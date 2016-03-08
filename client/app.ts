@@ -6,6 +6,7 @@
         'ui.bootstrap',
         'ui.router',
         'LocalStorageModule',
+        'mj.dataServices',
         'mj.directives',
         'mj.filters',
         'mj.services',
@@ -13,9 +14,10 @@
         'mj.templates'
     ]);
 
+    angular.module('mj.dataServices', ['ngResource']);
     angular.module('mj.directives', []);
     angular.module('mj.filters', []);
-    angular.module('mj.services', ['ngResource']);
+    angular.module('mj.services', []);
     angular.module('mj.states', ['ui.router']);
     angular.module('mj.templates', []);
 
