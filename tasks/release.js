@@ -37,7 +37,6 @@ var paths = (function () {
 
 
 // -------------------- build --------------------
-var angularFilesort = require('gulp-angular-filesort');
 var inject = require('gulp-inject');
 var rev = require('gulp-rev');
 var through2 = require('through2');
@@ -94,6 +93,7 @@ var compileTemplates = function() {
 };
 
 // ------------------- scripts ------------------
+var angularFilesort = require('gulp-angular-filesort');
 var order = require('gulp-order');
 var ts = require('gulp-typescript');
 var tsProject = ts.createProject(paths.tsConfig);

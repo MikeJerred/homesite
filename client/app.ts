@@ -67,7 +67,6 @@
         // combines multiple concurrent requests to run in one digest cycle
         $httpProvider.useApplyAsync(true);
     }]);
-
 }
 
 declare module angular.ui {
