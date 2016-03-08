@@ -1,5 +1,4 @@
 ﻿var gulp = require('gulp');
-var autoprefixer = require('gulp-autoprefixer');
 var clone = require('gulp-clone');
 var concat = require('gulp-concat');
 var del = require('del');
@@ -19,7 +18,8 @@ var paths = (function () {
 
     return {
         tsConfig: './tsconfig.json',
-        tsTypings: './typings/browser/**/*.d.ts',
+        tsTypings: ['./typings/browser.d.ts', './typings/browser/**/*.d.ts'],
+        tsTypingsConfig: './typings.json',
 
         srcIndex: srcIndex,
         srcHtml: [srcRoot + '/**/*.html', '!' + srcIndex],
@@ -39,13 +39,18 @@ var paths = (function () {
 // -------------------- build --------------------
 var inject = require('gulp-inject');
 var rev = require('gulp-rev');
+var typings = require('gulp-typings');
 var through2 = require('through2');
 
 gulp.task('release:clean', function () {
     return del([paths.dest]);
 });
 
-gulp.task('release:build', ['release:clean'], function () {
+gulp.task('release:typings', function () {
+    return gulp.src(paths.tsTypingsConfig).pipe(typings());
+});
+
+gulp.task('release:build', ['release:clean', 'release:typings'], function () {
     var templates = compileTemplates();
 
     var styles = compileStyles()
@@ -67,29 +72,30 @@ gulp.task('release:build', ['release:clean'], function () {
         .pipe(inject(templates, { name: 'templates', relative: true }))
         .pipe(gulp.dest(paths.dest));
 
-    return merge(templates, styles, scripts, libraries, images, fonts, iconFont, index);
+    return merge(templates, styles, scripts, libraries, images, fonts, index);
 });
-
-// ------------------- styles -------------------
-var less = require('gulp-less');
-
-var compileStyles = function() {
-    return gulp.src(paths.srcLess)
-        .pipe(progeny())
-        .pipe(less())
-        .pipe(autoprefixer(autoprefixOptions))
-        .pipe(minifyCss({ keepSpecialComments: false }));
-};
 
 //------------------ templates ------------------
 var angularTemplateCache = require('gulp-angular-templatecache');
 
-var compileTemplates = function() {
+var compileTemplates = function () {
     return gulp.src(paths.srcHtml)
         .pipe(angularTemplateCache('templates.js', { module: 'mj.templates' }))
         .pipe(uglify())
         .pipe(rev())
         .pipe(gulp.dest(paths.dest));
+};
+
+// ------------------- styles -------------------
+var less = require('gulp-less');
+var lessPluginAutoprefix = require('less-plugin-autoprefix');
+var autoprefix = new lessPluginAutoprefix(autoprefixOptions);
+
+var compileStyles = function() {
+    return gulp.src(paths.srcLess)
+        .pipe(progeny())
+        .pipe(less({ plugins: [autoprefix] }))
+        .pipe(minifyCss({ keepSpecialComments: false }));
 };
 
 // ------------------- scripts ------------------
@@ -99,8 +105,7 @@ var ts = require('gulp-typescript');
 var tsProject = ts.createProject(paths.tsConfig);
 
 var compileScripts = function () {
-    return gulp.src(paths.srcTs)
-        //.src([paths.tsTypings].concat(paths.srcTs))
+    return gulp.src(paths.tsTypings.concat(paths.srcTs))
         .pipe(ts(tsProject))
         .js
         .pipe(angularFilesort())

@@ -9,7 +9,7 @@ var remember = require('gulp-remember');
 var sourcemaps = require('gulp-sourcemaps');
 var util = require('gulp-util');
 
-var autoprefixOptions = { browsers: ['> 2%', 'IE 9'] };
+var autoprefixOptions = { browsers: ['> 2%'] };
 
 var EE = require('events').EventEmitter;
 var plumberOptions = {
@@ -35,7 +35,7 @@ var paths = (function () {
 
     return {
         tsConfig: './tsconfig.json',
-        tsTypings: './typings/**/*.d.ts',
+        tsTypings: ['./typings/browser.d.ts', './typings/browser/**/*.d.ts'],
 
         srcIndex: srcIndex,
         srcHtml: [srcRoot + '/**/*.html', '!' + srcIndex],
@@ -121,8 +121,9 @@ gulp.task('debug:compile:templates', ['debug:clean:templates'], function (done) 
 
 
 // -------------------- styles --------------------
-var autoprefixer = require('gulp-autoprefixer');
 var less = require('gulp-less');
+var lessPluginAutoprefix = require('less-plugin-autoprefix');
+var autoprefix = new lessPluginAutoprefix(autoprefixOptions);
 var progeny = require('gulp-progeny');
 
 var compileStyles = function (files, done) {
@@ -135,8 +136,7 @@ var compileStyles = function (files, done) {
         .pipe(plumber(plumberOptions))
         .pipe(progeny())
         .pipe(sourcemaps.init())
-        .pipe(less())
-        .pipe(autoprefixer(autoprefixOptions))
+        .pipe(less({ plugins: [autoprefix] }))
         .pipe(sourcemaps.write('.'))
         .pipe(cached('styles', { optimizeMemory: true }))
         .pipe(gulp.dest(paths.dest))
@@ -166,8 +166,7 @@ var compileScripts = function(files, done) {
         .pipe(gulp.dest(paths.dest))
         .pipe(livereload());
 
-    var jsFiles = gulp.src(paths.srcTs)
-        //.src([paths.tsTypings].concat(paths.srcTs))
+    var jsFiles = gulp.src(paths.tsTypings.concat(paths.srcTs))
         .pipe(plumber(plumberOptions))
         .pipe(sourcemaps.init())
         .pipe(ts(tsProject))
