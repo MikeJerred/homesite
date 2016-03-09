@@ -1,9 +1,16 @@
 ﻿module MJ.Directives.Page.Header {
+    interface IScope {
+        imageUrl: string;
+        title: string;
+        subTitle?: string;
+    }
+
     class PageHeaderDirectve implements ng.IDirective {
         public restrict = 'E';
         public scope = {
             imageUrl: '@',
-            title: '@'
+            title: '@',
+            subTitle: '@'
         };
         public templateUrl = 'directives/page/header/page-header.html';
     }
