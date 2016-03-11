@@ -5,8 +5,11 @@
     "noResolve": true,
     "removeComments": false
   },
-  "files": [
-    ".",
-    "../typings/browser.d.ts"
+  "exclude": [
+    "dist",
+    "bower_components",
+    "node_modules",
+    "typings/browser.d.ts",
+    "typings/browser"
   ]
 }

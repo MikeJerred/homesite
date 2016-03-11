@@ -9,7 +9,7 @@ module.exports = {
     bowerOrder: ['**jquery.js', '**jquery**', '**lodash**', '**angular.js'],
     paths: {
         client: {
-            tsConfig: clientSrcRoot + '/tsconfig.json',
+            tsConfig: './tsconfig.json',
             tsTypings: ['./typings/browser.d.ts', './typings/browser/**/*.d.ts'],
             tsTypingsConfig: './typings.json',
 
@@ -30,7 +30,7 @@ module.exports = {
             builtJsNoLibs: [clientBuildRoot + '/**/*.js', '!' + clientBuildLibs + '/*.js']
         },
         server: {
-            tsConfig: serverSrcRoot + '/tsconfig.json',
+            tsConfig: './tsconfig.json',
             tsTypings: ['./typings/main.d.ts', './typings/main/**/*.d.ts'],
 
             srcRoot: serverSrcRoot,
