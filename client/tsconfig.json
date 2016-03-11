@@ -5,9 +5,8 @@
     "noResolve": true,
     "removeComments": false
   },
-  "exclude": [
-    "node_modules",
-    "typings/main",
-    "typings/main.d.ts"
+  "files": [
+    ".",
+    "../typings/browser.d.ts"
   ]
 }

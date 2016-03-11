@@ -1,4 +1,4 @@
-﻿module FM {
+﻿module MJ {
     var app = angular.module('mj', [
         'ngAnimate',
         'ngResource',

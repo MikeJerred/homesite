@@ -1,2 +1,4 @@
-require('./tasks/debug.js');
-require('./tasks/release.js');
+var gulp = require('gulp');
+var requireDir = require('require-dir');
+
+var tasks = requireDir('./tasks', { recurse: true });

@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "noImplicitAny": true,
+    "noResolve": true,
+    "removeComments": false,
+    "module": "commonjs",
+    "moduleResolution": "node"
+  },
+  "files": [
+    ".",
+    "../typings/main.d.ts"
+  ]
+}
