@@ -1,6 +1,6 @@
-var clientSrcRoot = './client';
-var serverSrcRoot = './server';
-var buildRoot = './dist';
+var clientSrcRoot = 'client';
+var serverSrcRoot = 'server';
+var buildRoot = 'dist';
 var clientBuildRoot = buildRoot + '/wwwroot';
 var clientBuildLibs = clientBuildRoot + '/libs/**';
 
