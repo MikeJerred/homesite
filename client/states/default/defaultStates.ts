@@ -6,18 +6,19 @@
             $urlRouterProvider: ng.ui.IUrlRouterProvider) {
 
             var header = Views.Default.Header.view;
+            var footer = Views.Default.Footer.view;
 
             $stateProvider
                 .state('default', {
                     'abstract': true,
-                    templateUrl: 'states/default/default-layout.html',
-                    controller: 'normal'
+                    templateUrl: 'states/default/default-layout.html'
                 })
                 .state('default.home', {
-                    url: '/home',
+                    url: '/',
                     views: {
                         'header': header,
-                        'main': Views.Default.Main.Home.view
+                        'main': Views.Default.Main.Home.view,
+                        'footer': footer
                     }
                 })
                 //.state('default.blogs', {
@@ -28,7 +29,8 @@
                 //    reloadOnSearch: false,
                 //    views: {
                 //        'header': header,
-                //        'main': Views.Default.Main.Blogs.view
+                //        'main': Views.Default.Main.Blogs.view,
+                //        'footer': footer
                 //    },
                 //    data: {
                 //        metaData: { title: 'Blog' }
@@ -38,7 +40,8 @@
                     url: '/not-found',
                     views: {
                         'header': header,
-                        //'main': 
+                        //'main': ,
+                        'footer': footer
                     },
                     data: {
                         metaData: { title: 'Page Not Found' }
