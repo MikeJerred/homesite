@@ -35,7 +35,13 @@ gulp.task('client:debug:watch', ['client:debug:build'], function () {
     gulp.watch(paths.srcTs, ['client:debug:compile:scripts']);
     gulp.watch(paths.srcImg, ['client:debug:compile:images']);
     gulp.watch(paths.srcFonts, ['client:debug:compile:fonts']);
-    gulp.watch([paths.srcIndex].concat(paths.builtCssAndJs), ['client:debug:compile:index']);
+    gulp.watch(paths.srcIndex, ['client:debug:compile:index']);
+
+    gulp.watch(paths.builtCssAndJs, function(event) {
+        if (event.type == 'added' || event.type == 'deleted') {
+            runSequence('client:debug:compile:index');
+        }
+    });
 });
 
 
