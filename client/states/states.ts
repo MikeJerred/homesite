@@ -1,10 +1,12 @@
 ﻿module MJ.States {
     class StateConfig {
-        static $inject = ['$urlMatcherFactoryProvider'];
+        static $inject = ['$urlMatcherFactoryProvider', '$locationProvider'];
         constructor(
-            $urlMatcherFactoryProvider: ng.ui.IUrlMatcherFactory) {
+            $urlMatcherFactoryProvider: ng.ui.IUrlMatcherFactory,
+            $locationProvider: ng.ILocationProvider) {
 
             $urlMatcherFactoryProvider.strictMode(false);
+            $locationProvider.html5Mode(true);
         }
     }
 
