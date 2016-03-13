@@ -7,7 +7,7 @@ var merge = require('event-stream').merge;
 var remember = require('gulp-remember');
 var sourcemaps = require('gulp-sourcemaps');
 
-var settings = require('../settings.js');
+var settings = require('../../settings/task-settings.js');
 var paths = settings.paths.client;
 
 
@@ -175,10 +175,7 @@ var inject = require('gulp-inject');
 var order = require('gulp-order');
 
 gulp.task('client:debug:compile:index', function () {
-    var styles = gulp.src(paths.builtCssNoLibs, { read: false });
-
-    var scripts = gulp.src(paths.builtJsNoLibs)
-        .pipe(angularFilesort());
+    var rollbar = gulp.src(paths.srcRollbar);
 
     var libraries = gulp.src(bowerFiles())
         .pipe(cached('client:debug:libs', { optimizeMemory: true }))
@@ -186,8 +183,17 @@ gulp.task('client:debug:compile:index', function () {
         .pipe(remember('client:debug:libs'))
         .pipe(order(settings.bowerOrder));
 
+    var styles = gulp.src(paths.builtCssNoLibs, { read: false });
+
+    var scripts = gulp.src(paths.builtJsNoLibs)
+        .pipe(angularFilesort());
+
     var index = gulp.src(paths.srcIndex)
         .pipe(gulp.dest(paths.dest))
+        .pipe(inject(rollbar, {
+            name: 'rollbar',
+            transform: function(filePath, file) { return file.contents.toString('utf8'); }
+        }))
         .pipe(inject(libraries, { name: 'bower', relative: true }))
         .pipe(inject(merge(styles, scripts), { relative: true }))
         .pipe(gulp.dest(paths.dest))

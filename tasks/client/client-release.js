@@ -4,7 +4,7 @@ var del = require('del');
 var merge = require('event-stream').merge;
 var uglify = require('gulp-uglify');
 
-var settings = require('../settings.js');
+var settings = require('../../settings/task-settings.js');
 var paths = settings.paths.client;
 
 

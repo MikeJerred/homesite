@@ -3,7 +3,7 @@ var del = require('del');
 var runSequence = require('run-sequence').use(gulp);
 var sourcemaps = require('gulp-sourcemaps');
 
-var settings = require('../settings.js');
+var settings = require('../../settings/task-settings.js');
 var paths = settings.paths.server;
 
 

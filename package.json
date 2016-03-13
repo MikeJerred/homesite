@@ -2,11 +2,14 @@
   "version": "0.0.1",
   "name": "homesite",
   "private": true,
+  "dependencies": {
+    "express": "^4.13.4",
+    "rollbar": "^0.5.15"
+  },
   "devDependencies": {
     "bower": "^1.7.7",
     "del": "^2.2.0",
     "event-stream": "^3.3.2",
-    "express": "^4.13.4",
     "gulp": "^3.9.1",
     "gulp-angular-filesort": "^1.1.1",
     "gulp-angular-templatecache": "^1.8.0",
