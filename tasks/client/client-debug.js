@@ -30,12 +30,12 @@ gulp.task('client:debug:build', function (done) {
 });
 
 gulp.task('client:debug:watch', ['client:debug:build'], function () {
-    gulp.watch(paths.srcHtml, ['client:debug:compile:templates']);
-    gulp.watch(paths.srcLess, ['client:debug:compile:styles']);
-    gulp.watch(paths.srcTs, ['client:debug:compile:scripts']);
-    gulp.watch(paths.srcImg, ['client:debug:compile:images']);
-    gulp.watch(paths.srcFonts, ['client:debug:compile:fonts']);
-    gulp.watch(paths.srcIndex, ['client:debug:compile:index']);
+    watch(paths.srcHtml, { read: false }, function() { runSequence('client:debug:compile:templates'); });
+    watch(paths.srcLess, { read: false }, function() { runSequence('client:debug:compile:styles'); });
+    watch(paths.srcTs, { read: false }, function() { runSequence('client:debug:compile:scripts'); });
+    watch(paths.srcImg, { read: false }, function() { runSequence('client:debug:compile:images'); });
+    watch(paths.srcFonts, { read: false }, function() { runSequence('client:debug:compile:fonts'); });
+    watch(paths.srcIndex, { read: false }, function() { runSequence('client:debug:compile:index'); });
 
     gulp.watch(paths.builtCssAndJs, function(event) {
         if (event.type == 'added' || event.type == 'deleted') {

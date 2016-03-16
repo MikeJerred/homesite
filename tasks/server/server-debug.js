@@ -3,6 +3,7 @@ var cached = require('gulp-cached');
 var del = require('del');
 var runSequence = require('run-sequence').use(gulp);
 var sourcemaps = require('gulp-sourcemaps');
+var watch = require('gulp-watch');
 
 var settings = require('../../settings/task-settings.js');
 var paths = settings.paths.server;
@@ -24,7 +25,7 @@ gulp.task('server:debug:build', function (done) {
 });
 
 gulp.task('server:debug:watch', ['server:debug:build'], function() {
-    gulp.watch(paths.srcTs, ['server:debug:compile']);
+    watch(paths.srcTs, { read: false }, function() { runSequence('server:debug:compile'); });
 });
 
 
