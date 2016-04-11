@@ -1,5 +1,59 @@
 ﻿@import "../../../styles/variables.less";
 
 article.default-layout header.header {
+    .navbar {
+        min-height: 82px;
+        margin-bottom: 0;
+        border: 0;
+        background-color: @theme-blue;
+        overflow: hidden;
+        position: relative;
 
+        .nav-header {
+            position: absolute;
+            right: 0;
+            background-color: @theme-blue;
+            z-index: 100;
+
+            > .nav-toggle {
+                font-size: 21px;
+                margin: 20px;
+                padding: 10px;
+                border: 2px solid #fff;
+                border-radius: 50%;
+                outline: none;
+                color: #fff;
+
+                .icon-bar {
+                    display: block;
+                    height: 2px;
+                    width: 18px;
+                    background-color: #fff;
+                    margin-top: 6px;
+
+                    &:first-child { margin-top: 0; }
+                }
+            }
+        }
+
+        .nav-collapse {
+            border: 0;
+            overflow: hidden;
+            line-height: 62px;
+            transition: all ease-in-out 0.3s;
+
+            @media (min-width: @screen-sm-min) {
+                transform: translateX(0);
+
+                &.collapsed {
+                    transform: translateX(120%);
+                }
+            }
+
+            .nav {
+                background-color: @theme-blue;
+                width: ~"calc(100% - 82px)";
+            }
+        }
+    }
 }

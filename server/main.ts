@@ -1,5 +1,5 @@
 ﻿import express = require('express');
-import rollbar = require('rollbar');
+//import rollbar = require('rollbar');
 import rollbarSettings = require('./settings/rollbar-settings');
 
 module MJ.Server {
@@ -12,7 +12,7 @@ module MJ.Server {
         res.sendFile('index.html', { root: __dirname + '/wwwroot' });
     });
 
-    app.use(rollbar.errorHandler(rollbarSettings.serverAccessToken));
+    //app.use(rollbar.errorHandler(rollbarSettings.serverAccessToken));
 
     app.listen(3000);
 }

@@ -1,5 +1,64 @@
 ﻿@import "../../../../styles/variables.less";
 
 article.default-layout article.main-home {
+    .about {
+        background-color: @theme-blue;
 
+        h1 { color: #fff; font-family: @font-fmaily-serif; font-size: 54px; }
+        h3 { margin: 20px 0; font-weight: 700; }
+    }
+
+    .lorum {
+        background-color: #fff;
+        color: #333;
+
+        .tiles {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            > li {
+                height: 300px;
+                color: #fff;
+                font-size: 30px;
+
+                .title {
+                    bottom: 20px;
+                    position: absolute;
+                    height: 100px;
+                }
+
+
+                &.ng-enter {
+                    transition: all ease-in-out 0.3s;
+                    transform: translateY(50px);
+                    opacity: 0;
+                }
+
+                &.ng-enter-stagger {
+                    transition-delay: 0.08s;
+                    transition-duration: 0s;
+                }
+
+                &.ng-enter.ng-enter-active {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+
+                &.ng-leave {
+                    transition: all ease-in-out 0.3s;
+                    opacity: 1;
+                }
+
+                /*&.ng-leave-stagger {
+                    transition-delay: 0.08s;
+                    transition-duration: 0s;
+                }*/
+
+                &.ng-leave.ng-leave-active {
+                    opacity: 0;
+                }
+            }
+        }
+    }
 }

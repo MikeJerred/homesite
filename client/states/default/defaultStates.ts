@@ -21,6 +21,14 @@
                         'footer': footer
                     }
                 })
+                .state('default.about', {
+                    url: '/about',
+                    views: {
+                        'header': header,
+                        'main': Views.Default.Main.About.view,
+                        'footer': footer
+                    }
+                })
                 //.state('default.blogs', {
                 //    url: '/blogs?{page:int}',
                 //    params: {
