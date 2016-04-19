@@ -54,11 +54,14 @@ article.default-layout header.header {
                 &.collapsed {
                     transform: translateX(100%);
                 }
+
+                .nav {
+                    width: ~"calc(100% - 82px)";
+                }
             }
 
             .nav {
                 background-color: @theme-light-blue;
-                width: ~"calc(100% - 82px)";
             }
         }
     }
