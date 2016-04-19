@@ -7,15 +7,19 @@
         </div>
     </section>
 
-    <div class="lorum">
-        <section class="container-fluid">
-            <div class="row">
-                <ul class="tiles clearfix">
-                    <li ng-repeat="card in homeCtrl.cards" class="animate-cards col-xs-12 col-md-4 col-lg-3" ng-style="{ 'background-color': card.color }">
-                        <div class="title">{{card.title}}</div>
-                    </li>
-                </ul>
-            </div>
-        </section>
-    </div>
+    <section class="filler">
+        <div class="text">
+            Some thoughts on web development
+        </div>
+    </section>
+
+    <section class="blog">
+        <div class="top-bar clearfix">
+            <span class="glyphicon glyphicon-th-large"></span>
+        </div>
+        <blog-cards></blog-cards>
+        <div class="bottom-bar">
+            <a ng-click="" class="btn btn-default btn-lg">More</a>
+        </div>
+    </section>
 </article>

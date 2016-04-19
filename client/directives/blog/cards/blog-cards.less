@@ -1,0 +1,55 @@
+@import "../../../styles/variables.less";
+
+blog-cards article.blog-cards {
+    .blog-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        //border: 1px solid #000;
+
+        > li {
+            @height: 200px;
+
+            display: table;
+            height: @height;
+            border: 1px solid #000;
+            background-color: @theme-light-blue;
+            padding: 20px;
+            color: @theme-black;
+
+            >.content {
+                display: table-cell;
+                vertical-align: bottom;
+            }
+
+            .headline { margin: 0; }
+            .date { font-weight: 600; margin-top: 10px; }
+
+            @media(min-width: @screen-md-min) {
+                &:first-child {
+                    width: 50%;
+                    height: 2 * @height;
+                    color: #fff;
+                }
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            .set-color(@color) {
+                background-color: @color;
+
+                &:hover {
+                    background-color: darken(@color, 5%);
+                }
+            }
+
+            &:first-child { .set-color(@theme-blue); }
+            &:nth-child(2) { .set-color(#fff); }
+            &:nth-child(3) { .set-color(lighten(@theme-blue, 20%)); }
+            &:nth-child(4) { .set-color(lighten(@theme-blue, 30%)); }
+            &:last-child { .set-color(lighten(@theme-blue, 10%)); }
+        }
+    }
+}

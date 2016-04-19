@@ -17,16 +17,16 @@
                     url: '/',
                     views: {
                         'header': header,
-                        'main': Views.Default.Main.Home.view,
-                        'footer': footer
+                        'main': Views.Default.Main.Home.view
+                        //'footer': footer
                     }
                 })
                 .state('default.about', {
                     url: '/about',
                     views: {
                         'header': header,
-                        'main': Views.Default.Main.About.view,
-                        'footer': footer
+                        'main': Views.Default.Main.About.view
+                        //'footer': footer
                     }
                 })
                 //.state('default.blogs', {
@@ -47,9 +47,9 @@
                 .state('default.notFound', {
                     url: '/not-found',
                     views: {
-                        'header': header,
+                        'header': header
                         //'main': ,
-                        'footer': footer
+                        //'footer': footer
                     },
                     data: {
                         metaData: { title: 'Page Not Found' }

@@ -5,14 +5,14 @@ article.default-layout header.header {
         min-height: 82px;
         margin-bottom: 0;
         border: 0;
-        background-color: @theme-blue;
+        background-color: @theme-light-blue;
         overflow: hidden;
         position: relative;
 
         .nav-header {
             position: absolute;
             right: 0;
-            background-color: @theme-blue;
+            background-color: @theme-light-blue;
             z-index: 100;
 
             > .nav-toggle {
@@ -22,7 +22,12 @@ article.default-layout header.header {
                 border: 2px solid #fff;
                 border-radius: 50%;
                 outline: none;
+                background-color: @theme-light-blue;
                 color: #fff;
+
+                &:hover {
+                    background-color: darken(@theme-light-blue, 2%);
+                }
 
                 .icon-bar {
                     display: block;
@@ -52,7 +57,7 @@ article.default-layout header.header {
             }
 
             .nav {
-                background-color: @theme-blue;
+                background-color: @theme-light-blue;
                 width: ~"calc(100% - 82px)";
             }
         }

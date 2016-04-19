@@ -2,63 +2,75 @@
 
 article.default-layout article.main-home {
     .about {
-        background-color: @theme-blue;
+        background-color: @theme-light-blue;
+        min-height: ~"calc(100vh - 82px)";
+        line-height: ~"calc(100vh - 82px)";
+        // display: table;
+        // width: 100%;
 
         h1 { color: #fff; font-family: @font-fmaily-serif; font-size: 54px; }
         h3 { margin: 20px 0; font-weight: 700; }
+
+        .text {
+            display: inline-block;
+        }
     }
 
-    .lorum {
-        background-color: #fff;
-        color: #333;
+    .filler {
+        @color: #fff;
+        background-attachment: fixed;
+        background-image: url(/images/corridor.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        height: 50vh;
+        border-top: 2px solid @color;
+        border-bottom: 2px solid @color;
+        position: relative;
+        padding: 40px;
+        display: table;
+        width: 100%;
 
-        .tiles {
-            list-style: none;
-            margin: 0;
-            padding: 0;
+        .text {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+            border: 2px solid @color;
+            color: @color;
+            height: 100%;
+            font-size: 56px;
+        }
+    }
 
-            > li {
-                height: 300px;
+    .blog {
+        background-color: @theme-light-blue;
+
+        .top-bar, .bottom-bar {
+            text-align: center;
+            background-color: @theme-dark-blue;
+        }
+
+        .top-bar {
+            padding: 15px 0;
+
+            > .glyphicon {
                 color: #fff;
-                font-size: 30px;
+                border: 2px solid #fff;
+                border-radius: 50%;
+                float: right;
+                padding: 10px 10px 11px 11px;
+                margin: 0 40px;
+                font-size: 21px;
+                cursor: pointer;
 
-                .title {
-                    bottom: 20px;
-                    position: absolute;
-                    height: 100px;
-                }
-
-
-                &.ng-enter {
-                    transition: all ease-in-out 0.3s;
-                    transform: translateY(50px);
-                    opacity: 0;
-                }
-
-                &.ng-enter-stagger {
-                    transition-delay: 0.08s;
-                    transition-duration: 0s;
-                }
-
-                &.ng-enter.ng-enter-active {
-                    transform: translateY(0);
-                    opacity: 1;
-                }
-
-                &.ng-leave {
-                    transition: all ease-in-out 0.3s;
-                    opacity: 1;
-                }
-
-                /*&.ng-leave-stagger {
-                    transition-delay: 0.08s;
-                    transition-duration: 0s;
-                }*/
-
-                &.ng-leave.ng-leave-active {
-                    opacity: 0;
+                &:hover {
+                    background-color: darken(@theme-dark-blue, 2%);
                 }
             }
+        }
+
+        .bottom-bar {
+            padding: 25px 0;
         }
     }
 }
