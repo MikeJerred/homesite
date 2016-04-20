@@ -10,16 +10,17 @@ blog-cards article.blog-cards {
         > li {
             @height: 200px;
 
-            display: table;
+            position: relative;
             height: @height;
             border: 1px solid #000;
             background-color: @theme-light-blue;
-            padding: 20px;
             color: @theme-black;
 
-            >.content {
-                display: table-cell;
-                vertical-align: bottom;
+            > .content {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                padding: 20px;
             }
 
             .headline { margin: 0; }

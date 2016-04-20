@@ -3,13 +3,18 @@
 article.default-layout article.main-home {
     .about {
         background-color: @theme-light-blue;
-        min-height: ~"calc(100vh - 82px)";
-        line-height: ~"calc(100vh - 82px)";
-        // display: table;
-        // width: 100%;
 
-        h1 { color: #fff; font-family: @font-fmaily-serif; font-size: 54px; }
-        h3 { margin: 20px 0; font-weight: 700; }
+        .container {
+            min-height: ~"calc(100vh - 82px)";
+            line-height: ~"calc(100vh - 82px)";
+
+            .content {
+                display: inline-block;
+
+                h1 { color: #fff; font-family: @font-fmaily-serif; font-size: 54px; }
+                h3 { margin: 20px 0; font-weight: 700; }
+            }
+        }
     }
 
     .filler {

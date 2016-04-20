@@ -1,6 +1,6 @@
 <article class="blog-cards clearfix">
     <ul class="blog-list clearfix">
-        <li ng-repeat="blog in blogCardsCtrl.blogStubs" class="col-xs-12 col-md-3">
+        <li ng-repeat="blog in blogCardsCtrl.blogStubs" class="col-xs-12 col-sm-6 col-md-3">
             <a class="content" ui-sref="default.blog({ articleId: blog.id })">
                 <h3 class="headline">{{blog.headline}}</h3>
                 <div class="date">{{blog.date | date:'dd/MM/yyyy'}}</div>
