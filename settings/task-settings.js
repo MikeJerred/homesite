@@ -36,6 +36,7 @@ module.exports = {
 
             srcRoot: serverSrcRoot,
             srcTs: [serverSrcRoot + '/**/*.ts'],
+            srcOther: [serverSrcRoot + '/**/*', '!' + serverSrcRoot + '/**/*.ts'],
 
             dest: buildRoot
         }

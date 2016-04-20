@@ -1,0 +1,14 @@
+runtime: nodejs
+vm: true
+
+skip_files:
+ - ^(?!(dist|package\.json))$
+#  - ^.vscode$
+#  - ^bower_components$
+#  - ^client$
+#  - ^design$
+#  - ^node_modules$
+#  - ^server$
+#  - ^settings$
+#  - ^tass$
+#  - ^typings$

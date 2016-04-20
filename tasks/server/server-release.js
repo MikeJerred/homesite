@@ -12,6 +12,7 @@ gulp.task('server:release:build', function (done) {
     runSequence(
         'server:clean',
         'server:release:compile',
+        'server:release:copy',
         done);
 });
 
@@ -27,8 +28,14 @@ gulp.task('server:release:compile', function() {
         .pipe(sourcemaps.init())
         .pipe(ts(tsProject))
         .js
-        .pipe(concat('main.js'))
+        //.pipe(concat('main.js'))
         .pipe(uglify())
-        .pipe(sourcemaps.write('.'))
+        //.pipe(sourcemaps.write('.', { includeContent: false, destPath: paths.dest }))
+        .pipe(gulp.dest(paths.dest));
+});
+
+// --------------------------------------------- copy ----------------------------------------------
+gulp.task('server:release:copy', function() {
+    return gulp.src(paths.srcOther)
         .pipe(gulp.dest(paths.dest));
 });

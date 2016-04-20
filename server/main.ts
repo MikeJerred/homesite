@@ -12,7 +12,15 @@ module MJ.Server {
         res.sendFile('index.html', { root: __dirname + '/wwwroot' });
     });
 
+    //app.set('trust_proxy', 1);
+
     //app.use(rollbar.errorHandler(rollbarSettings.serverAccessToken));
 
-    app.listen(3000);
+    if (module === require.main) {
+        var server = app.listen(process.env.PORT || 8080, () => {
+            console.log('Server listening at http://%s:%s', server.address().address, server.address().port);
+        });
+    }
+
+    module.exports = app;
 }

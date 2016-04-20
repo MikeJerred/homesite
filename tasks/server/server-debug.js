@@ -21,6 +21,7 @@ gulp.task('server:debug:build', function (done) {
     runSequence(
         'server:clean',
         'server:debug:compile',
+        'server:debug:copy',
         done);
 });
 
@@ -40,5 +41,12 @@ gulp.task('server:debug:compile', function() {
         .js
         .pipe(sourcemaps.write('.', { includeContent: false, destPath: paths.dest }))
         .pipe(cached('server', { optimizeMemory: true }))
+        .pipe(gulp.dest(paths.dest));
+});
+
+
+// --------------------------------------------- copy ----------------------------------------------
+gulp.task('server:debug:copy', function() {
+    return gulp.src(paths.srcOther)
         .pipe(gulp.dest(paths.dest));
 });

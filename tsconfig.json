@@ -6,8 +6,10 @@
     "removeComments": false
   },
   "exclude": [
-    "dist",
+    ".vscode",
     "bower_components",
+    "design",
+    "dist",
     "node_modules",
     "typings/browser.d.ts",
     "typings/browser"
