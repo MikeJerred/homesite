@@ -97,7 +97,7 @@ var compileLibs = function() {
     var js = gulp.src(bowerFiles())
         .pipe(filter(['**/*.js']))
         .pipe(order(settings.bowerOrder))
-        //.pipe(uglify())
+        .pipe(uglify())
         .pipe(concat('libraries.js'))
         .pipe(rev())
         .pipe(gulp.dest(paths.dest));

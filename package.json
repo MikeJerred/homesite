@@ -44,5 +44,8 @@
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.5",
     "typings": "^0.8.1"
+  },
+  "engines": {
+    "node": ">=4.0.0"
   }
 }
