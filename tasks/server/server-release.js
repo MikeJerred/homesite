@@ -30,7 +30,7 @@ gulp.task('server:release:compile', function() {
         .js
         //.pipe(concat('main.js'))
         .pipe(uglify())
-        //.pipe(sourcemaps.write('.', { includeContent: false, destPath: paths.dest }))
+        .pipe(sourcemaps.write('.', { includeContent: false, destPath: paths.dest }))
         .pipe(gulp.dest(paths.dest));
 });
 

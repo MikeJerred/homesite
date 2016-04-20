@@ -55,7 +55,7 @@ var compileTemplates = function () {
 // -------------------------------------------- styles ---------------------------------------------
 var less = require('gulp-less');
 var lessPluginAutoprefix = require('less-plugin-autoprefix');
-var minifyCss = require('gulp-minify-css');
+var cleanCss = require('gulp-clean-css');
 var progeny = require('gulp-progeny');
 var lessAutoprefix = new lessPluginAutoprefix(settings.autoprefixer);
 
@@ -63,7 +63,7 @@ var compileStyles = function() {
     return gulp.src(paths.srcLess.concat('!**/*.debug.less'))
         .pipe(progeny())
         .pipe(less({ plugins: [lessAutoprefix] }))
-        .pipe(minifyCss({ keepSpecialComments: false }))
+        .pipe(cleanCss())
         .pipe(concat('styles.css'))
         .pipe(rev())
         .pipe(gulp.dest(paths.dest));
@@ -106,7 +106,7 @@ var compileLibs = function() {
         .pipe(filter(['**/*.css']))
         .pipe(autoprefixer(settings.autoprefixer))
         .pipe(concat('libraries.css'))
-        .pipe(minifyCss({ keepSpecialComments: false }))
+        .pipe(cleanCss())
         .pipe(rev())
         .pipe(gulp.dest(paths.dest));
 
