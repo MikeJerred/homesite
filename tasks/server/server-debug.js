@@ -27,6 +27,7 @@ gulp.task('server:debug:build', function (done) {
 
 gulp.task('server:debug:watch', ['server:debug:build'], function() {
     watch(paths.srcTs, { read: false }, function() { runSequence('server:debug:compile'); });
+    watch(paths.srcOther, { read: false }, function() { runSequence('server:debug:copy'); });
 });
 
 

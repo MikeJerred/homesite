@@ -5,12 +5,14 @@ import rollbarSettings = require('./settings/rollbar-settings');
 module MJ.Server {
     var app = express();
 
-    app.use(express.static('wwwroot'));
+    console.log(__dirname);
 
-    app.all('/*', function(req, res, next) {
-        // Just send the index.html for other files to support HTML5Mode
-        res.sendFile('index.html', { root: __dirname + '/wwwroot' });
-    });
+    app.use(express.static(__dirname + '/wwwroot'));
+
+     app.all('/*', function(req, res, next) {
+         // Just send the index.html for other files to support HTML5Mode
+         res.sendFile('index.html', { root: __dirname + '/wwwroot' });
+     });
 
     //app.set('trust_proxy', 1);
 
