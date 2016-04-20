@@ -1,17 +1,59 @@
 @import "../../../styles/variables.less";
 
 article.default-layout footer.footer {
-    .container {
-        margin-top: 40px;
-        border-top: 1px solid @gray-lighter;
-        padding-top: 40px;
+    display: table;
+    width: 100%;
+    padding: 40px;
+    border-top: 2px solid #fff;
+    background-attachment: fixed;
+    background-image: url(/images/pattern.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 
-        .content {
-            //padding: 40px 0;
+    .content {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        border: 2px solid #fff;
+        color: #fff;
+        padding: 30px;
+
+        .title {
+            font-size: 32px;
+            font-family: @font-fmaily-serif;
+            margin: 0 0 30px 0;
+        }
+
+        .email {
+            margin: 20px 0;
+            font-size: 16px;
         }
 
         .back-to-top {
             cursor: pointer;
+        }
+
+        .links {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 0;
+
+            > li {
+                display: inline-block;
+
+                > a {
+                    display: inline-block;
+                    border: 2px solid #fff;
+                    border-radius: 50%;
+                    width: 40px;
+                    height: 40px;
+                    padding: 8px;
+                    font-size: 14px;
+                    margin: 0 5px;
+                }
+            }
         }
     }
 }
