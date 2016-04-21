@@ -1,13 +1,17 @@
 ﻿@import "../../../styles/variables.less";
 
 article.default-layout header.header {
+    position: relative;
+    z-index: 2000;
+
     .navbar {
         min-height: 82px;
         margin-bottom: 0;
         border: 0;
         background-color: @theme-light-blue;
         overflow: hidden;
-        position: relative;
+        position: fixed;
+        width: 100%;
 
         .nav-header {
             position: absolute;
