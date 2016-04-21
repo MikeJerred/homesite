@@ -9,6 +9,7 @@ before_install:
   -in gae-api-key.json.enc -out gae-api-key.json -d
 - npm install -g gulp bower typings
 install:
+- npm install
 - bower install
 - typings install
 before_script:
