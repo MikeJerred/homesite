@@ -9,7 +9,6 @@ article.default-layout header.header {
         margin-bottom: 0;
         border: 0;
         background-color: @theme-light-blue;
-        overflow: hidden;
         position: fixed;
         width: 100%;
 
@@ -20,7 +19,6 @@ article.default-layout header.header {
             z-index: 100;
 
             > .nav-toggle {
-                font-size: 21px;
                 margin: 20px 40px;
                 padding: 10px;
                 border: 2px solid #fff;
@@ -49,18 +47,18 @@ article.default-layout header.header {
             border: 0;
             overflow: hidden;
             line-height: 62px;
-            transition: transform ease-in-out 0.3s;
 
             @media (min-width: @screen-sm-min) {
                 height: auto !important;
-                transform: translateX(0);
-
-                &.collapsed {
-                    transform: translateX(100%);
-                }
 
                 .nav {
+                    transition: transform ease-in-out 0.3s;
+                    transform: translateX(0);
                     width: ~"calc(100% - 121px)";
+                }
+
+                &.collapsed .nav {
+                    transform: translateX(100%);
                 }
             }
 
