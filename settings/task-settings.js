@@ -19,7 +19,6 @@ module.exports = {
             srcTs: [clientSrcRoot + '/**/*.ts'],
             srcFonts: ['./bower_components/bootstrap/dist/fonts/*.*'],
             srcImg: [clientSrcRoot + '/images/**/*'],
-            srcRollbar: ['./settings/rollbar-client.html'],
 
             dest: clientBuildRoot,
             destFonts: clientBuildRoot + '/fonts',
