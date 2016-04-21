@@ -5,8 +5,8 @@ branches:
   only:
   - master
 before_install:
-- openssl aes-256-cbc -K $encrypted_e0409bd53bc1_key -iv $encrypted_e0409bd53bc1_iv
-  -in Homesite-f860fde119aa.json.enc -out Homesite-f860fde119aa.json -d
+- openssl aes-256-cbc -K $encrypted_be98dbccbee8_key -iv $encrypted_be98dbccbee8_iv
+  -in gae-api-key.json.enc -out gae-api-key.json -d
 - npm install -g gulp bower typings
 install:
 - bower install
@@ -15,7 +15,7 @@ before_script:
 - gulp build:release
 deploy:
   provider: gae
-  keyfile: Homesite-f860fde119aa.json
+  keyfile: gae-api-key.json
   project: light-moon-128716
   no_promote: true
   skip_cleanup: true

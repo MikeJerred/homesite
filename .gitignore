@@ -3,4 +3,4 @@ node_modules/
 typings/
 dist/
 server/settings/rollbar-settings.ts
-Homesite-f860fde119aa.json
+gae-api-key.json
