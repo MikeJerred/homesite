@@ -1,19 +1,21 @@
 language: node_js
 node_js:
- - "4"
-
-# whitelist
+- '4'
 branches:
- only:
+  only:
   - master
-
 before_install:
- - npm install -g gulp bower typings
-
+- openssl aes-256-cbc -K $encrypted_e0409bd53bc1_key -iv $encrypted_e0409bd53bc1_iv
+  -in Homesite-f860fde119aa.json.enc -out Homesite-f860fde119aa.json -d
+- npm install -g gulp bower typings
 install:
- - npm install -g gulp bower typings
- - bower install
- - typings install
-
+- bower install
+- typings install
 before_script:
- - gulp build:release
+- gulp build:release
+deploy:
+  provider: gae
+  keyfile: Homesite-f860fde119aa.json
+  project: light-moon-128716
+  no_promote: true
+  skip_cleanup: true
