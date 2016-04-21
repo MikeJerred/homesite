@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+ - "4"
+
+# whitelist
+branches:
+ only:
+  - master
+
+before_install:
+ - npm install -g gulp bower typings
+
+install:
+ - npm install -g gulp bower typings
+ - bower install
+ - typings install
+
+before_script:
+ - gulp build:release
