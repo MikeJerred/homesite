@@ -1,10 +1,14 @@
-<article class="blog-cards clearfix">
+<article class="blog-cards container">
+    <div class="row">
     <ul class="blog-list clearfix">
-        <li ng-repeat="blog in blogCardsCtrl.blogStubs" class="col-xs-12 col-sm-6 col-md-3">
-            <a class="content" ui-sref="default.blog({ articleId: blog.id })">
-                <h3 class="headline">{{blog.headline}}</h3>
-                <div class="date">{{blog.date | date:'dd/MM/yyyy'}}</div>
+        <li ng-repeat="blog in blogCardsCtrl.blogStubs" class="col-xs-12 col-sm-4" ng-class="$index === 0 ? 'col-md-6' : 'col-md-3'">
+            <a class="card" ui-sref="default.blog({ articleId: blog.id })">
+                <div class="content">
+                    <h3 class="headline">{{blog.headline}}</h3>
+                    <div class="date">{{blog.date | date:'dd/MM/yyyy'}}</div>
+                </div>
             </a>
         </li>
     </ul>
+    </div>
 </article>

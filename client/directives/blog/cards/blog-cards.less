@@ -2,55 +2,72 @@
 
 blog-cards article.blog-cards {
     .blog-list {
-        margin: 0;
+        margin: @grid-gutter-width 0 0 0;
         padding: 0;
         list-style: none;
-        //border: 1px solid #000;
 
         > li {
-            @height: 200px;
+            @height-xs: 150px;
+            @height-sm: 200px;
+            @height-md: 200px;
+            @height-lg: 240px;
 
-            position: relative;
-            height: @height;
-            border: 1px solid #000;
-            background-color: @theme-light-blue;
-            color: @theme-black;
+            margin-bottom: @grid-gutter-width;
 
-            > .content {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                padding: 20px;
-            }
+            > .card {
+                display: block;
+                position: relative;
+                height: @height-xs;
+                color: @theme-black;
+                background-color: @theme-light-blue;
+                box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
 
-            .headline { margin: 0; }
-            .date { font-weight: 600; margin-top: 10px; }
+                > .content {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    padding: 20px;
 
-            @media(min-width: @screen-md-min) {
-                &:first-child {
-                    width: 50%;
-                    height: 2 * @height;
-                    color: #fff;
+                    .headline { margin: 0; font-family: @font-family-serif; }
+                    .date { font-weight: 600; margin-top: 10px; }
                 }
-            }
-
-            &:hover {
-                cursor: pointer;
             }
 
             .set-color(@color) {
                 background-color: @color;
+                &:hover { background-color: darken(@color, 5%); }
+            }
 
-                &:hover {
-                    background-color: darken(@color, 5%);
+            &:first-child > .card { .set-color(@theme-blue); color: #fff; }
+            &:nth-child(2) > .card { .set-color(#fff); }
+            &:nth-child(3) > .card { .set-color(lighten(@theme-blue, 20%)); }
+            &:nth-child(4) > .card { .set-color(lighten(@theme-blue, 15%)); }
+            &:nth-child(5) > .card { .set-color(lighten(@theme-blue, 10%)); }
+            &:nth-child(6) > .card { .set-color(lighten(@theme-blue, 5%)); }
+
+            @media (max-width: @screen-sm-min) {
+                &:nth-child(n+4) {
+                    display: none;
                 }
             }
 
-            &:first-child { .set-color(@theme-blue); }
-            &:nth-child(2) { .set-color(#fff); }
-            &:nth-child(3) { .set-color(lighten(@theme-blue, 20%)); }
-            &:nth-child(4) { .set-color(lighten(@theme-blue, 30%)); }
-            &:last-child { .set-color(lighten(@theme-blue, 10%)); }
+            @media (min-width: @screen-sm-min) {
+                > .card { height: @height-sm; };
+            }
+
+            @media (min-width: @screen-md-min) {
+                > .card { height: @height-md; };
+                &:first-child > .card { height: 2 * @height-md + @grid-gutter-width; }
+
+                &:nth-child(n+6) {
+                    display: none;
+                }
+            }
+
+            @media (min-width: @screen-lg-min) {
+                & > .card { height: @height-lg; }
+                &:first-child > .card { height: 2 * @height-lg + @grid-gutter-width; }
+            }
         }
     }
 }

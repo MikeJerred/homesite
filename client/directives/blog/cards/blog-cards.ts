@@ -21,7 +21,8 @@ module MJ.Directives.Blog.Cards {
             { id: 2, headline: 'Becoming a Freelance PHP Programmer', date: new Date(2016, 2, 1) },
             { id: 3, headline: 'Publish your new website the right way', date: new Date(2016, 2, 7) },
             { id: 4, headline: 'Marketing a website development company', date: new Date(2016, 3, 16) },
-            { id: 5, headline: 'Create a CSS navigation bar showing the current state', date: new Date(2016, 4, 3) }
+            { id: 5, headline: 'Create a CSS navigation bar showing the current state', date: new Date(2016, 4, 3) },
+            { id: 6, headline: 'Testing', date: new Date(2016, 4, 3) }
         ];
     }
 
