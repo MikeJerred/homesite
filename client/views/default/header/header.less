@@ -29,6 +29,7 @@ article.default-layout header.header {
                 background-color: @theme-light-blue;
                 color: #fff;
                 font-size: 0;
+                transition: all ease-in-out 0.3s;
 
                 &:hover {
                     background-color: darken(@theme-light-blue, 2%);
@@ -44,8 +45,13 @@ article.default-layout header.header {
                     .line1 { transform-origin: 120px 120px; }
                     .line2 { transform-origin: 600px 6000px; }
                     .line3 { transform-origin: 120px 1080px; }
+                }
 
-                    &.cross {
+                &.cross {
+                    background-color: transparent;
+                    border-color: transparent;
+
+                    svg {
                         .line1 { transform: rotate(45deg) scaleX(sqrt(2)); }
                         .line2 { transform: scaleX(0.01); }
                         .line3 { transform: rotate(-45deg) scaleX(sqrt(2)); }
@@ -62,7 +68,6 @@ article.default-layout header.header {
             height: @radius * 2;
             border-radius: 50%;
             background-color: @theme-blue;
-            border: 2px solid #fff;
             transition: all @expand-time ease-in-out;
             transform: translate(50%, -50%) scale(1);
 
