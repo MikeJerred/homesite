@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node dist/main.js",
     "monitor": "nodemon dist/main.js",
-    "deploy": "gcloud preview app deploy app.yaml"
+    "deploy": "gcloud preview app deploy app.yaml --no-promote"
   },
   "dependencies": {
     "express": "^4.13.4",
