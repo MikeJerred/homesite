@@ -101,7 +101,7 @@ gulp.task('client:debug:compile:styles', function () {
         .pipe(gulp.dest(paths.dest));
 
     var cssFiles = src
-        .pipe(plumber())
+        .pipe(plumber(plumberOptions))
         .pipe(progeny())
         .pipe(sourcemaps.init())
         .pipe(less({ plugins: [autoprefix] }))
@@ -134,7 +134,7 @@ gulp.task('client:debug:compile:scripts', function () {
         .pipe(gulp.dest(paths.dest));
 
     var jsFiles = gulp.src(paths.tsTypings.concat(paths.srcTs))
-        .pipe(plumber())
+        .pipe(plumber(plumberOptions))
         .pipe(sourcemaps.init())
         .pipe(ts(tsProject))
         .js
@@ -162,7 +162,7 @@ gulp.task('client:debug:clean:other', function() {
 
 gulp.task('client:debug:compile:images', function () {
     return gulp.src(paths.srcImg)
-        .pipe(plumber())
+        .pipe(plumber(plumberOptions))
         .pipe(cached('client:debug:images', { optimizeMemory: true }))
         .pipe(gulp.dest(paths.destImg))
         .pipe(livereload());
@@ -170,7 +170,7 @@ gulp.task('client:debug:compile:images', function () {
 
 gulp.task('client:debug:compile:fonts', function () {
     return gulp.src(paths.srcFonts)
-        .pipe(plumber())
+        .pipe(plumber(plumberOptions))
         .pipe(cached('client:debug:fonts', { optimizeMemory: true }))
         .pipe(flatten())
         .pipe(gulp.dest(paths.destFonts))
@@ -195,7 +195,6 @@ var order = require('gulp-order');
 
 gulp.task('client:debug:compile:index', function () {
     var libraries = gulp.src(bowerFiles())
-        .pipe(plumber())
         .pipe(cached('client:debug:libs', { optimizeMemory: true }))
         .pipe(gulp.dest(paths.destLibs))
         .pipe(remember('client:debug:libs'))
@@ -204,11 +203,10 @@ gulp.task('client:debug:compile:index', function () {
     var styles = gulp.src(paths.builtCssNoLibs, { read: false });
 
     var scripts = gulp.src(paths.builtJsNoLibs)
-        .pipe(plumber())
         .pipe(angularFilesort());
 
     var index = gulp.src(paths.srcIndex)
-        .pipe(plumber())
+        .pipe(plumber(plumberOptions))
         .pipe(gulp.dest(paths.dest))
         .pipe(inject(libraries, { name: 'bower', relative: true }))
         .pipe(inject(merge(styles, scripts), { relative: true }))
