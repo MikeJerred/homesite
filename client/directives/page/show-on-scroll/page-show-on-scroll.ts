@@ -4,6 +4,7 @@ module MJ.Directives.Page.ScrollOnShow {
     }
 
     class Controller {
+        static $inject = ['$scope', '$document', '$timeout'];
         constructor(
             private $scope: IScope,
             private $document: ng.IDocumentService,
