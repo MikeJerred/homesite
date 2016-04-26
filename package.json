@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "postinstall": "bower install && typings install",
-    "heroku-postbuild": "gulp release:build",
+    "heroku-postbuild": "gulp build:release",
     "start": "node dist/main.js",
     "monitor": "nodemon dist/main.js",
     "deploy": "gcloud preview app deploy app.yaml --no-promote"
