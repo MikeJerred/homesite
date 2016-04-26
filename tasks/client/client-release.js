@@ -30,7 +30,7 @@ gulp.task('client:release:build', ['client:release:clean', 'client:release:typin
     var iconStyles = through2.obj();
     var icons = compileIcons(iconStyles);
 
-    var allStyles = merge(styles, iconStyles)
+    var allStyles = styles //merge(styles, iconStyles)
         .pipe(concat('styles.css'))
         .pipe(cleanCss())
         .pipe(rev())
@@ -135,9 +135,9 @@ var compileIcons = (stylesStream) =>
     gulp.src(paths.srcIcons)
         .pipe(iconfont({
             fontName: 'mj-icons',
-            formats: ['svg', 'ttf', 'eot', 'woff']
-            //normalize: true,
-            //fontHeight: 1001
+            formats: ['svg', 'ttf', 'eot', 'woff'],
+            normalize: true,
+            fontHeight: 1001
         }))
         .on('glyphs', (glyphs, options) => {
             gulp.src(paths.srcIconsTemplate)
@@ -145,7 +145,7 @@ var compileIcons = (stylesStream) =>
                     glyphs: glyphs,
                     appendUnicode: true,
                     fontName: 'mj-icons',
-                    fontPath: paths.destFonts
+                    fontPath: paths.destFonts.substr(paths.dest.length+1)
                 }))
                 .pipe(rename(paths.destIconsTemplate))
                 .pipe(stylesStream);
