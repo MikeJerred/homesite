@@ -1,5 +1,5 @@
 ﻿<header class="header" page-show-on-scroll="headerCtrl.show">
-    <nav class="navbar navbar-default" role="navigation" ng-class="{ 'hide-menu': !headerCtrl.show && !headerCtrl.expanded }">
+    <nav class="navbar" role="navigation" ng-class="{ 'hide-menu': !headerCtrl.show && !headerCtrl.expanded }">
         <div class="nav-header">
             <button type="button" class="nav-toggle" ng-click="headerCtrl.expandClick()" ng-class="{ 'cross': headerCtrl.expanded }">
                 <svg width="18" height="18" viewbox="0 0 1200 1200">
@@ -13,16 +13,19 @@
         <div class="nav-collapse" ng-class="{ collapsed: !headerCtrl.expanded }">
             <ul class="nav">
                 <li ui-sref-active="active">
-                    <a ui-sref="default.home" title="Home" class="glyphicon glyphicon-home"></a>
+                    <a ui-sref="default.home" title="Home" class="fa fa-home"></a>
                 </li>
                 <li ui-sref-active="active">
-                    <a ui-sref="default.blogs" title="Blog" class="glyphicon glyphicon-th-large"></a>
+                    <a ui-sref="default.blogs" title="Blog" class="fa fa-th-large"></a>
                 </li>
                 <li ui-sref-active="active">
-                    <a ui-sref="default.cv" title="CV" class="glyphicon glyphicon-user"></a>
+                    <a ui-sref="default.cv" title="CV" class="fa fa-user"></a>
                 </li>
                 <li ui-sref-active="active">
-                    <a ui-sref="default.contact" title="Contact" class="glyphicon glyphicon-envelope"></a>
+                    <a ui-sref="default.lab" title="Experiments" class="fa fa-flask"></a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="default.contact" title="Contact" class="fa fa-envelope"></a>
                 </li>
             </ul>
         </div>
