@@ -14,7 +14,7 @@ var paths = settings.paths.client;
 
 var EE = require('events').EventEmitter;
 var plumberOptions = {
-    errorHandler: function(error) {
+    errorHandler: (error) => {
         if (EE.listenerCount(this, 'error') < 3) {
             util.log(
                 util.colors.cyan('Plumber') + util.colors.red(' found unhandled error:\n'),
@@ -31,29 +31,44 @@ var batch = require('gulp-batch');
 var runSequence = require('run-sequence').use(gulp);
 var watch = require('gulp-watch');
 
-gulp.task('client:debug:clean', function () {
-    cached.caches = {};
-    return del([paths.dest]);
-});
+gulp.task('client:debug:clean',
+    [
+        'client:debug:clean:other',
+        'client:debug:clean:templates',
+        'client:debug:clean:styles',
+        'client:debug:clean:scripts',
+        'client:debug:clean:other',
+        'client:debug:clean:icons',
+        'client:debug:clean:libs'
+    ],
+    () =>  del([paths.dest]));
 
-gulp.task('client:debug:build', function (done) {
+gulp.task('client:debug:build', (done) => {
     runSequence(
         'client:debug:clean',
-        ['client:debug:compile:templates', 'client:debug:compile:styles', 'client:debug:compile:scripts', 'client:debug:compile:images', 'client:debug:compile:fonts'],
+        [
+            'client:debug:compile:templates',
+            'client:debug:compile:styles',
+            'client:debug:compile:scripts',
+            'client:debug:compile:images',
+            'client:debug:compile:fonts',
+            'client:debug:compile:icons'
+        ],
         'client:debug:compile:index',
         done);
 });
 
-gulp.task('client:debug:watch', ['client:debug:build'], function () {
-    watch(paths.srcHtml, { read: false }, function() { runSequence('client:debug:compile:templates'); });
-    watch(paths.srcLess, { read: false }, function() { runSequence('client:debug:compile:styles'); });
-    watch(paths.srcTs, { read: false }, function() { runSequence('client:debug:compile:scripts'); });
-    watch(paths.srcImg, { read: false }, function() { runSequence('client:debug:compile:images'); });
-    watch(paths.srcFonts, { read: false }, function() { runSequence('client:debug:compile:fonts'); });
-    watch(paths.srcIndex, { read: false }, function() { runSequence('client:debug:compile:index'); });
+gulp.task('client:debug:watch', ['client:debug:build'], () => {
+    watch(paths.srcHtml, { read: false }, () => { runSequence('client:debug:compile:templates'); });
+    watch(paths.srcLess, { read: false }, () => { runSequence('client:debug:compile:styles'); });
+    watch(paths.srcTs, { read: false }, () => { runSequence('client:debug:compile:scripts'); });
+    watch(paths.srcImg, { read: false }, () => { runSequence('client:debug:compile:images'); });
+    watch(paths.srcFonts, { read: false }, () => { runSequence('client:debug:compile:fonts'); });
+    watch(paths.srcIcons.concat(paths.srcIconsTemplate), { read: false }, () => { runSequence('client:debug:compile:icons'); });
+    watch(paths.srcIndex, { read: false }, () => { runSequence('client:debug:compile:index'); });
 
-    gulp.watch(paths.builtCssAndJs, function(event) {
-        if (event.type == 'added' || event.type == 'deleted') {
+    gulp.watch(paths.builtCssAndJs, (event) => {
+        if (event.type === 'added' || event.type === 'deleted') {
             runSequence('client:debug:compile:index');
         }
     });
@@ -61,19 +76,19 @@ gulp.task('client:debug:watch', ['client:debug:build'], function () {
 
 
 // ------------------------------------------- templates -------------------------------------------
-gulp.task('client:debug:clean:templates', function () {
+gulp.task('client:debug:clean:templates', () => {
     if (cached.caches['client:debug:templates'])
         delete cached.caches['client:debug:templates'];
 
     return del([paths.dest + '/**/*.html']);
 });
 
-gulp.task('client:debug:compile:templates', function () {
-    return gulp.src(paths.srcHtml)
+gulp.task('client:debug:compile:templates', () =>
+    gulp.src(paths.srcHtml)
         .pipe(cached('client:debug:templates', { optimizeMemory: true }))
         .pipe(gulp.dest(paths.dest))
-        .pipe(livereload());
-});
+        .pipe(livereload())
+);
 
 
 // -------------------------------------------- styles ---------------------------------------------
@@ -82,7 +97,7 @@ var lessPluginAutoprefix = require('less-plugin-autoprefix');
 var autoprefix = new lessPluginAutoprefix(settings.autoprefixer);
 var progeny = require('gulp-progeny');
 
-gulp.task('client:debug:clean:styles', function () {
+gulp.task('client:debug:clean:styles', () => {
     if (cached.caches['client:debug:styles:src'])
         delete cached.caches['client:debug:styles:src'];
 
@@ -92,7 +107,7 @@ gulp.task('client:debug:clean:styles', function () {
     return del([paths.dest + '/**/*.{css,less,css.map}']);
 });
 
-gulp.task('client:debug:compile:styles', function () {
+gulp.task('client:debug:compile:styles', () => {
     var src = gulp.src(paths.srcLess.concat('!**/*.release.less'))
         .pipe(cached('client:debug:styles:src', { optimizeMemory: true }));
 
@@ -118,7 +133,7 @@ gulp.task('client:debug:compile:styles', function () {
 var ts = require('gulp-typescript');
 var tsProject = ts.createProject(paths.tsConfig, { sortOutput: true });
 
-gulp.task('client:debug:clean:scripts', function () {
+gulp.task('client:debug:clean:scripts', () => {
     if (cached.caches['client:debug:scripts:src'])
         delete cached.caches['client:debug:scripts:src'];
 
@@ -128,7 +143,7 @@ gulp.task('client:debug:clean:scripts', function () {
     return del([paths.dest + '/**/*.{js,js.map,ts,d.ts}']);
 });
 
-gulp.task('client:debug:compile:scripts', function () {
+gulp.task('client:debug:compile:scripts', () => {
     var tsFiles = gulp.src(paths.srcTs)
         .pipe(cached('client:debug:scripts:src', { optimizeMemory: true }))
         .pipe(gulp.dest(paths.dest));
@@ -150,7 +165,7 @@ gulp.task('client:debug:compile:scripts', function () {
 // ---------------------------------------- fonts & images -----------------------------------------
 var flatten = require('gulp-flatten');
 
-gulp.task('client:debug:clean:other', function() {
+gulp.task('client:debug:clean:other', () => {
     if (cached.caches['client:debug:images'])
         delete cached.caches['client:debug:images'];
 
@@ -160,26 +175,60 @@ gulp.task('client:debug:clean:other', function() {
     return del([paths.destImg, paths.destFonts]);
 });
 
-gulp.task('client:debug:compile:images', function () {
-    return gulp.src(paths.srcImg)
+gulp.task('client:debug:compile:images', () =>
+    gulp.src(paths.srcImg)
         .pipe(plumber(plumberOptions))
         .pipe(cached('client:debug:images', { optimizeMemory: true }))
         .pipe(gulp.dest(paths.destImg))
-        .pipe(livereload());
-});
+        .pipe(livereload())
+);
 
-gulp.task('client:debug:compile:fonts', function () {
-    return gulp.src(paths.srcFonts)
+gulp.task('client:debug:compile:fonts', () =>
+    gulp.src(paths.srcFonts)
         .pipe(plumber(plumberOptions))
         .pipe(cached('client:debug:fonts', { optimizeMemory: true }))
         .pipe(flatten())
         .pipe(gulp.dest(paths.destFonts))
-        .pipe(livereload());
-});
+        .pipe(livereload())
+);
+
+
+// --------------------------------------------- icons ---------------------------------------------
+var consolidate = require('gulp-consolidate');
+var iconfont = require('gulp-iconfont');
+var rename = require("gulp-rename");
+
+gulp.task('client:debug:clean:icons', () =>
+    del([paths.destFonts + '/mj-icons.{svg,ttf,eot,woff}', paths.destIconsTemplate]));
+
+gulp.task('client:debug:compile:icons', () =>
+    gulp.src(paths.srcIcons)
+        .pipe(plumber(plumberOptions))
+        .pipe(iconfont({
+            fontName: 'mj-icons',
+            formats: ['svg', 'ttf', 'eot', 'woff'],
+            normalize: true,
+            fontHeight: 1001
+        }))
+        .on('glyphs', (glyphs, options) => {
+            gulp.src(paths.srcIconsTemplate)
+                .pipe(plumber(plumberOptions))
+                .pipe(consolidate('lodash', {
+                    glyphs: glyphs,
+                    appendUnicode: false,
+                    fontName: 'mj-icons',
+                    fontPath: paths.destFonts.substr(paths.dest.length+1)
+                }))
+                .pipe(rename(paths.destIconsTemplate))
+                .pipe(livereload())
+                .pipe(gulp.dest(''));
+        })
+        .pipe(gulp.dest(paths.destFonts))
+        .pipe(livereload()));
 
 
 // --------------------------------------------- libs ----------------------------------------------
-gulp.task('client:debug:clean:libs', function() {
+gulp.task('client:debug:clean:libs', () => {
     if (cached.caches['client:debug:libs'])
         delete cached.caches['client:debug:libs'];
 
@@ -193,7 +242,7 @@ var bowerFiles = require('main-bower-files');
 var inject = require('gulp-inject');
 var order = require('gulp-order');
 
-gulp.task('client:debug:compile:index', function () {
+gulp.task('client:debug:compile:index', () => {
     var libraries = gulp.src(bowerFiles())
         .pipe(cached('client:debug:libs', { optimizeMemory: true }))
         .pipe(gulp.dest(paths.destLibs))
