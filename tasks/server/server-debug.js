@@ -10,14 +10,14 @@ var paths = settings.paths.server;
 
 
 // --------------------------------------------- build ---------------------------------------------
-gulp.task('server:clean', function () {
+gulp.task('server:clean', () => {
     if (cached.caches['server'])
         delete cached.caches['server'];
 
     return del([paths.dest + '/**', '!' + paths.dest, '!' + settings.paths.client.dest + '/**']);
 });
 
-gulp.task('server:debug:build', function (done) {
+gulp.task('server:debug:build', (done) => {
     runSequence(
         'server:clean',
         'server:debug:compile',
@@ -25,9 +25,9 @@ gulp.task('server:debug:build', function (done) {
         done);
 });
 
-gulp.task('server:debug:watch', ['server:debug:build'], function() {
-    watch(paths.srcTs, { read: false }, function() { runSequence('server:debug:compile'); });
-    watch(paths.srcOther, { read: false }, function() { runSequence('server:debug:copy'); });
+gulp.task('server:debug:watch', ['server:debug:build'], () => {
+    watch(paths.srcTs, { read: false }, () => { runSequence('server:debug:compile'); });
+    watch(paths.srcOther, { read: false }, () => { runSequence('server:debug:copy'); });
 });
 
 
@@ -35,19 +35,15 @@ gulp.task('server:debug:watch', ['server:debug:build'], function() {
 var ts = require('gulp-typescript');
 var tsProject = ts.createProject(paths.tsConfig, { sortOutput: true });
 
-gulp.task('server:debug:compile', function() {
-    return gulp.src(paths.tsTypings.concat(paths.srcTs))
+gulp.task('server:debug:compile', () =>
+    gulp.src(paths.tsTypings.concat(paths.srcTs))
         .pipe(sourcemaps.init())
         .pipe(ts(tsProject))
         .js
         .pipe(sourcemaps.write('.', { includeContent: false, destPath: paths.dest }))
         .pipe(cached('server', { optimizeMemory: true }))
-        .pipe(gulp.dest(paths.dest));
-});
+        .pipe(gulp.dest(paths.dest)));
 
 
 // --------------------------------------------- copy ----------------------------------------------
-gulp.task('server:debug:copy', function() {
-    return gulp.src(paths.srcOther)
-        .pipe(gulp.dest(paths.dest));
-});
+gulp.task('server:debug:copy', () => gulp.src(paths.srcOther).pipe(gulp.dest(paths.dest)));
