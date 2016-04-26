@@ -3,13 +3,14 @@
   "name": "homesite",
   "private": true,
   "scripts": {
+    "postinstall": "bower install && typings install",
+    "heroku-postbuild": "gulp release:build",
     "start": "node dist/main.js",
     "monitor": "nodemon dist/main.js",
     "deploy": "gcloud preview app deploy app.yaml --no-promote"
   },
   "dependencies": {
-    "express": "^4.13.4",
-    "gcloud": "^0.30.3"
+    "express": "^4.13.4"
   },
   "devDependencies": {
     "bower": "^1.7.9",
@@ -45,7 +46,7 @@
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.5",
     "less-plugin-autoprefix": "^1.5.1",
-    "main-bower-files": "^2.11.1",
+    "main-bower-files": "^2.12.0",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.1.5",
     "through2": "^2.0.1",
