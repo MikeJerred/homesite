@@ -18,10 +18,13 @@ module.exports = {
             srcLess: [clientSrcRoot + '/**/*.less'],
             srcTs: [clientSrcRoot + '/**/*.ts'],
             srcFonts: ['./bower_components/bootstrap/dist/fonts/*.*'],
-            srcImg: [clientSrcRoot + '/images/**/*'],
+            srcIcons: [clientSrcRoot + '/images/icons/*.svg'],
+            srcIconsTemplate: [clientSrcRoot + '/styles/icons-template.templ'],
+            srcImg: [clientSrcRoot + '/images/**/*', '!' + clientSrcRoot + '/images/icons/*.svg'],
 
             dest: clientBuildRoot,
             destFonts: clientBuildRoot + '/fonts',
+            destIconsTemplate: clientBuildRoot + '/styles/icons-template.css',
             destImg: clientBuildRoot + '/images',
             destLibs: clientBuildRoot + '/libs',
 
