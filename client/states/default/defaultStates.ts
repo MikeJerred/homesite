@@ -22,7 +22,7 @@
                     }
                 })
                 .state('default.blog', {
-                    url: '/blog/:id',
+                    url: '/blog/:articleId',
                     views: {
                         'header': header,
                         'main': Views.Default.Main.Blog.view,

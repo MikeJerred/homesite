@@ -21,7 +21,7 @@ gulp.task('server:release:build', (done) => {
 var concat = require('gulp-concat');
 var ts = require('gulp-typescript');
 var uglify = require('gulp-uglify');
-var tsProject = ts.createProject(paths.tsConfig, { sortOutput: true });
+var tsProject = ts.createProject(paths.tsConfig, { sortOutput: true, target: 'es6' });
 
 gulp.task('server:release:compile', () =>
     gulp.src(paths.tsTypings.concat(paths.srcTs))

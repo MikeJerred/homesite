@@ -74,7 +74,7 @@ var compileStyles = () =>
 var angularFilesort = require('gulp-angular-filesort');
 var order = require('gulp-order');
 var ts = require('gulp-typescript');
-var tsProject = ts.createProject(paths.tsConfig);
+var tsProject = ts.createProject(paths.tsConfig, { sortOutput: true, target: 'es5' });
 
 var compileScripts = () =>
     gulp.src(paths.tsTypings.concat(paths.srcTs))

@@ -131,7 +131,7 @@ gulp.task('client:debug:compile:styles', () => {
 
 // -------------------------------------------- scripts --------------------------------------------
 var ts = require('gulp-typescript');
-var tsProject = ts.createProject(paths.tsConfig, { sortOutput: true });
+var tsProject = ts.createProject(paths.tsConfig, { sortOutput: true, target: 'es5' });
 
 gulp.task('client:debug:clean:scripts', () => {
     if (cached.caches['client:debug:scripts:src'])

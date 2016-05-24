@@ -1,0 +1,28 @@
+@import "../../../../styles/variables.less";
+
+article.default-layout article.main-blog {
+    .top-bar {
+        background-color: @theme-light-blue;
+        padding-left: 20px;
+        height: 82px;
+        line-height: 82px;
+        font-size: 20px;
+    }
+
+    .next-blogs {
+        .card {
+            color: @theme-black;
+
+
+            &.card-prev {
+                float: left;
+                background-color: #fff;
+            }
+
+            &.card-next {
+                float: right;
+                background-color: @theme-light-blue;
+            }
+        }
+    }
+}

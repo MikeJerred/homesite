@@ -33,7 +33,7 @@ gulp.task('server:debug:watch', ['server:debug:build'], () => {
 
 // -------------------------------------------- compile --------------------------------------------
 var ts = require('gulp-typescript');
-var tsProject = ts.createProject(paths.tsConfig, { sortOutput: true });
+var tsProject = ts.createProject(paths.tsConfig, { sortOutput: true, target: 'es6' });
 
 gulp.task('server:debug:compile', () =>
     gulp.src(paths.tsTypings.concat(paths.srcTs))

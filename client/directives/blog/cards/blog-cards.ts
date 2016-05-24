@@ -1,22 +1,17 @@
 module MJ.Directives.Blog.Cards {
-    interface IBlogStub {
-        id: number;
-        headline: string;
-        date: Date;
-    }
-
-    interface IScope {
-    }
+    import IPage = DataServices.IPage;
+    import VmBlogStub = DataServices.Blogs.IVmBlogStub;
 
     class BlogCardsController {
-        public blogStubs: IBlogStub[] = [];
+        public blogStubs: IPage<VmBlogStub>;
 
-        static $inject = ['$scope'];
-        constructor($scope: IScope) {
-            _.each(this.blogData, x => { this.blogStubs.push(x); });
+        static $inject = ['dsBlogs'];
+        constructor(dsBlogs: DataServices.Blogs.IDsBlogs) {
+            this.blogStubs = dsBlogs.getBlogStubs(1, 6);
+            //_.each(this.blogData, x => { this.blogStubs.push(x); });
         }
 
-        private blogData: IBlogStub[] = [
+        private blogData = [
             { id: 1, headline: 'How-to build a successful website!', date: new Date(2015, 12, 22) },
             { id: 2, headline: 'Becoming a Freelance PHP Programmer', date: new Date(2016, 2, 1) },
             { id: 3, headline: 'Publish your new website the right way', date: new Date(2016, 2, 7) },
