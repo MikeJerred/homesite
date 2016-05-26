@@ -1,16 +1,18 @@
 {
   "name": "homesite",
-  "dependencies": {},
+  "dependencies": {
+    "immutable": "registry:npm/immutable#3.7.6+20160411060006"
+  },
   "devDependencies": {},
-  "ambientDependencies": {
+  "globalDependencies": {
     "angular": "registry:dt/angular#1.4.0+20160302143748",
     "angular-animate": "registry:dt/angular-animate#0.0.0+20151024125316",
     "angular-resource": "registry:dt/angular-resource#0.0.0+20160303190631",
     "angular-ui-bootstrap": "registry:dt/angular-ui-bootstrap#0.13.3+20160212100300",
     "angular-ui-router": "registry:dt/angular-ui-router#0.0.0+20160112161118",
     "express": "registry:dt/express#4.0.0+20160208031452",
+    "joi": "registry:dt/joi#9.0.0+20160514175131",
     "jquery": "registry:dt/jquery#2.0.0+20160303223636",
-    "lodash": "registry:dt/lodash#3.10.0+20160127144039",
     "mime": "registry:dt/mime#0.0.0+20151204023458",
     "mongodb": "registry:dt/mongodb#2.1.0+20160512045721",
     "node": "registry:dt/node#4.0.0+20160226132328",

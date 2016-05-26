@@ -1,5 +1,5 @@
-declare module MJ.DataServices {
-    export interface IPage<T> extends ng.resource.IResource<IPage<T>> {
+declare module MJ.Models {
+    export interface IVmPage<T> {
         pageNo: number;
         pageSize: number;
         items: T[];

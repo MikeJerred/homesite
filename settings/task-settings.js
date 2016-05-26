@@ -1,5 +1,6 @@
 var clientSrcRoot = 'client';
 var serverSrcRoot = 'server';
+var modelsSrcRoot = 'models';
 var buildRoot = 'dist';
 var clientBuildRoot = buildRoot + '/wwwroot';
 var clientBuildLibs = clientBuildRoot + '/libs/**';
@@ -10,7 +11,7 @@ module.exports = {
     paths: {
         client: {
             tsConfig: './tsconfig.json',
-            tsTypings: ['./typings/browser.d.ts', './typings/browser/**/*.d.ts'],
+            tsTypings: ['./typings/browser.d.ts', './typings/browser/**/*.d.ts', modelsSrcRoot + '/**/*.d.ts'],
             tsTypingsConfig: './typings.json',
 
             srcIndex: clientSrcRoot + '/index.html',
