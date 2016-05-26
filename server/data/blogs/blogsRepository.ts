@@ -1,4 +1,4 @@
-import Page from './data/page';
+import Page from '../page';
 import Blogs = MJ.Server.Data.Blogs;
 
 export async function getBlog(id: number): Promise<Blogs.IDmBlog> {
@@ -25,5 +25,5 @@ export async function getBlogs(pageNo: number, pageSize: number): Promise<Page<B
     let items = Array.from(ids, id => this.getBlog(id));
     let count = 100;
 
-    return Page.Build(pageNo, pageSize, items, count);
+    return Page.build(pageNo, pageSize, items, count);
 }

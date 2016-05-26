@@ -18,7 +18,7 @@
         static $inject = ['$timeout'];
         constructor($timeout: ng.ITimeoutService) {
             $timeout(() => {
-                _.each(this.cardsData, card => { this.cards.push(card); });
+                this.cardsData.forEach(card => { this.cards.push(card); });
             }, 500);
         }
     }

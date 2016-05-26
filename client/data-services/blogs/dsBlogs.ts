@@ -8,7 +8,7 @@ module MJ.DataServices.Blogs {
         static $inject = ['$resource'];
         constructor($resource: ng.resource.IResourceService) {
             this.blogs = $resource<IVmBlog>('api/blogs/:id', { id: '@id' });
-            this.blogStubs = $resource<IPage<IVmBlogStub>>('api/blog-stubs/:pageNo/:pageSize', { pageNo: '@pageNo', pageSize: '@pageSize' });
+            this.blogStubs = $resource<IPage<IVmBlogStub>>('api/blog-stubs', { pageNo: '@pageNo', pageSize: '@pageSize' });
         }
 
         private blogs: ng.resource.IResourceClass<IVmBlog>;

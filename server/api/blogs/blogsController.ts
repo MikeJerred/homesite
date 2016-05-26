@@ -1,15 +1,13 @@
 import IVmPage = MJ.Models.IVmPage;
 import IVmBlog = MJ.Models.Blogs.IVmBlog;
 import IVmBlogStub = MJ.Models.Blogs.IVmBlogStub;
-import * as BlogsRepository from './data/blogs/blogsRepository';
-import * as VmBlogFactory from 'vmBlogFactory';
-import * as VmBlogStubFactory from 'vmBlogStubFactory';
-import * as express from 'express';
 import * as Joi from 'joi';
-import * as Router from './api/router';
-import validate from './api/validate';
+import * as Router from '../router';
+import * as BlogsRepository from '../../data/blogs/blogsRepository';
+import * as VmBlogFactory from './vmBlogFactory';
+import * as VmBlogStubFactory from './vmBlogStubFactory';
 
-Router.Get(
+Router.get(
     'blogs/:id',
     {
         params: { id: Joi.number().integer().required() }
@@ -21,7 +19,7 @@ Router.Get(
     }
 );
 
-Router.Get(
+Router.get(
     'blog-stubs',
     {
         query: {

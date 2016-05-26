@@ -8,7 +8,7 @@ export default class Page<T> {
         public totalCount: number) {
     }
 
-    static Build<T>(pageNo: number, pageSize: number, items: T[], totalCount: number) {
+    static build<T>(pageNo: number, pageSize: number, items: T[], totalCount: number) {
         return new Page(pageNo, pageSize, Immutable.Seq(items), totalCount);
     }
 

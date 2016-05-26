@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as joi from 'joi';
-import validate from 'validate';
+import validate from './validate';
 
 const router = express.Router();
 
@@ -23,7 +23,8 @@ function sendResponse<T>(result: T | HttpStatus<any>, res: express.Response) {
     }
 }
 
-export function Delete<T>(
+export {_delete as delete};
+function _delete<T>(
     path: string,
     schemas: { params?: joi.SchemaMap, query?: joi.SchemaMap, body?: joi.SchemaMap },
     func: (params?: any, query?: any, body?: any) => Promise<T | HttpStatus<any>>) {
@@ -35,7 +36,7 @@ export function Delete<T>(
     });
 }
 
-export function Get<T>(
+export function get<T>(
     path: string,
     schemas: { params?: joi.SchemaMap, query?: joi.SchemaMap },
     func: (params?: any, query?: any) => Promise<T | HttpStatus<any>>) {
@@ -47,7 +48,7 @@ export function Get<T>(
     });
 }
 
-export function Post<T>(
+export function post<T>(
     path: string,
     schemas: { params?: joi.SchemaMap, query?: joi.SchemaMap, body?: joi.SchemaMap },
     func: (params?: any, query?: any, body?: any) => Promise<T | HttpStatus<any>>) {
@@ -59,7 +60,7 @@ export function Post<T>(
     });
 }
 
-export function Put<T>(
+export function put<T>(
     path: string,
     schemas: { params?: joi.SchemaMap, query?: joi.SchemaMap, body?: joi.SchemaMap },
     func: (params?: any, query?: any, body?: any) => Promise<T | HttpStatus<any>>) {
