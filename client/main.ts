@@ -3,7 +3,7 @@
         'ngAnimate',
         'ngResource',
         'ngSanitize',
-        'ng-showdown',
+        'hljs',
         'ui.bootstrap',
         'ui.router',
         'LocalStorageModule',

@@ -10,13 +10,13 @@ I had a play around with using angular to modify what stylesheets are loaded by 
 
 A quick example to outline this problem: suppose we are building a homesite for a company, and on one of the pages they list available job positions. We might have a css rule that look like this:
 
-\`\`\`
+\`\`\`less
 ul.jobs > li.job { background-color: #fff; }
 \`\`\`
 
 Now on a totally different part of the site, perhaps in the administrative section, there might be a page where you can queue up jobs that need to be done (a completely different meaning for the same word \`job\`), you might write a css rule like:
 
-\`\`\`
+\`\`\`less
 ul.jobs > li.job { width: 50%; }
 \`\`\`
 
@@ -27,7 +27,7 @@ It turns out that it is quite easy to get angular to manipulate the loaded style
 *Note: I've used the ES6 [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) notation, and often in examples I will use [typescript](http://www.typescriptlang.org/) instead of plain javascript code.*
 
 
-\`\`\`javascript
+\`\`\`typescript
 angular.module('app').directive('injectStyles', () => ({
     replace: true,
     restrict: 'E',
@@ -53,7 +53,7 @@ Now we just need to keep the \`stylesheets\` variable up-to-date with what we wa
 
 *Note: If the \`_\` seems mysterious it's because I'm using [lodash](https://lodash.com/). I apologize for using things that aren't plain javascript. I will try to minimize the amount of non-standard knowledge required; albeit taking some liberties if it makes the code considerably easier to read, or if I think it's essential knowledge for modern web development.*
 
-\`\`\`javascript
+\`\`\`typescript
 angular.module('app').directive('injectStyles', [
     '$rootScope',
     ($rootScope) => ({
@@ -76,7 +76,7 @@ angular.module('app').directive('injectStyles', [
 
 We need to add a \`stylesheetUrl\` property to each of the states views:
 
-\`\`\`
+\`\`\`typescript
 angular.module('app').config(['$stateProvider', ($stateProvider) => {
     var mainView = {
         templateUrl: 'views/home/home.html',
@@ -106,7 +106,7 @@ This gives the general idea, but we actually need to make it a bit more robust. 
 For this to work you must have the ng-app directive on the \`html\` element
 
 
-\`\`\`
+\`\`\`typescript
 interface IScope extends ng.IScope {
     stylesheets: string[];
 }

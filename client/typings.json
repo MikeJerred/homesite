@@ -9,6 +9,7 @@
     "angular-resource": "registry:dt/angular-resource#0.0.0+20160303190631",
     "angular-ui-bootstrap": "registry:dt/angular-ui-bootstrap#0.13.3+20160212100300",
     "angular-ui-router": "registry:dt/angular-ui-router#0.0.0+20160112161118",
+    "highlightjs": "registry:dt/highlightjs#9.1.0+20160317120654",
     "jquery": "registry:dt/jquery#2.0.0+20160303223636",
     "showdown": "registry:dt/showdown#0.3.1+20160317120654"
   },
