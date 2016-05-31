@@ -17,7 +17,7 @@ module MJ.Directives.Blog.Markdown {
                 element.html(converter.makeHtml(markdown));
 
                 // add syntax highlighting to code blocks
-                let codeBlocks = element[0].querySelectorAll('pre');
+                let codeBlocks = element[0].querySelectorAll('pre > code');
                 angular.forEach(codeBlocks, block => {
                     hljs.highlightBlock(block);
                 });
