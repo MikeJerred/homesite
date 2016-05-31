@@ -52,11 +52,11 @@ blog-cards article.blog-cards {
             }
 
             @media (min-width: @screen-sm-min) {
-                > .card { height: @height-sm; };
+                & > .card { height: @height-sm; };
             }
 
             @media (min-width: @screen-md-min) {
-                > .card { height: @height-md; };
+                & > .card { height: @height-md; };
                 &:first-child > .card { height: 2 * @height-md + @grid-gutter-width; }
 
                 &:nth-child(n+6) {

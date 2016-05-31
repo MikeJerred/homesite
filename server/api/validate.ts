@@ -8,8 +8,11 @@ interface IFieldError {
 }
 
 export class ValidationError extends Error {
-    constructor(private errors: { [key: string]: IFieldError[] }, public status = 400) {
+    constructor(private errors: { [key: string]: IFieldError[] }, public status?: number) {
         super('Validation Error');
+
+        if (status === undefined)
+            this.status = 400;
     }
 
     toString(): string {

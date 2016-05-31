@@ -3,9 +3,7 @@
         Michael Jerred
     </section>
 
-    <section class="main">
-
-    </section>
+    <section class="main container" markdown-to-html="blogCtrl.article.articleMarkdown"></section>
 
     <section class="next-blogs">
         <a class="card card-prev col-xs-6 col-sm-4 col-md-3" ng-if="prevBlog" ui-sref="default.blog({ articleId: blogCtrl.prevBlog.id })">

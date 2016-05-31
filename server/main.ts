@@ -1,5 +1,5 @@
 ﻿import * as express from 'express';
-import apiRouter from './api/router';
+import apiRoutes from './api/routes';
 import * as validation from './api/validate';
 
 let app = express();
@@ -7,7 +7,7 @@ let app = express();
 app.use(express.static(__dirname + '/wwwroot'));
 
 // Register API routes
-app.use('/api', apiRouter);
+app.use('/api', apiRoutes);
 
 app.all('/*', (req, res, next) => {
     // Just send the index.html for other paths to support HTML5Mode in angular
@@ -30,4 +30,4 @@ if (module === require.main) {
     });
 }
 
-module.exports = app;
+export default app;

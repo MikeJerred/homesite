@@ -3,8 +3,8 @@ import {MongoClient} from 'mongodb';
 let co = require('co');
 
 co(function*() {
-    var db = yield MongoClient.connect(process.env.MONGODB_URI);
+    let db = yield MongoClient.connect(process.env.MONGODB_URI);
     db.close();
-}).catch((err: any) => {
+}).catch((err: Error) => {
     console.log(err.stack);
 });

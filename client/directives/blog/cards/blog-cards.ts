@@ -1,14 +1,13 @@
 module MJ.Directives.Blog.Cards {
     import IPage = DataServices.IPage;
-    import VmBlogStub = DataServices.Blogs.IVmBlogStub;
+    import IVmBlogStub = DataServices.Blogs.IVmBlogStub;
 
     class BlogCardsController {
-        public blogStubs: IPage<VmBlogStub>;
+        public blogStubs: IPage<IVmBlogStub>;
 
         static $inject = ['dsBlogs'];
         constructor(dsBlogs: DataServices.Blogs.IDsBlogs) {
             this.blogStubs = dsBlogs.getBlogStubs(1, 6);
-            //_.each(this.blogData, x => { this.blogStubs.push(x); });
         }
 
         private blogData = [
@@ -23,7 +22,6 @@ module MJ.Directives.Blog.Cards {
 
     class BlogCardsDirectve implements ng.IDirective {
         public restrict = 'E';
-        //public scope = {};
         public controller = BlogCardsController;
         public controllerAs = 'blogCardsCtrl';
         public templateUrl = 'directives/blog/cards/blog-cards.html';

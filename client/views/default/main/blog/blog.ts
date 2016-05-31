@@ -1,4 +1,7 @@
 module MJ.Views.Default.Main.Blog {
+    import IVmBlog = DataServices.Blogs.IVmBlog;
+    import IVmBlogStub = DataServices.Blogs.IVmBlogStub;
+
     class Controller {
         static $inject = ['$stateParams', 'dsBlogs'];
         constructor(
@@ -9,9 +12,9 @@ module MJ.Views.Default.Main.Blog {
             this.article = dsBlogs.getBlog(articleId);
         }
 
-        public article: DataServices.Blogs.IVmBlog;
-        public prevBlog: DataServices.Blogs.IVmBlog;
-        public nextBlog: DataServices.Blogs.IVmBlog;
+        public article: IVmBlog;
+        public prevBlog: IVmBlogStub;
+        public nextBlog: IVmBlogStub;
     }
 
     export var view = {

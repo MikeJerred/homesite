@@ -8,7 +8,7 @@ import * as VmBlogFactory from './vmBlogFactory';
 import * as VmBlogStubFactory from './vmBlogStubFactory';
 
 Router.get(
-    'blogs/:id',
+    '/blogs/:id',
     {
         params: { id: Joi.number().integer().required() }
     },
@@ -20,7 +20,7 @@ Router.get(
 );
 
 Router.get(
-    'blog-stubs',
+    '/blog-stubs',
     {
         query: {
             pageNo: Joi.number().integer().required(),
@@ -31,7 +31,7 @@ Router.get(
         const pageNo: number = query.pageNo;
         const pageSize: number = query.pageSize;
 
-        let results = await BlogsRepository.getBlogs(pageNo, pageSize);
+        const results = await BlogsRepository.getBlogs(pageNo, pageSize);
 
         return results.map(VmBlogStubFactory.build).toVmPage();
     }

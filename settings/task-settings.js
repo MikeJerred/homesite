@@ -7,12 +7,12 @@ var clientBuildLibs = clientBuildRoot + '/libs/**';
 
 module.exports = {
     autoprefixer: { browsers: ['> 2%', 'IE 10'] },
-    bowerOrder: ['**jquery.js', '**jquery**', '**lodash**', '**angular.js'],
+    bowerOrder: ['**jquery.js', '**jquery**', '**lodash**', '**angular.js', '**/showdown.js'],
     paths: {
         client: {
-            tsConfig: './tsconfig.json',
-            tsTypings: ['./typings/index.d.ts', './typings/**/*.d.ts', modelsSrcRoot + '/**/*.d.ts'],
-            tsTypingsConfig: './typings.json',
+            tsConfig: clientSrcRoot + '/tsconfig.json',
+            tsTypingsConfig: clientSrcRoot + '/typings.json',
+            tsTypings: [clientSrcRoot + '/typings/**/*.d.ts', modelsSrcRoot + '/**/*.d.ts'],
 
             srcIndex: clientSrcRoot + '/index.html',
             srcHtml: [clientSrcRoot + '/**/*.html', '!' + clientSrcRoot + '/index.html'],
@@ -34,12 +34,13 @@ module.exports = {
             builtJsNoLibs: [clientBuildRoot + '/**/*.js', '!' + clientBuildLibs + '/*.js']
         },
         server: {
-            tsConfig: './tsconfig.json',
-            tsTypings: ['./typings/index.d.ts', './typings/**/*.d.ts', modelsSrcRoot + '/**/*.d.ts'],
+            tsConfig: serverSrcRoot + '/tsconfig.json',
+            tsTypingsConfig: serverSrcRoot + '/typings.json',
+            tsTypings: [serverSrcRoot + '/typings/**/*.d.ts', modelsSrcRoot + '/**/*.d.ts'],
 
             srcRoot: serverSrcRoot,
             srcTs: [serverSrcRoot + '/**/*.ts'],
-            srcOther: [serverSrcRoot + '/**/*', '!' + serverSrcRoot + '/**/*.ts'],
+            srcOther: [serverSrcRoot + '/**/*', '!' + serverSrcRoot + '/**/*.ts', '!' + serverSrcRoot + '/typings/**/*'],
 
             dest: buildRoot
         }
