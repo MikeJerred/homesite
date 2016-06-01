@@ -6,8 +6,7 @@
     "postinstall": "bower install && cd ./client && typings install && cd ../server && typings install",
     "heroku-postbuild": "gulp build:release",
     "start": "node dist/main.js",
-    "monitor": "nodemon dist/main.js",
-    "deploy": "gcloud preview app deploy app.yaml --no-promote"
+    "monitor": "nodemon dist/main.js"
   },
   "dependencies": {
     "co": "^4.6.0",
@@ -61,6 +60,6 @@
     "typings": "^1.0.4"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": "4.4.4"
   }
 }
