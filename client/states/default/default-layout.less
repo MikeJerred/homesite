@@ -1,0 +1,27 @@
+article.default-layout {
+    > .ui-view-container {
+        position: relative;
+
+        > .ui-view-animate {
+            transition: all 0.3s ease-in-out;
+            overflow: hidden;
+
+            &.ng-enter {
+                position: absolute;
+                top: auto !important;
+                width: 100%;
+                z-index: 1000;
+            }
+
+            &.ng-leave {
+                position: fixed;
+                width: 100%;
+                opacity: 1;
+
+                &.ng-leave-active {
+                    opacity: 0;
+                }
+            }
+        }
+    }
+}

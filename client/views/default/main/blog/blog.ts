@@ -3,18 +3,13 @@ module MJ.Views.Default.Main.Blog {
     import IVmBlogStub = DataServices.Blogs.IVmBlogStub;
 
     class Controller {
-        static $inject = ['$scope', '$stateParams', 'dsBlogs'];
+        static $inject = ['$stateParams', 'dsBlogs'];
         constructor(
-            $scope: ng.IScope,
             $stateParams: ng.ui.IStateParamsService,
             private dsBlogs: DataServices.Blogs.IDsBlogs) {
 
             const articleId = $stateParams['articleId'];
             this.article = dsBlogs.getBlog(articleId);
-
-            $scope.$on('mjInternalStateChange', () => {
-                $('html,body').delay(290).animate({ scrollTop: 0 }, 0);
-            });
         }
 
         public article: IVmBlog;

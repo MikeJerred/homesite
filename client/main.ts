@@ -23,42 +23,52 @@
     angular.module('mj.templates', []);
 
     app.run(
-        ['$rootScope', '$state', '$q', '$injector', '$window',
+        ['$rootScope', '$state', '$q', '$injector', '$window', '$timeout',
         ($rootScope: ng.IRootScopeService,
         $state: ng.ui.IStateService,
         $q: ng.IQService,
         $injector: ng.auto.IInjectorService,
-        $window: ng.IWindowService) => {
+        $window: ng.IWindowService,
+        $timeout: ng.ITimeoutService) => {
 
-        // detect when a state change has happened because the user used the browser history, in which case
-        // we want to scroll to their last position. If they navigated using links then we scroll to the top.
+        // detect whether a state change happened because the user:
+        // 1. used the browser history (back/forward buttons): $stateChangeSuccess happens after $locationChangeSuccess
+        // 2. navigated using links on the page: $stateChangeSuccess happens before $locationChangeSuccess
+        // Note: this is quite hacky as it is relying on the internal behaviour of angular,
+        // perhaps it is cleaner to do it using window.onpopstate
         let lastNavigationEvent = 0;
         $rootScope.$on('$stateChangeStart', () => {
             lastNavigationEvent = 0;
-            $rootScope['isInternalStateChange'] = false;
         });
-        $rootScope.$on('$stateChangeSuccess', () => {
+        $rootScope.$on('$stateChangeSuccess', (event: ng.IAngularEvent, toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState) => {
             if (lastNavigationEvent === 2) {
-                $rootScope['isInternalStateChange'] = false;
-                $rootScope.$broadcast('mjBrowserHistory');
+                // User navigated via browser history
+
+                if (toState.data && toState.data.scrollY) {
+                    // scroll to last known position
+                    $('html,body').delay(100).animate({ scrollTop: toState.data.scrollY }, 0);
+                } else {
+                    // if we don't known the last position, scroll to top
+                    $('html,body').delay(100).animate({ scrollTop: 0 }, 0);
+                }
             }
             lastNavigationEvent = 1;
+
+            $('.ui-view-animate').css('top', -$window.scrollY);
+
+            if (!fromState.data)
+                fromState.data = {};
+            fromState.data.scrollY = $window.scrollY;
         });
         $rootScope.$on('$locationChangeSuccess', () => {
             if (lastNavigationEvent === 1) {
-                $rootScope['isInternalStateChange'] = true;
-                $rootScope.$broadcast('mjInternalStateChange');
+                // User navigated via links
+
+                // scroll to top
+                $('html,body').delay(100).animate({ scrollTop: 0 }, 0);
             }
             lastNavigationEvent = 2;
         });
-
-
-        $rootScope.$on('$stateChangeSuccess', () => {
-            $('.ui-view-animate').css('top', -$window.scrollY);
-
-            //$('.ui-view-container').css('min-height', $('.ui-view-animate').height());
-        });
-
 
 
         // fix for a bug with angular-ui-router see https://github.com/angular-ui/ui-router/issues/1584

@@ -1,6 +1,4 @@
-.ui-view-container {
-    position: relative;
-
+.ui-view-animate {
     .inherit-transition() {
         transition-delay: inherit;
         transition-duration: inherit;
@@ -8,47 +6,30 @@
         transition-property: inherit;
     }
 
-    > .ui-view-animate {
-        transition: all 0.3s ease-in-out;
-        overflow: hidden;
+    &.ng-enter {
+        .view-slide-left {
+            .inherit-transition();
+            transform: translateX(100vw);
+        }
 
-        &.ng-enter {
-            position: absolute;
-            top: auto !important;
-            width: 100%;
-            z-index: 1000;
+        .view-slide-right {
+            .inherit-transition();
+            transform: translateX(-100vw);
+        }
 
-            &.fixed { position: fixed; }
-
+        &.ng-enter-active {
             .view-slide-left {
-                .inherit-transition();
-                transform: translateX(100vw);
+                transform: translateX(0);
             }
 
             .view-slide-right {
-                .inherit-transition();
-                transform: translateX(-100vw);
-            }
-
-            &.ng-enter-active {
-                .view-slide-left {
-                    transform: translateX(0);
-                }
-
-                .view-slide-right {
-                    transform: translateX(0);
-                }
+                transform: translateX(0);
             }
         }
+    }
 
-        &.ng-leave {
-            position: fixed;
-            width: 100%;
-            opacity: 1;
-
-            &.ng-leave-active {
-                opacity: 0;
-            }
+    &.ng-leave {
+        &.ng-leave-active {
         }
     }
 }
