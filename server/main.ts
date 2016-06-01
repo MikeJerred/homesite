@@ -2,7 +2,7 @@
 import apiRoutes from './api/routes';
 import * as validation from './api/validate';
 
-let app = express();
+const app = express();
 
 app.use(express.static(__dirname + '/wwwroot'));
 
@@ -25,7 +25,7 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 })
 
 if (module === require.main) {
-    let server = app.listen(process.env.PORT || 8080, () => {
+    const server = app.listen(process.env.PORT || 8080, () => {
         console.log('Server listening at http://%s:%s', server.address().address, server.address().port);
     });
 }

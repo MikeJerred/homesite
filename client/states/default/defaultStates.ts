@@ -5,8 +5,8 @@
             $stateProvider: ng.ui.IStateProvider,
             $urlRouterProvider: ng.ui.IUrlRouterProvider) {
 
-            var header = Views.Default.Header.view;
-            var footer = Views.Default.Footer.view;
+            const header = Views.Default.Header.view;
+            const footer = Views.Default.Footer.view;
 
             $stateProvider
                 .state('default', {

@@ -168,12 +168,12 @@ angular.module('app').directive('injectStyles',
 export async function getBlogs(pageNo: number, pageSize: number): Promise<Page<Blogs.IDmBlog>> {
     // todo: actually query the database
 
-    let skip = pageSize * (pageNo - 1);
-    let count = 100;
+    const skip = pageSize * (pageNo - 1);
+    const count = 100;
 
     let results: Blogs.IDmBlog[] = [];
     for (let i = skip; i < skip + pageSize; i++) {
-        let blog = await getBlog(i);
+        const blog = await getBlog(i);
         results.push(blog);
     }
 

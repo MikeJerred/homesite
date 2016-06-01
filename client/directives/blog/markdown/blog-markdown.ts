@@ -11,13 +11,13 @@ module MJ.Directives.Blog.Markdown {
             markdown: '='
         };
         public link = (scope: IScope, element: ng.IAugmentedJQuery, attributes: ng.IAttributes) => {
-            let converter: Showdown.Converter = new showdown.Converter();
+            const converter: Showdown.Converter = new showdown.Converter();
             scope.$watch('markdown', (markdown: string) => {
                 // convert markdown to html
                 element.html(converter.makeHtml(markdown));
 
                 // add syntax highlighting to code blocks
-                let codeBlocks = element[0].querySelectorAll('pre > code');
+                const codeBlocks = element[0].querySelectorAll('pre > code');
                 angular.forEach(codeBlocks, block => {
                     hljs.highlightBlock(block);
                 });

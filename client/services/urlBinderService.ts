@@ -10,13 +10,13 @@ module MJ.Services {
 
         public bind(scope: ng.IScope, name: string, urlParamName: string): Function {
             // when scope variable changes, update the URL
-            var unhookUrlUpdater = scope.$watch(name, function(newValue) {
+            const unhookUrlUpdater = scope.$watch(name, function(newValue) {
                 this.$location.search(urlParamName, newValue);
             });
 
             // when the URL changes, update the scope variable
-            var unhookScopeUpdater = scope.$on('$locationChangeSuccess', function() {
-                var value = this.$location.search()[urlParamName];
+            const unhookScopeUpdater = scope.$on('$locationChangeSuccess', function() {
+                const value = this.$location.search()[urlParamName];
 
                 if (!angular.equals(scope[name], value)) {
                     scope[name] = value;

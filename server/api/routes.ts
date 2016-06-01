@@ -1,7 +1,7 @@
 const controllers = require('require-all')({
-  dirname     :  __dirname,
-  filter      :  /(.+Controller)\.js$/,
-  recursive   : true
+    dirname     :  __dirname,
+    filter      :  /(.+Controller)\.js$/,
+    recursive   : true
 });
 
 const router = require('./router');

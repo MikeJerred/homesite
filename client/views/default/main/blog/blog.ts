@@ -8,7 +8,7 @@ module MJ.Views.Default.Main.Blog {
             $stateParams: ng.ui.IStateParamsService,
             private dsBlogs: DataServices.Blogs.IDsBlogs) {
 
-            let articleId = $stateParams['articleId'];
+            const articleId = $stateParams['articleId'];
             this.article = dsBlogs.getBlog(articleId);
         }
 
