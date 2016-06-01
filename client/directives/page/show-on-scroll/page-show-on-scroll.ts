@@ -17,9 +17,9 @@ module MJ.Directives.Page.ScrollOnShow {
         private timeout: ng.IPromise<void>;
 
         private refreshTimer() {
-            var self = this;
+            const self = this;
             this.timeout = this.$timeout(() => {
-                let currentPosition = self.$document.scrollTop();
+                const currentPosition = self.$document.scrollTop();
                 if (currentPosition === 0
                     || currentPosition < (self.lastPosition - 40)) {
 

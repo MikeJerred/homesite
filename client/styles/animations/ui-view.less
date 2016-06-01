@@ -1,0 +1,36 @@
+.ui-view-container {
+    position: relative;
+
+    @transition: all 0.3s ease-in-out;
+
+    > .ui-view-animate {
+        transition: @transition;
+        overflow: hidden;
+
+        &.ng-enter {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+
+            .view-slide-left {
+                transition-delay: inherit;
+                transition-duration: inherit;
+                transition-timing-function: inherit;
+                transition-property: inherit;
+                transform: translateX(100vw);
+            }
+
+            &.ng-enter-active {
+                .view-slide-left {
+                    transform: translateX(0);
+                }
+            }
+        }
+
+        &.ng-leave {
+
+            &.ng-leave-active {
+            }
+        }
+    }
+}

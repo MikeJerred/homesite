@@ -5,8 +5,7 @@
 
         public expandClick() {
             if (!this.show && this.expanded) {
-                // if the menu is expanded we dont want to hide the whole header
-                // before it gets collapsed
+                // if the menu is expanded we dont want to hide the whole header before it gets collapsed
                 this.show = true;
             }
 

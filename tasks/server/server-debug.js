@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var cached = require('gulp-cached');
 var del = require('del');
+var plumber = require('gulp-plumber');
 var runSequence = require('run-sequence').use(gulp);
 var sourcemaps = require('gulp-sourcemaps');
 var watch = require('gulp-watch');
@@ -8,6 +9,15 @@ var watch = require('gulp-watch');
 var settings = require('../../settings/task-settings.js');
 var paths = settings.paths.server;
 
+var plumberOptions = {
+    errorHandler: (error) => {
+        util.log(
+            util.colors.red('Unhandled error:\n'),
+            error.toString()
+        );
+        gulp.emit('finish');
+    }
+};
 
 // --------------------------------------------- build ---------------------------------------------
 gulp.task('server:clean', () => {
@@ -37,6 +47,7 @@ var tsProject = ts.createProject(paths.tsConfig, { sortOutput: true });
 
 gulp.task('server:debug:compile', () =>
     gulp.src(paths.tsTypings.concat(paths.srcTs))
+        .pipe(plumber(plumberOptions))
         .pipe(sourcemaps.init())
         .pipe(ts(tsProject))
         .js

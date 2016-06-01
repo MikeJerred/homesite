@@ -1,3 +1,24 @@
-<article class="main-blog">
+<article class="main-blog view-slide-left">
+    <section class="top-bar">
+        <a ui-sref="default.home">Michael Jerred</a>
+    </section>
 
+    <section class="main container">
+        <blog-markdown markdown="blogCtrl.article.articleMarkdown"></blog-markdown>
+    </section>
+
+    <section class="next-blogs">
+        <a class="card card-prev col-xs-6 col-sm-4 col-md-3" ng-if="prevBlog" ui-sref="default.blog({ articleId: blogCtrl.prevBlog.id })">
+            <div class="content">
+                <h3 class="headline">{{blogCtrl.prevBlog.headline}}</h3>
+                <div class="date">{{blogCtrl.prevBlog.date | date:'dd/MM/yyyy'}}</div>
+            </div>
+        </a>
+        <a class="card card-next col-xs-6 col-sm-4 col-md-3" ng-if="nextBlog" ui-sref="default.blog({ articleId: blogCtrl.nextBlog.id })">
+            <div class="content">
+                <h3 class="headline">{{blogCtrl.nextBlog.headline}}</h3>
+                <div class="date">{{blogCtrl.nextBlog.date | date:'dd/MM/yyyy'}}</div>
+            </div>
+        </a>
+    </section>
 </article>

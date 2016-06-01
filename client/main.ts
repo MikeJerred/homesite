@@ -3,6 +3,7 @@
         'ngAnimate',
         'ngResource',
         'ngSanitize',
+        'hljs',
         'ui.bootstrap',
         'ui.router',
         'LocalStorageModule',
@@ -30,7 +31,7 @@
 
         // fix for a bug with angular-ui-router see https://github.com/angular-ui/ui-router/issues/1584
         $rootScope.$on('$stateChangeStart', (event: ng.IAngularEvent, toState: ng.ui.IState, params: {}) => {
-            var redirect = toState.redirectTo;
+            let redirect = toState.redirectTo;
             if (redirect) {
                 if (angular.isString(redirect)) {
                     event.preventDefault();

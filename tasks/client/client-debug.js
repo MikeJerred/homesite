@@ -12,16 +12,13 @@ var util = require('gulp-util');
 var settings = require('../../settings/task-settings.js');
 var paths = settings.paths.client;
 
-var EE = require('events').EventEmitter;
 var plumberOptions = {
     errorHandler: (error) => {
-        if (EE.listenerCount(this, 'error') < 3) {
-            util.log(
-                util.colors.cyan('Plumber') + util.colors.red(' found unhandled error:\n'),
-                error.toString()
-            );
-        }
-        this.emit('end');
+        util.log(
+            util.colors.red('Unhandled error:\n'),
+            error.toString()
+        );
+        gulp.emit('finish');
     }
 };
 
@@ -239,6 +236,7 @@ gulp.task('client:debug:clean:libs', () => {
 // --------------------------------------------- index ---------------------------------------------
 var angularFilesort = require('gulp-angular-filesort');
 var bowerFiles = require('main-bower-files');
+var filter = require('gulp-filter');
 var inject = require('gulp-inject');
 var order = require('gulp-order');
 
@@ -247,6 +245,7 @@ gulp.task('client:debug:compile:index', () => {
         .pipe(cached('client:debug:libs', { optimizeMemory: true }))
         .pipe(gulp.dest(paths.destLibs))
         .pipe(remember('client:debug:libs'))
+        .pipe(filter(['**/*.{css,js}']))
         .pipe(order(settings.bowerOrder));
 
     var styles = gulp.src(paths.builtCssNoLibs, { read: false });

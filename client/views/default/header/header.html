@@ -13,19 +13,19 @@
         <div class="nav-collapse" ng-class="{ collapsed: !headerCtrl.expanded }">
             <ul class="nav">
                 <li ui-sref-active="active">
-                    <a ui-sref="default.home" title="Home" class="fa fa-home"></a>
+                    <a ui-sref="default.home" ng-click="headerCtrl.expandClick()" title="Home" class="fa fa-home"></a>
                 </li>
                 <li ui-sref-active="active">
-                    <a ui-sref="default.blogs" title="Blog" class="fa fa-th-large"></a>
+                    <a ui-sref="default.blogs" ng-click="headerCtrl.expandClick()" title="Blog" class="fa fa-th-large"></a>
                 </li>
                 <li ui-sref-active="active">
-                    <a ui-sref="default.cv" title="CV" class="fa fa-user"></a>
+                    <a ui-sref="default.cv" ng-click="headerCtrl.expandClick()" title="CV" class="fa fa-user"></a>
                 </li>
                 <li ui-sref-active="active">
-                    <a ui-sref="default.lab" title="Experiments" class="fa fa-flask"></a>
+                    <a ui-sref="default.lab" ng-click="headerCtrl.expandClick()" title="Experiments" class="fa fa-flask"></a>
                 </li>
                 <li ui-sref-active="active">
-                    <a ui-sref="default.contact" title="Contact" class="fa fa-envelope"></a>
+                    <a ui-sref="default.contact" ng-click="headerCtrl.expandClick()" title="Contact" class="fa fa-envelope"></a>
                 </li>
             </ul>
         </div>

@@ -1,23 +1,25 @@
 module MJ.DataServices.Blogs {
     export interface IDsBlogs {
-        getBlogs(): IVmBlog[];
-        getBlog(id: number): IVmBlog;
+        getBlogStubs(pageNo: number, pageSize: number): IPage<IVmBlogStub>;
+        getBlog(articleId: number): IVmBlog;
     }
 
     class DsBlogs implements IDsBlogs {
         static $inject = ['$resource'];
         constructor($resource: ng.resource.IResourceService) {
             this.blogs = $resource<IVmBlog>('api/blogs/:id', { id: '@id' });
+            this.blogStubs = $resource<IPage<IVmBlogStub>>('api/blog-stubs', { pageNo: '@pageNo', pageSize: '@pageSize' });
         }
 
         private blogs: ng.resource.IResourceClass<IVmBlog>;
+        private blogStubs: ng.resource.IResourceClass<IPage<IVmBlogStub>>;
 
-        public getBlogs(): IVmBlog[] {
-            return this.blogs.query();
+        public getBlogStubs(pageNo: number, pageSize: number): IPage<IVmBlogStub> {
+            return this.blogStubs.get({ pageNo: pageNo, pageSize: pageSize });
         }
 
-        public getBlog(id: number): IVmBlog {
-            return this.blogs.get({ id: id });
+        public getBlog(articleId: number): IVmBlog {
+            return this.blogs.get({ id: articleId });
         }
     }
 

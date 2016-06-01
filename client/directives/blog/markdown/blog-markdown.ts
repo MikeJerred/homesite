@@ -1,21 +1,27 @@
 module MJ.Directives.Blog.Markdown {
-    interface IScope {
+    interface IScope extends ng.IScope {
+        markdown: string;
     }
 
-    class BlogMardownController {
-        static $inject = ['$scope'];
-        constructor($scope: IScope) {
-        }
-    }
+    declare var showdown: { Converter: Showdown.ConverterStatic };
 
     class BlogMarkdownDirectve implements ng.IDirective {
         public restrict = 'E';
-        //public scope = {};
-        public controller = BlogMardownController;
-        public controllerAs = 'blogMarkdownCtrl';
-        public template = '<article class="blog-markdown" ng-bind-html=""></article>';
-        public link = (scope: ng.IScope, element: ng.IAugmentedJQuery, attributes: ng.IAttributes) => {
+        public scope = {
+            markdown: '='
+        };
+        public link = (scope: IScope, element: ng.IAugmentedJQuery, attributes: ng.IAttributes) => {
+            const converter: Showdown.Converter = new showdown.Converter();
+            scope.$watch('markdown', (markdown: string) => {
+                // convert markdown to html
+                element.html(converter.makeHtml(markdown));
 
+                // add syntax highlighting to code blocks
+                const codeBlocks = element[0].querySelectorAll('pre > code');
+                angular.forEach(codeBlocks, block => {
+                    hljs.highlightBlock(block);
+                });
+            });
         };
     }
 
