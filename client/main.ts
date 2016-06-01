@@ -23,11 +23,43 @@
     angular.module('mj.templates', []);
 
     app.run(
-        ['$rootScope', '$state', '$q', '$injector',
+        ['$rootScope', '$state', '$q', '$injector', '$window',
         ($rootScope: ng.IRootScopeService,
         $state: ng.ui.IStateService,
         $q: ng.IQService,
-        $injector: ng.auto.IInjectorService) => {
+        $injector: ng.auto.IInjectorService,
+        $window: ng.IWindowService) => {
+
+        // detect when a state change has happened because the user used the browser history, in which case
+        // we want to scroll to their last position. If they navigated using links then we scroll to the top.
+        let lastNavigationEvent = 0;
+        $rootScope.$on('$stateChangeStart', () => {
+            lastNavigationEvent = 0;
+            $rootScope['isInternalStateChange'] = false;
+        });
+        $rootScope.$on('$stateChangeSuccess', () => {
+            if (lastNavigationEvent === 2) {
+                $rootScope['isInternalStateChange'] = false;
+                $rootScope.$broadcast('mjBrowserHistory');
+            }
+            lastNavigationEvent = 1;
+        });
+        $rootScope.$on('$locationChangeSuccess', () => {
+            if (lastNavigationEvent === 1) {
+                $rootScope['isInternalStateChange'] = true;
+                $rootScope.$broadcast('mjInternalStateChange');
+            }
+            lastNavigationEvent = 2;
+        });
+
+
+        $rootScope.$on('$stateChangeSuccess', () => {
+            $('.ui-view-animate').css('top', -$window.scrollY);
+
+            //$('.ui-view-container').css('min-height', $('.ui-view-animate').height());
+        });
+
+
 
         // fix for a bug with angular-ui-router see https://github.com/angular-ui/ui-router/issues/1584
         $rootScope.$on('$stateChangeStart', (event: ng.IAngularEvent, toState: ng.ui.IState, params: {}) => {

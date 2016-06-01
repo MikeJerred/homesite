@@ -1,8 +1,10 @@
 ﻿module MJ.Views.Default.Main.Home {
     class Controller{
-        static $inject = ['$anchorScroll'];
-        constructor($anchorScroll: ng.IAnchorScrollService) {
-            $anchorScroll('top');
+        static $inject = ['$scope'];
+        constructor($scope: ng.IScope) {
+            $scope.$on('mjInternalStateChange', () => {
+                $('html,body').delay(290).animate({ scrollTop: 0 }, 0);
+            });
         }
     }
 

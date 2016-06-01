@@ -1,35 +1,53 @@
 .ui-view-container {
     position: relative;
 
-    @transition: all 0.3s ease-in-out;
+    .inherit-transition() {
+        transition-delay: inherit;
+        transition-duration: inherit;
+        transition-timing-function: inherit;
+        transition-property: inherit;
+    }
 
     > .ui-view-animate {
-        transition: @transition;
+        transition: all 0.3s ease-in-out;
         overflow: hidden;
 
         &.ng-enter {
-            position: fixed;
+            position: absolute;
+            top: auto !important;
             width: 100%;
             z-index: 1000;
 
+            &.fixed { position: fixed; }
+
             .view-slide-left {
-                transition-delay: inherit;
-                transition-duration: inherit;
-                transition-timing-function: inherit;
-                transition-property: inherit;
+                .inherit-transition();
                 transform: translateX(100vw);
+            }
+
+            .view-slide-right {
+                .inherit-transition();
+                transform: translateX(-100vw);
             }
 
             &.ng-enter-active {
                 .view-slide-left {
                     transform: translateX(0);
                 }
+
+                .view-slide-right {
+                    transform: translateX(0);
+                }
             }
         }
 
         &.ng-leave {
+            position: fixed;
+            width: 100%;
+            opacity: 1;
 
             &.ng-leave-active {
+                opacity: 0;
             }
         }
     }
