@@ -1,7 +1,9 @@
 ﻿<article class="default-layout">
-    <ui-view name="header"></ui-view>
+    <div ui-view name="header"></div>
 
-    <ui-view name="main"></ui-view>
+    <div class="ui-view-container">
+        <div ui-view name="main" class="ui-view-animate"></div>
+    </div>
 
-    <ui-view name="footer"></ui-view>
+    <div ui-view name="footer"></div>
 </article>

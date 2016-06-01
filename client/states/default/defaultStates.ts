@@ -5,36 +5,32 @@
             $stateProvider: ng.ui.IStateProvider,
             $urlRouterProvider: ng.ui.IUrlRouterProvider) {
 
-            const header = Views.Default.Header.view;
-            const footer = Views.Default.Footer.view;
-
             $stateProvider
                 .state('default', {
                     'abstract': true,
-                    templateUrl: 'states/default/default-layout.html'
+                    //templateUrl: 'states/default/default-layout.html',
+                    views: {
+                        '': { templateUrl: 'states/default/default-layout.html' },
+                        'header@default': Views.Default.Header.view,
+                        'footer@default': Views.Default.Footer.view
+                    }
                 })
                 .state('default.home', {
                     url: '/',
                     views: {
-                        'header': header,
-                        'main': Views.Default.Main.Home.view,
-                        'footer': footer
+                        'main': Views.Default.Main.Home.view
                     }
                 })
                 .state('default.blog', {
                     url: '/blog/:articleId',
                     views: {
-                        'header': header,
-                        'main': Views.Default.Main.Blog.view,
-                        'footer': footer
+                        'main': Views.Default.Main.Blog.view
                     }
                 })
                 .state('default.about', {
                     url: '/about',
                     views: {
-                        'header': header,
-                        'main': Views.Default.Main.About.view,
-                        'footer': footer
+                        'main': Views.Default.Main.About.view
                     }
                 })
                 //.state('default.blogs', {
@@ -44,9 +40,7 @@
                 //    },
                 //    reloadOnSearch: false,
                 //    views: {
-                //        'header': header,
-                //        'main': Views.Default.Main.Blogs.view,
-                //        'footer': footer
+                //        'main': Views.Default.Main.Blogs.view
                 //    },
                 //    data: {
                 //        metaData: { title: 'Blog' }
@@ -55,9 +49,7 @@
                 .state('default.notFound', {
                     url: '/not-found',
                     views: {
-                        'header': header,
-                        //'main': ,
-                        'footer': footer
+                        //'main':
                     },
                     data: {
                         metaData: { title: 'Page Not Found' }
