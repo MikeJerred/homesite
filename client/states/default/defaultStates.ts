@@ -5,26 +5,28 @@
             $stateProvider: ng.ui.IStateProvider,
             $urlRouterProvider: ng.ui.IUrlRouterProvider) {
 
+            const footer = Views.Default.Footer.view;
+
             $stateProvider
                 .state('default', {
                     'abstract': true,
-                    //templateUrl: 'states/default/default-layout.html',
                     views: {
                         '': { templateUrl: 'states/default/default-layout.html' },
-                        'header@default': Views.Default.Header.view,
-                        'footer@default': Views.Default.Footer.view
+                        'header@default': Views.Default.Header.view
                     }
                 })
                 .state('default.home', {
                     url: '/',
                     views: {
-                        'main': Views.Default.Main.Home.view
+                        'main': Views.Default.Main.Home.view,
+                        'footer@default.home': footer
                     }
                 })
                 .state('default.blog', {
                     url: '/blog/:articleId',
                     views: {
-                        'main': Views.Default.Main.Blog.view
+                        'main': Views.Default.Main.Blog.view,
+                        'footer@default.blog': footer
                     }
                 })
                 .state('default.about', {

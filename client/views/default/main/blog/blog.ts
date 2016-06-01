@@ -10,8 +10,6 @@ module MJ.Views.Default.Main.Blog {
 
             const articleId = $stateParams['articleId'];
             this.article = dsBlogs.getBlog(articleId);
-
-            $('html,body').delay(300).animate({ scrollTop: 0 }, 0);
         }
 
         public article: IVmBlog;
