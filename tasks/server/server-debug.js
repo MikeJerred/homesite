@@ -4,6 +4,7 @@ var del = require('del');
 var plumber = require('gulp-plumber');
 var runSequence = require('run-sequence').use(gulp);
 var sourcemaps = require('gulp-sourcemaps');
+var util = require('gulp-util');
 var watch = require('gulp-watch');
 
 var settings = require('../../settings/task-settings.js');

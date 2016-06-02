@@ -1,8 +1,10 @@
 ﻿import * as express from 'express';
+import * as mongoose from 'mongoose';
 import apiRoutes from './api/routes';
 import * as validation from './api/validate';
 
 const app = express();
+mongoose.connect(process.env.MONGODB_URI);
 
 app.use(express.static(__dirname + '/wwwroot'));
 
