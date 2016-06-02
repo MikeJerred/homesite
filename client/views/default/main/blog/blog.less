@@ -1,7 +1,7 @@
 @import "../../../../styles/variables.less";
 
 article.default-layout article.main-blog {
-    background-color: #fff;
+    background-color: @theme-light-blue;
 
     .top-bar {
         background-color: @theme-light-blue;
@@ -9,6 +9,36 @@ article.default-layout article.main-blog {
         height: 82px;
         line-height: 82px;
         font-size: 20px;
+    }
+
+    .headline {
+        display: table;
+        width: 100%;
+        padding: 40px;
+        background: url(/images/glass-pattern.jpg) no-repeat;
+        background-position: center center;
+        background-size: cover;
+        color: #fff;
+        font-family: @font-family-serif;
+
+        .box {
+            display: table-cell;
+            padding: 40px;
+            vertical-align: middle;
+            border: 1px solid #fff;
+            text-align: center;
+
+            h1 { margin-bottom: 40px; }
+        }
+    }
+
+    .main {
+        font-size: 20px;
+
+        h1 { font-size: 38px; }
+        h2 { font-size: 30px; }
+        h3 { font-size: 22px; }
+        h4 { font-size: 18px; }
     }
 
     .next-blogs {

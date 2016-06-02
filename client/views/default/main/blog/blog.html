@@ -3,21 +3,29 @@
         <a ui-sref="default.home">Michael Jerred</a>
     </section>
 
+    <section class="headline">
+        <div class="box">
+            <h1>{{blogCtrl.article.headline}}</h1>
+
+            <h4>{{blogCtrl.article.date | date:'dd MMMM yyyy'}}</h4>
+        </div>
+    </section>
+
     <section class="main container">
-        <blog-markdown markdown="blogCtrl.article.articleMarkdown"></blog-markdown>
+        <blog-markdown class="col-xs-offset-1 col-xs-10 col-md-offset-2 col-md-8" markdown="blogCtrl.article.articleMarkdown"></blog-markdown>
     </section>
 
     <section class="next-blogs">
         <a class="card card-prev col-xs-6 col-sm-4 col-md-3" ng-if="prevBlog" ui-sref="default.blog({ articleId: blogCtrl.prevBlog.id })">
             <div class="content">
                 <h3 class="headline">{{blogCtrl.prevBlog.headline}}</h3>
-                <div class="date">{{blogCtrl.prevBlog.date | date:'dd/MM/yyyy'}}</div>
+                <div class="date">{{blogCtrl.prevBlog.date | date:'dd/MMM/yyyy'}}</div>
             </div>
         </a>
         <a class="card card-next col-xs-6 col-sm-4 col-md-3" ng-if="nextBlog" ui-sref="default.blog({ articleId: blogCtrl.nextBlog.id })">
             <div class="content">
                 <h3 class="headline">{{blogCtrl.nextBlog.headline}}</h3>
-                <div class="date">{{blogCtrl.nextBlog.date | date:'dd/MM/yyyy'}}</div>
+                <div class="date">{{blogCtrl.nextBlog.date | date:'dd/MMM/yyyy'}}</div>
             </div>
         </a>
     </section>
