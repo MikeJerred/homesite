@@ -31,7 +31,7 @@ Router.get(
         const pageNo: number = query.pageNo;
         const pageSize: number = query.pageSize;
 
-        const results = await BlogsRepository.getBlogs(pageNo, pageSize);
+        const results = await BlogsRepository.getBlogsPage(pageNo, pageSize);
 
         return results.map(VmBlogStubFactory.build).toVmPage();
     }

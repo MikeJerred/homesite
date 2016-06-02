@@ -40,13 +40,17 @@
         $rootScope.$on('$stateChangeStart', () => {
             lastNavigationEvent = 0;
         });
-        $rootScope.$on('$stateChangeSuccess', (event: ng.IAngularEvent, toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState) => {
+        $rootScope.$on('$stateChangeSuccess', (event: ng.IAngularEvent, toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) => {
             if (lastNavigationEvent === 2) {
                 // User navigated via browser history
 
-                if (toState.data && toState.data.scrollY) {
+                if (toState.data) {
+                    if (toState.data.slideRight && toParams['slideRight'] === undefined)
+                        toParams['slideRight'] = true;
+
                     // scroll to last known position
-                    $('html,body').delay(100).animate({ scrollTop: toState.data.scrollY }, 0);
+                    if (toState.data.scrollY)
+                        $('html,body').delay(100).animate({ scrollTop: toState.data.scrollY }, 0);
                 } else {
                     // if we don't known the last position, scroll to top
                     $('html,body').delay(100).animate({ scrollTop: 0 }, 0);
@@ -58,6 +62,8 @@
 
             if (!fromState.data)
                 fromState.data = {};
+
+            fromState.data.slideRight = !!fromParams['slideRight'];
             fromState.data.scrollY = $window.scrollY;
         });
         $rootScope.$on('$locationChangeSuccess', () => {

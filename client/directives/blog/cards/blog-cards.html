@@ -2,7 +2,7 @@
     <div class="row">
         <ul class="blog-list clearfix">
             <li ng-repeat="blog in blogCardsCtrl.blogStubs.items" class="col-xs-12 col-sm-4" ng-class="$index === 0 ? 'col-md-6' : 'col-md-3'">
-                <a class="card" ui-sref="default.blog({ articleId: blog.id })">
+                <a class="card" ui-sref="default.blog({ articleId: blog.id, slideRight: false })">
                     <div class="content">
                         <h3 class="headline">{{blog.headline}}</h3>
                         <div class="date">{{blog.date | date:'dd/MM/yyyy'}}</div>

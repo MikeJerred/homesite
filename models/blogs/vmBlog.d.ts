@@ -4,5 +4,7 @@ declare module MJ.Models.Blogs {
         headline: string;
         date: Date;
         articleMarkdown: string;
+        prevBlog?: IVmBlogStub;
+        nextBlog?: IVmBlogStub;
     }
 }

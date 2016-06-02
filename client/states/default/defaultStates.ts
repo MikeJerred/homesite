@@ -24,6 +24,7 @@
                 })
                 .state('default.blog', {
                     url: '/blog/:articleId',
+                    params: { slideRight: undefined },
                     views: {
                         'main': Views.Default.Main.Blog.view,
                         'footer@default.blog': footer
