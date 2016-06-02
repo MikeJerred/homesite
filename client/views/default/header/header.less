@@ -12,6 +12,7 @@ article.default-layout header.header {
         right: 0;
         transition: all 0.2s ease-in-out;
         transform: translateY(0);
+        pointer-events: none;
 
         &.hide-menu { transform: translateY(-100px); }
 
@@ -21,7 +22,7 @@ article.default-layout header.header {
             z-index: 100;
 
             > .nav-toggle {
-                margin: 20px;
+                margin: 40px;
                 padding: 10px;
                 border: 2px solid #fff;
                 border-radius: 50%;
@@ -29,6 +30,7 @@ article.default-layout header.header {
                 background-color: @theme-light-blue;
                 color: #fff;
                 font-size: 0;
+                pointer-events: auto;
                 transition: all ease-in-out 0.3s;
 
                 &:hover {
@@ -61,7 +63,7 @@ article.default-layout header.header {
         }
 
         .nav-collapse {
-            @radius: 150px;
+            @radius: 170px;
             @expand-time: 0.3s;
             @fan-time: 0.3s;
             width: @radius * 2;
@@ -70,6 +72,7 @@ article.default-layout header.header {
             background-color: @theme-blue;
             transition: all @expand-time ease-in-out;
             transform: translate(50%, -50%) scale(1);
+            pointer-events: auto;
 
             &.collapsed {
                 transition-delay: @fan-time * 1/3;
