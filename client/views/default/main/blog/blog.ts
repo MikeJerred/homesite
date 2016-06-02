@@ -10,7 +10,11 @@ module MJ.Views.Default.Main.Blog {
 
             const articleId = $stateParams['articleId'];
             this.article = dsBlogs.getBlog(articleId);
+
+            this.slideRight = !!$stateParams['slideRight'];
         }
+
+        public slideRight: boolean;
 
         public article: IVmBlog;
         public prevBlog: IVmBlogStub;

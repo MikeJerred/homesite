@@ -21,7 +21,7 @@ module.exports = {
             srcFonts: ['./bower_components/bootstrap/dist/fonts/*.*'],
             srcIcons: [clientSrcRoot + '/images/icons/*.svg'],
             srcIconsTemplate: [clientSrcRoot + '/styles/icons-template.templ'],
-            srcImg: [clientSrcRoot + '/images/**/*', '!' + clientSrcRoot + '/images/icons/*.svg'],
+            srcImg: [clientSrcRoot + '/images/**/*.{png,jpg,gif,svg}', '!' + clientSrcRoot + '/images/icons/*.svg'],
 
             dest: clientBuildRoot,
             destFonts: clientBuildRoot + '/fonts',

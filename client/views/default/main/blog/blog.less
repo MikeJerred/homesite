@@ -1,9 +1,9 @@
 @import "../../../../styles/variables.less";
 
 article.default-layout article.main-blog {
-    background-color: #fff;
+    background-color: @theme-light-blue;
 
-    .top-bar {
+    > .top-bar {
         background-color: @theme-light-blue;
         padding-left: 20px;
         height: 82px;
@@ -11,19 +11,61 @@ article.default-layout article.main-blog {
         font-size: 20px;
     }
 
-    .next-blogs {
+    > .headline {
+        display: table;
+        width: 100%;
+        padding: 40px;
+        background: url(/images/green-pattern.jpg) no-repeat;
+        background-attachment: fixed;
+        background-position: center center;
+        background-size: cover;
+        color: #fff;
+        font-family: @font-family-serif;
+
+        .box {
+            display: table-cell;
+            padding: 40px;
+            vertical-align: middle;
+            border: 1px solid #fff;
+            text-align: center;
+
+            h1 { margin-bottom: 40px; }
+        }
+    }
+
+    > .main {
+        font-size: 20px;
+
+        h1 { font-size: 38px; }
+        h2 { font-size: 30px; }
+        h3 { font-size: 22px; }
+        h4 { font-size: 18px; }
+    }
+
+    > .related-blogs {
+        background: @theme-blue;
+        padding: 40px 0;
+
         .card {
             color: @theme-black;
+            padding: 40px 20px;
+            font-family: @font-family-serif;
+            box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
 
+            &:hover {
+                box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+            }
 
             &.card-prev {
                 float: left;
                 background-color: #fff;
+                &:hover { background-color: darken(#fff, 10%); }
             }
 
             &.card-next {
                 float: right;
                 background-color: @theme-light-blue;
+                &:hover { background-color: darken(@theme-light-blue, 10%); }
             }
         }
     }
