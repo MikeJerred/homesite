@@ -1,5 +1,5 @@
 bower_components/
 node_modules/
-typings/
+client/typings/
+server/typings/
 dist/
-gae-api-key.json
