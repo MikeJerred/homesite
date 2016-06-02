@@ -3,3 +3,4 @@ node_modules/
 client/typings/
 server/typings/
 dist/
+settings/.env

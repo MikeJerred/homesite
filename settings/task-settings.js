@@ -40,7 +40,7 @@ module.exports = {
 
             srcRoot: serverSrcRoot,
             srcTs: [serverSrcRoot + '/**/*.ts'],
-            srcOther: [serverSrcRoot + '/**/*', '!' + serverSrcRoot + '/**/*.ts', '!' + serverSrcRoot + '/typings/**/*'],
+            srcOther: ['settings/.env', serverSrcRoot + '/**/*', '!' + serverSrcRoot + '/**/*.ts', '!' + serverSrcRoot + '/typings/**/*'],
 
             dest: buildRoot
         }

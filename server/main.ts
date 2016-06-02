@@ -2,6 +2,7 @@
 import * as mongoose from 'mongoose';
 import apiRoutes from './api/routes';
 import * as validation from './api/validate';
+require('dotenv').config();
 
 const app = express();
 mongoose.connect(process.env.MONGODB_URI);

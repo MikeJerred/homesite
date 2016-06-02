@@ -9,6 +9,7 @@
     "monitor": "nodemon dist/main.js"
   },
   "dependencies": {
+    "dotenv": "^2.0.0",
     "express": "^4.13.4",
     "immutable": "^3.8.1",
     "joi": "^8.4.0",
