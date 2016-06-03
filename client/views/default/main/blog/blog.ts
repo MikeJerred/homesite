@@ -11,7 +11,7 @@ module MJ.Views.Default.Main.Blog {
             const articleId = $stateParams['articleId'];
             this.article = dsBlogs.getBlog(articleId);
 
-            this.slideRight = !!$stateParams['slideRight'];
+            this.slideRight = $stateParams['slideTo'] === 'right';
         }
 
         public slideRight: boolean;

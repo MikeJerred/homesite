@@ -11,7 +11,7 @@
                 .state('default', {
                     'abstract': true,
                     views: {
-                        '': { templateUrl: 'states/default/default-layout.html' },
+                        '': MJ.States.Default.view,
                         'header@default': Views.Default.Header.view
                     }
                 })
@@ -24,7 +24,7 @@
                 })
                 .state('default.blog', {
                     url: '/blog/:articleId',
-                    params: { slideRight: undefined },
+                    params: { slideTo: undefined },
                     views: {
                         'main': Views.Default.Main.Blog.view,
                         'footer@default.blog': footer

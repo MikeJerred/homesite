@@ -1,4 +1,6 @@
 body {
+    // always show vertical scrollbar to prevent the screen jumping when
+    // in the animation due to the leaving view having position: fixed
     overflow-y: scroll;
 }
 
@@ -12,17 +14,20 @@ article.default-layout {
 
             &.ng-enter {
                 position: absolute;
-                top: auto !important;
+                top: auto !important; // ensure that we ignore the value set by default-layout.ts
                 width: 100%;
                 z-index: 1000;
             }
 
             &.ng-leave {
                 position: fixed;
+                // top will be set to the current scroll position by default-layout.ts
                 width: 100%;
                 opacity: 1;
 
                 &.ng-leave-active {
+                    // for some reason the ng-leave class stays longer than ng-enter, so we want to
+                    // prevent the flicker that happens when the above z-index rule no longer applies
                     opacity: 0;
                 }
             }
