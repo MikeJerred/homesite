@@ -15,6 +15,7 @@ module MJ.Views.Default.Main.Blog {
         }
 
         public slideRight: boolean;
+        public showShareLinks = false;
 
         public article: IVmBlog;
         public prevBlog: IVmBlogStub;

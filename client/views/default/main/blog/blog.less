@@ -8,14 +8,15 @@ article.default-layout article.main-blog {
         padding-left: 20px;
         height: 82px;
         line-height: 82px;
-        font-size: 20px;
+        font-size: 28px;
     }
 
     > .headline {
         display: table;
         width: 100%;
         padding: 40px;
-        background: url(/images/green-pattern.jpg) no-repeat;
+        background-image: url(/images/green-pattern.jpg);
+        background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center center;
         background-size: cover;
@@ -24,17 +25,93 @@ article.default-layout article.main-blog {
 
         .box {
             display: table-cell;
-            padding: 40px;
+            padding: 80px;
             vertical-align: middle;
             border: 1px solid #fff;
             text-align: center;
 
-            h1 { margin-bottom: 40px; }
+            h1 { margin-bottom: 30px; }
+
+            .share-links {
+                position: relative;
+                margin-top: 30px;
+
+                .icon() {
+                    font-size: 20px;
+                    border: 2px solid #fff;
+                    border-radius: 50%;
+                    width: 46px;
+                    height: 46px;
+                    line-height: 42px;
+                }
+
+                .share-button {
+                    .icon();
+                    position: absolute;
+                    top: 0;
+                    left: ~"calc(50% - 23px)";
+                    z-index: 100;
+                    cursor: pointer;
+                }
+
+                .links {
+                    list-style: none;
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                    height: 46px;
+                    color: #fff;
+                    text-align: center;
+                    padding: 0;
+                    margin: 0;
+                    font-size: 0;
+
+                    > li {
+                        position: absolute;
+                        left: ~"calc(50% - 28px)";
+                        transition: all 0.3s ease-in-out;
+                        transform: translateX(0);
+                        opacity: 0;
+
+                        > a {
+                            .icon();
+                            margin: 0 5px;
+                        }
+                    }
+                }
+
+                &.open {
+                    .share-button {
+                        color: red;
+                    }
+
+                    .links > li {
+                        @count: 4;
+                        @step: 55px;
+                        .create-children(@i: 1) when (@i =< @count) {
+                            @distance: pow(-1, @i) * @step * ceil(@i / 2);
+
+                            opacity: 1;
+
+                            &:nth-child(@{i}) {
+                                transform: translateX(@distance);
+                            }
+
+                            .create-children(@i+1);
+                        }
+
+                        .create-children();
+                    }
+                }
+            }
         }
     }
 
     > .main {
+        margin-top: 40px;
+        margin-bottom: 40px;
         font-size: 20px;
+        line-height: 30px;
 
         h1 { font-size: 38px; }
         h2 { font-size: 30px; }
