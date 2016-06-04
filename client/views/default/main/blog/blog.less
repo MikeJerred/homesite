@@ -52,6 +52,7 @@ article.default-layout article.main-blog {
                     left: ~"calc(50% - 23px)";
                     z-index: 100;
                     cursor: pointer;
+                    transition: color 0.3s ease-in-out;
                 }
 
                 .links {
@@ -82,7 +83,8 @@ article.default-layout article.main-blog {
 
                 &.open {
                     .share-button {
-                        color: red;
+                        color: @theme-light-blue;
+                        border-color: @theme-light-blue;
                     }
 
                     .links > li {

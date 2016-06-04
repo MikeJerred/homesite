@@ -12,10 +12,10 @@
             <div class="share-links" ng-class="{ open: blogCtrl.showShareLinks}">
                 <div class="share-button fa fa-share-alt" ng-click="blogCtrl.showShareLinks = !blogCtrl.showShareLinks"></div>
                 <ul class="links">
-                    <li><a class="fa fa-linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fsharingbuttons.io&amp;title=<title>&amp;summary=<summary>&amp;source=http%3A%2F%2Fsharingbuttons.io"></a></li>
-                    <li><a class="fa fa-google-plus" href="https://plus.google.com/share?url=http%3A%2F%2F"></a></li>
-                    <li><a class="fa fa-twitter" href="https://twitter.com/intent/tweet/?text=<text>&amp;url=http%3A%2F%2F"></a></li>
-                    <li><a class="fa fa-facebook" href="https://facebook.com/sharer/sharer.php?u=http%3A%2F%2F"></a></li>
+                    <li><a class="fa fa-linkedin" ng-href="{{blogCtrl.linkedInLink}}"></a></li>
+                    <li><a class="fa fa-google-plus" ng-href="{{blogCtrl.googlePlusLink}}"></a></li>
+                    <li><a class="fa fa-twitter" ng-href="{{blogCtrl.twitterLink}}"></a></li>
+                    <li><a class="fa fa-facebook" ng-href="{{blogCtrl.facebookLink}}"></a></li>
                 </ul>
             </div>
         </div>
