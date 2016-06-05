@@ -46,13 +46,45 @@ article.default-layout article.main-blog {
                 }
 
                 .share-button {
-                    .icon();
+                    border: 2px solid #fff;
+                    border-radius: 50%;
+                    width: 46px;
+                    height: 46px;
+                    font-size: 0;
                     position: absolute;
                     top: 0;
                     left: ~"calc(50% - 23px)";
                     z-index: 100;
                     cursor: pointer;
+                    background-color: transparent;
+                    outline: none;
                     transition: color 0.3s ease-in-out;
+
+                    svg {
+                        .dot1, .dot2, .dot3, .line1, .line2 {
+                            fill: #fff;
+                            transform: scale(1);
+                            transition: all 0.3s ease-in-out;
+                        }
+
+                        @center1: 300px 600px;
+                        @center2: 900px 320px;
+                        @center3: 900px 880px;
+
+                        .dot1 { transform-origin: @center1; }
+                        .dot2 { transform-origin: @center2; }
+                        .dot3 { transform-origin: @center3; }
+
+                        .line1 {
+                            transform-origin: @center2;
+                            transform: rotate(155deg);
+                        }
+
+                        .line2 {
+                            transform-origin: @center3;
+                            transform: rotate(-155deg);
+                        }
+                    }
                 }
 
                 .links {
@@ -84,7 +116,29 @@ article.default-layout article.main-blog {
                 &.open {
                     .share-button {
                         color: @theme-light-blue;
-                        border-color: @theme-light-blue;
+                        border-color: transparent;
+
+                        svg {
+                            .dot1, .dot2, .dot3, .line1, .line2 {
+                                fill: @theme-light-blue;
+                            }
+
+                            .dot2, .dot3 {
+                                transform: scale(0);
+                            }
+
+                            .dot1 {
+                                transform: translateX(300px) scale(0.01);
+                            }
+
+                            .line1 {
+                                transform: rotate(135deg) scale(1.198, 120/150);
+                            }
+
+                            .line2 {
+                                transform: rotate(-135deg) scale(1.198, 120/150);
+                            }
+                        }
                     }
 
                     .links > li {

@@ -3,19 +3,15 @@ module MJ.Views.Default.Main.Blog {
     import IVmBlogStub = DataServices.Blogs.IVmBlogStub;
 
     class Controller {
-        static $inject = ['$state', '$stateParams', 'dsBlogs'];
-        constructor(
-            $state: ng.ui.IStateService,
-            $stateParams: ng.ui.IStateParamsService,
-            private dsBlogs: DataServices.Blogs.IDsBlogs) {
-
+        static $inject = ['$stateParams', 'dsBlogs'];
+        constructor($stateParams: ng.ui.IStateParamsService, private dsBlogs: DataServices.Blogs.IDsBlogs) {
             const articleId = $stateParams['articleId'];
             this.article = dsBlogs.getBlog(articleId);
 
             this.slideRight = $stateParams['slideTo'] === 'right';
 
             this.article.$promise.then(article => {
-                const url = encodeURIComponent(window.location.href); //encodeURIComponent('http://localhost:8080' + $state.href($state.current, $stateParams));
+                const url = encodeURIComponent(window.location.href);
                 const title = article.headline;
                 const summary = '';
 
