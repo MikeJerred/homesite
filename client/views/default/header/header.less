@@ -9,20 +9,29 @@ article.default-layout header.header {
         background-color: transparent;
         margin: 0;
         border: 0;
-        right: 0;
+        width: 100%;
         transition: all 0.2s ease-in-out;
         transform: translateY(0);
         pointer-events: none;
 
         &.hide-menu { transform: translateY(-100px); }
 
+        .top-bar {
+            background-color: @theme-light-blue;
+            height: 86px;
+            line-height: 86px;
+            font-size: 28px;
+            padding-left: 40px;
+        }
+
         .nav-header {
             position: absolute;
             right: 0;
+            top: 0;
             z-index: 100;
 
             > .nav-toggle {
-                margin: 40px;
+                margin: 20px 40px;
                 padding: 10px;
                 border: 2px solid #fff;
                 border-radius: 50%;
@@ -66,6 +75,9 @@ article.default-layout header.header {
             @radius: 200px;
             @expand-time: 0.3s;
             @fan-time: 0.3s;
+            position: absolute;
+            right: 0;
+            top: -20px;
             width: @radius * 2;
             height: @radius * 2;
             border-radius: 50%;
@@ -82,6 +94,7 @@ article.default-layout header.header {
             .nav {
                 position: relative;
                 top: 50%;
+                left: 0;
                 font-family: @font-family-serif;
                 font-size: 24px;
 
@@ -101,17 +114,26 @@ article.default-layout header.header {
                     > a {
                         border-radius: 50%;
                         color: @theme-black;
+                        padding: 20px;
+
+                        &:first-child {
+                            padding-top: 30px;
+                        }
                     }
                 }
             }
 
             @count: 5;
-            @step: -90 / (@count);
+            @step: 85 / (@count);
             .create-children(@i: 1) when (@i =< @count) {
                 @angle: (@i - 1) * @step;
 
                 .nav > li:nth-child(@{i}) {
-                    transform: rotate(~"@{angle}deg");
+                    transform: rotate(~"-@{angle}deg");
+
+                    > a {
+                        transform: rotate(~"@{angle}deg");
+                    }
                 }
 
                 &.collapsed .nav {

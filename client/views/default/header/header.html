@@ -1,7 +1,14 @@
 ﻿<header class="header" page-show-on-scroll="headerCtrl.show">
     <nav class="navbar" role="navigation" ng-class="{ 'hide-menu': !headerCtrl.show && !headerCtrl.expanded }">
+        <div class="top-bar">
+            <a ui-sref="default.home">Michael Jerred</a>
+        </div>
         <div class="nav-header">
-            <button type="button" class="nav-toggle" ng-click="headerCtrl.expandClick()" ng-class="{ 'cross': headerCtrl.expanded }">
+            <button type="button"
+                    class="nav-toggle"
+                    ng-click="headerCtrl.expandClick()"
+                    ng-class="{ 'cross': headerCtrl.expanded }"
+                    title="{{headerCtrl.expanded ? 'Close' : 'Menu'}}">
                 <svg width="22" height="22" viewbox="0 0 1200 1200">
                     <rect class="line1" x="60" y="60" width="1080" height="120" rx="60" ry="60" />
                     <rect class="line2" x="60" y="540" width="1080" height="120" rx="60" ry="60" />
