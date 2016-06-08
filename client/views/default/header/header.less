@@ -12,14 +12,13 @@ article.default-layout header.header {
         width: 100%;
         transition: all 0.2s ease-in-out;
         transform: translateY(0);
-        pointer-events: none;
 
         &.hide-menu { transform: translateY(-100px); }
 
         .top-bar {
             background-color: @theme-light-blue;
-            height: 86px;
-            line-height: 86px;
+            height: @header-height;
+            line-height: @header-height;
             font-size: 28px;
             padding-left: 40px;
         }

@@ -13,23 +13,25 @@ article.default-layout {
             overflow: hidden;
 
             &.ng-enter {
-                position: absolute;
-                top: auto !important; // ensure that we ignore the value set by default-layout.ts
-                width: 100%;
-                z-index: 1000;
             }
 
             &.ng-leave {
                 position: fixed;
-                // top will be set to the current scroll position by default-layout.ts
                 width: 100%;
-                opacity: 1;
+                // top will be set to the current scroll position by default-layout.ts
 
                 &.ng-leave-active {
-                    // for some reason the ng-leave class stays longer than ng-enter, so we want to
-                    // prevent the flicker that happens when the above z-index rule no longer applies
-                    opacity: 0;
                 }
+            }
+
+            &:not(.ng-leave):nth-child(1):nth-last-child(2), &:not(.ng-leave):nth-child(2):nth-last-child(1) {
+                // this rule applies to a .ui-view-animate which doesn't have .ng-leave, and only when
+                // there are two .ui-view-animate elements. This is to solve the problem that ng-leave
+                // stays on for longer than ng-enter
+                position: absolute;
+                z-index: 1000;
+                top: auto !important; // ensure that we ignore the value set by default-layout.ts
+                width: 100%;
             }
         }
     }
