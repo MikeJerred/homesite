@@ -1,4 +1,6 @@
 body {
+    // always show vertical scrollbar to prevent the screen jumping when
+    // in the animation due to the leaving view having position: fixed
     overflow-y: scroll;
 }
 
@@ -11,20 +13,25 @@ article.default-layout {
             overflow: hidden;
 
             &.ng-enter {
-                position: absolute;
-                top: auto !important;
-                width: 100%;
-                z-index: 1000;
             }
 
             &.ng-leave {
                 position: fixed;
                 width: 100%;
-                opacity: 1;
+                // top will be set to the current scroll position by default-layout.ts
 
                 &.ng-leave-active {
-                    opacity: 0;
                 }
+            }
+
+            &:not(.ng-leave):nth-child(1):nth-last-child(2), &:not(.ng-leave):nth-child(2):nth-last-child(1) {
+                // this rule applies to a .ui-view-animate which doesn't have .ng-leave, and only when
+                // there are two .ui-view-animate elements. This is to solve the problem that ng-leave
+                // stays on for longer than ng-enter
+                position: absolute;
+                z-index: 1000;
+                top: auto !important; // ensure that we ignore the value set by default-layout.ts
+                width: 100%;
             }
         }
     }
