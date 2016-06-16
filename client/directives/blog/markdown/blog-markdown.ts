@@ -11,7 +11,7 @@ module MJ.Directives.Blog.Markdown {
             markdown: '='
         };
         public link = (scope: IScope, element: ng.IAugmentedJQuery, attributes: ng.IAttributes) => {
-            const converter: Showdown.Converter = new showdown.Converter();
+            const converter = new showdown.Converter();
             scope.$watch('markdown', (markdown: string) => {
                 // convert markdown to html
                 element.html(converter.makeHtml(markdown));

@@ -112,25 +112,11 @@ article.default-layout article.main-blog {
                         border-color: transparent;
 
                         svg {
-                            .dot1, .dot2, .dot3, .line1, .line2 {
-                                fill: @theme-light-blue;
-                            }
-
-                            .dot2, .dot3 {
-                                transform: scale(0);
-                            }
-
-                            .dot1 {
-                                transform: translateX(300px) scale(0.01);
-                            }
-
-                            .line1 {
-                                transform: rotate(135deg) scale(1.198, 120/150);
-                            }
-
-                            .line2 {
-                                transform: rotate(-135deg) scale(1.198, 120/150);
-                            }
+                            .dot1, .dot2, .dot3, .line1, .line2 { fill: @theme-light-blue; }
+                            .dot2, .dot3 { transform: scale(0); }
+                            .dot1 { transform: translateX(300px) scale(0.01); }
+                            .line1 { transform: rotate(135deg) scale(1.198, 120/150); }
+                            .line2 { transform: rotate(-135deg) scale(1.198, 120/150); }
                         }
                     }
 
@@ -162,8 +148,8 @@ article.default-layout article.main-blog {
         font-size: 20px;
         line-height: 30px;
 
-        h1 { font-size: 38px; }
-        h2 { font-size: 30px; }
+        h1 { font-size: 38px; margin-top: 30px; }
+        h2 { font-size: 30px; margin-top: 20px; }
         h3 { font-size: 22px; }
         h4 { font-size: 18px; }
     }

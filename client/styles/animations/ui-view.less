@@ -1,30 +1,22 @@
 .ui-view-animate {
-    .inherit-transition() {
-        transition-delay: inherit;
-        transition-duration: inherit;
-        transition-timing-function: inherit;
-        transition-property: inherit;
-    }
-
     &.ng-enter {
-        .view-slide-left {
-            .inherit-transition();
-            transform: translateX(100vw);
+        .view-slide-left, .view-slide-right, .view-slide-up, .view-slide-down {
+            transition-delay: inherit;
+            transition-duration: inherit;
+            transition-timing-function: inherit;
+            transition-property: inherit;
         }
 
-        .view-slide-right {
-            .inherit-transition();
-            transform: translateX(-100vw);
-        }
+        .view-slide-left { transform: translateX(100vw); }
+        .view-slide-right { transform: translateX(-100vw); }
+        .view-slide-up { transform: translateY(100vh); }
+        .view-slide-down { transform: translateY(-100vh); }
 
         &.ng-enter-active {
-            .view-slide-left {
-                transform: translateX(0);
-            }
-
-            .view-slide-right {
-                transform: translateX(0);
-            }
+            .view-slide-left { transform: translateX(0); }
+            .view-slide-right { transform: translateX(0); }
+            .view-slide-up { transform: translateY(0); }
+            .view-slide-down { transform: translateY(0); }
         }
     }
 
