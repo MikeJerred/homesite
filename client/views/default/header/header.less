@@ -21,6 +21,15 @@ article.default-layout header.header {
             line-height: @header-height;
             font-size: 28px;
             padding-left: 40px;
+
+            > .name {
+                transition: all 0.2s ease-in-out;
+                opacity: 1;
+
+                &.ng-hide {
+                    opacity: 0;
+                }
+            }
         }
 
         .nav-header {
