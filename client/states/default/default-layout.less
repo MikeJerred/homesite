@@ -1,3 +1,5 @@
+@import "../../styles/variables.less";
+
 body {
     // always show vertical scrollbar to prevent the screen jumping when
     // in the animation due to the leaving view having position: fixed
@@ -7,6 +9,12 @@ body {
 article.default-layout {
     > .ui-view-container {
         position: relative;
+
+        // add padding for the fixed header
+        > [ui-view][name="main"] > article {
+            background-color: @theme-light-blue;
+            padding-top: @header-height;
+        }
 
         > .ui-view-animate {
             transition: all 0.3s ease-in-out;
