@@ -1,7 +1,7 @@
 ﻿<header class="header" page-show-on-scroll="headerCtrl.show">
     <nav class="navbar" role="navigation" ng-class="{ 'hide-menu': !headerCtrl.show && !headerCtrl.expanded }">
-        <div class="top-bar">
-            <a class="name" ui-sref="default.home" ng-show="!('default.home' | isState)">Michael Jerred</a>
+        <div class="top-bar" ng-show="!('default.home' | isState)">
+            <a class="name" ui-sref="default.home">Michael Jerred</a>
         </div>
         <div class="nav-header">
             <button type="button"

@@ -18,6 +18,12 @@ article.default-layout article.main-home {
                 h1 { color: #fff; font-family: @font-family-serif; font-size: 80px; }
                 h3 { margin: 20px 0 10px 0; font-weight: 700; font-size: 30px; }
                 h4 { font-size: 20px; }
+
+                @media (max-width: @screen-sm-min) {
+                    h1 { font-size: 55px; }
+                    h3 { font-size: 25px; }
+                    h4 { font-size: 18px; }
+                }
             }
         }
     }
@@ -36,10 +42,6 @@ article.default-layout article.main-home {
         display: table;
         width: 100%;
 
-        @media (max-width: @screen-sm-min) {
-            padding: 20px;
-        }
-
         .text {
             display: table-cell;
             vertical-align: middle;
@@ -49,6 +51,14 @@ article.default-layout article.main-home {
             height: 100%;
             font-size: 60px;
             font-family: @font-family-serif;
+        }
+
+        @media (max-width: @screen-sm-min) {
+            padding: 20px;
+
+            .text {
+                font-size: 35px;
+            }
         }
     }
 

@@ -13,6 +13,10 @@ article.default-layout article.main-blog {
         color: #fff;
         font-family: @font-family-serif;
 
+        @media (max-width: @screen-sm-min) {
+            padding: 20px;
+        }
+
         .box {
             display: table-cell;
             padding: 80px;
@@ -22,24 +26,34 @@ article.default-layout article.main-blog {
 
             h1 { margin-bottom: 30px; }
 
+            @media (max-width: @screen-sm-min) {
+                padding: 30px;
+
+                h1 { font-size: 28px; }
+                h4 { font-size: 16px; }
+            }
+
             .share-links {
+                @link-size: 46px;
+
                 position: relative;
+                height: @link-size;
                 margin-top: 30px;
 
                 .icon() {
                     font-size: 20px;
                     border: 2px solid #fff;
                     border-radius: 50%;
-                    width: 46px;
-                    height: 46px;
+                    width: @link-size;
+                    height: @link-size;
                     line-height: 42px;
                 }
 
                 .share-button {
                     border: 2px solid #fff;
                     border-radius: 50%;
-                    width: 46px;
-                    height: 46px;
+                    width: @link-size;
+                    height: @link-size;
                     font-size: 0;
                     position: absolute;
                     top: 0;
@@ -82,7 +96,7 @@ article.default-layout article.main-blog {
                     position: absolute;
                     top: 0;
                     width: 100%;
-                    height: 46px;
+                    height: @link-size;
                     color: #fff;
                     text-align: center;
                     padding: 0;
@@ -142,13 +156,26 @@ article.default-layout article.main-blog {
     > .main {
         margin-top: 40px;
         margin-bottom: 40px;
-        font-size: 20px;
+        font-size: 18px;
         line-height: 30px;
 
-        h1 { font-size: 38px; margin-top: 30px; }
+        h1 { font-size: 36px; margin-top: 30px; }
         h2 { font-size: 30px; margin-top: 20px; }
         h3 { font-size: 22px; }
         h4 { font-size: 18px; }
+
+        pre > code { font-size: 16px; }
+
+        @media (max-width: @screen-sm-min) {
+            font-size: 16px;
+
+            h1 { font-size: 30px; }
+            h2 { font-size: 25px; }
+            h3 { font-size: 18px; }
+            h4 { font-size: 14px; }
+
+            pre > code { font-size: 12px; }
+        }
     }
 
     > .related-blogs {
