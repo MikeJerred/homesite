@@ -50,6 +50,10 @@ article.default-layout header.header {
                 pointer-events: auto;
                 transition: all ease-in-out 0.3s;
 
+                @media (max-width: @screen-sm-min) {
+                    margin: 20px;
+                }
+
                 &:hover {
                     background-color: darken(@theme-light-blue, 2%);
                 }
@@ -94,6 +98,10 @@ article.default-layout header.header {
             transform: translate(50%, -50%) scale(1);
             pointer-events: auto;
 
+            @media (max-width: @screen-sm-min) {
+                top: 0;
+            }
+
             &.collapsed {
                 transition-delay: @fan-time * 1/3;
                 transform: translate(50%, -50%) scale(0);
@@ -124,8 +132,10 @@ article.default-layout header.header {
                         color: @theme-black;
                         padding: 20px;
 
-                        &:first-child {
-                            padding-top: 30px;
+                        @media (min-width: @screen-sm-min) {
+                            &:first-child {
+                                padding-top: 30px;
+                            }
                         }
                     }
                 }

@@ -57,7 +57,7 @@ article.default-layout article.main-home {
             padding: 20px;
 
             .text {
-                font-size: 35px;
+                font-size: 32px;
             }
         }
     }
@@ -83,6 +83,10 @@ article.default-layout article.main-home {
                 margin: 0 40px;
                 font-size: 21px;
                 cursor: pointer;
+
+                @media (max-width: @screen-sm-min) {
+                    margin: 0 20px;
+                }
 
                 &:hover {
                     background-color: darken(@theme-dark-blue, 2%);
