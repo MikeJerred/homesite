@@ -11,6 +11,14 @@
 
             this.expanded = !this.expanded;
         }
+
+        public scrollToBottom() {
+            $('html, body').animate({ scrollTop: $('footer.footer').offset().top }, 300);
+        }
+
+        public isScrolledToTop() : boolean {
+            return $('body').scrollTop() === 0;
+        }
     }
 
     export var view = {

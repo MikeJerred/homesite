@@ -131,6 +131,7 @@ article.default-layout header.header {
                         border-radius: 50%;
                         color: @theme-black;
                         padding: 20px;
+                        cursor: pointer;
 
                         @media (min-width: @screen-sm-min) {
                             &:first-child {
@@ -141,7 +142,7 @@ article.default-layout header.header {
                 }
             }
 
-            @count: 5;
+            @count: 4;
             @step: 85 / (@count);
             .create-children(@i: 1) when (@i =< @count) {
                 @angle: (@i - 1) * @step;

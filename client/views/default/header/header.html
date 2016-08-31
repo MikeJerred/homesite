@@ -1,7 +1,7 @@
 ﻿<header class="header" page-show-on-scroll="headerCtrl.show">
     <nav class="navbar" role="navigation" ng-class="{ 'hide-menu': !headerCtrl.show && !headerCtrl.expanded }">
-        <div class="top-bar" ng-show="!('default.home' | isState)">
-            <a class="name" ui-sref="default.home">Michael Jerred</a>
+        <div class="top-bar" ng-hide="('default.home' | isState) && headerCtrl.isScrolledToTop()">
+            <a class="name" ui-sref="default.home" ng-show="!('default.home' | isState)">Michael Jerred</a>
         </div>
         <div class="nav-header">
             <button type="button"
@@ -28,11 +28,11 @@
                 <li ui-sref-active="active">
                     <a ui-sref="default.about" ng-click="headerCtrl.expandClick()" title="About" class="fa fa-user"></a>
                 </li>
-                <li ui-sref-active="active">
+                <!--<li ui-sref-active="active">
                     <a ui-sref="default.lab" ng-click="headerCtrl.expandClick()" title="Experiments" class="fa fa-flask"></a>
-                </li>
+                </li>-->
                 <li ui-sref-active="active">
-                    <a ui-sref="default.contact" ng-click="headerCtrl.expandClick()" title="Contact" class="fa fa-envelope"></a>
+                    <a ng-click="headerCtrl.expandClick(); headerCtrl.scrollToBottom()" title="Contact" class="fa fa-envelope"></a>
                 </li>
             </ul>
         </div>
