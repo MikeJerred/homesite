@@ -4,5 +4,8 @@
     "noImplicitAny": true,
     "noResolve": true,
     "removeComments": false
-  }
+  },
+  "include": [
+    "../models/**/*"
+  ]
 }

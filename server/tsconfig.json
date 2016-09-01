@@ -5,5 +5,8 @@
     "noResolve": true,
     "removeComments": false,
     "module": "commonjs"
-  }
+  },
+  "include": [
+    "../models/**/*"
+  ]
 }
