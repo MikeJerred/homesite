@@ -30,33 +30,30 @@
                         'footer@default.blog': footer
                     }
                 })
+                .state('default.blogs', {
+                    url: '/blogs?{pageNo:int}',
+                    reloadOnSearch: false,
+                    views: {
+                        'main': Views.Default.Main.Blogs.view,
+                        'footer@default.blogs': footer
+                    }
+                })
                 .state('default.about', {
                     url: '/about',
                     views: {
-                        'main': Views.Default.Main.About.view
+                        'main': Views.Default.Main.About.view,
+                        'footer@default.about': footer
                     }
                 })
-                //.state('default.blogs', {
-                //    url: '/blogs?{page:int}',
-                //    params: {
-                //        page: 1
-                //    },
-                //    reloadOnSearch: false,
-                //    views: {
-                //        'main': Views.Default.Main.Blogs.view
-                //    },
-                //    data: {
-                //        metaData: { title: 'Blog' }
-                //    }
-                //})
                 .state('default.notFound', {
                     url: '/not-found',
                     views: {
-                        //'main':
-                    },
-                    data: {
-                        metaData: { title: 'Page Not Found' }
+                        'main': Views.Default.Main.NotFound.view,
+                        'footer@default.notFound': footer
                     }
+                    // data: {
+                    //     metaData: { title: 'Page Not Found' }
+                    // }
                 });
 
             $urlRouterProvider.when('', '/');
