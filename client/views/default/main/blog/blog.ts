@@ -5,8 +5,8 @@ module MJ.Views.Default.Main.Blog {
     class Controller {
         static $inject = ['$stateParams', 'dsBlogs'];
         constructor($stateParams: ng.ui.IStateParamsService, private dsBlogs: DataServices.Blogs.IDsBlogs) {
-            const articleId = $stateParams['articleId'];
-            this.article = dsBlogs.getBlog(articleId);
+            this.articleId = $stateParams['articleId'];
+            this.article = dsBlogs.getBlog(this.articleId);
 
             this.slideRight = $stateParams['slideTo'] === 'right';
 
@@ -33,6 +33,7 @@ module MJ.Views.Default.Main.Blog {
         public twitterLink: string;
         public googlePlusLink: string;
 
+        public articleId: number;
         public article: IVmBlog;
         public prevBlog: IVmBlogStub;
         public nextBlog: IVmBlogStub;
