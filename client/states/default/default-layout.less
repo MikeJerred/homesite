@@ -19,13 +19,14 @@ article.default-layout {
         > .ui-view-animate {
             transition: all 0.3s ease-in-out;
             overflow: hidden;
+            width: 100%;
 
             &.ng-enter {
             }
 
             &.ng-leave {
                 position: fixed;
-                width: 100%;
+                z-index: 500;
                 // top will be set to the current scroll position by default-layout.ts
 
                 &.ng-leave-active {
@@ -35,11 +36,10 @@ article.default-layout {
             &:not(.ng-leave):nth-child(1):nth-last-child(2), &:not(.ng-leave):nth-child(2):nth-last-child(1) {
                 // this rule applies to a .ui-view-animate which doesn't have .ng-leave, and only when there
                 // are two .ui-view-animate elements. This is to solve the problem that ng-leave stays on
-                // for longer than ng-enter, otherwise we would just use a simple .ng-leave selector.
+                // for longer than ng-enter, otherwise we would just use a simple .ng-enter selector.
                 position: absolute;
                 z-index: 1000;
                 top: auto !important; // ensure that we ignore the value set by default-layout.ts
-                width: 100%;
             }
         }
     }
