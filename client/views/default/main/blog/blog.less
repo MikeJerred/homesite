@@ -211,6 +211,8 @@ article.default-layout article.main-blog {
         padding: 40px 0;
 
         .card {
+            height: 200px;
+            display: table;
             color: @theme-black;
             padding: 40px 20px;
             font-family: @font-family-serif;
@@ -230,6 +232,13 @@ article.default-layout article.main-blog {
                 float: right;
                 background-color: @theme-light-blue;
                 &:hover { background-color: darken(@theme-light-blue, 10%); }
+            }
+
+            .content {
+                display: table-cell;
+                vertical-align: middle;
+
+
             }
         }
     }
