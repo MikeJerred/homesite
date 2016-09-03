@@ -1,5 +1,5 @@
 ﻿module MJ.States {
-    class StateConfig {
+    class DefaultStateConfig {
         static $inject = ['$stateProvider', '$urlRouterProvider'];
         constructor(
             $stateProvider: ng.ui.IStateProvider,
@@ -15,8 +15,16 @@
                         'header@default': Views.Default.Header.view
                     }
                 })
-                .state('default.home', {
+                .state('default.intro', {
                     url: '/',
+                    views: {
+                        'main': Views.Default.Main.Intro.view,
+                        'header@default': {}
+                    }
+                })
+                .state('default.home', {
+                    url: '/home',
+                    params: { slideTo: undefined },
                     views: {
                         'main': Views.Default.Main.Home.view,
                         'footer@default.home': footer
@@ -61,5 +69,5 @@
         }
     }
 
-    angular.module('mj.states').config(StateConfig);
+    angular.module('mj.states').config(DefaultStateConfig);
 }

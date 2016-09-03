@@ -1,6 +1,12 @@
 ﻿@import "../../bower_components/bootstrap/less/bootstrap.less";
 @import "variables.less";
 
+body {
+    // always have a scrollbar to prevent page jumping when transitioning
+    // between a view that would have no scrollbar and one that does
+    overflow-y: scroll;
+}
+
 a {
     color: inherit;
 }

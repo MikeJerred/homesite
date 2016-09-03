@@ -21,7 +21,19 @@
     }
 
     &.ng-leave {
+        .view-slide-up, .view-slide-down {
+            transition-delay: inherit;
+            transition-duration: inherit;
+            transition-timing-function: inherit;
+            transition-property: inherit;
+        }
+
+        .view-slide-up { transform: translateY(0); }
+        .view-slide-down { transform: translateY(0); }
+
         &.ng-leave-active {
+            .view-slide-up    { transform: translateY(80vh); }
+            .view-slide-down  { transform: translateY(-80vh); }
         }
     }
 }

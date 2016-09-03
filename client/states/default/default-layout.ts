@@ -5,7 +5,7 @@ module MJ.States.Default {
             // detect whether a state change happened because the user:
             // 1. used the browser history (back/forward buttons): $stateChangeSuccess happens after $locationChangeSuccess
             // 2. navigated using links on the page: $stateChangeSuccess happens before $locationChangeSuccess
-            // Note: this is quite hacky as it is relying on the internal behaviour of angular,
+            // Note: this is quite hacky as it is relying on the internal behavior of angular,
             // perhaps it is cleaner to do it using window.onpopstate
             let lastNavigationEvent = 0;
             $rootScope.$on('$stateChangeStart', () => {
@@ -16,7 +16,7 @@ module MJ.States.Default {
                 (event: ng.IAngularEvent, toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) => {
 
                     if (lastNavigationEvent === 2)
-                        this.browserHistoryNavigate(toState, toParams);
+                        this.browserHistoryNavigate(toState, toParams, fromState, fromParams);
 
                     lastNavigationEvent = 1;
 
@@ -33,7 +33,6 @@ module MJ.States.Default {
                     const key = this.getDataKey(fromParams);
 
                     fromState.data[key] = {
-                        slideTo: fromParams['slideTo'],
                         scrollY: $window.scrollY
                     };
                 }
@@ -52,14 +51,19 @@ module MJ.States.Default {
             return angular.toJson(params);
         }
 
-        private browserHistoryNavigate(toState: ng.ui.IState, toParams: any) {
+        private browserHistoryNavigate(toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) {
             if (toState.data) {
                 const key = this.getDataKey(toParams);
                 const stateData = toState.data[key];
 
-                if (stateData && stateData.slideTo !== undefined) {
-                    // slide in the same direction as happened last time this state was visited
-                    toParams['slideTo'] = stateData.slideTo;
+                if (toState.name === 'default.blog' && fromState.name === 'default.blog') {
+                    toParams['slideTo'] = toParams.articleId < fromParams.articleId
+                        ? 'right'
+                        : 'left';
+                }
+
+                if (toState.name === 'default.home' && fromState.name === 'default.intro') {
+                    toParams['slideTo'] = 'up';
                 }
 
                 // scroll to last known position, or to the top if we don't know the last position
