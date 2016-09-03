@@ -1,8 +1,61 @@
 <article class="main-about view-slide-up">
-    <section class="print-button pull-right btn btn-default">Print</section>
+    <section class="print-button pull-right btn btn-default" ng-click="aboutCtrl.print()">Print</section>
 
     <section class="profile container">
+        <div class="col-xs-offset-3 col-xs-6">
+            <p>
+                My name is Mike, I'm originally from Manchester but have been living in London since 2012.
+                I started learning to program from the age of 13, and used the internet teach myself.
 
+                I have been working as a full-time web developer in a couple of different
+                companies over the past {{aboutCtrl.getYearsSince(2012)}} years.
+            </p>
+
+            <p>
+                I have experience working on existing monolithic codebases, as well as designing the code
+                architecture and building sites from scratch. I usually use these technologies:
+                <ul>
+                    <li>CSS Pre-processor: LESS</li>
+                    <li>Frontend MV* framework: AngularJS with Typescript</li>
+                    <li>Package managers: npm, bower</li>
+                    <li>Server: ASP.NET C# or Express with Node.js</li>
+                    <li>Database: SQL Server or mongoDb</li>
+                    <li>Package managers: npm and bower</li>
+                    <li>Build tool: gulp</li>
+                </ul>
+            </p>
+        </div>
+    </section>
+
+    <section class="life-story container">
+        I first started programming when I was 13 years old. I begin by creating mods for video games, learning to
+        write programs in a bespoke language used for missions in the GTA: III &amp; Vice City games. From there
+        I started to learn C++ and asm x86 , as well as techniques for hacking games. I learnt how a buffer overflow
+        could be exploited to allow code injection by modifying the game data files.
+
+        <p>
+            Later I started hacking the game Guild Wars, and further developed my reverse engineering and assembly skills.
+            I also learnt some basics of DirectX and built a tool that drew a window in game and provided cheat functions.
+        </p>
+
+        <p>
+            In 2012 I started working as a full-time web developer, learning C#, SQL, HTML, CSS, and Javascript.
+            In 2014 I left this company, and had a few months before starting a new job. During this time I learnt
+            a lot about AngularJS, Typescript, and Node.js.
+            Later in the year I started working again at a new company. During my time there I created the base
+            for a new major project, and by using AngularJS and Typescript I introduced the technologies to the team.
+            This was very successful
+        </p>
+
+        <p>
+            I have developed an interest in functional programming, and have learnt some basics of Haskell. I intend to write
+            a fun project with this language to aide my learning process.
+        </p>
+
+        <p>
+            I am also very interested in the working of the human mind, and have begun learning about machine learning. I have found
+            <a href="http://neuralnetworksanddeeplearning.com/index.html" target="_blank">this</a> set of articles extremely helpful.
+        </p>
     </section>
     <section class="experience container">
         <h1>Work Experience</h1>
