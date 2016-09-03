@@ -17,12 +17,9 @@ article.default-layout {
         }
 
         > .ui-view-animate {
-            transition: all 0.3s ease-in-out;
+            transition: all 0.5s ease-in-out;
             overflow: hidden;
             width: 100%;
-
-            &.ng-enter {
-            }
 
             &.ng-leave {
                 position: fixed;
@@ -33,6 +30,7 @@ article.default-layout {
                 }
             }
 
+            // &.ng-enter {
             &:not(.ng-leave):nth-child(1):nth-last-child(2), &:not(.ng-leave):nth-child(2):nth-last-child(1) {
                 // this rule applies to a .ui-view-animate which doesn't have .ng-leave, and only when there
                 // are two .ui-view-animate elements. This is to solve the problem that ng-leave stays on
