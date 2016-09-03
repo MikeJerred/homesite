@@ -19,6 +19,10 @@
         public isScrolledToTop() : boolean {
             return $('body').scrollTop() === 0;
         }
+
+        public shouldHide() {
+            return !this.show && !this.expanded;
+        }
     }
 
     export var view = {

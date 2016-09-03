@@ -18,8 +18,7 @@
                 .state('default.intro', {
                     url: '/',
                     views: {
-                        'main': Views.Default.Main.Intro.view,
-                        'header@default': {}
+                        'main': Views.Default.Main.Intro.view
                     }
                 })
                 .state('default.home', {
