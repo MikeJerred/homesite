@@ -1,14 +1,24 @@
 <article class="main-intro view-slide-down">
-    <section class="about">
+    <section class="about" load-delay="500">
         <div class="container">
             <div class="content">
                 <div class="center">
-                    <h1>.NET web developer</h1>
-                    <h3 load-delay class="load-delay-fade">Michael Jerred</h3>
-                    <h4 load-delay class="load-delay-fade">Developing websites using C#, AngularJS, Typescript</h4>
 
-                    <a ui-sref="default.home({ slideTo: 'up'})" class="btn btn-default">Next</a>
+                    <div class="logo">
+                        <svg class="border" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <path class="line" fill="none" d="M0 0 L100 0 L100 100 L0 100 Z"/>
+                        </svg>
+                        <div class="text">MJ</div>
+                    </div>
+
+                    <h4 load-delay class="load-delay-fade">Web Developer, using C#, AngularJS, and Typescript</h4>
                 </div>
+
+                <a ui-sref="default.home({ slideTo: 'up'})" class="down-link">
+                    <svg width="30px" height="50px" viewBox="0 0 60 100">
+                        <path d="M30 0 L30 100 L0 70 M30 100 L60 70"></path>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>

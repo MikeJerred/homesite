@@ -2,32 +2,131 @@
 
 article.default-layout article.main-intro {
     padding-top: 0 !important; // let the header overlap on this page
+    background: none !important; // remove background as the image has z-index: -1
 
     .about {
-        //background-color: @theme-light-blue;
-        background-image: url(/images/corridor.jpg);
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center center;
-        color: #fff;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+
+        &:before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform: translateX(0) translateY(0) scale(1);
+            background-image: url(/images/intro.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            z-index: -1;
+        }
 
         .content {
             height: 100vh;
             display: table;
             width: 100%;
+            position: relative;
 
             .center {
                 display: table-cell;
                 vertical-align: middle;
+                text-align: center;
 
-                h1 { color: #fff; font-family: @font-family-serif; font-size: 80px; }
-                h3 { margin: 20px 0 10px 0; font-weight: 700; font-size: 30px; }
-                h4 { font-size: 20px; }
+                .logo {
+                    position: relative;
+                    width: 100px;
+                    height: 100px;
+                    text-align: center;
+                    margin: 0 auto;
 
-                @media (max-width: @screen-sm-min) {
-                    h1 { font-size: 55px; }
-                    h3 { font-size: 25px; }
-                    h4 { font-size: 18px; }
+                    .border {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        pointer-events: none;
+
+                        .line {
+                            stroke: @theme-yellow;
+                            stroke-width: 4px;
+                            stroke-dasharray: 400;
+                            stroke-dashoffset: 400;
+                        }
+                    }
+
+                    .text {
+                        font-family: @font-family-serif;
+                        font-size: 50px;
+                        color: @theme-yellow;
+                        line-height: 100px;
+                        opacity: 0;
+                    }
+                }
+
+                h4 {
+                    margin: 60px;
+                    font-family: @font-family-base;
+                    font-size: 18px;
+                    color: @theme-black;
+                    opacity: 0;
+                }
+            }
+
+            .down-link {
+                margin-top: 60px;
+                color: @theme-black;
+                opacity: 0;
+                display: block;
+                position: absolute;
+                bottom: 100px;
+                left: 45%;
+                left: ~"calc(50% - 15px)";
+
+                > svg {
+                    stroke-width: 2px;
+                    stroke: @theme-black;
+                    fill: none;
+                }
+            }
+        }
+
+        &.loaded {
+            &:before {
+                transition: transform 2s ease-in-out;
+                transition-delay: 1.5s;
+                transform: translateX(-2.5%) translateY(-2.5%) scale(1.05);
+            }
+
+            .content {
+                .center .logo .border .line {
+                    transition: stroke-dashoffset 0.5s ease-in-out;
+                    transition-delay: 0.75s;
+                    stroke-dashoffset: 0;
+                }
+
+                .center .logo .text {
+                    transition: opacity 0.5s ease-in-out;
+                    opacity: 1;
+                }
+
+                .center h4 {
+                    transition: opacity 0.5s ease-in-out;
+                    transition-delay: 0.75s;
+                    opacity: 1;
+                }
+
+                .down-link {
+                    transition: all 0.5s ease-in-out;
+                    transition-delay: 0.75s;
+                    opacity: 1;
+
+                    animation: 0.3s 0.5s 4 alternate bounce;
+
+                    @keyframes bounce {
+                        from { transform: translateY(0); }
+                        to { transform: translateY(-20px); }
+                    }
                 }
             }
         }
