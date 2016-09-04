@@ -1,10 +1,6 @@
 <article class="main-blog" ng-class="blogCtrl.slideRight ? 'view-slide-right' : 'view-slide-left'">
     <section class="headline" ng-style="{ 'background-image': 'url(/images/blog-'+blogCtrl.articleId+'.jpg)' }">
         <div class="box" load-delay>
-            <svg class="border" width="100%" height="100%" viewBox="0 0 400 100" preserveAspectRatio="none">
-                <path class="line" fill="none" d="M0 0 L400 0 L400 100 L0 100 Z"/>
-            </svg>
-
             <h1>{{blogCtrl.article.headline}}</h1>
 
             <h4>{{blogCtrl.article.date | date:'dd MMMM yyyy'}}</h4>
@@ -33,10 +29,12 @@
         </div>
     </section>
 
-    <section class="main container">
-        <blog-markdown
-            class="col-sm-offset-1 col-sm-10"
-            markdown="blogCtrl.article.articleMarkdown"></blog-markdown>
+    <section class="main">
+        <div class="container">
+            <blog-markdown
+                class="col-sm-offset-1 col-sm-10"
+                markdown="blogCtrl.article.articleMarkdown"></blog-markdown>
+        </div>
     </section>
 
     <section class="related-blogs clearfix">

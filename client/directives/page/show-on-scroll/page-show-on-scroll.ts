@@ -1,4 +1,4 @@
-module MJ.Directives.Page.ScrollOnShow {
+module MJ.Directives.Page.ShowOnScroll {
     interface IScope extends ng.IScope {
         show: boolean;
     }

@@ -10,6 +10,7 @@
                     this.slideUp = toState.name === 'default.intro';
                 });
         }
+
         public slideUp: boolean;
     }
 

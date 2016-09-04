@@ -64,11 +64,17 @@ gulp.task('client:debug:watch', ['client:debug:build'], () => {
     watch(paths.srcIcons.concat(paths.srcIconsTemplate), { read: false }, () => { runSequence('client:debug:compile:icons'); });
     watch(paths.srcIndex, { read: false }, () => { runSequence('client:debug:compile:index'); });
 
-    gulp.watch(paths.builtCssAndJs, (event) => {
-        if (event.type === 'added' || event.type === 'deleted') {
-            runSequence('client:debug:compile:index');
-        }
-    });
+    watch(
+        paths.srcHtml.concat(paths.srcLess).concat(paths.srcTs).concat(paths.srcImg),
+        { read: false, events: ['add', 'unlink'] },
+        () => { runSequence('client:debug:compile:index'); }
+    );
+
+    // gulp.watch(paths.builtCssAndJs, (event) => {
+    //     if (event.type === 'added' || event.type === 'deleted') {
+    //         runSequence('client:debug:compile:index');
+    //     }
+    // });
 });
 
 
