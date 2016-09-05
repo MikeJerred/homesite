@@ -5,11 +5,11 @@ module MJ.Directives.Page.ScrolledPast {
     }
 
     class Controller {
-        static $inject = ['$scope', '$element', '$document', '$timeout'];
+        static $inject = ['$scope', '$element', '$window', '$timeout'];
         constructor(
             private $scope: IScope,
             private $element: ng.IAugmentedJQuery,
-            private $document: ng.IDocumentService,
+            private $window: ng.IWindowService,
             private $timeout: ng.ITimeoutService) {
 
             this.refreshTimer();
@@ -20,10 +20,10 @@ module MJ.Directives.Page.ScrolledPast {
         private refreshTimer() {
             const self = this;
             this.timeout = this.$timeout(() => {
-                const currentPosition = self.$document.scrollTop();
-                let offset = self.$scope.offset || 0;
+                const currentPosition = self.$window.scrollY + self.$window.innerHeight;
+                let offset = +self.$scope.offset || 0;
 
-                if (currentPosition > (self.$element.offset().top - offset)) {
+                if (currentPosition > (self.$element.offset().top + offset)) {
                     self.$element.addClass(self.$scope.cssClass || 'scrolled-past');
                 } else {
                     self.refreshTimer();

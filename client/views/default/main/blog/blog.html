@@ -38,7 +38,7 @@
     </section>
 
     <section class="related-blogs clearfix">
-        <a class="card card-prev col-xs-6 col-sm-4 col-md-3 col-lg-2"
+        <a class="card card-prev pull-left col-xs-5 col-sm-4 col-md-3 col-lg-2"
            ng-if="blogCtrl.article.prevBlog"
            ui-sref="default.blog({ articleId: blogCtrl.article.prevBlog.id, slideTo: 'right' })">
             <div class="content">
@@ -46,7 +46,7 @@
                 <div class="date">{{blogCtrl.article.prevBlog.date | date:'dd MMMM yyyy'}}</div>
             </div>
         </a>
-        <a class="card card-next col-xs-6 col-sm-4 col-md-3 col-lg-2"
+        <a class="card card-next pull-right col-xs-5 col-sm-4 col-md-3 col-lg-2"
            ng-if="blogCtrl.article.nextBlog"
            ui-sref="default.blog({ articleId: blogCtrl.article.nextBlog.id, slideTo: 'left' })">
             <div class="content">

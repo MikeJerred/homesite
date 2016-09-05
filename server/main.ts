@@ -5,7 +5,13 @@ import * as validation from './api/validate';
 require('dotenv').config();
 
 const app = express();
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI, {
+    server: {
+        reconnectTries: Number.MAX_VALUE,
+        reconnectInterval: 3000
+        //socketOptions: { keepAlive: 120 }
+    }
+});
 
 app.use(express.static(__dirname + '/wwwroot'));
 

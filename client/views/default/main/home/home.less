@@ -1,7 +1,8 @@
 ﻿@import "../../../../styles/variables.less";
 
 article.default-layout article.main-home {
-    padding-top: 0 !important; // let the header overlap on this page
+    //padding-top: 0 !important; // let the header overlap on this page
+    background-color: #fff;
 
     .about {
         height: 100vh;
@@ -64,11 +65,13 @@ article.default-layout article.main-home {
 
     .overview {
         @color: @theme-black;
-        background-color: #ededed;
+        background-color: #fff;
         display: table;
         width: 100%;
         height: 50vh;
         position: relative;
+        box-shadow: inset 0 0 5px 2px rgba(0,0,0,0.5);
+        @transition-time: 1s;
 
         @media (max-width: @screen-xs-max) {
             height: 80vh;
@@ -81,19 +84,19 @@ article.default-layout article.main-home {
             overflow: hidden;
 
             @stroke-width: 6px;
-            @stroke-time: 0.25s;
+            @stroke-time: @transition-time/4;
             .border-top, .border-bottom, .border-left, .border-right {
                 position: absolute;
-                background-color: @theme-yellow-dark;
-                transition: transform @stroke-time linear;
+                background-color: @theme-yellow;
+
             }
             .border-top, .border-bottom { width: 100%; height: @stroke-width; }
             .border-left, .border-right { width: @stroke-width; height: 100%; }
 
-            .border-top { top: 0; left: 0; transition-delay: 0; transform: translateX(-100%); }
-            .border-right { top: 0; right: 0; transition-delay: @stroke-time; transform: translateY(-100%); }
-            .border-bottom { bottom: 0; left: 0; transition-delay: @stroke-time*2; transform: translateX(100%); }
-            .border-left { top: 0; left: 0; transition-delay: @stroke-time*3; transform: translateY(100%); }
+            .border-top { top: 0; left: 0; transition: transform @stroke-time ease-in; transition-delay: 0; transform: translateX(-100%); }
+            .border-right { top: 0; right: 0; transition: transform @stroke-time ease; transition-delay: @stroke-time; transform: translateY(-100%); }
+            .border-bottom { bottom: 0; left: 0; transition: transform @stroke-time ease; transition-delay: @stroke-time*2; transform: translateX(100%); }
+            .border-left { top: 0; left: 0; transition: transform @stroke-time ease-out; transition-delay: @stroke-time*3; transform: translateY(100%); }
         }
 
         &.scrolled-past {
@@ -116,7 +119,7 @@ article.default-layout article.main-home {
 
         .left, .right {
             @fade-time: 0.3s;
-            @delay-time: 0.1s;
+            @delay-time: (@transition-time - @fade-time)/5;
             padding: 0 20px;
 
             ul {
@@ -125,13 +128,13 @@ article.default-layout article.main-home {
                 margin: 0;
                 padding: 0;
 
-                > li:nth-child(1) { transition-delay: 1*@delay-time; }
-                > li:nth-child(2) { transition-delay: 2*@delay-time; }
-                > li:nth-child(3) { transition-delay: 3*@delay-time; }
-                > li:nth-child(4) { transition-delay: 4*@delay-time; }
-                > li:nth-child(5) { transition-delay: 5*@delay-time; }
-                > li:nth-child(6) { transition-delay: 6*@delay-time; }
-                > li:nth-child(7) { transition-delay: 7*@delay-time; }
+                > li:nth-child(1) { transition-delay: 0; }
+                > li:nth-child(2) { transition-delay: 1*@delay-time; }
+                > li:nth-child(3) { transition-delay: 2*@delay-time; }
+                > li:nth-child(4) { transition-delay: 3*@delay-time; }
+                > li:nth-child(5) { transition-delay: 4*@delay-time; }
+                > li:nth-child(6) { transition-delay: 5*@delay-time; }
+                > li:nth-child(7) { transition-delay: 6*@delay-time; }
                 > li {
                     transition: opacity @fade-time ease-in-out;
                     opacity: 0;
@@ -143,7 +146,7 @@ article.default-layout article.main-home {
             font-family: @font-family-serif;
             font-size: 20px;
             line-height: 40px;
-            transition: opacity 0.3s ease-in-out;
+            transition: opacity @transition-time ease-in-out;
             opacity: 0;
         }
 
@@ -260,6 +263,12 @@ article.default-layout article.main-home {
             .text > a {
                 border: 1px solid @theme-black;
                 padding: 20px 40px;
+                background-color: transparent;
+                transition: background-color 0.3s ease-in-out;
+
+                &:hover {
+                    background-color: fade(@theme-yellow, 50%);
+                }
             }
         }
 
