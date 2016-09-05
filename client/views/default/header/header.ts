@@ -1,5 +1,14 @@
 ﻿module MJ.Views.Default.Header {
     class Controller {
+        static $inject = ['$rootScope'];
+        constructor($rootScope: ng.IRootScopeService) {
+            $rootScope.$on('$stateChangeSuccess', (event: ng.IAngularEvent, toState: ng.ui.IState) => {
+                if (toState.name === 'default.intro') {
+                    this.expanded = false;
+                }
+            });
+        }
+
         public show = true;
         public expanded = false;
 

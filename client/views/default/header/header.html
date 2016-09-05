@@ -1,6 +1,6 @@
 ﻿<header class="header" page-show-on-scroll="headerCtrl.show">
     <nav class="navbar" role="navigation" ng-class="{ 'hide-menu': ('default.intro' | isState) || headerCtrl.shouldHide() }">
-        <div class="top-bar" ng-hide="('default.home' | isState) && headerCtrl.isScrolledToTop()">
+        <div class="top-bar" ng-hide="('default.home' | isState) || ('default.intro' | isState)">
             <a class="logo" ui-sref="default.home">
                 <span class="text">MJ</span>
             </a>
@@ -19,7 +19,7 @@
             </button>
         </div>
 
-        <div class="nav-collapse collapsed" ng-class="{ collapsed: ('default.intro' | isState) || !headerCtrl.expanded }">
+        <div class="nav-collapse collapsed" ng-class="{ collapsed: !headerCtrl.expanded }">
             <ul class="nav">
                 <li ui-sref-active="active">
                     <a ui-sref="default.home" ng-click="headerCtrl.expandClick()" title="Home" class="fa fa-home"></a>
