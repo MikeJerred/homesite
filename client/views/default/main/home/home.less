@@ -6,14 +6,14 @@ article.default-layout article.main-home {
 
     .about {
         height: 100vh;
-        width: 100%;
         background-image: url(/images/tent.jpg);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
         display: table;
+        width: 100%;
 
-        .container {
+        .center {
             display: table-cell;
             vertical-align: middle;
         }
@@ -210,8 +210,9 @@ article.default-layout article.main-home {
             }
 
             &:last-child  {
-                .panel-heading:before {
-                    transform: translateY(150px);
+                .panel-heading {
+                    margin-bottom: 0;
+                    &:before { transform: translateY(150px); }
                 }
             }
 
