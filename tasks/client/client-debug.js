@@ -56,19 +56,23 @@ gulp.task('client:debug:build', (done) => {
 });
 
 gulp.task('client:debug:watch', ['client:debug:build'], () => {
-    watch(paths.srcHtml, { read: false }, () => { runSequence('client:debug:compile:templates'); });
-    watch(paths.srcLess, { read: false }, () => { runSequence('client:debug:compile:styles'); });
-    watch(paths.srcTs, { read: false }, () => { runSequence('client:debug:compile:scripts'); });
-    watch(paths.srcImg, { read: false }, () => { runSequence('client:debug:compile:images'); });
-    watch(paths.srcFonts, { read: false }, () => { runSequence('client:debug:compile:fonts'); });
-    watch(paths.srcIcons.concat(paths.srcIconsTemplate), { read: false }, () => { runSequence('client:debug:compile:icons'); });
-    watch(paths.srcIndex, { read: false }, () => { runSequence('client:debug:compile:index'); });
+    var buildHandler = (task) => {
+        return (vinyl) => {
+            if (vinyl.event === 'add' || vinyl.event === 'unlink') {
+                runSequence(task, 'client:debug:compile:index');
+            } else {
+                runSequence(task);
+            }
+        };
+    };
 
-    watch(
-        paths.srcHtml.concat(paths.srcLess).concat(paths.srcTs).concat(paths.srcImg),
-        { read: false, events: ['add', 'unlink'] },
-        () => { runSequence('client:debug:compile:index'); }
-    );
+    watch(paths.srcHtml, { read: false }, buildHandler('client:debug:compile:templates'));
+    watch(paths.srcLess, { read: false }, buildHandler('client:debug:compile:styles'));
+    watch(paths.srcTs, { read: false }, buildHandler('client:debug:compile:scripts'));
+    watch(paths.srcImg, { read: false }, buildHandler('client:debug:compile:images'));
+    watch(paths.srcFonts, { read: false }, buildHandler('client:debug:compile:fonts'));
+    watch(paths.srcIcons.concat(paths.srcIconsTemplate), { read: false }, buildHandler('client:debug:compile:icons'));
+    watch(paths.srcIndex, { read: false }, () => { runSequence('client:debug:compile:index'); });
 
     // gulp.watch(paths.builtCssAndJs, (event) => {
     //     if (event.type === 'added' || event.type === 'deleted') {

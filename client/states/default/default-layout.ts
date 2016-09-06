@@ -14,7 +14,6 @@ module MJ.States.Default {
             $rootScope.$on(
                 '$stateChangeSuccess',
                 (event: ng.IAngularEvent, toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) => {
-
                     if (lastNavigationEvent === 2)
                         this.browserHistoryNavigate(toState, toParams, fromState, fromParams);
 
@@ -23,7 +22,10 @@ module MJ.States.Default {
                     // as we change view the fromState view will become position: fixed, so we need to offset its top by the
                     // current scroll position so that it remains in place. This is because the scroll position will soon
                     // change to that of the toState and we don't want the old view to be affected by that during the animation
-                    $('.ui-view-animate').css('top', -$window.scrollY);
+                    let scrollPos = (fromState.name === 'default.intro')
+                        ? 0
+                        : -$window.scrollY;
+                    $('.ui-view-animate').css('top', scrollPos);
 
                     // save data for the fromState so that we can use it if the user goes back to this state later on
                     if (!fromState.data)
@@ -64,6 +66,7 @@ module MJ.States.Default {
 
                 if (toState.name === 'default.home' && fromState.name === 'default.intro') {
                     toParams['slideTo'] = 'up';
+                    stateData.scrollY = 0;
                 }
 
                 // scroll to last known position, or to the top if we don't know the last position
@@ -79,9 +82,7 @@ module MJ.States.Default {
         }
 
         private scrollTo(y: number) {
-            this.$timeout(() => {
-                this.$window.scrollTo(0, y)
-            }, 100);
+            this.$timeout(() => { this.$window.scrollTo(0, y); }, 10);
         }
     }
 

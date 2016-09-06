@@ -32,12 +32,6 @@ article.default-layout article.main-home {
                     stroke-dashoffset: 400;
                     transition: stroke-dashoffset 1.25s ease-in-out;
                 }
-
-                &.loaded {
-                    .line1, .line2 {
-                        stroke-dashoffset: 0;
-                    }
-                }
             }
 
             .center {
@@ -55,10 +49,13 @@ article.default-layout article.main-home {
                     font-weight: bold;
                     font-family: @font-family-serif;
                 }
+            }
 
-                &.loaded {
-                    opacity: 1;
+            &.page-loaded {
+                .border {
+                    .line1, .line2 { stroke-dashoffset: 0; }
                 }
+                .center { opacity: 1; }
             }
         }
     }
