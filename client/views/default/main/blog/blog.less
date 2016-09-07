@@ -24,15 +24,16 @@ article.default-layout article.main-blog {
             vertical-align: middle;
             text-align: center;
 
-            h1 { margin-bottom: 30px; font-family: @font-family-serif; }
-            h4 { font-family: @font-family-base; }
-
             h1, h4, .share-links {
                 transition: opacity 0.3s ease-in-out;
                 opacity: 0;
             }
 
-            &.loaded {
+            h1 { margin-bottom: 30px; font-family: @font-family-serif; }
+            h4 { font-family: @font-family-base; transition-delay: 0.15s; }
+            .share-links { transition-delay: 0.3s; }
+
+            &.page-loaded {
                 h1, h4, .share-links { opacity: 1; }
             }
 

@@ -1,6 +1,6 @@
 <article class="main-blog" ng-class="blogCtrl.slideRight ? 'view-slide-right' : 'view-slide-left'">
     <section class="headline" ng-style="{ 'background-image': 'url(/images/blog-'+blogCtrl.articleId+'.jpg)' }">
-        <div class="box" load-delay>
+        <div class="box" page-loaded>
             <h1>{{blogCtrl.article.headline}}</h1>
 
             <h4>{{blogCtrl.article.date | date:'dd MMMM yyyy'}}</h4>
