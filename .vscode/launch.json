@@ -18,7 +18,7 @@
 				"NODE_ENV": "development",
 				"NPM_CONFIG_PRODUCTION": "false"
 			},
-			"externalConsole": false,
+			"console": "integratedTerminal",
 			"sourceMaps": true,
 			"outDir": "${workspaceRoot}/dist"
 		},
