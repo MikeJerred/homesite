@@ -62,51 +62,20 @@ article.default-layout article.main-home {
 
     .overview {
         @color: @theme-black;
-        background-color: #fff;
+        background-color: @theme-light-blue;
+        border-top: 4px solid #fff;
+        border-bottom: 4px solid #fff;
         display: table;
         width: 100%;
         height: 50vh;
         position: relative;
-        //box-shadow: inset 0 0 5px 2px rgba(0,0,0,0.5);
         @transition-time: 1s;
 
         @media (max-width: @screen-xs-max) {
             height: 80vh;
         }
 
-        .border {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-
-            @stroke-width: 4px;
-            @stroke-time: @transition-time/4;
-            .border-top, .border-bottom, .border-left, .border-right {
-                position: absolute;
-                background-color: @theme-yellow;
-
-            }
-            .border-top, .border-bottom { width: 100%; height: @stroke-width; }
-            .border-left, .border-right { width: @stroke-width; height: 100%; }
-
-            .border-top { top: 0; left: 0; transition: transform @stroke-time ease-in; transition-delay: 0; }
-            .border-right { top: 0; right: 0; transition: transform @stroke-time ease; transition-delay: @stroke-time; }
-            .border-bottom { bottom: 0; left: 0; transition: transform @stroke-time ease; transition-delay: @stroke-time*2; }
-            .border-left { top: 0; left: 0; transition: transform @stroke-time ease-out; transition-delay: @stroke-time*3; }
-
-            // .border-top { transform: translateX(-100%); }
-            // .border-right { transform: translateY(-100%); }
-            // .border-bottom { transform: translateX(100%); }
-            // .border-left { transform: translateY(100%); }
-        }
-
         &.scrolled-past {
-            .border {
-                .border-top, .border-bottom { transform: translateX(0); }
-                .border-left, .border-right { transform: translateY(0); }
-            }
-
             .left, .right {
                 opacity: 1;
 
@@ -189,7 +158,7 @@ article.default-layout article.main-home {
                     width: 100%;
                     height: 100%;
                     position: absolute;
-                    background-color: @theme-yellow;
+                    background-color: @theme-light-blue;
                     z-index: 1;
                     transition: all 0.3s ease-in-out;
                     opacity: 0;
