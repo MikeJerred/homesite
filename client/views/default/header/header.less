@@ -57,7 +57,7 @@ article.default-layout header.header {
             > .nav-toggle {
                 margin: 20px 40px;
                 padding: 10px;
-                border: 2px solid @theme-black;
+                border: none;
                 outline: none;
                 background-color: transparent;
                 font-size: 0;
@@ -74,24 +74,28 @@ article.default-layout header.header {
 
                 svg {
                     .line1, .line2, .line3 {
-                        transition: all ease-in-out 0.2s;
-                        transform: rotate(0) scaleX(1);
+                        transition: all ease-in-out 0.3s;
                         fill: @theme-black;
                     }
 
-                    .line1 { transform-origin: 120px 120px; }
-                    .line2 { transform-origin: 600px 6000px; }
-                    .line3 { transform-origin: 120px 1080px; }
+                    .line1 { transform-origin: 100px 100px; }
+                    .line2 { transform-origin: 1618px/2 500px; }
+                    .line3 { transform-origin: 100px 900px; }
                 }
 
                 &.cross {
                     background-color: transparent;
                     border-color: transparent;
 
+                    @width: 1518px;
+                    @height: 900px;
+                    @scaleX: unit((sqrt(2)*(@height - 100px) + 100px) / (@width));
+                    @translateX: (@width - @height)/2;
+
                     svg {
-                        .line1 { transform: rotate(45deg) scaleX(sqrt(2)); }
-                        .line2 { transform: scaleX(0.01); }
-                        .line3 { transform: rotate(-45deg) scaleX(sqrt(2)); }
+                        .line1 { transform: translateX(@translateX) rotate(45deg) scaleX(@scaleX); }
+                        .line2 { transform: scaleX(0.001); }
+                        .line3 { transform: translateX(@translateX) rotate(-45deg) scaleX(@scaleX); }
                     }
                 }
             }
