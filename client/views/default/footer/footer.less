@@ -43,12 +43,17 @@ article.default-layout footer.footer {
                 font-size: 25px;
 
                 > a {
+                    transition: all 0.2s ease-in-out;
                     border: 2px solid @theme-black;
-                    border-radius: 50%;
                     margin: 0 5px;
                     width: 56px;
                     height: 56px;
                     line-height: 50px;
+
+                    &:hover {
+                        background-color: fade(@theme-yellow, 30%);
+                        border-radius: 50%;
+                    }
 
                     &.fa-github {
                         font-size: 34px;
