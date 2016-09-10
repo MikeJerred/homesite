@@ -10,7 +10,7 @@ article.default-layout article.main-blog {
         background-attachment: fixed;
         background-position: center center;
         background-size: cover;
-        color: @theme-black;
+        color: @theme-grey;
         font-family: @font-family-serif;
 
         @media (max-width: @screen-sm-min) {
@@ -29,8 +29,8 @@ article.default-layout article.main-blog {
                 opacity: 0;
             }
 
-            h1 { margin-bottom: 30px; font-family: @font-family-serif; }
-            h4 { font-family: @font-family-base; transition-delay: 0.15s; }
+            h1 { font-family: @font-family-serif; font-size: 38px; }
+            h4 { margin: 40px 0; font-family: @font-family-base; transition-delay: 0.15s; }
             .share-links { transition-delay: 0.3s; }
 
             &.page-loaded {
@@ -45,22 +45,21 @@ article.default-layout article.main-blog {
             }
 
             .share-links {
-                @link-size: 46px;
+                @link-size: 35px;
 
                 position: relative;
                 height: @link-size;
-                margin-top: 30px;
 
                 .icon() {
-                    font-size: 20px;
-                    border: 2px solid @theme-black;
+                    font-size: @link-size / 2;
+                    border: 2px solid @theme-grey;
                     width: @link-size;
                     height: @link-size;
-                    line-height: 42px;
+                    line-height: @link-size - 4px;
                 }
 
                 .share-button {
-                    border: 2px solid @theme-black;
+                    border: 2px solid @theme-grey;
                     width: @link-size;
                     height: @link-size;
                     font-size: 0;
@@ -75,7 +74,7 @@ article.default-layout article.main-blog {
 
                     svg {
                         .dot1, .dot2, .dot3, .line1, .line2 {
-                            fill: @theme-black;
+                            fill: @theme-grey;
                             transform: scale(1);
                             transition: all 0.3s ease-in-out;
                         }
@@ -100,7 +99,7 @@ article.default-layout article.main-blog {
                     }
 
                     &:hover {
-                        background-color: fade(@theme-yellow, 30%);
+                        border-radius: 50%;
                     }
                 }
 
@@ -110,7 +109,7 @@ article.default-layout article.main-blog {
                     top: 0;
                     width: 100%;
                     height: @link-size;
-                    color: @theme-black;
+                    color: @theme-grey;
                     text-align: center;
                     padding: 0;
                     margin: 0;
@@ -119,18 +118,18 @@ article.default-layout article.main-blog {
                     > li {
                         position: absolute;
                         left: ~"calc(50% - 28px)";
-                        transition: all 0.3s ease-in-out;
+                        transition: all 0.2s ease-in-out;
                         transform: translateX(0);
                         opacity: 0;
 
                         > a {
                             .icon();
                             margin: 0 5px;
-                            background-color: transparent;
-                            transition: background-color 0.3s ease-in-out;
+                            //background-color: transparent;
+                            transition: border-radius 0.3s ease-in-out;
 
                             &:hover {
-                                background-color: fade(@theme-yellow, 30%);
+                                border-radius: 50%;
                             }
                         }
                     }
@@ -138,11 +137,11 @@ article.default-layout article.main-blog {
 
                 &.open {
                     .share-button {
-                        color: @theme-black;
+                        color: @theme-grey;
                         border-color: transparent;
 
                         svg {
-                            .dot1, .dot2, .dot3, .line1, .line2 { fill: @theme-black; }
+                            .dot1, .dot2, .dot3, .line1, .line2 { fill: @theme-grey; }
                             .dot2, .dot3 { transform: scale(0); }
                             .dot1 { transform: translateX(300px) scale(0.01); }
                             .line1 { transform: rotate(135deg) scale(1.198, 120/150); }
@@ -180,9 +179,10 @@ article.default-layout article.main-blog {
         padding-top: 60px;
         padding-bottom: 60px;
         font-size: 18px;
+        font-weight: 300;
         line-height: 30px;
-        background-color: #fff;
-        border: 4px solid @theme-yellow;
+        background-color: @theme-light-blue;
+        border-top: 4px solid #fff;
 
         h1 { font-size: 36px; margin-top: 30px; }
         h2 { font-size: 30px; margin-top: 20px; }
@@ -210,10 +210,10 @@ article.default-layout article.main-blog {
         .card {
             height: 200px;
             display: table;
-            color: @theme-black;
+            color: @theme-grey;
             padding: 40px 20px;
             font-family: @font-family-serif;
-            border: 1px solid @theme-black;
+            border: 1px solid @theme-grey;
             background-color: transparent;
 
             &:hover {

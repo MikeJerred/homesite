@@ -10,28 +10,45 @@ article.default-layout article.main-home {
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
+        background-attachment: fixed;
         display: table;
         width: 100%;
 
-        .center {
+        > .center {
             display: table-cell;
             vertical-align: middle;
         }
 
         .content {
+            .anchor {
+                position: relative;
+
+                @media (max-width: @screen-xs-max) and (min-width: 500px) {
+                    margin: 0 80px;
+                }
+            }
+
             .border {
                 position: absolute;
-                top: 0;
-                left: 0;
-                pointer-events: none;
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                @stroke-width: 2px;
 
-                .line1, .line2 {
-                    stroke: @theme-yellow;
-                    stroke-width: 1px;
-                    stroke-dasharray: 400;
-                    stroke-dashoffset: 400;
-                    transition: stroke-dashoffset 1.25s ease-in-out;
+                .top, .left, .right, .bottom {
+                    position: absolute;
+                    background-color: @theme-yellow;
                 }
+
+                .top, .bottom { width: 33%; height: @stroke-width; }
+                .left, .right { width: @stroke-width; height: 50%; }
+                .top, .left { top: 0; left: 0; }
+                .right, .bottom { bottom: 0; right: 0; }
+
+                .top { transform: translateX(-100%); }
+                .bottom { transform: translateX(100%); }
+                .left { transform: translateY(-100%); }
+                .right { transform: translateY(100%); }
             }
 
             .center {
@@ -42,26 +59,40 @@ article.default-layout article.main-home {
                 padding: 40px;
                 font-family: @font-family-base;
                 opacity: 0;
-                transition: opacity 1.25s ease-in-out;
 
                 .bold {
                     font-size: 32px;
                     font-weight: bold;
                     font-family: @font-family-serif;
                 }
+
+                @media (max-width: @screen-xs-max) {
+                    font-size: 14px;
+                    line-height: 28px;
+                    padding: 20px;
+
+                    .bold { font-size: 24px; }
+                }
             }
 
             &.page-loaded {
                 .border {
-                    .line1, .line2 { stroke-dashoffset: 0; }
+                    .top, .left, .right, .bottom {
+                        transition: transform 0.5s ease-in-out;
+                        transition-delay: 0.5s;
+                        transform: translateX(0) translateY(0);
+                    }
                 }
-                .center { opacity: 1; }
+                .center {
+                    transition: opacity 0.5s ease-in-out;
+                    opacity: 1;
+                }
             }
         }
     }
 
     .overview {
-        @color: @theme-black;
+        @color: @theme-grey;
         background-color: @theme-light-blue;
         border-top: 4px solid #fff;
         border-bottom: 4px solid #fff;
@@ -175,6 +206,10 @@ article.default-layout article.main-home {
                     a:focus, a:active {
                         outline: none;
                     }
+
+                    @media (max-width: @screen-xs-max) {
+                        font-size: 26px;
+                    }
                 }
             }
 
@@ -211,9 +246,9 @@ article.default-layout article.main-home {
     }
 
     .filler {
-        @color: @theme-black;
-        background-color: #fff;
-        border: 4px solid @theme-light-blue;
+        color: @theme-grey;
+        background-color: @theme-light-blue;
+        border-top: 4px solid #fff;
 
         .left, .right {
             font-family: @font-family-serif;
@@ -227,26 +262,40 @@ article.default-layout article.main-home {
                 vertical-align: middle;
             }
 
-            @media (max-width: @screen-sm-min) {
-                height: 20vh;
+            @media (max-width: @screen-xs-max) {
+                font-size: 24px;
+                height: 25vh;
+            }
+
+            @media (max-height: 400px) {
+                height: 120px;
             }
         }
 
         .left {
+            //padding-top: 40px;
         }
 
         .right {
+            //padding-bottom: 40px;
             font-size: 18px;
             font-family: @font-family-base;
 
             .text > a {
-                border: 1px solid @theme-black;
+                border: 1px solid @theme-grey;
                 padding: 20px 40px;
                 background-color: transparent;
-                transition: background-color 0.3s ease-in-out;
+                transition: border-color 0.3s ease-in-out;
 
                 &:hover {
-                    background-color: fade(@theme-yellow, 50%);
+                    transition: background-color 0.3s ease-in-out;
+                    border-color: transparent;
+                    background-color: fade(@theme-yellow, 100%);
+                }
+
+                @media (max-width: @screen-xs-max) {
+                    font-size: 16px;
+                    padding: 10px 20px;
                 }
             }
         }

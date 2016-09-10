@@ -9,12 +9,13 @@ article.default-layout footer.footer {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
+    border-top: 4px solid #fff;
 
     .content {
         display: table-cell;
         vertical-align: middle;
         text-align: center;
-        color: @theme-black;
+        color: @theme-grey;
         padding: 30px;
 
         .title {
@@ -44,14 +45,13 @@ article.default-layout footer.footer {
 
                 > a {
                     transition: all 0.2s ease-in-out;
-                    border: 2px solid @theme-black;
+                    border: 2px solid @theme-grey;
                     margin: 0 5px;
                     width: 56px;
                     height: 56px;
                     line-height: 50px;
 
                     &:hover {
-                        background-color: fade(@theme-yellow, 30%);
                         border-radius: 50%;
                     }
 
