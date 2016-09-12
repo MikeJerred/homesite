@@ -11,6 +11,7 @@
     "angular-local-storage": "^0.2.5",
     "angular-ui-router": "^0.3.1",
     "bootstrap": "^3.3.6",
+    "jquery": "^3.1.0",
     "showdown": "^1.4.1"
   },
   "overrides": {
