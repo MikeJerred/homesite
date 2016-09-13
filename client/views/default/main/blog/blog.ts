@@ -8,8 +8,6 @@ module MJ.Views.Default.Main.Blog {
             this.articleId = $stateParams['articleId'];
             this.article = dsBlogs.getBlog(this.articleId);
 
-            this.slideRight = $stateParams['slideTo'] === 'right';
-
             this.article.$promise.then(article => {
                 const url = encodeURIComponent(window.location.href);
                 const title = article.headline;
@@ -25,7 +23,6 @@ module MJ.Views.Default.Main.Blog {
             });
         }
 
-        public slideRight: boolean;
         public showShareLinks = false;
 
         public linkedInLink: string;

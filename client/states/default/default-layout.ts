@@ -27,6 +27,11 @@ module MJ.States.Default {
                         : $window.scrollY;
                     $('.ui-view-animate').css('top', -scrollPos);
 
+                    let unbind = $rootScope.$on('$viewContentLoaded', () => {
+                        this.setAnimations(toState, toParams, fromState, fromParams);
+                        unbind();
+                    });
+
                     // save data for the fromState so that we can use it if the user goes back to this state later on
                     if (!fromState.data)
                         fromState.data = {};
@@ -47,9 +52,47 @@ module MJ.States.Default {
             });
         }
 
+        private setEnterClass(className: string) {
+            $('.ui-view-animate > article').filter(index => index === 0).addClass(className);
+        }
+        private setLeaveClass(className: string) {
+            let element = $('.ui-view-animate > article').filter(index => index === 1);
+            element.removeClass('view-slide-right view-slide-left view-slide-up view-slide-down');
+            element.addClass(className);
+        }
+
+        private setAnimations(toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) {
+            const order: {[key: string]: number} = {
+                'default.intro'    : 0,
+                'default.home'     : 1,
+                'default.blogs'    : 2,
+                'default.blog'     : 3,
+                'default.notFound' : 4
+            };
+
+            if (toState.name === 'default.blog' && fromState.name === 'default.blog') {
+                if (toParams.articleId < fromParams.articleId) {
+                    this.setEnterClass('view-slide-right');
+                    this.setLeaveClass('view-slide-left');
+                } else {
+                    this.setEnterClass('view-slide-left');
+                    this.setLeaveClass('view-slide-right');
+                }
+            }
+            else {
+                if (order[toState.name] < order[fromState.name]) {
+                    this.setEnterClass('view-slide-down');
+                    this.setLeaveClass('view-slide-up');
+                }
+                else {
+                    this.setEnterClass('view-slide-up');
+                    this.setLeaveClass('view-slide-down');
+                }
+            }
+        }
+
         private getDataKey(fromParams: any) {
             let params = angular.copy(fromParams);
-            params.slideTo = undefined;
             return angular.toJson(params);
         }
 
@@ -58,14 +101,7 @@ module MJ.States.Default {
                 const key = this.getDataKey(toParams);
                 const stateData = toState.data[key];
 
-                if (toState.name === 'default.blog' && fromState.name === 'default.blog') {
-                    toParams['slideTo'] = toParams.articleId < fromParams.articleId
-                        ? 'right'
-                        : 'left';
-                }
-
-                if (toState.name === 'default.home' && fromState.name === 'default.intro') {
-                    toParams['slideTo'] = 'up';
+                if (toState.name === 'default.home' || fromState.name === 'default.home') {
                     stateData.scrollY = 0;
                 }
 

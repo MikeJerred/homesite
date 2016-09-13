@@ -1,4 +1,4 @@
-<article class="main-blog" ng-class="blogCtrl.slideRight ? 'view-slide-right' : 'view-slide-left'">
+<article class="main-blog">
     <section class="headline" ng-style="{ 'background-image': 'url(/images/blog-'+blogCtrl.articleId+'.jpg)' }">
         <div class="box" page-loaded>
             <h1>{{blogCtrl.article.headline}}</h1>
@@ -40,7 +40,7 @@
     <section class="related-blogs clearfix">
         <a class="card card-prev pull-left col-xs-5 col-sm-4 col-md-3 col-lg-2"
            ng-if="blogCtrl.article.prevBlog"
-           ui-sref="default.blog({ articleId: blogCtrl.article.prevBlog.id, slideTo: 'right' })">
+           ui-sref="default.blog({ articleId: blogCtrl.article.prevBlog.id })">
             <div class="content">
                 <h3 class="headline">{{blogCtrl.article.prevBlog.headline}}</h3>
                 <div class="date">{{blogCtrl.article.prevBlog.date | date:'dd MMMM yyyy'}}</div>
@@ -48,7 +48,7 @@
         </a>
         <a class="card card-next pull-right col-xs-5 col-sm-4 col-md-3 col-lg-2"
            ng-if="blogCtrl.article.nextBlog"
-           ui-sref="default.blog({ articleId: blogCtrl.article.nextBlog.id, slideTo: 'left' })">
+           ui-sref="default.blog({ articleId: blogCtrl.article.nextBlog.id })">
             <div class="content">
                 <h3 class="headline">{{blogCtrl.article.nextBlog.headline}}</h3>
                 <div class="date">{{blogCtrl.article.nextBlog.date | date:'dd MMMM yyyy'}}</div>

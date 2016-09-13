@@ -23,7 +23,6 @@
                 })
                 .state('default.home', {
                     url: '/home',
-                    params: { slideTo: undefined },
                     views: {
                         'main': Views.Default.Main.Home.view,
                         'footer@default.home': footer
@@ -31,7 +30,6 @@
                 })
                 .state('default.blog', {
                     url: '/blog/:articleId',
-                    params: { slideTo: undefined },
                     views: {
                         'main': Views.Default.Main.Blog.view,
                         'footer@default.blog': footer

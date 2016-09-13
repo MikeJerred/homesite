@@ -52,7 +52,7 @@
     // }]);
 
     app.run(['$templateCache', ($templateCache: ng.ITemplateCacheService) => {
-        // fix the uib-accordion so that you can click anwhere in the header to toggle it, not just on the actual text
+        // fix the uib-accordion so that you can click anywhere in the header to toggle it, not just on the actual text
         $templateCache.put("uib/template/accordion/accordion-group.html",
             "<div class=\"panel\" ng-class=\"panelClass || 'panel-default'\">\n" +
             "  <div role=\"tab\" id=\"{{::headingId}}\" aria-selected=\"{{isOpen}}\" class=\"panel-heading\" ng-click=\"toggleOpen()\" ng-keypress=\"toggleOpen($event)\">\n" +
