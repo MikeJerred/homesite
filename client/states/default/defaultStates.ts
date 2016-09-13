@@ -33,7 +33,8 @@
                     views: {
                         'main': Views.Default.Main.Blog.view,
                         'footer@default.blog': footer
-                    }
+                    },
+                    resolve: Views.Default.Main.Blog.resolve
                 })
                 .state('default.blogs', {
                     url: '/blogs?{pageNo:int}',
