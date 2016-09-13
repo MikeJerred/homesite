@@ -213,19 +213,28 @@ article.default-layout article.main-blog {
             color: @theme-grey;
             padding: 40px 20px;
             font-family: @font-family-serif;
-            border: 1px solid @theme-grey;
+            border-top: 1px solid @theme-grey;
+            border-bottom: 1px solid @theme-grey;
             background-color: transparent;
 
             &:hover {
                 background-color: fade(@theme-yellow, 30%);
             }
 
-            &.card-prev .content {
-                text-align: left;
+            &.card-prev {
+                border-right: 1px solid @theme-grey;
+
+                .content {
+                    text-align: left;
+                }
             }
 
-            &.card-next .content {
-                text-align: right;
+            &.card-next {
+                border-left: 1px solid @theme-grey;
+
+                .content {
+                    text-align: right;
+                }
             }
 
             .content {
