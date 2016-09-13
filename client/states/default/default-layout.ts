@@ -1,17 +1,17 @@
 module MJ.States.Default {
     class Controller {
-        static $inject = ['$rootScope', '$window', '$timeout'];
-        constructor($rootScope: ng.IScope, private $window: ng.IWindowService, private $timeout: ng.ITimeoutService) {
+        static $inject = ['$scope', '$window', '$timeout'];
+        constructor($scope: ng.IScope, private $window: ng.IWindowService, private $timeout: ng.ITimeoutService) {
             // detect whether a state change happened because the user:
             // 1. used the browser history (back/forward buttons): $stateChangeSuccess happens after $locationChangeSuccess
             // 2. navigated using links on the page: $stateChangeSuccess happens before $locationChangeSuccess
             // Note: this is quite hacky as it is relying on the internal behavior of angular,
             // perhaps it is cleaner to do it using window.onpopstate
             let lastNavigationEvent = 0;
-            $rootScope.$on('$stateChangeStart', () => {
+            $scope.$on('$stateChangeStart', () => {
                 lastNavigationEvent = 0;
             });
-            $rootScope.$on(
+            $scope.$on(
                 '$stateChangeSuccess',
                 (event: ng.IAngularEvent, toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) => {
                     if (lastNavigationEvent === 2)
@@ -27,7 +27,7 @@ module MJ.States.Default {
                         : $window.scrollY;
                     $('.ui-view-animate').css('top', -scrollPos);
 
-                    let unbind = $rootScope.$on('$viewContentLoaded', () => {
+                    let unbind = $scope.$on('$viewContentLoaded', () => {
                         this.setAnimations(toState, toParams, fromState, fromParams);
                         unbind();
                     });
@@ -44,7 +44,7 @@ module MJ.States.Default {
                     };
                 }
             );
-            $rootScope.$on('$locationChangeSuccess', () => {
+            $scope.$on('$locationChangeSuccess', () => {
                 if (lastNavigationEvent === 1)
                     this.linkNavigate();
 
