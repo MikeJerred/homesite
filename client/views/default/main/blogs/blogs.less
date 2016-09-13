@@ -1,9 +1,11 @@
 @import "../../../../styles/variables.less";
 
 article.default-layout article.main-blogs {
+    background-color: @theme-light-blue;
+
     .main {
         .blogs-list {
-            margin: @grid-gutter-width 0 0 0;
+            margin: @grid-gutter-width*3 0 0 0;
             padding: 0;
             list-style: none;
 
@@ -11,24 +13,52 @@ article.default-layout article.main-blogs {
                 margin-bottom: @grid-gutter-width;
 
                 > .card {
-                    display: block;
+                    display: table;
+                    width: 100%;
                     position: relative;
-                    height: 150px;
                     color: @theme-grey;
-                    background-color: #fff;
+                    background-position: center center;
+                    background-size: cover;
                     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
                     font-size: 18px;
+                    height: 366px;
 
-                    &:hover { background-color: darken(#fff, 5%); }
+                    @media (max-width: @screen-md-max) { height: 260px; }
+                    @media (max-width: @screen-sm-max) { height: 196px; }
+                    @media (max-width: @screen-xs-max) { height: 150px; }
+
+                    @margin: @grid-gutter-width/2;
+
+                    &:before {
+                        content: '';
+                        position: absolute;
+                        left: @margin;
+                        right: @margin;
+                        top: @margin;
+                        bottom: @margin;
+                        background-color: #fff;
+                        opacity: 0.8;
+                        pointer-events: none;
+                        transition: all 0.2s ease-in-out;
+                    }
+
+                    &:hover {
+                        &:before {
+                            left: 0;
+                            right: 0;
+                            top: 0;
+                            bottom: 0;
+                        }
+                    }
 
                     > .content {
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        padding: 20px;
+                        position: relative;
+                        display: table-cell;
+                        vertical-align: middle;
+                        padding: 0 @margin*2;
 
-                        .headline { margin: 0; font-family: @font-family-serif; }
-                        .date { margin-top: 10px; font-size: 16px; }
+                        .headline { margin: 0; font-family: @font-family-serif; font-size: 22px; }
+                        .date { margin-top: 10px; font-size: 14px; font-weight: 300; }
                     }
                 }
             }
