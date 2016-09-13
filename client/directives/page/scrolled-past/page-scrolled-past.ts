@@ -12,21 +12,19 @@ module MJ.Directives.Page.ScrolledPast {
             private $window: ng.IWindowService,
             private $timeout: ng.ITimeoutService) {
 
-            this.refreshTimer();
+            let offset = this.convertToPx($scope.offset);
+            $timeout(() => this.refreshTimer(offset), 400);
         }
 
-        private timeout: ng.IPromise<void>;
-
-        private refreshTimer() {
+        private refreshTimer(offset: number) {
             const self = this;
-            this.timeout = this.$timeout(() => {
+            this.$timeout(() => {
                 const currentPosition = self.$window.scrollY + self.$window.innerHeight;
-                let offset = this.convertToPx(self.$scope.offset);
 
                 if (currentPosition > (self.$element.offset().top + offset)) {
                     self.$element.addClass(self.$scope.cssClass || 'scrolled-past');
                 } else {
-                    self.refreshTimer();
+                    self.refreshTimer(offset);
                 }
             }, 100);
         }

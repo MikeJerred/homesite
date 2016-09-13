@@ -44,6 +44,7 @@ module MJ.States.Default {
                             this.setEnterAnimation(toState, toParams, fromState, fromParams);
                             unbind();
                         });
+                        this.$window.scrollTo(0, 0);
                     }
                 }
             );
@@ -103,7 +104,7 @@ module MJ.States.Default {
                 const key = this.getDataKey(toParams);
                 const stateData = toState.data[key];
 
-                if (toState.name === 'default.home' || fromState.name === 'default.home') {
+                if (toState.name !== 'default.blog') {
                     stateData.scrollY = 0;
                 }
 
@@ -121,7 +122,7 @@ module MJ.States.Default {
 
         private scrollTo(y: number) {
             let unbind = this.$scope.$on('$viewContentLoaded', () => {
-                this.$timeout(() => { $('html, body').animate({ scrollTop: y }, 200); }, 400);
+                this.$timeout(() => { $('html, body').animate({ scrollTop: y }, 200); }, 500);
                 unbind();
             });
         }

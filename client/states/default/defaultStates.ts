@@ -41,7 +41,8 @@
                     views: {
                         'main': Views.Default.Main.Blogs.view,
                         'footer@default.blogs': footer
-                    }
+                    },
+                    resolve: Views.Default.Main.Blogs.resolve
                 })
                 .state('default.about', {
                     url: '/about',

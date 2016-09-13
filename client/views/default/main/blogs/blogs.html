@@ -1,12 +1,11 @@
 <article class="main-blogs">
-    <section class="blogs-filters">
-
+    <!--<section class="blogs-filters">
         <ul class="filters" uib-collapse="blogsCtrl.filtersCollapsed">
             <li ng-repeat="filter in blogsCtrl.filters">
 
             </li>
         </ul>
-    </section>
+    </section>-->
 
     <section class="main container">
         <div class="row">
@@ -26,7 +25,7 @@
         </div>
     </section>
 
-    <section class="pagination-container text-center">
+    <section class="pagination-container text-center" ng-if="blogsCtrl.blogs.totalCount > blogsCtrl.pageSize">
         <ul class="pagination"
             uib-pagination
             boundary-links="true"
