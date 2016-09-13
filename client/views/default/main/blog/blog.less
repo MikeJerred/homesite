@@ -25,16 +25,16 @@ article.default-layout article.main-blog {
             text-align: center;
 
             h1, h4, .share-links {
-                transition: opacity 0.3s ease-in-out;
                 opacity: 0;
+                animation: 0.3s ease-in-out both;
             }
 
             h1 { font-family: @font-family-serif; font-size: 38px; }
-            h4 { margin: 40px 0; font-family: @font-family-base; transition-delay: 0.15s; }
-            .share-links { transition-delay: 0.3s; }
+            h4 { margin: 40px 0; font-family: @font-family-base; animation-delay: 0.15s; }
+            .share-links { animation-delay: 0.3s; }
 
             &.page-loaded {
-                h1, h4, .share-links { opacity: 1; }
+                h1, h4, .share-links { animation-name: fade; }
             }
 
             @media (max-width: @screen-sm-min) {
@@ -45,10 +45,11 @@ article.default-layout article.main-blog {
             }
 
             .share-links {
-                @link-size: 35px;
+                @link-size: 40px;
 
                 position: relative;
                 height: @link-size;
+                text-align: center;
 
                 .icon() {
                     font-size: @link-size / 2;
@@ -56,6 +57,7 @@ article.default-layout article.main-blog {
                     width: @link-size;
                     height: @link-size;
                     line-height: @link-size - 4px;
+                    text-align: center;
                 }
 
                 .share-button {
@@ -63,9 +65,7 @@ article.default-layout article.main-blog {
                     width: @link-size;
                     height: @link-size;
                     font-size: 0;
-                    position: absolute;
-                    top: 0;
-                    left: ~"calc(50% - 23px)";
+                    position: relative;
                     z-index: 100;
                     cursor: pointer;
                     background-color: transparent;
@@ -118,6 +118,7 @@ article.default-layout article.main-blog {
                     > li {
                         position: absolute;
                         left: ~"calc(50% - 28px)";
+                        text-align: center;
                         transition: all 0.2s ease-in-out;
                         transform: translateX(0);
                         opacity: 0;
@@ -125,7 +126,6 @@ article.default-layout article.main-blog {
                         > a {
                             .icon();
                             margin: 0 5px;
-                            //background-color: transparent;
                             transition: border-radius 0.3s ease-in-out;
 
                             &:hover {

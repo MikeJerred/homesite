@@ -1,7 +1,7 @@
 @import "../../../../styles/variables.less";
 
 article.default-layout article.main-intro {
-    //padding-top: 0 !important; // let the header overlap on this page
+    @animate-delay: 0.75s;
 
     .about {
         width: 100%;
@@ -18,6 +18,12 @@ article.default-layout article.main-intro {
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center center;
+            animation: 3s ease-in both;
+
+            @keyframes defaultMainIntroZoom {
+                0% { transform: translateX(0) translateY(0) scale(1); }
+                100% { transform: translateX(-5%) translateY(-5%) scale(1.1); }
+            }
         }
 
         .content {
@@ -50,6 +56,12 @@ article.default-layout article.main-intro {
                             stroke-width: 4px;
                             stroke-dasharray: 400;
                             stroke-dashoffset: 400;
+                            animation: 0.5s ease-in-out @animate-delay both;
+
+                            @keyframes defaultMainIntroOutlineLogo {
+                                0% { stroke-dashoffset: 400; }
+                                100% { stroke-dashoffset: 0; }
+                            }
                         }
                     }
 
@@ -59,6 +71,7 @@ article.default-layout article.main-intro {
                         font-size: 50px;
                         line-height: 100px;
                         opacity: 0;
+                        animation: 0.5s ease-in-out 0.25s both;
                     }
                 }
 
@@ -68,16 +81,24 @@ article.default-layout article.main-intro {
                     font-size: 18px;
                     color: @theme-grey;
                     opacity: 0;
+                    animation: 0.5s ease-in-out @animate-delay both;
                 }
 
                 .down-link {
                     color: @theme-grey;
-                    opacity: 0;
                     display: block;
                     position: absolute;
                     bottom: 10vh;
                     left: 45%;
                     left: ~"calc(50% - 15px)";
+                    opacity: 0;
+                    animation:  0.3s ease-in-out 0.5s 4 alternate,
+                         0.5s ease-in-out @animate-delay both;
+
+                    @keyframes defaultMainIntroArrowBounce {
+                        0% { opacity: 0; transform: translateY(0); }
+                        100% { opacity: 1; transform: translateY(-20px); }
+                    }
 
                     > svg {
                         stroke-width: 3px;
@@ -94,45 +115,16 @@ article.default-layout article.main-intro {
         }
 
         &.page-loaded {
-            &:before {
-                transition: transform 3s ease-in;
-                transform: translateX(-5%) translateY(-5%) scale(1.1);
-            }
-
+            &:before { animation-name: defaultMainIntroZoom; }
             .content {
-                .center {
-                    .logo {
-                        .border .line {
-                            transition: stroke-dashoffset 0.5s ease-in-out;
-                            transition-delay: 0.75s;
-                            stroke-dashoffset: 0;
-                        }
-
-                        .text {
-                            transition: opacity 0.5s ease-in-out;
-                            opacity: 1;
-                        }
-                    }
-
-                    h4 {
-                        transition: opacity 0.5s ease-in-out;
-                        transition-delay: 0.75s;
-                        opacity: 1;
-                    }
+                .logo {
+                    .border .line { animation-name: defaultMainIntroOutlineLogo; }
+                    .text { animation-name: fade; }
                 }
 
-                .down-link {
-                    transition: opacity 0.5s ease-in-out;
-                    transition-delay: 0.75s;
-                    opacity: 1;
+                h4 { animation-name: fade; }
 
-                    animation: 0.3s 0.5s 4 alternate bounce;
-
-                    @keyframes bounce {
-                        from { transform: translateY(0); }
-                        to { transform: translateY(-20px); }
-                    }
-                }
+                .down-link { animation-name: defaultMainIntroArrowBounce, fade; }
             }
         }
     }

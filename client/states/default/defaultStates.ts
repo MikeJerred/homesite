@@ -9,7 +9,7 @@
 
             $stateProvider
                 .state('default', {
-                    'abstract': true,
+                    abstract: true,
                     views: {
                         '': MJ.States.Default.view,
                         'header@default': Views.Default.Header.view

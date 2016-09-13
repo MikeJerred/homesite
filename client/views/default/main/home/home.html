@@ -1,4 +1,4 @@
-﻿<article class="main-home" ng-class="homeCtrl.slideUp ? 'view-slide-up' : 'view-slide-right'">
+﻿<article class="main-home view-slide-up">
     <section class="about">
         <div class="center">
             <div class="container">
@@ -23,40 +23,9 @@
         </div>
     </section>
 
-    <section class="overview" page-scrolled-past offset="30vh">
-        <div class="center">
-            <div class="container">
-                <div class="left col-xs-12 col-sm-6 col-lg-4 col-lg-offset-1">
-                    I have experience working on existing codebases, as well as designing the code
-                    architecture and building sites from scratch. I&nbsp;usually use these technologies:
-                </div>
-                <div class="right col-xs-12 col-sm-6 col-lg-4 col-lg-offset-2">
-                    <ul>
-                        <li>Frontend MV* Framework: AngularJS with Typescript</li>
-                        <li>CSS Pre-processor: LESS</li>
-                        <li>Server: ASP.NET C# or Express with Node.js</li>
-                        <li>Database: SQL Server or mongoDB</li>
-                        <li>Package Manager: npm and bower</li>
-                        <li>Build Tool: gulp</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+    <ng-include src="'/views/default/main/home/overview/overview.html'"></ng-include>
 
-    <section class="cv">
-        <uib-accordion>
-            <div uib-accordion-group class="top" heading="Work Experience">
-                A
-            </div>
-            <div uib-accordion-group class="middle" heading="Skills">
-                B
-            </div>
-            <div uib-accordion-group class="bottom" heading="Education">
-                C
-            </div>
-        </uib-accordion>
-    </section>
+    <ng-include src="'/views/default/main/home/cv/cv.html'"></ng-include>
 
     <section class="filler">
         <div class="container">
@@ -68,6 +37,4 @@
             </div>
         </div>
     </section>
-
-    <div ui-view name="footer"></div>
 </article>

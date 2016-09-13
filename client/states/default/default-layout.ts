@@ -24,8 +24,8 @@ module MJ.States.Default {
                     // change to that of the toState and we don't want the old view to be affected by that during the animation
                     let scrollPos = (fromState.name === 'default.intro')
                         ? 0
-                        : -$window.scrollY;
-                    $('.ui-view-animate').css('top', scrollPos);
+                        : $window.scrollY;
+                    $('.ui-view-animate').css('top', -scrollPos);
 
                     // save data for the fromState so that we can use it if the user goes back to this state later on
                     if (!fromState.data)
@@ -35,7 +35,7 @@ module MJ.States.Default {
                     const key = this.getDataKey(fromParams);
 
                     fromState.data[key] = {
-                        scrollY: $window.scrollY
+                        scrollY: scrollPos
                     };
                 }
             );
@@ -82,7 +82,7 @@ module MJ.States.Default {
         }
 
         private scrollTo(y: number) {
-            this.$timeout(() => { this.$window.scrollTo(0, y); }, 10);
+            this.$timeout(() => { this.$window.scrollTo(0, y); }, 100);
         }
     }
 
