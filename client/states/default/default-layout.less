@@ -4,6 +4,7 @@ body {
     // always show vertical scrollbar to prevent the screen jumping when
     // in the animation due to the leaving view having position: fixed
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 ui-view {
@@ -15,26 +16,22 @@ article.default-layout {
 
     .ui-view-animate {
         transition: all 0.4s ease;
-        overflow: hidden;
+        width: 100%;
 
-        &.ng-enter, &.ng-leave {
-            left: 0;
-            right: 0;
-        }
-
-        &.ng-enter {
+        &.ng-enter, &:not(.ng-leave):nth-child(1):nth-last-child(2), &:not(.ng-leave):nth-child(2):nth-last-child(1) {
+            // this rule applies to a .ui-view-animate which doesn't have .ng-leave, and only when there
+            // are two .ui-view-animate elements. This is to solve the problem that ng-leave stays on
+            // for longer than ng-enter, otherwise we would just use a simple .ng-enter selector.
             position: absolute;
             z-index: 1000;
             top: auto !important;
+            max-height: 100vh;
+            overflow: hidden;
         }
 
         &.ng-leave {
             position: fixed;
-            z-index: 1;
-
-            &:first-child {
-                z-index: 500;
-            }
+            z-index: 500;
         }
     }
 }

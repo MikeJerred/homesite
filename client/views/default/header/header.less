@@ -29,7 +29,6 @@ article.default-layout header.header {
 
             > .logo {
                 @size: @header-height - 20px*2;
-                //transition: all 0.3s ease-in-out;
                 opacity: 1;
                 width: @size;
                 height: @size;
@@ -66,14 +65,9 @@ article.default-layout header.header {
                 background-color: transparent;
                 font-size: 0;
                 pointer-events: auto;
-                transition: all ease-in-out 0.3s;
 
                 @media (max-width: @screen-sm-min) {
                     margin: 20px;
-                }
-
-                &:hover {
-                    background-color: fade(@theme-yellow, 30%);
                 }
 
                 svg {

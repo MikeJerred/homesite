@@ -1,7 +1,7 @@
 module MJ.States.Default {
     class Controller {
         static $inject = ['$scope', '$window', '$timeout'];
-        constructor($scope: ng.IScope, private $window: ng.IWindowService, private $timeout: ng.ITimeoutService) {
+        constructor(private $scope: ng.IScope, private $window: ng.IWindowService, private $timeout: ng.ITimeoutService) {
             // detect whether a state change happened because the user:
             // 1. used the browser history (back/forward buttons): $stateChangeSuccess happens after $locationChangeSuccess
             // 2. navigated using links on the page: $stateChangeSuccess happens before $locationChangeSuccess
@@ -23,27 +23,27 @@ module MJ.States.Default {
                         // as we change view the fromState view will become position: fixed, so we need to offset its top by the
                         // current scroll position so that it remains in place. This is because the scroll position will soon
                         // change to that of the toState and we don't want the old view to be affected by that during the animation
-                        let scrollPos = (fromState.name === 'default.intro')
-                            ? 0
-                            : $window.scrollY;
+                        let scrollPos = $window.scrollY;
                         $('.ui-view-animate').css('top', -scrollPos);
+
+                        if (fromState.name === 'default.blog') {
+                            // save data for the fromState so that we can use it if the user goes back to this state later on
+                            if (!fromState.data)
+                                fromState.data = {};
+
+                            // we need this key because we might be transitioning to the same state just with different params
+                            const key = this.getDataKey(fromParams);
+
+                            fromState.data[key] = {
+                                scrollY: scrollPos
+                            };
+                        }
 
                         this.setLeaveAnimation(toState, toParams, fromState, fromParams);
                         let unbind = $scope.$on('$viewContentLoaded', () => {
                             this.setEnterAnimation(toState, toParams, fromState, fromParams);
                             unbind();
                         });
-
-                        // save data for the fromState so that we can use it if the user goes back to this state later on
-                        if (!fromState.data)
-                            fromState.data = {};
-
-                        // we need this key because we might be transitioning to the same state just with different params
-                        const key = this.getDataKey(fromParams);
-
-                        fromState.data[key] = {
-                            scrollY: scrollPos
-                        };
                     }
                 }
             );
@@ -83,12 +83,12 @@ module MJ.States.Default {
 
         private setEnterAnimation(toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) {
             let name = this.chooseAnimation(toState, toParams, fromState, fromParams).enter;
-            $('.ui-view-animate > article').filter(index => index === 0).addClass(name);
+            $('.ui-view-animate').filter(index => index === 0).addClass(name);
         }
 
         private setLeaveAnimation(toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) {
             let name = this.chooseAnimation(toState, toParams, fromState, fromParams).leave;
-            let element = $('.ui-view-animate > article');
+            let element = $('.ui-view-animate');
             element.removeClass('view-slide-right view-slide-left view-slide-up view-slide-down');
             element.addClass(name);
         }
@@ -120,7 +120,10 @@ module MJ.States.Default {
         }
 
         private scrollTo(y: number) {
-            this.$timeout(() => { this.$window.scrollTo(0, y); }, 100);
+            let unbind = this.$scope.$on('$viewContentLoaded', () => {
+                this.$timeout(() => { $('html, body').animate({ scrollTop: y }, 200); }, 400);
+                unbind();
+            });
         }
     }
 

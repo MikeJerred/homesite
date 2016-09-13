@@ -1,21 +1,21 @@
 .ui-view-animate {
-    .view-slide-left, .view-slide-right, .view-slide-up, .view-slide-down {
+    &.view-slide-left, &.view-slide-right, &.view-slide-up, &.view-slide-down {
         animation-duration: 0.4s;
         animation-fill-mode: both;
     }
 
     &.ng-enter {
-        .view-slide-left  { animation-name: slideInLeft; }
-        .view-slide-right { animation-name: slideInRight; }
-        .view-slide-up    { animation-name: slideInUp; }
-        .view-slide-down  { animation-name: slideInDown; }
+        &.view-slide-left  { animation-name: slideInLeft; }
+        &.view-slide-right { animation-name: slideInRight; }
+        &.view-slide-up    { animation-name: slideInUp; }
+        &.view-slide-down  { animation-name: slideInDown; }
     }
 
     &.ng-leave {
-        .view-slide-left  { animation-name: slideOutRight; }
-        .view-slide-right { animation-name: slideOutLeft; }
-        .view-slide-up    { animation-name: slideOutDown; }
-        .view-slide-down  { animation-name: slideOutUp; }
+        &.view-slide-left  { animation-name: slideOutRight; }
+        &.view-slide-right { animation-name: slideOutLeft; }
+        &.view-slide-up    { animation-name: slideOutDown; }
+        &.view-slide-down  { animation-name: slideOutUp; }
     }
 
     @keyframes slideInUp {

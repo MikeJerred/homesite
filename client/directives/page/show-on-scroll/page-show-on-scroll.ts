@@ -14,7 +14,7 @@ module MJ.Directives.Page.ShowOnScroll {
 
             $scope.$on('$stateChangeSuccess', () => {
                 this.inTransition = true;
-                $timeout(() => { this.inTransition = false; }, 300);
+                $timeout(() => { this.inTransition = false; }, 400);
             });
         }
 
