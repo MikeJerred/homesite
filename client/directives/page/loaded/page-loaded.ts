@@ -4,17 +4,16 @@ module MJ.Directives.Page.Loaded {
         ($timeout: ng.ITimeoutService) => ({
             restrict: 'A',
             link: (scope: ng.IScope, element: ng.IAugmentedJQuery, attributes: ng.IAttributes) => {
-                let transitionStarted = $('.ui-view-animate').length === 1;
-                let unwatch = scope.$watch(() => $('.ui-view-animate').hasClass('ng-enter'), inTransition => {
-                    if (!transitionStarted) {
-                        if (inTransition)
-                            transitionStarted = true;
-                    }
-                    else if (inTransition === false) {
-                        element.addClass('page-loaded');
-                        unwatch();
-                    }
-                });
+                if ($('.ui-view-animate').length === 1) {
+                    $timeout(() => { element.addClass('page-loaded'); }, 400);
+                } else {
+                    let unwatch = scope.$watch(() => $('.ui-view-animate').hasClass('ng-enter'), inTransition => {
+                        if (inTransition) {
+                            $timeout(() => { element.addClass('page-loaded'); }, 400);
+                            unwatch();
+                        }
+                    });
+                }
             }
         })
     ]);
