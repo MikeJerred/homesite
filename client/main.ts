@@ -22,33 +22,34 @@
     angular.module('mj.states', ['ui.router']);
     angular.module('mj.templates', []);
 
-    app.run(
-        ['$rootScope', '$state', '$q', '$injector',
-        ($rootScope: ng.IRootScopeService,
-        $state: ng.ui.IStateService,
-        $q: ng.IQService,
-        $injector: ng.auto.IInjectorService) => {
+    // this is disabled for now since there are no sub-views that need a redirect
+    // app.run(
+    //     ['$rootScope', '$state', '$q', '$injector',
+    //     ($rootScope: ng.IRootScopeService,
+    //     $state: ng.ui.IStateService,
+    //     $q: ng.IQService,
+    //     $injector: ng.auto.IInjectorService) => {
 
-        // fix for a bug with angular-ui-router see https://github.com/angular-ui/ui-router/issues/1584
-        $rootScope.$on('$stateChangeStart', (event: ng.IAngularEvent, toState: ng.ui.IState, params: {}) => {
-            let redirect = toState.redirectTo;
-            if (redirect) {
-                if (angular.isString(redirect)) {
-                    event.preventDefault();
-                    $state.go(redirect, params);
-                } else {
-                    redirect = $injector.invoke(<(string | Function)[]>redirect);
+    //     // fix for a bug with angular-ui-router see https://github.com/angular-ui/ui-router/issues/1584
+    //     $rootScope.$on('$stateChangeStart', (event: ng.IAngularEvent, toState: ng.ui.IState, params: {}) => {
+    //         let redirect = toState.redirectTo;
+    //         if (redirect) {
+    //             if (angular.isString(redirect)) {
+    //                 event.preventDefault();
+    //                 $state.go(redirect, params);
+    //             } else {
+    //                 redirect = $injector.invoke(<(string | Function)[]>redirect);
 
-                    if (redirect) {
-                        $q.when(redirect).then(result => {
-                            event.preventDefault();
-                            $state.go(result, params);
-                        });
-                    }
-                }
-            }
-        });
-    }]);
+    //                 if (redirect) {
+    //                     $q.when(redirect).then(result => {
+    //                         event.preventDefault();
+    //                         $state.go(result, params);
+    //                     });
+    //                 }
+    //             }
+    //         }
+    //     });
+    // }]);
 
     app.run(['$templateCache', ($templateCache: ng.ITemplateCacheService) => {
         // fix the uib-accordion so that you can click anwhere in the header to toggle it, not just on the actual text
@@ -72,8 +73,8 @@
     }]);
 }
 
-declare module angular.ui {
-    interface IState {
-        redirectTo?: string|Array<string|Function>;
-    }
-}
+// declare module angular.ui {
+//     interface IState {
+//         redirectTo?: string|Array<string|Function>;
+//     }
+// }
