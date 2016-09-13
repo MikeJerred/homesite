@@ -19,29 +19,32 @@ module MJ.States.Default {
 
                     lastNavigationEvent = 1;
 
-                    // as we change view the fromState view will become position: fixed, so we need to offset its top by the
-                    // current scroll position so that it remains in place. This is because the scroll position will soon
-                    // change to that of the toState and we don't want the old view to be affected by that during the animation
-                    let scrollPos = (fromState.name === 'default.intro')
-                        ? 0
-                        : $window.scrollY;
-                    $('.ui-view-animate').css('top', -scrollPos);
+                    if (fromState.name) {
+                        // as we change view the fromState view will become position: fixed, so we need to offset its top by the
+                        // current scroll position so that it remains in place. This is because the scroll position will soon
+                        // change to that of the toState and we don't want the old view to be affected by that during the animation
+                        let scrollPos = (fromState.name === 'default.intro')
+                            ? 0
+                            : $window.scrollY;
+                        $('.ui-view-animate').css('top', -scrollPos);
 
-                    let unbind = $scope.$on('$viewContentLoaded', () => {
-                        this.setAnimations(toState, toParams, fromState, fromParams);
-                        unbind();
-                    });
+                        this.setLeaveAnimation(toState, toParams, fromState, fromParams);
+                        let unbind = $scope.$on('$viewContentLoaded', () => {
+                            this.setEnterAnimation(toState, toParams, fromState, fromParams);
+                            unbind();
+                        });
 
-                    // save data for the fromState so that we can use it if the user goes back to this state later on
-                    if (!fromState.data)
-                        fromState.data = {};
+                        // save data for the fromState so that we can use it if the user goes back to this state later on
+                        if (!fromState.data)
+                            fromState.data = {};
 
-                    // we need this key because we might be transitioning to the same state just with different params
-                    const key = this.getDataKey(fromParams);
+                        // we need this key because we might be transitioning to the same state just with different params
+                        const key = this.getDataKey(fromParams);
 
-                    fromState.data[key] = {
-                        scrollY: scrollPos
-                    };
+                        fromState.data[key] = {
+                            scrollY: scrollPos
+                        };
+                    }
                 }
             );
             $scope.$on('$locationChangeSuccess', () => {
@@ -52,16 +55,7 @@ module MJ.States.Default {
             });
         }
 
-        private setEnterClass(className: string) {
-            $('.ui-view-animate > article').filter(index => index === 0).addClass(className);
-        }
-        private setLeaveClass(className: string) {
-            let element = $('.ui-view-animate > article').filter(index => index === 1);
-            element.removeClass('view-slide-right view-slide-left view-slide-up view-slide-down');
-            element.addClass(className);
-        }
-
-        private setAnimations(toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) {
+        private chooseAnimation(toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) {
             const order: {[key: string]: number} = {
                 'default.intro'    : 0,
                 'default.home'     : 1,
@@ -72,23 +66,31 @@ module MJ.States.Default {
 
             if (toState.name === 'default.blog' && fromState.name === 'default.blog') {
                 if (toParams.articleId < fromParams.articleId) {
-                    this.setEnterClass('view-slide-right');
-                    this.setLeaveClass('view-slide-left');
+                    return { enter: 'view-slide-right', leave: 'view-slide-left' };
                 } else {
-                    this.setEnterClass('view-slide-left');
-                    this.setLeaveClass('view-slide-right');
+                    return { enter: 'view-slide-left', leave: 'view-slide-right' };
                 }
             }
             else {
                 if (order[toState.name] < order[fromState.name]) {
-                    this.setEnterClass('view-slide-down');
-                    this.setLeaveClass('view-slide-up');
+                    return { enter: 'view-slide-down', leave: 'view-slide-up' };
                 }
                 else {
-                    this.setEnterClass('view-slide-up');
-                    this.setLeaveClass('view-slide-down');
+                    return { enter: 'view-slide-up', leave: 'view-slide-down' };
                 }
             }
+        }
+
+        private setEnterAnimation(toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) {
+            let name = this.chooseAnimation(toState, toParams, fromState, fromParams).enter;
+            $('.ui-view-animate > article').filter(index => index === 0).addClass(name);
+        }
+
+        private setLeaveAnimation(toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) {
+            let name = this.chooseAnimation(toState, toParams, fromState, fromParams).leave;
+            let element = $('.ui-view-animate > article');
+            element.removeClass('view-slide-right view-slide-left view-slide-up view-slide-down');
+            element.addClass(name);
         }
 
         private getDataKey(fromParams: any) {
