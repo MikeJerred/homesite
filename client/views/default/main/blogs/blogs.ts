@@ -2,6 +2,7 @@ module MJ.Views.Default.Main.Blogs {
     import IUrlBinderService = Services.IUrlBinderService;
     import IPage = DataServices.IPage;
     import IVmBlogStub =  DataServices.Blogs.IVmBlogStub;
+    import PageMetaService = Services.IPageMetaService;
 
     interface IFilter {
     }
@@ -9,12 +10,15 @@ module MJ.Views.Default.Main.Blogs {
     const pageSize = 6;
 
     class Controller {
-        static $inject = ['$scope', 'urlBinder', 'dsBlogs', 'initialBlogPage'];
+        static $inject = ['$scope', 'urlBinder', 'dsBlogs', 'initialBlogPage', 'pageMeta'];
         constructor(
             $scope: ng.IScope,
             urlBinder: IUrlBinderService,
             private dsBlogs: DataServices.Blogs.IDsBlogs,
-            initialBlogPage: IPage<IVmBlogStub>) {
+            initialBlogPage: IPage<IVmBlogStub>,
+            pageMeta: PageMetaService) {
+
+            pageMeta.setTitle(null);
 
             urlBinder.bind($scope, 'blogsCtrl.pageNo', 'pageNo');
 

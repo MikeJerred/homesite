@@ -2,8 +2,8 @@ module MJ.States.Default {
     import PageMetaService = MJ.Services.IPageMetaService;
 
     class Controller {
-        static $inject = ['$scope', '$window', 'pageMeta'];
-        constructor($scope: ng.IScope, private $window: ng.IWindowService, pageMeta: PageMetaService) {
+        static $inject = ['$scope', '$window'];
+        constructor($scope: ng.IScope, private $window: ng.IWindowService) {
             // detect whether a state change happened because the user:
             // 1. used the browser history (back/forward buttons): $stateChangeSuccess happens after $locationChangeSuccess
             // 2. navigated using links on the page: $stateChangeSuccess happens before $locationChangeSuccess
@@ -15,7 +15,6 @@ module MJ.States.Default {
 
             $scope.$on('$stateChangeStart', () => {
                 lastNavigationEvent = 0;
-                pageMeta.setTitle(null);
                 scrollPos = $window.pageYOffset;
 
                 // disable auto scrolling by the browser, once the browser scrolls the page immediately reset to the right position

@@ -1,6 +1,10 @@
 module MJ.Views.Default.Main.NotFound {
+    import PageMetaService = Services.IPageMetaService;
+
     class Controller {
-        constructor() {
+        static $inject = ['pageMeta'];
+        constructor(pageMeta: PageMetaService) {
+            pageMeta.setTitle('Not Found');
         }
     }
 
