@@ -1,18 +1,9 @@
 @import "../../styles/variables.less";
 
-body {
-    // always show vertical scrollbar to prevent the screen jumping when
-    // in the animation due to the leaving view having position: fixed
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-ui-view {
-    display: block;
-}
-
 article.default-layout {
-    min-height: 100vh;
+    .ui-view-animate-container {
+        position: relative;
+    }
 
     .ui-view-animate {
         transition: all 0.4s ease;
@@ -24,8 +15,7 @@ article.default-layout {
             // for longer than ng-enter, otherwise we would just use a simple .ng-enter selector.
             position: absolute;
             z-index: 1000;
-            top: auto !important;
-            max-height: 100vh;
+            height: 100vh;
             overflow: hidden;
         }
 
