@@ -216,10 +216,7 @@ article.default-layout article.main-blog {
             border-top: 1px solid @theme-grey;
             border-bottom: 1px solid @theme-grey;
             background-color: transparent;
-
-            &:hover {
-                background-color: fade(@theme-yellow, 30%);
-            }
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 
             &.card-prev {
                 border-right: 1px solid @theme-grey;
@@ -235,6 +232,11 @@ article.default-layout article.main-blog {
                 .content {
                     text-align: right;
                 }
+            }
+
+            &:hover {
+                border-color: transparent;
+                background-color: @theme-yellow;
             }
 
             .content {

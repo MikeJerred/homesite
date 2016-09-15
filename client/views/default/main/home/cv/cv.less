@@ -30,7 +30,7 @@ article.default-layout article.main-home section.cv {
                 width: 100%;
                 height: 100%;
                 position: absolute;
-                background-color: @theme-light-blue;
+                background-color: @theme-blue;
                 z-index: 1;
                 transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
                 opacity: 0;
@@ -82,6 +82,11 @@ article.default-layout article.main-home section.cv {
             .panel .panel-heading:before {
                 transform: translateY(150px);
             }
+        }
+
+        .panel-body {
+            text-align: left;
+            background-color: @theme-light-blue;
         }
     }
 }
