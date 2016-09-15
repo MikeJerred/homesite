@@ -1,7 +1,9 @@
 module MJ.States.Default {
+    import PageMetaService = MJ.Services.IPageMetaService;
+
     class Controller {
-        static $inject = ['$scope', '$window', '$timeout'];
-        constructor(private $scope: ng.IScope, private $window: ng.IWindowService, private $timeout: ng.ITimeoutService) {
+        static $inject = ['$scope', '$window', 'pageMeta'];
+        constructor($scope: ng.IScope, private $window: ng.IWindowService, pageMeta: PageMetaService) {
             // detect whether a state change happened because the user:
             // 1. used the browser history (back/forward buttons): $stateChangeSuccess happens after $locationChangeSuccess
             // 2. navigated using links on the page: $stateChangeSuccess happens before $locationChangeSuccess
@@ -9,19 +11,28 @@ module MJ.States.Default {
             // but when following links it should always take the user to the top of the page.
             // Note: this is quite hacky as it is relying on the internal behavior of angular, perhaps it is cleaner to do it using window.onpopstate
             let lastNavigationEvent = 0;
+            let scrollPos = 0;
+
             $scope.$on('$stateChangeStart', () => {
                 lastNavigationEvent = 0;
+                pageMeta.setTitle(null);
+                scrollPos = $window.pageYOffset;
+
+                // disable auto scrolling by the browser, once the browser scrolls the page immediately reset to the right position
+                $window.onscroll = () => {
+                    $window.scrollTo(0, scrollPos);
+                    $window.onscroll = null;
+                };
             });
             $scope.$on(
                 '$stateChangeSuccess',
                 (event: ng.IAngularEvent, toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) => {
+                    $window.onscroll = null;
                     if (fromState.name) {
                         // as we change view the fromState view will become position: fixed, so we need to offset its top by the
                         // current scroll position so that it remains in place. This is because the scroll position will soon
                         // change to that of the toState and we don't want the old view to be affected by that during the animation
-                        let scrollPos = $window.pageYOffset;
                         $('.ui-view-animate').css('top', -scrollPos);
-                        this.$window.scrollTo(0, 0);
 
                         if (fromState.name === 'default.blog') {
                             // save data for the fromState so that we can use it if the user goes back to this state later on
@@ -129,13 +140,13 @@ module MJ.States.Default {
             let viewAnimData = $('.ui-view-animate').filter(index => index === 0).data('$uiViewAnim');
             viewAnimData.$animEnter.then(() => {
                 $('.ui-view-animate-container').css({
-                    'height': 'auto',
-                    'overflow': 'visible'
+                    'height': '',
+                    'overflow': ''
                 });
                 innerArticle.css({
-                    'top': 'auto',
-                    'position': 'static',
-                    'width': 'auto'
+                    'top': '',
+                    'position': '',
+                    'width': ''
                 });
                 this.$window.scrollTo(0, y);
             });

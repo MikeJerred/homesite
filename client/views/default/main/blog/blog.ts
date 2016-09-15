@@ -1,16 +1,20 @@
 module MJ.Views.Default.Main.Blog {
     import IVmBlog = DataServices.Blogs.IVmBlog;
     import IVmBlogStub = DataServices.Blogs.IVmBlogStub;
+    import PageMetaService = MJ.Services.IPageMetaService;
 
     class Controller {
-        static $inject = ['$stateParams', 'dsBlogs', 'article'];
+        static $inject = ['$stateParams', 'dsBlogs', 'article', 'pageMeta'];
         constructor(
             $stateParams: ng.ui.IStateParamsService,
             private dsBlogs: DataServices.Blogs.IDsBlogs,
-            article: IVmBlog) {
+            article: IVmBlog,
+            pageMeta: PageMetaService) {
 
             this.articleId = $stateParams['articleId'];
             this.article = article;
+
+            pageMeta.setTitle(article.headline);
 
             const url = encodeURIComponent(window.location.href);
             const title = article.headline;
@@ -48,7 +52,7 @@ module MJ.Views.Default.Main.Blog {
         'article': ['$stateParams', 'dsBlogs',
             ($stateParams: ng.ui.IStateParamsService,
             dsBlogs: DataServices.Blogs.IDsBlogs) => {
-                return dsBlogs.getBlog($stateParams['articleId']);
+                return dsBlogs.getBlog($stateParams['articleId']).$promise;
             }]
     };
 }

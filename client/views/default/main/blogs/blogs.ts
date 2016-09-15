@@ -41,7 +41,7 @@ module MJ.Views.Default.Main.Blogs {
             ($stateParams: ng.ui.IStateParamsService,
             dsBlogs: DataServices.Blogs.IDsBlogs) => {
                 const pageNo = $stateParams['pageNo'] || 1;
-                return dsBlogs.getBlogStubs(pageNo, pageSize);
+                return dsBlogs.getBlogStubs(pageNo, pageSize).$promise;
             }]
     };
 }
