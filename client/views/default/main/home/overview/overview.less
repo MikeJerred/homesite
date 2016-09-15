@@ -43,11 +43,11 @@ article.default-layout article.main-home section.overview {
             margin: 0;
             padding: 0;
 
-            @fade-time: 0.3s;
+            @fade-time: 0.6s;
             @delay-time: (@transition-time - @fade-time)/5;
 
             > li {
-                transition: opacity @transition-time ease-in-out;
+                transition: opacity @fade-time ease-in-out;
                 opacity: 0;
             }
 
@@ -57,7 +57,6 @@ article.default-layout article.main-home section.overview {
             > li:nth-child(4) { transition-delay: 3*@delay-time; }
             > li:nth-child(5) { transition-delay: 4*@delay-time; }
             > li:nth-child(6) { transition-delay: 5*@delay-time; }
-            > li:nth-child(7) { transition-delay: 6*@delay-time; }
         }
     }
 
