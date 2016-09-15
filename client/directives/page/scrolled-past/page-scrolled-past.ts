@@ -19,7 +19,7 @@ module MJ.Directives.Page.ScrolledPast {
         private refreshTimer(offset: number) {
             const self = this;
             this.$timeout(() => {
-                const currentPosition = self.$window.scrollY + self.$window.innerHeight;
+                const currentPosition = self.$window.pageYOffset + self.$window.innerHeight;
 
                 if (currentPosition > (self.$element.offset().top + offset)) {
                     self.$element.addClass(self.$scope.cssClass || 'scrolled-past');

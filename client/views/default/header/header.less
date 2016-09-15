@@ -70,7 +70,7 @@ article.default-layout header.header {
                     margin: 20px;
                 }
 
-                svg {
+                .icon {
                     .line1, .line2, .line3 {
                         transition: all ease-in-out 0.3s;
                         fill: @theme-grey;
@@ -79,6 +79,12 @@ article.default-layout header.header {
                     .line1 { transform-origin: 100px 100px; }
                     .line2 { transform-origin: 1618px/2 500px; }
                     .line3 { transform-origin: 100px 900px; }
+                }
+
+                .no-smil-cross-icon {
+                    display: none;
+
+                    .line1, .line2, .line3 { stroke: @theme-grey; }
                 }
 
                 &.cross {
@@ -90,10 +96,20 @@ article.default-layout header.header {
                     @scaleX: unit((sqrt(2)*(@height - 100px) + 100px) / (@width));
                     @translateX: (@width - @height)/2;
 
-                    svg {
+                    .icon {
                         .line1 { transform: translateX(@translateX) rotate(45deg) scaleX(@scaleX); }
                         .line2 { transform: scaleX(0.001); }
                         .line3 { transform: translateX(@translateX) rotate(-45deg) scaleX(@scaleX); }
+                    }
+
+                    html:not(.smil) & {
+                        .icon {
+                            display: none;
+                        }
+
+                        .no-smil-cross-icon {
+                            display: block;
+                        }
                     }
                 }
             }

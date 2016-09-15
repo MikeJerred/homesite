@@ -19,7 +19,7 @@ module MJ.States.Default {
                         // as we change view the fromState view will become position: fixed, so we need to offset its top by the
                         // current scroll position so that it remains in place. This is because the scroll position will soon
                         // change to that of the toState and we don't want the old view to be affected by that during the animation
-                        let scrollPos = $window.scrollY;
+                        let scrollPos = $window.pageYOffset;
                         $('.ui-view-animate').css('top', -scrollPos);
                         this.$window.scrollTo(0, 0);
 

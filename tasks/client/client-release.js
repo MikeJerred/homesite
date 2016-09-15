@@ -35,7 +35,7 @@ gulp.task('client:release:build', ['client:release:clean', 'client:release:typin
     var templates = compileTemplates();
     var styles = compileStyles();
     var scripts = compileScripts();
-    var libraries = compileLibs();
+    var libraries = compileLibs(scripts);
     var images = copyImages();
     var fonts = copyFonts();
 
@@ -108,10 +108,17 @@ var autoprefixer = require('gulp-autoprefixer');
 var bowerFiles = require('main-bower-files');
 var filter = require('gulp-filter');
 var ignore = require('gulp-ignore');
+var modernizr = require('gulp-modernizr');
 //var replace = require('gulp-replace');
 
-var compileLibs = () => {
-    var js = gulp.src(bowerFiles())
+var compileLibs = (scripts) => {
+    var modernizrLib = scripts
+        .pipe(modernizr({
+            tests: ['smil'],
+            options: ['setClasses']
+        }));
+
+    var js = merge(gulp.src(bowerFiles()), modernizrLib)
         .pipe(plumber(plumberOptions))
         .pipe(filter(['**/*.js']))
         .pipe(ignore.exclude(['**/*.map']))

@@ -248,20 +248,27 @@ var angularFilesort = require('gulp-angular-filesort');
 var bowerFiles = require('main-bower-files');
 var filter = require('gulp-filter');
 var inject = require('gulp-inject');
+var modernizr = require('gulp-modernizr');
 var order = require('gulp-order');
 
 gulp.task('client:debug:compile:index', () => {
-    var libraries = gulp.src(bowerFiles())
+    var styles = gulp.src(paths.builtCssNoLibs, { read: false });
+
+    var scripts = gulp.src(paths.builtJsNoLibs)
+        .pipe(angularFilesort());
+
+    var modernizrLib = gulp.src(paths.builtJsNoLibs)
+        .pipe(modernizr({
+            tests: ['smil'],
+            options: ['setClasses']
+        }));
+
+    var libraries = merge(gulp.src(bowerFiles()), modernizrLib)
         .pipe(cached('client:debug:libs', { optimizeMemory: true }))
         .pipe(gulp.dest(paths.destLibs))
         .pipe(remember('client:debug:libs'))
         .pipe(filter(['**/*.{css,js}']))
         .pipe(order(settings.bowerOrder));
-
-    var styles = gulp.src(paths.builtCssNoLibs, { read: false });
-
-    var scripts = gulp.src(paths.builtJsNoLibs)
-        .pipe(angularFilesort());
 
     var index = gulp.src(paths.srcIndex)
         .pipe(plumber(plumberOptions))
