@@ -67,10 +67,10 @@ module MJ.States.Default {
         private chooseAnimation(toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) {
             const order: {[key: string]: number} = {
                 'default.intro'    : 0,
-                'default.home'     : 1,
-                'default.blogs'    : 2,
-                'default.blog'     : 3,
-                'default.notFound' : 4
+                'default.home'     : 20,
+                'default.blogs'    : 21,
+                'default.notFound' : 22,
+                'default.blog'     : 40
             };
 
             if (toState.name === 'default.blog' && fromState.name === 'default.blog') {
@@ -80,11 +80,17 @@ module MJ.States.Default {
                     return { enter: 'view-slide-left', leave: 'view-slide-right' };
                 }
             }
+            else if (Math.abs(order[toState.name] - order[fromState.name]) < 10) {
+                if (order[toState.name] < order[fromState.name]) {
+                    return { enter: 'view-slide-right', leave: 'view-slide-left' };
+                } else {
+                    return { enter: 'view-slide-left', leave: 'view-slide-right' };
+                }
+            }
             else {
                 if (order[toState.name] < order[fromState.name]) {
                     return { enter: 'view-slide-down', leave: 'view-slide-up' };
-                }
-                else {
+                } else {
                     return { enter: 'view-slide-up', leave: 'view-slide-down' };
                 }
             }

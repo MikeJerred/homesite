@@ -20,14 +20,12 @@ article.default-layout article.main-home section.overview {
         vertical-align: middle;
     }
 
-    .left, .right {
-        padding: 0 20px;
-    }
-
     .left {
         font-family: @font-family-serif;
         font-size: 20px;
+        font-weight: 300;
         line-height: 40px;
+        padding-right: 40px;
         transition: opacity @transition-time ease-in-out;
         opacity: 0;
     }
@@ -35,11 +33,14 @@ article.default-layout article.main-home section.overview {
     .right {
         font-family: @font-family-base;
         font-size: 16px;
+        font-weight: 200;
         line-height: 35px;
+        padding-left: 30px;
 
         .tech-list {
             //list-style-image: url(/images/list-line.svg);
-            list-style-position: outside;
+            list-style: square;
+            list-style-position: inside;
             margin: 0;
             padding: 0;
 
@@ -58,6 +59,11 @@ article.default-layout article.main-home section.overview {
             > li:nth-child(5) { transition-delay: 4*@delay-time; }
             > li:nth-child(6) { transition-delay: 5*@delay-time; }
         }
+    }
+
+    @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+        .left { padding-right: 20px; }
+        .right { padding-left: 20px; }
     }
 
     &.scrolled-past {

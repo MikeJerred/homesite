@@ -53,13 +53,14 @@ article.default-layout article.main-intro {
 
                         .line {
                             stroke: @theme-grey;
-                            stroke-width: 4px;
-                            stroke-dasharray: 400;
-                            stroke-dashoffset: 400;
+                            stroke-width: 2px;
+                            @path-length: 90*4 + 1;
+                            stroke-dasharray: @path-length;
+                            stroke-dashoffset: @path-length;
                             animation: 0.5s ease-in-out @animate-delay both;
 
                             @keyframes defaultMainIntroOutlineLogo {
-                                0% { stroke-dashoffset: 400; }
+                                0% { stroke-dashoffset: @path-length; }
                                 100% { stroke-dashoffset: 0; }
                             }
                         }
@@ -79,6 +80,7 @@ article.default-layout article.main-intro {
                     margin-top: 60px;
                     font-family: @font-family-base;
                     font-size: 18px;
+                    font-weight: 200;
                     color: @theme-grey;
                     opacity: 0;
                     animation: 0.5s ease-in-out @animate-delay both;
