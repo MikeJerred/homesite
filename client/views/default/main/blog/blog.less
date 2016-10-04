@@ -1,0 +1,285 @@
+@import "../../../../styles/variables.less";
+
+article.default-layout article.main-blog {
+    > .headline {
+        display: table;
+        width: 100%;
+        position: relative;
+        padding: 40px;
+        background-image: url(/images/green-pattern.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center center;
+        background-size: cover;
+        color: @theme-grey;
+        font-family: @font-family-serif;
+
+        @media (max-width: @screen-sm-min) {
+            padding: 20px;
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            opacity: 0.84;
+        }
+
+        .box {
+            position: relative;
+            display: table-cell;
+            padding: 80px;
+            vertical-align: middle;
+            text-align: center;
+
+            h1, h4, .share-links {
+                opacity: 0;
+                animation: 0.3s ease-in-out both;
+            }
+
+            h1 { font-family: @font-family-serif; font-size: 38px; }
+            h4 { margin: 40px 0; font-family: @font-family-base; animation-delay: 0.15s; }
+            .share-links { animation-delay: 0.3s; }
+
+            &.page-loaded {
+                h1, h4, .share-links { animation-name: fade; }
+            }
+
+            @media (max-width: @screen-sm-min) {
+                padding: 60px;
+
+                h1 { font-size: 28px; }
+                h4 { font-size: 16px; }
+            }
+
+            .share-links {
+                @link-size: 40px;
+
+                position: relative;
+                height: @link-size;
+                text-align: center;
+
+                .icon() {
+                    font-size: @link-size / 2;
+                    border: 2px solid @theme-grey;
+                    width: @link-size;
+                    height: @link-size;
+                    line-height: @link-size - 4px;
+                    text-align: center;
+                }
+
+                .share-button {
+                    border: 2px solid @theme-grey;
+                    width: @link-size;
+                    height: @link-size;
+                    font-size: 0;
+                    position: relative;
+                    z-index: 100;
+                    cursor: pointer;
+                    background-color: transparent;
+                    outline: none;
+                    transition: border-radius 0.2s ease-in-out;
+
+                    .icon {
+                        .dot1, .dot2, .dot3, .line1, .line2 {
+                            fill: @theme-grey;
+                            transform: scale(1);
+                            transition: all 0.3s ease-in-out;
+                        }
+
+                        @center1: 300px 600px;
+                        @center2: 900px 320px;
+                        @center3: 900px 880px;
+
+                        .dot1 { transform-origin: @center1; }
+                        .dot2 { transform-origin: @center2; }
+                        .dot3 { transform-origin: @center3; }
+
+                        .line1 {
+                            transform-origin: @center2;
+                            transform: rotate(155deg);
+                        }
+
+                        .line2 {
+                            transform-origin: @center3;
+                            transform: rotate(-155deg);
+                        }
+                    }
+
+                    .no-smil-icon {
+                        html.smil & { display: none; }
+
+                        .dot1, .dot2, .dot3 { fill: @theme-grey; }
+                        .line1, .line2 { stroke: @theme-grey; }
+                    }
+
+                    .no-smil-cross-icon {
+                        display: none;
+
+                        .line1, .line2 { stroke: @theme-grey; }
+                    }
+
+                    html:not(.smil) & .icon { display: none; }
+
+                    &:hover {
+                        border-radius: 50%;
+                    }
+                }
+
+                .links {
+                    list-style: none;
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                    height: @link-size;
+                    color: @theme-grey;
+                    text-align: center;
+                    padding: 0;
+                    margin: 0;
+                    font-size: 0;
+
+                    > li {
+                        position: absolute;
+                        @offset: @link-size/2 + 2; // +2 is for the border
+                        left: ~"calc(50% - @{offset})";
+                        text-align: center;
+                        transition: all 0.2s ease-in-out;
+                        transform: translateX(0);
+                        opacity: 0;
+
+                        > a {
+                            .icon();
+                            transition: border-radius 0.2s ease-in-out;
+
+                            &:hover {
+                                border-radius: 50%;
+                            }
+                        }
+                    }
+                }
+
+                &.open {
+                    .share-button {
+                        color: @theme-grey;
+                        border-color: transparent;
+
+                        .icon {
+                            .dot1, .dot2, .dot3, .line1, .line2 { fill: @theme-grey; }
+                            .dot2, .dot3 { transform: scale(0); }
+                            .dot1 { transform: translateX(300px) scale(0.01); }
+                            .line1 { transform: rotate(135deg) scale(1.198, 120/150); }
+                            .line2 { transform: rotate(-135deg) scale(1.198, 120/150); }
+                        }
+
+                        html:not(.smil) & {
+                            .no-smil-icon { display: none; }
+                            .no-smil-cross-icon { display: block; }
+                        }
+
+                        &:hover {
+                            background-color: transparent;
+                        }
+                    }
+
+                    .links > li {
+                        @count: 4;
+                        @step: 55px;
+                        .create-children(@i: 1) when (@i =< @count) {
+                            @distance: pow(-1, @i) * @step * ceil(@i / 2);
+
+                            opacity: 1;
+
+                            &:nth-child(@{i}) {
+                                transform: translateX(@distance);
+                            }
+
+                            .create-children(@i+1);
+                        }
+
+                        .create-children();
+                    }
+                }
+            }
+        }
+    }
+
+    > .main {
+        padding-top: 60px;
+        padding-bottom: 60px;
+        font-size: 18px;
+        font-weight: 300;
+        line-height: 30px;
+        background-color: @theme-light-blue;
+        border-top: 4px solid #fff;
+
+        h1 { font-size: 36px; margin-top: 30px; }
+        h2 { font-size: 30px; margin-top: 20px; }
+        h3 { font-size: 22px; }
+        h4 { font-size: 18px; }
+
+        pre > code { font-size: 16px; }
+
+        @media (max-width: @screen-sm-min) {
+            font-size: 16px;
+
+            h1 { font-size: 30px; }
+            h2 { font-size: 25px; }
+            h3 { font-size: 18px; }
+            h4 { font-size: 14px; }
+
+            pre > code { font-size: 12px; }
+        }
+    }
+
+    > .related-blogs {
+        background: @theme-light-blue;
+        padding: 40px 0;
+
+        .card {
+            height: 200px;
+            display: table;
+            color: @theme-grey;
+            padding: 40px 20px;
+            font-family: @font-family-serif;
+            border-top: 1px solid @theme-grey;
+            border-bottom: 1px solid @theme-grey;
+            background-color: transparent;
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+            &.card-prev {
+                border-right: 1px solid @theme-grey;
+
+                .content {
+                    text-align: left;
+                }
+            }
+
+            &.card-next {
+                border-left: 1px solid @theme-grey;
+
+                .content {
+                    text-align: right;
+                }
+            }
+
+            &:hover {
+                border-color: transparent;
+                background-color: @theme-yellow;
+            }
+
+            .content {
+                display: table-cell;
+                vertical-align: middle;
+
+                @media (max-width: @screen-xs-max) {
+                    h3 { font-size: 18px; }
+                    .date { font-size: 12px; }
+                }
+            }
+        }
+    }
+}

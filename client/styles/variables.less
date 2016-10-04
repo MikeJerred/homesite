@@ -1,14 +1,18 @@
 ﻿@import "../../bower_components/bootstrap/less/variables.less";
 @import "mixins.less";
 
-@theme-grey: #1e1e1e;
-@theme-black: #222;
-@theme-light-blue: #cfd8dc;
-@theme-blue: #78909c;
+@theme-grey: #515151;
+@theme-black: #12211A;
+@theme-light-blue: #ebf5ff;
+@theme-blue: #b9dcff;
 @theme-dark-blue: #455a64;
+@theme-yellow: #ff9;
+@theme-yellow-dark: #ff6;
 
-@font-family-base: 'Oxygen';
-@font-family-serif: 'Fauna One';
+@font-family-base: 'Prompt', sans-serif;
+@font-family-serif: 'Fauna One', serif;
+
+@header-height: 100px;
 
 
 //== Scaffolding
@@ -66,8 +70,8 @@
 
 @screen-xs-min:              480px;
 @screen-sm-min:              768px;
-@screen-md-min:              992px;
-@screen-lg-min:              1200px;
+@screen-md-min:              960px;
+@screen-lg-min:              1280px;
 
 // So media queries don't overlap when required, provide a maximum
 @screen-xs-max:              (@screen-sm-min - 1);
@@ -82,7 +86,7 @@
 //** Number of columns in the grid.
 @grid-columns:              12;
 //** Padding between columns. Gets divided in half for the left and right.
-@grid-gutter-width:         20px;
+@grid-gutter-width:         40px;
 // Navbar collapse
 //** Point at which the navbar becomes uncollapsed.
 @grid-float-breakpoint:     @screen-sm-min;
@@ -95,16 +99,22 @@
 //## Define the maximum width of `.container` for different screen sizes.
 
 // Small screen / tablet
-@container-tablet:             (720px + @grid-gutter-width);
+@container-tablet:             (668px + @grid-gutter-width);
 //** For `@screen-sm-min` and up.
 @container-sm:                 @container-tablet;
 
 // Medium screen / desktop
-@container-desktop:            (940px + @grid-gutter-width);
+@container-desktop:            (860px + @grid-gutter-width);
 //** For `@screen-md-min` and up.
 @container-md:                 @container-desktop;
 
 // Large screen / wide desktop
-@container-large-desktop:      (1140px + @grid-gutter-width);
+@container-large-desktop:      (940px + @grid-gutter-width);
 //** For `@screen-lg-min` and up.
 @container-lg:                 @container-large-desktop;
+
+
+
+
+
+@cursor-disabled:                default;

@@ -18,9 +18,10 @@ blog-cards article.blog-cards {
                 display: block;
                 position: relative;
                 height: @height-xs;
-                color: @theme-black;
+                color: @theme-grey;
                 background-color: @theme-light-blue;
                 box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+                font-size: 18px;
 
                 > .content {
                     position: absolute;
@@ -29,7 +30,7 @@ blog-cards article.blog-cards {
                     padding: 20px;
 
                     .headline { margin: 0; font-family: @font-family-serif; }
-                    .date { font-weight: 600; margin-top: 10px; }
+                    .date { margin-top: 10px; font-size: 16px; }
                 }
             }
 
@@ -52,12 +53,15 @@ blog-cards article.blog-cards {
             }
 
             @media (min-width: @screen-sm-min) {
-                > .card { height: @height-sm; };
+                & > .card { height: @height-sm; };
             }
 
             @media (min-width: @screen-md-min) {
-                > .card { height: @height-md; };
-                &:first-child > .card { height: 2 * @height-md + @grid-gutter-width; }
+                & > .card { height: @height-md; };
+                &:first-child > .card {
+                    height: 2 * @height-md + @grid-gutter-width;
+                    font-size: 26px;
+                }
 
                 &:nth-child(n+6) {
                     display: none;

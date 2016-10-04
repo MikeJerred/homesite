@@ -12,16 +12,13 @@ var util = require('gulp-util');
 var settings = require('../../settings/task-settings.js');
 var paths = settings.paths.client;
 
-var EE = require('events').EventEmitter;
 var plumberOptions = {
     errorHandler: (error) => {
-        if (EE.listenerCount(this, 'error') < 3) {
-            util.log(
-                util.colors.cyan('Plumber') + util.colors.red(' found unhandled error:\n'),
-                error.toString()
-            );
-        }
-        this.emit('end');
+        util.log(
+            util.colors.red('Unhandled error:\n'),
+            error.toString()
+        );
+        gulp.emit('finish');
     }
 };
 
@@ -59,19 +56,29 @@ gulp.task('client:debug:build', (done) => {
 });
 
 gulp.task('client:debug:watch', ['client:debug:build'], () => {
-    watch(paths.srcHtml, { read: false }, () => { runSequence('client:debug:compile:templates'); });
-    watch(paths.srcLess, { read: false }, () => { runSequence('client:debug:compile:styles'); });
-    watch(paths.srcTs, { read: false }, () => { runSequence('client:debug:compile:scripts'); });
-    watch(paths.srcImg, { read: false }, () => { runSequence('client:debug:compile:images'); });
-    watch(paths.srcFonts, { read: false }, () => { runSequence('client:debug:compile:fonts'); });
-    watch(paths.srcIcons.concat(paths.srcIconsTemplate), { read: false }, () => { runSequence('client:debug:compile:icons'); });
+    var buildHandler = (task) => {
+        return (vinyl) => {
+            if (vinyl.event === 'add' || vinyl.event === 'unlink') {
+                runSequence(task, 'client:debug:compile:index');
+            } else {
+                runSequence(task);
+            }
+        };
+    };
+
+    watch(paths.srcHtml, { read: false }, buildHandler('client:debug:compile:templates'));
+    watch(paths.srcLess, { read: false }, buildHandler('client:debug:compile:styles'));
+    watch(paths.srcTs, { read: false }, buildHandler('client:debug:compile:scripts'));
+    watch(paths.srcImg, { read: false }, buildHandler('client:debug:compile:images'));
+    watch(paths.srcFonts, { read: false }, buildHandler('client:debug:compile:fonts'));
+    watch(paths.srcIcons.concat(paths.srcIconsTemplate), { read: false }, buildHandler('client:debug:compile:icons'));
     watch(paths.srcIndex, { read: false }, () => { runSequence('client:debug:compile:index'); });
 
-    gulp.watch(paths.builtCssAndJs, (event) => {
-        if (event.type === 'added' || event.type === 'deleted') {
-            runSequence('client:debug:compile:index');
-        }
-    });
+    // gulp.watch(paths.builtCssAndJs, (event) => {
+    //     if (event.type === 'added' || event.type === 'deleted') {
+    //         runSequence('client:debug:compile:index');
+    //     }
+    // });
 });
 
 
@@ -239,20 +246,29 @@ gulp.task('client:debug:clean:libs', () => {
 // --------------------------------------------- index ---------------------------------------------
 var angularFilesort = require('gulp-angular-filesort');
 var bowerFiles = require('main-bower-files');
+var filter = require('gulp-filter');
 var inject = require('gulp-inject');
+var modernizr = require('gulp-modernizr');
 var order = require('gulp-order');
 
 gulp.task('client:debug:compile:index', () => {
-    var libraries = gulp.src(bowerFiles())
-        .pipe(cached('client:debug:libs', { optimizeMemory: true }))
-        .pipe(gulp.dest(paths.destLibs))
-        .pipe(remember('client:debug:libs'))
-        .pipe(order(settings.bowerOrder));
-
     var styles = gulp.src(paths.builtCssNoLibs, { read: false });
 
     var scripts = gulp.src(paths.builtJsNoLibs)
         .pipe(angularFilesort());
+
+    var modernizrLib = gulp.src(paths.builtJsNoLibs)
+        .pipe(modernizr({
+            tests: ['smil'],
+            options: ['setClasses']
+        }));
+
+    var libraries = merge(gulp.src(bowerFiles()), modernizrLib)
+        .pipe(cached('client:debug:libs', { optimizeMemory: true }))
+        .pipe(gulp.dest(paths.destLibs))
+        .pipe(remember('client:debug:libs'))
+        .pipe(filter(['**/*.{css,js}']))
+        .pipe(order(settings.bowerOrder));
 
     var index = gulp.src(paths.srcIndex)
         .pipe(plumber(plumberOptions))

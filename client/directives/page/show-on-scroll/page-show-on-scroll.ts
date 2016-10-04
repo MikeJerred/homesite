@@ -1,4 +1,4 @@
-module MJ.Directives.Page.ScrollOnShow {
+module MJ.Directives.Page.ShowOnScroll {
     interface IScope extends ng.IScope {
         show: boolean;
     }
@@ -11,24 +11,32 @@ module MJ.Directives.Page.ScrollOnShow {
             private $timeout: ng.ITimeoutService) {
 
             this.refreshTimer();
+
+            $scope.$on('$stateChangeSuccess', () => {
+                this.inTransition = true;
+                $timeout(() => { this.inTransition = false; }, 400);
+            });
         }
 
         private lastPosition: number;
         private timeout: ng.IPromise<void>;
+        private inTransition = false;
 
         private refreshTimer() {
-            var self = this;
+            const self = this;
             this.timeout = this.$timeout(() => {
-                let currentPosition = self.$document.scrollTop();
-                if (currentPosition === 0
-                    || currentPosition < (self.lastPosition - 40)) {
+                const currentPosition = self.$document.scrollTop();
+                if (!self.inTransition) {
+                    if (currentPosition === 0
+                        || currentPosition < (self.lastPosition - 40)) {
 
-                    // if we scrolled up by more than delta, or are at the top
-                    self.$scope.show = true;
-                } else if (currentPosition > (self.lastPosition + 40)) {
+                        // if we scrolled up by more than delta, or are at the top
+                        self.$scope.show = true;
+                    } else if (currentPosition > (self.lastPosition + 40)) {
 
-                    // if we scrolled down by more than delta
-                    self.$scope.show = false;
+                        // if we scrolled down by more than delta
+                        self.$scope.show = false;
+                    }
                 }
 
                 self.lastPosition = currentPosition;

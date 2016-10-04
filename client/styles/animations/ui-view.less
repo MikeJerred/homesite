@@ -1,0 +1,60 @@
+.ui-view-animate {
+    &.view-slide-left, &.view-slide-right, &.view-slide-up, &.view-slide-down {
+        animation-duration: 0.6s;
+        animation-fill-mode: both;
+    }
+
+    &.ng-enter {
+        &.view-slide-left  { animation-name: slideInLeft; }
+        &.view-slide-right { animation-name: slideInRight; }
+        &.view-slide-up    { animation-name: slideInUp; }
+        &.view-slide-down  { animation-name: slideInDown; }
+    }
+
+    &.ng-leave {
+        &.view-slide-left  { animation-name: slideOutRight; }
+        &.view-slide-right { animation-name: slideOutLeft; }
+        &.view-slide-up    { animation-name: slideOutDown; }
+        &.view-slide-down  { animation-name: slideOutUp; }
+    }
+
+    @keyframes slideInUp {
+        0% { transform: translateY(100vh); }
+        100% { transform: translateY(0); }
+    }
+
+    @keyframes slideOutUp {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-70vh); }
+    }
+
+    @keyframes slideInDown {
+        0% { transform: translateY(-100vh); }
+        100% { transform: translateY(0); }
+    }
+
+    @keyframes slideOutDown {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(70vh); }
+    }
+
+    @keyframes slideInLeft {
+        0% { transform: translateX(100vw); }
+        100% { transform: translateX(0); }
+    }
+
+    @keyframes slideOutLeft {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-70vw); }
+    }
+
+    @keyframes slideInRight {
+        0% { transform: translateX(-100vw); }
+        100% { transform: translateX(0); }
+    }
+
+    @keyframes slideOutRight {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(70vw); }
+    }
+}

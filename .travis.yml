@@ -1,33 +1,24 @@
 sudo: false
 language: node_js
 node_js:
-- '4'
+- '6'
 branches:
   only:
   - master
 before_install:
-- openssl aes-256-cbc -K $encrypted_be98dbccbee8_key -iv $encrypted_be98dbccbee8_iv
-  -in gae-api-key.json.enc -out gae-api-key.json -d
 - npm install -g gulp bower typings
 install:
 - npm install
-- bower install
-- typings install
 before_script:
 - gulp build:release
 deploy:
-  provider: gae
-  keyfile: gae-api-key.json
-  project: light-moon-128716
-  no_promote: true
+  provider: heroku
   skip_cleanup: true
-  # provider: heroku
-  # skip_cleanup: true
-  # app:
-  #   master: homesite-prod
-  #   development: homesite-staging
-  # api_key:
-  #   secure: FYbPQm6WwOdVlMsShwGcf0YGtPKJ8Y0uAOsAefgPUAdNZXLH69krfX7woVQYWs8Rec7cRLjVhNHNW5pJRaSkHZwcHI7F2L+kYaqDKuwMsQlK9/FqFsZp7NkdggGjgf45M5WFq71y/efVq9XP2QhmKUOsJjmCuiEiMYsy3UkM8rS1VmRcyYC+U68sohHow2z8g6Any0L5YFDn3FRW5KLwNtCO1PygWFBPNgVXTJa2s1oOrWq8OIcj2HCipyVq9QWnnRkbpC5zdypRfcb4GgwquIPaqhaxjZ22cUCklBAyYp0AyHS8671Jpa038Vs0wz/Evw4wZAtTIb//cqJWSBF/oeIzFvtsA8FdFSoHPH0pKWkw40XCukj/Uf2OM1LHUlMOYkccAs8xuN8l8QTULfpNNgboRoqNvYP3SPAv3XQ8gSdUss6bIquICwpCVF5+YA2x8Gel2M63LLwFPhvMECbDrK2pU6ia0buD/CA+58wmBAU3PgRW6KJM6vjMx318zWWsa+tccDX7BVar2OF8S3BBagGwdq7vsUPyz3fS36OeqRVyHKKe4B+GLq73RYhsN6dqg+fFrLvAzOdqZm+7EG3Od10Of4xPxhQnmD/FaJlzCViwJio3m+GdMBpeq/RZAm6aud0oXF64WhNRwtC63i+PaqeAV0fspDvHQ+wqRFkBPyM=
+  app:
+    master: homesite-prod
+    development: homesite-staging
+  api_key:
+    secure: FYbPQm6WwOdVlMsShwGcf0YGtPKJ8Y0uAOsAefgPUAdNZXLH69krfX7woVQYWs8Rec7cRLjVhNHNW5pJRaSkHZwcHI7F2L+kYaqDKuwMsQlK9/FqFsZp7NkdggGjgf45M5WFq71y/efVq9XP2QhmKUOsJjmCuiEiMYsy3UkM8rS1VmRcyYC+U68sohHow2z8g6Any0L5YFDn3FRW5KLwNtCO1PygWFBPNgVXTJa2s1oOrWq8OIcj2HCipyVq9QWnnRkbpC5zdypRfcb4GgwquIPaqhaxjZ22cUCklBAyYp0AyHS8671Jpa038Vs0wz/Evw4wZAtTIb//cqJWSBF/oeIzFvtsA8FdFSoHPH0pKWkw40XCukj/Uf2OM1LHUlMOYkccAs8xuN8l8QTULfpNNgboRoqNvYP3SPAv3XQ8gSdUss6bIquICwpCVF5+YA2x8Gel2M63LLwFPhvMECbDrK2pU6ia0buD/CA+58wmBAU3PgRW6KJM6vjMx318zWWsa+tccDX7BVar2OF8S3BBagGwdq7vsUPyz3fS36OeqRVyHKKe4B+GLq73RYhsN6dqg+fFrLvAzOdqZm+7EG3Od10Of4xPxhQnmD/FaJlzCViwJio3m+GdMBpeq/RZAm6aud0oXF64WhNRwtC63i+PaqeAV0fspDvHQ+wqRFkBPyM=
 cache:
   directories:
   - node_modules

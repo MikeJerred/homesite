@@ -1,58 +1,62 @@
 ﻿module MJ.States {
-    class StateConfig {
+    class DefaultStateConfig {
         static $inject = ['$stateProvider', '$urlRouterProvider'];
         constructor(
             $stateProvider: ng.ui.IStateProvider,
             $urlRouterProvider: ng.ui.IUrlRouterProvider) {
 
-            var header = Views.Default.Header.view;
-            var footer = Views.Default.Footer.view;
+            const footer = Views.Default.Footer.view;
 
             $stateProvider
                 .state('default', {
-                    'abstract': true,
-                    templateUrl: 'states/default/default-layout.html'
+                    abstract: true,
+                    views: {
+                        '': MJ.States.Default.view,
+                        'header@default': Views.Default.Header.view
+                    }
                 })
-                .state('default.home', {
+                .state('default.intro', {
                     url: '/',
                     views: {
-                        'header': header,
-                        'main': Views.Default.Main.Home.view,
-                        'footer': footer
+                        'main': Views.Default.Main.Intro.view
                     }
                 })
-                .state('default.about', {
-                    url: '/about',
+                .state('default.home', {
+                    url: '/home',
                     views: {
-                        'header': header,
-                        'main': Views.Default.Main.About.view,
-                        'footer': footer
+                        'main': Views.Default.Main.Home.view,
+                        'footer@default.home': footer
                     }
                 })
-                //.state('default.blogs', {
-                //    url: '/blogs?{page:int}',
-                //    params: {
-                //        page: 1
-                //    },
-                //    reloadOnSearch: false,
-                //    views: {
-                //        'header': header,
-                //        'main': Views.Default.Main.Blogs.view,
-                //        'footer': footer
-                //    },
-                //    data: {
-                //        metaData: { title: 'Blog' }
-                //    }
-                //})
+                .state('default.blog', {
+                    url: '/blog/:articleId',
+                    views: {
+                        'main': Views.Default.Main.Blog.view,
+                        'footer@default.blog': footer
+                    },
+                    resolve: Views.Default.Main.Blog.resolve
+                })
+                .state('default.blogs', {
+                    url: '/blogs?{pageNo:int}',
+                    reloadOnSearch: false,
+                    views: {
+                        'main': Views.Default.Main.Blogs.view,
+                        'footer@default.blogs': footer
+                    },
+                    resolve: Views.Default.Main.Blogs.resolve
+                })
+                // .state('default.about', {
+                //     url: '/about',
+                //     views: {
+                //         'main': Views.Default.Main.About.view,
+                //         'footer@default.about': footer
+                //     }
+                // })
                 .state('default.notFound', {
                     url: '/not-found',
                     views: {
-                        'header': header,
-                        //'main': ,
-                        'footer': footer
-                    },
-                    data: {
-                        metaData: { title: 'Page Not Found' }
+                        'main': Views.Default.Main.NotFound.view,
+                        'footer@default.notFound': footer
                     }
                 });
 
@@ -61,5 +65,5 @@
         }
     }
 
-    angular.module('mj.states').config(StateConfig);
+    angular.module('mj.states').config(DefaultStateConfig);
 }

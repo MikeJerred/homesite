@@ -1,29 +1,42 @@
 ﻿<article class="main-home">
     <section class="about">
-        <div class="container">
-            <div class="content">
-                <div class="center">
-                    <h1>.NET web developer</h1>
-                    <h3>Michael Jerred</h3>
-                    <h4>Developing websites using C#, AngularJS, Typescript</h4>
+        <div class="center">
+            <div class="container">
+                <div class="content col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2" page-loaded>
+                    <div class="anchor">
+                        <div class="border">
+                            <div class="top"></div>
+                            <div class="left"></div>
+                            <div class="right"></div>
+                            <div class="bottom"></div>
+                        </div>
+                        <div class="center">
+
+                            <span class="bold">Hi</span>, my name is Mike - a .NET web developer based in London.
+                            I'm originally from Manchester but have been living in London since 2012.
+                            I started learning to program from the age of 13, and used the internet teach myself
+                            I have been working as a full-time web developer in a couple of different companies over the past 4 years.
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <ng-include src="'views/default/main/home/overview/overview.html'"></ng-include>
+
+    <ng-include src="'views/default/main/home/cv/cv.html'"></ng-include>
+
     <section class="filler">
-        <div class="text">
-            Some thoughts on web development
+        <div class="container">
+            <div class="left col-xs-12 col-sm-6">
+                <div class="text">I'm available for contract or freelance work.</div>
+            </div>
+            <div class="right col-xs-12 col-sm-6">
+                <div class="text"><a ui-sref="default.about">Download CV</a></div>
+            </div>
         </div>
     </section>
 
-    <section class="blog">
-        <div class="top-bar clearfix">
-            <a ui-sref="default.blogs" class="glyphicon glyphicon-th-large"></a>
-        </div>
-        <blog-cards></blog-cards>
-        <div class="bottom-bar">
-            <a ng-click="" class="btn btn-default btn-lg">More</a>
-        </div>
-    </section>
+    <ui-view name="footer"></ui-view>
 </article>

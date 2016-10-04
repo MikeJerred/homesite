@@ -4,19 +4,18 @@ article.default-layout footer.footer {
     display: table;
     width: 100%;
     padding: 40px;
-    border-top: 2px solid #fff;
     background-attachment: fixed;
     background-image: url(/images/pattern.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
+    border-top: 4px solid #fff;
 
     .content {
         display: table-cell;
         vertical-align: middle;
         text-align: center;
-        border: 2px solid #fff;
-        color: #fff;
+        color: @theme-grey;
         padding: 30px;
 
         .title {
@@ -30,10 +29,6 @@ article.default-layout footer.footer {
             font-size: 16px;
         }
 
-        .back-to-top {
-            cursor: pointer;
-        }
-
         .links {
             display: inline-block;
             list-style: none;
@@ -45,12 +40,16 @@ article.default-layout footer.footer {
                 font-size: 25px;
 
                 > a {
-                    border: 2px solid #fff;
-                    border-radius: 50%;
+                    transition: border-radius 0.2s ease-in-out;
+                    border: 2px solid @theme-grey;
                     margin: 0 5px;
                     width: 56px;
                     height: 56px;
                     line-height: 50px;
+
+                    &:hover {
+                        border-radius: 50%;
+                    }
 
                     &.fa-github {
                         font-size: 34px;

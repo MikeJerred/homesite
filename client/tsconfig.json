@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "noImplicitAny": true,
+    "noResolve": true,
+    "removeComments": false
+  },
+  "include": [
+    "../models/**/*"
+  ]
+}

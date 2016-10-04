@@ -1,17 +1,18 @@
 var clientSrcRoot = 'client';
 var serverSrcRoot = 'server';
+var modelsSrcRoot = 'models';
 var buildRoot = 'dist';
 var clientBuildRoot = buildRoot + '/wwwroot';
 var clientBuildLibs = clientBuildRoot + '/libs/**';
 
 module.exports = {
     autoprefixer: { browsers: ['> 2%', 'IE 10'] },
-    bowerOrder: ['**jquery.js', '**jquery**', '**lodash**', '**angular.js'],
+    bowerOrder: ['**jquery.js', '**jquery**', '**lodash**', '**angular.js', '**/showdown.js'],
     paths: {
         client: {
-            tsConfig: './tsconfig.json',
-            tsTypings: ['./typings/browser.d.ts', './typings/browser/**/*.d.ts'],
-            tsTypingsConfig: './typings.json',
+            tsConfig: clientSrcRoot + '/tsconfig.json',
+            tsTypingsConfig: clientSrcRoot + '/typings.json',
+            tsTypings: [clientSrcRoot + '/typings/**/*.d.ts', modelsSrcRoot + '/**/*.d.ts'],
 
             srcIndex: clientSrcRoot + '/index.html',
             srcHtml: [clientSrcRoot + '/**/*.html', '!' + clientSrcRoot + '/index.html'],
@@ -20,7 +21,7 @@ module.exports = {
             srcFonts: ['./bower_components/bootstrap/dist/fonts/*.*'],
             srcIcons: [clientSrcRoot + '/images/icons/*.svg'],
             srcIconsTemplate: [clientSrcRoot + '/styles/icons-template.templ'],
-            srcImg: [clientSrcRoot + '/images/**/*', '!' + clientSrcRoot + '/images/icons/*.svg'],
+            srcImg: [clientSrcRoot + '/images/**/*.{png,jpg,gif,svg}', '!' + clientSrcRoot + '/images/icons/*.svg'],
 
             dest: clientBuildRoot,
             destFonts: clientBuildRoot + '/fonts',
@@ -33,12 +34,13 @@ module.exports = {
             builtJsNoLibs: [clientBuildRoot + '/**/*.js', '!' + clientBuildLibs + '/*.js']
         },
         server: {
-            tsConfig: './tsconfig.json',
-            tsTypings: ['./typings/main.d.ts', './typings/main/**/*.d.ts'],
+            tsConfig: serverSrcRoot + '/tsconfig.json',
+            tsTypingsConfig: serverSrcRoot + '/typings.json',
+            tsTypings: [serverSrcRoot + '/typings/**/*.d.ts', modelsSrcRoot + '/**/*.d.ts'],
 
             srcRoot: serverSrcRoot,
             srcTs: [serverSrcRoot + '/**/*.ts'],
-            srcOther: [serverSrcRoot + '/**/*', '!' + serverSrcRoot + '/**/*.ts'],
+            srcOther: ['settings/.env', serverSrcRoot + '/**/*', '!' + serverSrcRoot + '/**/*.ts', '!' + serverSrcRoot + '/typings/**/*'],
 
             dest: buildRoot
         }
