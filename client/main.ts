@@ -1,8 +1,11 @@
-﻿module MJ {
+﻿declare var FastClick: any;
+
+module MJ {
     var app = angular.module('mj', [
         'ngAnimate',
         'ngResource',
         'ngSanitize',
+        'ngTouch',
         'hljs',
         'ui.bootstrap',
         'ui.router',
@@ -70,6 +73,8 @@
     app.config(['$httpProvider', ($httpProvider: ng.IHttpProvider) => {
         // combines multiple concurrent requests to run in one digest cycle
         $httpProvider.useApplyAsync(true);
+
+        FastClick.attach(document.body);
     }]);
 }
 
