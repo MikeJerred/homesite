@@ -6,7 +6,7 @@ article.default-layout article.main-blogs {
 
     .main {
         .blogs-list {
-            margin: @grid-gutter-width*3 0 0 0;
+            margin: @grid-gutter-width*3 0 @grid-gutter-width 0;
             padding: 0;
             list-style: none;
 
@@ -21,7 +21,7 @@ article.default-layout article.main-blogs {
                     background-position: center center;
                     background-size: cover;
                     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
-                    font-size: 18px;
+                    font-size: 14px;
 
                     @ratio: 0.9;
                     @lg-width: (@container-lg / 3) - @grid-gutter-width;
@@ -31,7 +31,10 @@ article.default-layout article.main-blogs {
 
                     @media (max-width: @screen-md-max) { height: @md-width * @ratio; }
                     @media (max-width: @screen-sm-max) { height: @sm-width * @ratio; }
-                    @media (max-width: @screen-xs-max) { height: 150px; }
+                    @media (max-width: @screen-xs-max) {
+                        height: 150px;
+                        font-size: 12px;
+                    }
 
                     @margin: @grid-gutter-width/2;
 
@@ -63,14 +66,26 @@ article.default-layout article.main-blogs {
                         vertical-align: middle;
                         padding: 0 @margin*2;
 
-                        .headline { margin: 0; font-family: @font-family-serif; font-size: 22px; }
-                        .date { margin-top: 10px; font-size: 14px; font-weight: 300; }
+                        .headline { margin: 0; font-family: @font-family-serif; font-size: 1.6em; }
+                        .date { margin-top: 10px; font-size: 1em; font-weight: 300; }
                     }
                 }
             }
         }
+    }
 
-        .pagination {
+    .pagination {
+        > li {
+            > a {
+            }
+
+            &.disabled {
+
+            }
+
+            &.active {
+
+            }
         }
     }
 }
