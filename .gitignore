@@ -3,3 +3,4 @@ node_modules/
 typings/
 dist/
 gae-api-key.json
+settings/.env
