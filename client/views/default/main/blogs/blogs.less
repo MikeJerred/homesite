@@ -22,10 +22,15 @@ article.default-layout article.main-blogs {
                     background-size: cover;
                     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
                     font-size: 18px;
-                    height: 366px;
 
-                    @media (max-width: @screen-md-max) { height: 260px; }
-                    @media (max-width: @screen-sm-max) { height: 196px; }
+                    @ratio: 0.9;
+                    @lg-width: (@container-lg / 3) - @grid-gutter-width;
+                    @md-width: (@container-md / 3) - @grid-gutter-width;
+                    @sm-width: (@container-sm / 2) - @grid-gutter-width;
+                    height: @lg-width * @ratio;
+
+                    @media (max-width: @screen-md-max) { height: @md-width * @ratio; }
+                    @media (max-width: @screen-sm-max) { height: @sm-width * @ratio; }
                     @media (max-width: @screen-xs-max) { height: 150px; }
 
                     @margin: @grid-gutter-width/2;
