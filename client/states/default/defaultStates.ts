@@ -45,22 +45,19 @@
                     },
                     resolve: Views.Default.Main.Blogs.resolve
                 })
-                .state('default.about', {
-                    url: '/about',
-                    views: {
-                        'main': Views.Default.Main.About.view,
-                        'footer@default.about': footer
-                    }
-                })
+                // .state('default.about', {
+                //     url: '/about',
+                //     views: {
+                //         'main': Views.Default.Main.About.view,
+                //         'footer@default.about': footer
+                //     }
+                // })
                 .state('default.notFound', {
                     url: '/not-found',
                     views: {
                         'main': Views.Default.Main.NotFound.view,
                         'footer@default.notFound': footer
                     }
-                    // data: {
-                    //     metaData: { title: 'Page Not Found' }
-                    // }
                 });
 
             $urlRouterProvider.when('', '/');
