@@ -91,11 +91,10 @@ article.default-layout article.main-home section.cv {
             color: @theme-black;
             padding: 0;
 
-            .list {
+            .list, .education-list {
                 margin-top: @grid-gutter-width/2;
                 margin-bottom: @grid-gutter-width/2;
                 padding: 0;
-                list-style: none;
                 font-family: @font-family-base;
                 font-size: 16px;
                 font-weight: 200;
@@ -103,13 +102,33 @@ article.default-layout article.main-home section.cv {
 
                 > li {
                     margin-bottom: @grid-gutter-width;
-                    position: relative;
-                    padding: 60px;
                     color: @theme-black;
 
                     &:first-child {
                         margin-top: @grid-gutter-width;
                     }
+                }
+
+                @media (max-width: @screen-xs-max) {
+                    margin: 0;
+                    font-size: 14px;
+
+                    > li {
+                        margin-bottom: @grid-gutter-width/2;
+
+                        &:first-child {
+                            margin-top: @grid-gutter-width/2;
+                        }
+                    }
+                }
+            }
+
+            .list {
+                list-style: none;
+
+                > li {
+                    position: relative;
+                    padding: 60px;
 
                     @size: 150px;
                     &:before, &:after {
@@ -139,16 +158,8 @@ article.default-layout article.main-home section.cv {
                 }
 
                 @media (max-width: @screen-xs-max) {
-                    margin: 0;
-                    font-size: 14px;
-
                     > li {
                         padding: 0;
-                        margin-bottom: @grid-gutter-width/2;
-
-                        &:first-child {
-                            margin-top: @grid-gutter-width/2;
-                        }
 
                         &:before {
                             content: none;
@@ -176,6 +187,11 @@ article.default-layout article.main-home section.cv {
 
                 //.projects {
                 //}
+            }
+
+            .education-list {
+                list-style-image: url(/images/list-line.svg);
+                list-style-position: inside;
             }
         }
     }

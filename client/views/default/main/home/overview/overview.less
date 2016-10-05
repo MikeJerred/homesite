@@ -10,6 +10,7 @@ article.default-layout article.main-home section.overview {
 
     > .container {
         display: table;
+        font-size: 16px;
     }
 
     .left, .right {
@@ -21,19 +22,20 @@ article.default-layout article.main-home section.overview {
 
     .left {
         font-family: @font-family-serif;
-        font-size: 20px;
+        font-size: 1.25em;
         font-weight: 300;
         line-height: 40px;
-        padding-right: 40px;
+        padding-right: @grid-gutter-width/2;
         transition: opacity @transition-time ease-in-out;
         opacity: 0;
     }
 
     .right {
         font-family: @font-family-base;
-        font-size: 16px;
+        font-size: 1em;
         font-weight: 200;
         line-height: 35px;
+        padding-left: @grid-gutter-width/2;
 
         .tech-list {
             list-style-position: inside;
@@ -57,7 +59,16 @@ article.default-layout article.main-home section.overview {
         }
     }
 
+    @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+        > .container { font-size: 14px; }
+
+        .left { padding-right: 15px; }
+        .right { padding-left: 15px; }
+    }
+
     @media (max-width: @screen-xs-max) {
+        > .container { font-size: 14px; }
+
         .left, .right {
             width: 100%;
             display: block;
@@ -67,11 +78,6 @@ article.default-layout article.main-home section.overview {
         .right {
             padding-top: 0;
         }
-    }
-
-    @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
-        .left { padding-right: 20px; }
-        .right { padding-left: 20px; }
     }
 
     &.scrolled-past {
