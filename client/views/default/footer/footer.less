@@ -17,16 +17,17 @@ article.default-layout footer.footer {
         text-align: center;
         color: @theme-grey;
         padding: 30px;
+        font-size: 16px;
 
         .title {
-            font-size: 32px;
+            font-size: 2em;
             font-family: @font-family-serif;
             margin: 0 0 20px 0;
         }
 
         .email {
             margin: 20px 0;
-            font-size: 16px;
+            font-size: 1em;
         }
 
         .links {
@@ -37,7 +38,7 @@ article.default-layout footer.footer {
 
             > li {
                 float: left;
-                font-size: 25px;
+                font-size: 1.56em;
 
                 > a {
                     transition: border-radius 0.2s ease-in-out;
@@ -45,7 +46,7 @@ article.default-layout footer.footer {
                     margin: 0 5px;
                     width: 56px;
                     height: 56px;
-                    line-height: 50px;
+                    line-height: 52px;
 
                     &:hover {
                         border-radius: 50%;
@@ -59,11 +60,20 @@ article.default-layout footer.footer {
         }
     }
 
-    @media (max-width: @screen-sm-min) {
+    @media (max-width: @screen-xs-max) {
         padding: 20px;
 
         .content {
             padding: 20px;
+            font-size: 14px;
+
+            .links {
+                > li > a {
+                    width: 49px;
+                    height: 49px;
+                    line-height: 45px;
+                }
+            }
         }
     }
 }
