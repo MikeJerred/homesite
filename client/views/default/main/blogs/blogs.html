@@ -10,9 +10,9 @@
         <div class="row">
             <ul class="blogs-list clearfix">
                 <li ng-repeat="blog in blogsCtrl.blogs.items" class="col-xs-12 col-sm-6 col-md-4">
-                    <a  class="card"
-                        ui-sref="default.blog({ articleId: blog.id })"
-                        ng-style="{ 'background-image': 'url(/images/blog-'+blog.id+'.jpg)' }">
+                    <a class="card"
+                       ui-sref="default.blog({ articleId: blog.id })"
+                       ng-class="'id-' + blog.id">
 
                         <div class="content">
                             <div class="headline">{{blog.headline}}</div>

@@ -38,7 +38,7 @@ gulp.task('client:debug:clean',
         'client:debug:clean:icons',
         'client:debug:clean:libs'
     ],
-    () =>  del([paths.dest]));
+    () => del([paths.dest]));
 
 gulp.task('client:debug:build', (done) => {
     runSequence(
@@ -52,6 +52,8 @@ gulp.task('client:debug:build', (done) => {
             'client:debug:compile:icons'
         ],
         'client:debug:compile:index',
+        'favicon-build',
+        'favicon-update-check',
         done);
 });
 

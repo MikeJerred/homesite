@@ -6,17 +6,24 @@ article.default-layout article.main-blog {
         width: 100%;
         position: relative;
         padding: 40px;
-        background-image: url(/images/green-pattern.jpg);
         background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center center;
         background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
         color: @theme-grey;
         font-family: @font-family-serif;
 
         @media (max-width: @screen-sm-min) {
             padding: 20px;
         }
+
+        &.id-1 { background-image: url(/images/blog-1.jpg); }
+        &.id-2 { background-image: url(/images/blog-2.jpg); }
+        &.id-3 { background-image: url(/images/blog-3.jpg); }
+        &.id-4 { background-image: url(/images/blog-4.jpg); }
+        &.id-5 { background-image: url(/images/blog-5.jpg); }
+        &.id-6 { background-image: url(/images/blog-6.jpg); }
+        &.id-7 { background-image: url(/images/blog-7.jpg); }
 
         &:before {
             content: '';
@@ -221,8 +228,6 @@ article.default-layout article.main-blog {
         h3 { font-size: 22px; }
         h4 { font-size: 18px; }
 
-        pre > code { font-size: 16px; }
-
         @media (max-width: @screen-sm-min) {
             font-size: 16px;
 
@@ -230,8 +235,6 @@ article.default-layout article.main-blog {
             h2 { font-size: 25px; }
             h3 { font-size: 18px; }
             h4 { font-size: 14px; }
-
-            pre > code { font-size: 12px; }
         }
     }
 
