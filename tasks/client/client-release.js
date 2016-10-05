@@ -26,11 +26,18 @@ var plumberOptions = {
 // --------------------------------------------- build ---------------------------------------------
 var inject = require('gulp-inject');
 var revAll = require('gulp-rev-all');
+var runSequence = require('run-sequence').use(gulp);
 var typings = require('gulp-typings');
 
 gulp.task('client:release:clean', () => del([paths.dest]));
 
-gulp.task('client:release:build', ['client:release:clean'], () => {
+gulp.task('client:release:build', ['client:release:compile'], (done) => {
+    runSequence(
+        'favicon-build',
+        done);
+});
+
+gulp.task('client:release:compile', ['client:release:clean'], () => {
     var templates = compileTemplates();
     var styles = compileStyles();
     var scripts = compileScripts();
@@ -72,7 +79,7 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
         .pipe(gulp.dest(paths.dest))
         .pipe(revAll.manifestFile())
         .pipe(gulp.dest(paths.dest));
-        
+
     return merge(revFiles, fonts, icons);
 });
 
