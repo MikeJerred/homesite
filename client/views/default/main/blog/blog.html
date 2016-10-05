@@ -1,5 +1,5 @@
 <article class="main-blog" ng-swipe-disable-mouse ng-swipe-left="blogCtrl.gotoPreviousBlog()" ng-swipe-right="blogCtrl.gotoNextBlog()">
-    <section class="headline" ng-style="{ 'background-image': 'url(/images/blog-'+blogCtrl.articleId+'.jpg)' }">
+    <section class="headline" ng-class="'id-' + blogCtrl.articleId">
         <div class="box" page-loaded>
             <h1>{{blogCtrl.article.headline}}</h1>
 

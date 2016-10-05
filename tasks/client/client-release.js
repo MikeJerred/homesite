@@ -3,8 +3,9 @@ var cleanCss = require('gulp-clean-css');
 var concat = require('gulp-concat');
 var del = require('del');
 var merge = require('event-stream').merge;
+var path = require('path');
 var plumber = require('gulp-plumber');
-var through2 = require('through2');
+var through = require('through2');
 var uglify = require('gulp-uglify');
 var util = require('gulp-util');
 
@@ -24,14 +25,12 @@ var plumberOptions = {
 
 // --------------------------------------------- build ---------------------------------------------
 var inject = require('gulp-inject');
-var rev = require('gulp-rev');
+var revAll = require('gulp-rev-all');
 var typings = require('gulp-typings');
 
 gulp.task('client:release:clean', () => del([paths.dest]));
 
-gulp.task('client:release:typings', () => gulp.src(paths.tsTypingsConfig).pipe(typings()));
-
-gulp.task('client:release:build', ['client:release:clean', 'client:release:typings'], () => {
+gulp.task('client:release:build', ['client:release:clean'], () => {
     var templates = compileTemplates();
     var styles = compileStyles();
     var scripts = compileScripts();
@@ -39,14 +38,12 @@ gulp.task('client:release:build', ['client:release:clean', 'client:release:typin
     var images = copyImages();
     var fonts = copyFonts();
 
-    var iconStyles = through2.obj();
+    var iconStyles = through.obj();
     var icons = compileIcons(iconStyles);
 
     var allStyles = styles //merge(styles, iconStyles)
         .pipe(concat('styles.css'))
-        .pipe(cleanCss())
-        .pipe(rev())
-        .pipe(gulp.dest(paths.dest));
+        .pipe(cleanCss());
 
     var index = gulp.src(paths.srcIndex)
         .pipe(plumber(plumberOptions))
@@ -56,7 +53,27 @@ gulp.task('client:release:build', ['client:release:clean', 'client:release:typin
         .pipe(inject(templates, { name: 'templates', relative: true }))
         .pipe(gulp.dest(paths.dest));
 
-    return merge(templates, allStyles, scripts, libraries, images, fonts, icons, index);
+    var revFiles = merge(templates, scripts, libraries, images, allStyles, index)
+        .pipe(through.obj((file, enc, cb) => {
+            // change each files base path to be relative to the output dir (paths.dest)
+            var basePath = path.resolve(process.cwd(), paths.dest);
+            var writePath = path.resolve(basePath, file.relative);
+
+            file.base = path.normalize(basePath + path.sep);
+            file.path = writePath;
+
+            cb(null, file);
+        }))
+        .pipe(revAll.revision({
+            dontRenameFile: [/^\/?index.html$/g],
+            dontSearchFile: [/.js$/g],
+            includeFilesInManifest: ['.css', '.js', '.png', '.jpg', '.svg', '.gif']
+        }))
+        .pipe(gulp.dest(paths.dest))
+        .pipe(revAll.manifestFile())
+        .pipe(gulp.dest(paths.dest));
+        
+    return merge(revFiles, fonts, icons);
 });
 
 
@@ -67,9 +84,7 @@ var compileTemplates = () =>
     gulp.src(paths.srcHtml)
         .pipe(plumber(plumberOptions))
         .pipe(angularTemplateCache('templates.js', { module: 'mj.templates' }))
-        .pipe(uglify())
-        .pipe(rev())
-        .pipe(gulp.dest(paths.dest));
+        .pipe(uglify());
 
 
 // -------------------------------------------- styles ---------------------------------------------
@@ -98,9 +113,7 @@ var compileScripts = () =>
         .js
         .pipe(angularFilesort())
         .pipe(concat('scripts.js'))
-        .pipe(uglify())
-        .pipe(rev())
-        .pipe(gulp.dest(paths.dest));
+        .pipe(uglify());
 
 
 // --------------------------------------------- libs ----------------------------------------------
@@ -124,19 +137,15 @@ var compileLibs = (scripts) => {
         .pipe(ignore.exclude(['**/*.map']))
         .pipe(order(settings.bowerOrder))
         //.pipe(replace(/^\/\/# sourceMappingURL=.+$/g, ''))
-        .pipe(uglify())
         .pipe(concat('libraries.js'))
-        .pipe(rev())
-        .pipe(gulp.dest(paths.dest));
+        .pipe(uglify());
 
     var css = gulp.src(bowerFiles())
         .pipe(plumber(plumberOptions))
         .pipe(filter(['**/*.css']))
         .pipe(autoprefixer(settings.autoprefixer))
         .pipe(concat('libraries.css'))
-        .pipe(cleanCss())
-        .pipe(rev())
-        .pipe(gulp.dest(paths.dest));
+        .pipe(cleanCss());
 
     return merge(js, css);
 };
@@ -146,9 +155,8 @@ var compileLibs = (scripts) => {
 var flatten = require('gulp-flatten');
 
 var copyImages = () =>
-    gulp.src(paths.srcImg)
-        .pipe(plumber(plumberOptions))
-        .pipe(gulp.dest(paths.destImg));
+    gulp.src(paths.srcImg, { base: paths.src })
+        .pipe(plumber(plumberOptions));
 
 var copyFonts = () =>
     gulp.src(paths.srcFonts)

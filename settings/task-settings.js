@@ -14,6 +14,7 @@ module.exports = {
             tsTypingsConfig: clientSrcRoot + '/typings.json',
             tsTypings: [clientSrcRoot + '/typings/**/*.d.ts', modelsSrcRoot + '/**/*.d.ts'],
 
+            src: clientSrcRoot,
             srcIndex: clientSrcRoot + '/index.html',
             srcHtml: [clientSrcRoot + '/**/*.html', '!' + clientSrcRoot + '/index.html'],
             srcLess: [clientSrcRoot + '/**/*.less'],
@@ -40,7 +41,12 @@ module.exports = {
 
             srcRoot: serverSrcRoot,
             srcTs: [serverSrcRoot + '/**/*.ts'],
-            srcOther: ['settings/.env', serverSrcRoot + '/**/*', '!' + serverSrcRoot + '/**/*.ts', '!' + serverSrcRoot + '/typings/**/*'],
+            srcOther: [
+                'settings/.env',
+                serverSrcRoot + '/**/*',
+                '!' + serverSrcRoot + '/**/*.ts',
+                '!' + serverSrcRoot + '/typings/**/*',
+                '!' + serverSrcRoot + '/[tsconfig,typings].json'],
 
             dest: buildRoot
         }
