@@ -4,13 +4,12 @@ module MJ.Views.Default.Main.Blog {
     import PageMetaService = MJ.Services.IPageMetaService;
 
     class Controller {
-        static $inject = ['$state', 'dsBlogs', 'article', 'pageMeta'];
+        static $inject = ['$state', 'article', 'pageMeta'];
         constructor(
             private $state: ng.ui.IStateService,
-            private dsBlogs: DataServices.Blogs.IDsBlogs,
             article: IVmBlog,
             pageMeta: PageMetaService) {
-            this.articleId = $state.params['articleId'];
+
             this.article = article;
 
             pageMeta.setTitle(article.headline);
@@ -35,7 +34,6 @@ module MJ.Views.Default.Main.Blog {
         public twitterLink: string;
         public googlePlusLink: string;
 
-        public articleId: number;
         public article: IVmBlog;
 
         public gotoPreviousBlog() {
