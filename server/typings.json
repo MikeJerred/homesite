@@ -1,13 +1,14 @@
 {
   "name": "homesite.server",
   "dependencies": {
-    "immutable": "registry:npm/immutable#3.7.6+20160411060006",
-    "mongoose": "registry:npm/mongoose#4.3.5+20160531094808"
+    "immutable": "registry:npm/immutable#3.7.6+20160411060006"
   },
   "globalDependencies": {
     "express": "registry:dt/express#4.0.0+20160208031452",
     "joi": "registry:dt/joi#9.0.0+20160514175131",
     "mime": "registry:dt/mime#0.0.0+20151204023458",
+    "mongodb": "registry:dt/mongodb#2.1.0+20160602142941",
+    "mongoose": "registry:dt/mongoose#4.5.9+20161001164137",
     "node": "registry:dt/node#4.0.0+20160226132328",
     "send": "github:MikeJerred/DefinitelyTyped/send/send.d.ts#14c07e8d",
     "serve-static": "registry:dt/serve-static#1.7.1+20160104095738"

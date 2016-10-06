@@ -13,21 +13,20 @@ mongoose.connect(process.env.MONGODB_URI, {
         //socketOptions: { keepAlive: 120 }
     }
 });
+mongoose.Promise = global.Promise;
 
-app.get('/index.html', (req, res) => {
-    send(req, '/index.html', { maxAge: 0 }).pipe(res);
+app.get(/^\/?(index.html)?$/, (req, res) => {
+    send(req, '/index.html', { maxAge: 0, root: __dirname + '/wwwroot' }).pipe(res);
 })
 
-app.use(express.static(__dirname + '/wwwroot', {
-    maxAge: '10 years'
-}));
+app.use(express.static(__dirname + '/wwwroot', { maxAge: '10 years' }));
 
 // Register API routes
 app.use('/api', apiRoutes);
 
 app.all('/*', (req, res, next) => {
     // Just send the index.html for other paths to support HTML5Mode in angular
-    res.sendFile('index.html', { root: __dirname + '/wwwroot' });
+    res.sendFile('index.html', { maxAge: 0, root: __dirname + '/wwwroot' });
 });
 
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {

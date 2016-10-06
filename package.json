@@ -13,7 +13,8 @@
     "express": "^4.13.4",
     "immutable": "^3.8.1",
     "joi": "^8.4.0",
-    "mongoose": "^4.4.19",
+    "mongodb": "^2.2.10",
+    "mongoose": "^4.6.3",
     "require-all": "^2.0.0",
     "send": "^0.14.1"
   },
