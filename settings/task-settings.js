@@ -29,6 +29,7 @@ module.exports = {
             destFonts: clientBuildRoot + '/fonts',
             destIconsTemplate: clientBuildRoot + '/styles/icons-template.css',
             destImg: clientBuildRoot + '/images',
+            destFavicons: clientBuildRoot + '/favicons',
             destLibs: clientBuildRoot + '/libs',
 
             builtIndex: clientBuildRoot + '/index.html',

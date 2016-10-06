@@ -169,7 +169,7 @@ var copyFonts = () =>
 var copyFavicons = () =>
     gulp.src(paths.srcFavicons)
         .pipe(plumber(plumberOptions))
-        .pipe(gulp.dest(paths.dest));
+        .pipe(gulp.dest(paths.destFavicons));
 
 
 // --------------------------------------------- icons ---------------------------------------------
