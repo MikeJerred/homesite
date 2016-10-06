@@ -1,4 +1,5 @@
 ﻿import * as express from 'express';
+import * as userAgent from 'express-useragent';
 import * as mongoose from 'mongoose';
 import * as send from 'send';
 import apiRoutes from './api/routes';
@@ -16,7 +17,12 @@ mongoose.connect(process.env.MONGODB_URI, {
 mongoose.Promise = global.Promise;
 
 app.get(/^\/?(index.html)?$/, (req, res) => {
-    send(req, '/index.html', { maxAge: 0, root: __dirname + '/wwwroot' }).pipe(res);
+    let info = userAgent.parse(req.headers['user-agent']);
+    if (info.isIE && +info.version < 10) {
+        res.redirect('http://www.whatbrowser.org/');
+    } else {
+        send(req, '/index.html', { maxAge: 0, root: __dirname + '/wwwroot' }).pipe(res);
+    }
 })
 
 app.use(express.static(__dirname + '/wwwroot', { maxAge: '10 years' }));

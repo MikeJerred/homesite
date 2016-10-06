@@ -5,6 +5,7 @@
   },
   "globalDependencies": {
     "express": "registry:dt/express#4.0.0+20160208031452",
+    "express-useragent": "registry:dt/express-useragent#0.2.4+20160412141759",
     "joi": "registry:dt/joi#9.0.0+20160514175131",
     "mime": "registry:dt/mime#0.0.0+20151204023458",
     "mongodb": "registry:dt/mongodb#2.1.0+20160602142941",
