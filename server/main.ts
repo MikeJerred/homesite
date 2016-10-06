@@ -1,5 +1,6 @@
 ﻿import * as express from 'express';
 import * as mongoose from 'mongoose';
+import * as send from 'send';
 import apiRoutes from './api/routes';
 import * as validation from './api/validate';
 require('dotenv').config();
@@ -13,7 +14,13 @@ mongoose.connect(process.env.MONGODB_URI, {
     }
 });
 
-app.use(express.static(__dirname + '/wwwroot'));
+app.get('/index.html', (req, res) => {
+    send(req, '/index.html', { maxAge: 0 }).pipe(res);
+})
+
+app.use(express.static(__dirname + '/wwwroot', {
+    maxAge: '10 years'
+}));
 
 // Register API routes
 app.use('/api', apiRoutes);
