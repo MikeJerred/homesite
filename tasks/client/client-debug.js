@@ -49,11 +49,10 @@ gulp.task('client:debug:build', (done) => {
             'client:debug:compile:scripts',
             'client:debug:compile:images',
             'client:debug:compile:fonts',
-            'client:debug:compile:icons'
+            'client:debug:compile:icons',
+            'client:debug:compile:favicons'
         ],
         'client:debug:compile:index',
-        'favicon-build',
-        'favicon-update-check',
         done);
 });
 
@@ -75,12 +74,6 @@ gulp.task('client:debug:watch', ['client:debug:build'], () => {
     watch(paths.srcFonts, { read: false }, buildHandler('client:debug:compile:fonts'));
     watch(paths.srcIcons.concat(paths.srcIconsTemplate), { read: false }, buildHandler('client:debug:compile:icons'));
     watch(paths.srcIndex, { read: false }, () => { runSequence('client:debug:compile:index'); });
-
-    // gulp.watch(paths.builtCssAndJs, (event) => {
-    //     if (event.type === 'added' || event.type === 'deleted') {
-    //         runSequence('client:debug:compile:index');
-    //     }
-    // });
 });
 
 
@@ -200,6 +193,10 @@ gulp.task('client:debug:compile:fonts', () =>
         .pipe(gulp.dest(paths.destFonts))
         .pipe(livereload())
 );
+
+gulp.task('client:debug:compile:favicons', () =>
+    gulp.src(paths.srcFavicons)
+        .pipe(gulp.dest(paths.dest)));
 
 
 // --------------------------------------------- icons ---------------------------------------------

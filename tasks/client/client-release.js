@@ -31,19 +31,14 @@ var typings = require('gulp-typings');
 
 gulp.task('client:release:clean', () => del([paths.dest]));
 
-gulp.task('client:release:build', ['client:release:compile'], (done) => {
-    runSequence(
-        'favicon-build',
-        done);
-});
-
-gulp.task('client:release:compile', ['client:release:clean'], () => {
+gulp.task('client:release:build', ['client:release:clean'], () => {
     var templates = compileTemplates();
     var styles = compileStyles();
     var scripts = compileScripts();
     var libraries = compileLibs(scripts);
     var images = copyImages();
     var fonts = copyFonts();
+    var favicons = copyFavicons();
 
     var iconStyles = through.obj();
     var icons = compileIcons(iconStyles);
@@ -80,7 +75,7 @@ gulp.task('client:release:compile', ['client:release:clean'], () => {
         .pipe(revAll.manifestFile())
         .pipe(gulp.dest(paths.dest));
 
-    return merge(revFiles, fonts, icons);
+    return merge(revFiles, fonts, favicons, icons);
 });
 
 
@@ -169,7 +164,12 @@ var copyFonts = () =>
     gulp.src(paths.srcFonts)
         .pipe(plumber(plumberOptions))
         .pipe(flatten())
-        .pipe(gulp.dest(paths.destFonts))
+        .pipe(gulp.dest(paths.destFonts));
+
+var copyFavicons = () =>
+    gulp.src(paths.srcFavicons)
+        .pipe(plumber(plumberOptions))
+        .pipe(gulp.dest(paths.dest));
 
 
 // --------------------------------------------- icons ---------------------------------------------
