@@ -195,8 +195,8 @@ gulp.task('client:debug:compile:fonts', () =>
 );
 
 gulp.task('client:debug:compile:favicons', () =>
-    gulp.src(paths.srcFavicons)
-        .pipe(gulp.dest(paths.destFavicons)));
+    gulp.src(paths.srcFavicons, { base: paths.src })
+        .pipe(gulp.dest(paths.dest)));
 
 
 // --------------------------------------------- icons ---------------------------------------------

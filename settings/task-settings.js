@@ -23,13 +23,12 @@ module.exports = {
             srcIcons: [clientSrcRoot + '/images/icons/*.svg'],
             srcIconsTemplate: [clientSrcRoot + '/styles/icons-template.templ'],
             srcImg: [clientSrcRoot + '/images/**/*.{png,jpg,gif,svg}', '!' + clientSrcRoot + '/images/icons/*.svg'],
-            srcFavicons: clientSrcRoot + '/favicons/**/*',
+            srcFavicons: [clientSrcRoot + '/favicon.ico', clientSrcRoot + '/favicons/**/*'],
 
             dest: clientBuildRoot,
             destFonts: clientBuildRoot + '/fonts',
             destIconsTemplate: clientBuildRoot + '/styles/icons-template.css',
             destImg: clientBuildRoot + '/images',
-            destFavicons: clientBuildRoot + '/favicons',
             destLibs: clientBuildRoot + '/libs',
 
             builtIndex: clientBuildRoot + '/index.html',
