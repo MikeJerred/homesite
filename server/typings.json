@@ -11,7 +11,7 @@
     "mongodb": "registry:dt/mongodb#2.1.0+20160602142941",
     "mongoose": "registry:dt/mongoose#4.5.9+20161001164137",
     "node": "registry:dt/node#4.0.0+20160226132328",
-    "send": "github:MikeJerred/DefinitelyTyped/send/send.d.ts#14c07e8d",
+    "send": "registry:dt/send#0.14.1+20161006145415",
     "serve-static": "registry:dt/serve-static#1.7.1+20160104095738"
   },
   "resolution": {
