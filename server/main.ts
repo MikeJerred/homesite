@@ -24,11 +24,9 @@ app.all('/*', (req, res, next) => {
     }
 });
 
-app.get(/^\/?(index.html)?$/, (req, res) => {
-    res.sendFile('index.html', { maxAge: 0, root: __dirname + '/wwwroot' });
-});
-
-app.use(express.static(__dirname + '/wwwroot', { maxAge: '10 years' }));
+app.use('/images', express.static(__dirname + '/wwwroot/images', { maxAge: '10 years' }));
+app.use(/^\/?(styles|scripts|templates|libraries)[a-zA-Z0-9]*\.(js|css)$/, express.static(__dirname + '/wwwroot', { maxAge: '10 years' }));
+app.use(express.static(__dirname + '/wwwroot', { maxAge: 0 }));
 
 // Register API routes
 app.use('/api', apiRoutes);
