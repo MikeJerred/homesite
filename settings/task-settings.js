@@ -8,6 +8,7 @@ var clientBuildLibs = clientBuildRoot + '/libs/**';
 module.exports = {
     autoprefixer: { browsers: ['> 2%', 'IE 10'] },
     bowerOrder: ['**jquery.js', '**jquery**', '**lodash**', '**angular.js', '**/showdown.js'],
+    highlightLanguages: 'xml javascript typescript less css cs cpp yaml haskell x86asm json sql bash',
     paths: {
         client: {
             tsConfig: clientSrcRoot + '/tsconfig.json',

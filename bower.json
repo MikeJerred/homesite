@@ -11,13 +11,19 @@
     "angular-highlightjs": "^0.6.1",
     "angular-ui-router": "^0.3.1",
     "bootstrap": "^3.3.6",
+    "fastclick": "^1.0.6",
+    "highlight-js": "^9.7.0",
     "jquery": "^3.1.0",
-    "showdown": "^1.4.1",
-    "fastclick": "^1.0.6"
+    "showdown": "^1.4.1"
   },
   "overrides": {
     "bootstrap": {
       "main": []
+    },
+    "highlight-js": {
+      "main": [
+        "build/highlight.pack.js"
+      ]
     },
     "showdown": {
       "main": [

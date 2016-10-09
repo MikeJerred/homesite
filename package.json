@@ -3,7 +3,7 @@
   "name": "homesite",
   "private": true,
   "scripts": {
-    "postinstall": "bower install && cd ./client && typings install && cd ../server && typings install",
+    "postinstall": "bower install && node ./tasks/highlight.js && cd ./client && typings install && cd ../server && typings install",
     "heroku-postbuild": "gulp build:release",
     "start": "node dist/main.js",
     "monitor": "nodemon dist/main.js"
