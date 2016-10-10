@@ -9,6 +9,7 @@
     "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160521151413",
     "highlightjs": "registry:dt/highlightjs#9.1.0+20160317120654",
     "jquery": "registry:dt/jquery#2.0.0+20160303223636",
+    "modernizr": "registry:dt/modernizr#3.2.0+20160215162030",
     "showdown": "registry:dt/showdown#0.3.1+20160317120654"
   },
   "resolution": {

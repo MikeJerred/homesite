@@ -11,27 +11,35 @@ module MJ.States.Default {
             // but when following links it should always take the user to the top of the page.
             // Note: this is quite hacky as it is relying on the internal behavior of angular, perhaps it is cleaner to do it using window.onpopstate
             let lastNavigationEvent = 0;
-            let scrollPos = 0;
 
-            $scope.$on('$stateChangeStart', () => {
-                lastNavigationEvent = 0;
-                scrollPos = $window.pageYOffset;
+            // disable auto scrolling by the browser: only works on chrome at the moment
+            (<any>history).scrollRestoration = 'manual';
+            this.captureScrollPos(true);
 
-                // disable auto scrolling by the browser, once the browser scrolls the page immediately reset to the right position
-                $window.onscroll = () => {
-                    $window.scrollTo(0, scrollPos);
-                    $window.onscroll = null;
-                };
-            });
+            $scope.$on(
+                '$stateChangeStart',
+                (event: ng.IAngularEvent, toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) => {
+                    lastNavigationEvent = 0;
+                    this.captureScrollPos(false);
+
+                    // disable auto scrolling by the browser: once the browser scrolls the page immediately reset to the right position
+                    $window.scrollTo(0, this.scrollPos);
+                }
+            );
             $scope.$on(
                 '$stateChangeSuccess',
                 (event: ng.IAngularEvent, toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) => {
-                    $window.onscroll = null;
                     if (fromState.name) {
                         // as we change view the fromState view will become position: fixed, so we need to offset its top by the
                         // current scroll position so that it remains in place. This is because the scroll position will soon
-                        // change to that of the toState and we don't want the old view to be affected by that during the animation
-                        $('.ui-view-animate').css('top', -scrollPos);
+                        // change to 0 since .ui-view-container has height set to 100vh during the transition,  and we don't want
+                        // the old view to be affected by that.
+                        //$('.ui-view-animate').css('top', -scrollPos);
+                        $('.ui-view-animate > article').css({
+                            'top' : -this.scrollPos + 'px',
+                            'position': 'absolute',
+                            'width': '100%'
+                        });
 
                         if (fromState.name === 'default.blog') {
                             // save data for the fromState so that we can use it if the user goes back to this state later on
@@ -39,7 +47,7 @@ module MJ.States.Default {
                                 fromState.data = {};
 
                             const key = this.getDataKey(fromParams);
-                            fromState.data[key] = { scrollY: scrollPos };
+                            fromState.data[key] = { scrollY: this.scrollPos };
                         }
 
                         this.setLeaveAnimation(toState, toParams, fromState, fromParams);
@@ -62,6 +70,15 @@ module MJ.States.Default {
             $scope.$on('$locationChangeSuccess', () => {
                 lastNavigationEvent = 2;
             });
+        }
+
+        private scrollPos = 0;
+
+        private captureScrollPos(on: boolean) {
+            let self = this;
+            this.$window.onscroll = on
+                ? () => { self.scrollPos = window.pageYOffset; }
+                : null;
         }
 
         private chooseAnimation(toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) {
@@ -137,7 +154,7 @@ module MJ.States.Default {
             });
             let innerArticle = $('.ui-view-animate > article').filter(index => index === 0);
             innerArticle.css({
-                'top': -y,
+                'top': -y + 'px',
                 'position': 'absolute',
                 'width': '100%'
             });
@@ -148,12 +165,14 @@ module MJ.States.Default {
                     'height': '',
                     'overflow': ''
                 });
-                innerArticle.css({
+                $('.ui-view-animate > article').css({
                     'top': '',
                     'position': '',
                     'width': ''
                 });
                 this.$window.scrollTo(0, y);
+                this.scrollPos = y;
+                this.captureScrollPos(true);
             });
         }
     }
