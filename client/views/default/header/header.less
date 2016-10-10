@@ -51,8 +51,8 @@ article.default-layout header.header {
             }
         }
 
-        @toggle-width: 32px;
-        @toggle-height: 20px;
+        @toggle-width: 16px;
+        @toggle-height: 10px;
         @menu-width: 50px;
         .nav-header {
             position: absolute;
@@ -93,9 +93,6 @@ article.default-layout header.header {
                 }
 
                 &.cross {
-                    background-color: transparent;
-                    border-color: transparent;
-
                     @width: 1518px;
                     @height: 900px;
                     @scaleX: unit((sqrt(2)*(@height - 100px) + 100px) / (@width));
@@ -123,8 +120,10 @@ article.default-layout header.header {
         .nav-collapse {
             position: absolute;
             right: 40px;
-            top: 20px;
+            top: 70px;
             width: @menu-width;
+            height: 44px * 3;
+            transition: height 0.3s ease-in-out;
             background-color: @theme-grey;
             z-index: 900;
 
@@ -132,8 +131,8 @@ article.default-layout header.header {
                 right: 20px;
             }
 
+            @delay-time: 0.1s;
             .nav {
-                margin-top: 40px;
                 font-family: @font-family-serif;
                 font-size: 24px;
                 text-align: center;
@@ -163,24 +162,29 @@ article.default-layout header.header {
                             padding-right: 10px;
                             line-height: 24px;
 
-                            @media (max-width: @screen-xs-max) {
+                            @media (max-width: @screen-md-max) {
                                 display: none;
                             }
                         }
                     }
 
-                    @delay-time: 0.1s;
                     &:nth-child(1) { transition-delay: @delay-time; }
                     &:nth-child(2) { transition-delay: 2*@delay-time; }
                     &:nth-child(3) { transition-delay: 3*@delay-time; }
-                    &:nth-child(4) { transition-delay: 4*@delay-time; }
                 }
             }
 
             &.collapsed {
+                height: 0;
+
                 .nav > li {
                     opacity: 0;
                     transform: translateX(100%);
+                    transition: opacity 0.2s ease-in-out, transform 0.3s ease-in-out;
+
+                    &:nth-child(1) { transition-delay: 2*@delay-time; }
+                    &:nth-child(2) { transition-delay: @delay-time; }
+                    &:nth-child(3) { transition-delay: 0s; }
                 }
             }
         }

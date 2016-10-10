@@ -11,19 +11,19 @@
                     ng-click="headerCtrl.expandClick()"
                     ng-class="{ 'cross': headerCtrl.expanded }"
                     title="{{headerCtrl.expanded ? 'Close' : 'Menu'}}">
-                <svg class="icon" width="32" height="20" viewbox="0 0 1618 1000">
+                <svg class="icon" width="16" height="10" viewbox="0 0 1618 1000">
                     <rect class="line1" x="50" y="50" width="1518" height="100" />
                     <rect class="line2" x="50" y="450" width="1518" height="100" />
                     <rect class="line3" x="50" y="850" width="1518" height="100" />
                 </svg>
-                <svg class="no-smil-cross-icon" width="32" height="20" viewbox="0 0 1618 1000">
+                <svg class="no-smil-cross-icon" width="16" height="10" viewbox="0 0 1618 1000">
                     <line class="line1" x1="409" y1="100" x2="1209" y2="900" stroke-width="100" />
                     <line class="line3" x1="409" y1="900" x2="1209" y2="100" stroke-width="100" />
                 </svg>
             </button>
         </div>
 
-        <div class="nav-collapse collapsed" uib-collapse="!headerCtrl.expanded" ng-class="{ collapsed: !headerCtrl.expanded }">
+        <div class="nav-collapse collapsed" ng-class="{ collapsed: !headerCtrl.expanded }">
             <ul class="nav">
                 <li ui-sref-active="active">
                     <a ui-sref="default.home" ng-click="headerCtrl.expandClick()" title="Home" class="fa fa-home"></a>
