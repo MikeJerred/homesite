@@ -51,8 +51,8 @@ article.default-layout header.header {
             }
         }
 
-        @toggle-width: 16px;
-        @toggle-height: 10px;
+        @toggle-width: 24px;
+        @toggle-height: 15px;
         @menu-width: 50px;
         .nav-header {
             position: absolute;
@@ -64,7 +64,7 @@ article.default-layout header.header {
                 @pad-x: (@menu-width - @toggle-width)/2;
                 @pad-y: (@menu-width - @toggle-height)/2;
                 padding: @pad-y @pad-x;
-                margin: 20px 40px;
+                margin: 20px 40px 0 0;
                 border: none;
                 outline: none;
                 background-color: @theme-grey;
@@ -122,7 +122,7 @@ article.default-layout header.header {
             right: 40px;
             top: 70px;
             width: @menu-width;
-            height: 44px * 3;
+            height: @menu-width * 3;
             transition: height 0.3s ease-in-out;
             background-color: @theme-grey;
             z-index: 900;
@@ -133,12 +133,13 @@ article.default-layout header.header {
 
             @delay-time: 0.1s;
             .nav {
+                @font-size: 24px;
                 font-family: @font-family-serif;
-                font-size: 24px;
+                font-size: @font-size;
                 text-align: center;
 
                 > li {
-                    padding: 10px 0;
+                    padding: (@menu-width - @font-size)/2 0;
                     transition: all 0.3s ease-in-out;
                     opacity: 1;
                     transform: translateX(0);
@@ -146,21 +147,22 @@ article.default-layout header.header {
                     &.active > a { color: @theme-blue; }
 
                     > a {
-                        color: #fff;
                         cursor: pointer;
-                        padding: 0;
+                        color: #fff;
                         position: relative;
+                        padding: 0;
+                        display: block;
+                        line-height: @font-size;
 
-                        + label {
+                        > label {
+                            cursor: pointer;
                             color: @theme-grey;
                             font-size: 16px;
                             position: absolute;
                             right: 100%;
-                            top: 10px;
                             max-width: none;
                             margin: 0;
                             padding-right: 10px;
-                            line-height: 24px;
 
                             @media (max-width: @screen-md-max) {
                                 display: none;
@@ -185,6 +187,8 @@ article.default-layout header.header {
                     &:nth-child(1) { transition-delay: 2*@delay-time; }
                     &:nth-child(2) { transition-delay: @delay-time; }
                     &:nth-child(3) { transition-delay: 0s; }
+
+                    > a { display: none; }
                 }
             }
         }
