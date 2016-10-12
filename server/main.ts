@@ -1,6 +1,6 @@
 ﻿import * as express from 'express';
 import * as userAgent from 'express-useragent';
-import * as mongoose from 'mongoose';
+import mongoose = require('mongoose');
 import apiRoutes from './api/routes';
 import * as validation from './api/validate';
 require('dotenv').config();

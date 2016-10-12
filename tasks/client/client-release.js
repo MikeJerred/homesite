@@ -106,12 +106,12 @@ var compileStyles = () =>
 var angularFilesort = require('gulp-angular-filesort');
 var order = require('gulp-order');
 var ts = require('gulp-typescript');
-var tsProject = ts.createProject(paths.tsConfig, { sortOutput: true });
+var tsProject = ts.createProject(paths.tsConfig);
 
 var compileScripts = () =>
     gulp.src(paths.tsTypings.concat(paths.srcTs))
         .pipe(plumber(plumberOptions))
-        .pipe(ts(tsProject))
+        .pipe(tsProject())
         .js
         .pipe(angularFilesort())
         .pipe(concat('scripts.js'))

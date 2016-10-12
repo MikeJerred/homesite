@@ -18,43 +18,48 @@
         &.view-slide-down  { animation-name: slideOutUp; }
     }
 
+    @full-height: 100%;
+    @part-height: 70%;
+    @full-width: 100%;
+    @part-width: 70%;
+
     @keyframes slideInUp {
-        0% { transform: translateY(100vh); }
+        0% { transform: translateY(@full-height); }
         100% { transform: translateY(0); }
     }
 
     @keyframes slideOutUp {
         0% { transform: translateY(0); }
-        100% { transform: translateY(-70vh); }
+        100% { transform: translateY(-@part-height); }
     }
 
     @keyframes slideInDown {
-        0% { transform: translateY(-100vh); }
+        0% { transform: translateY(-@full-height); }
         100% { transform: translateY(0); }
     }
 
     @keyframes slideOutDown {
         0% { transform: translateY(0); }
-        100% { transform: translateY(70vh); }
+        100% { transform: translateY(@part-height); }
     }
 
     @keyframes slideInLeft {
-        0% { transform: translateX(100vw); }
+        0% { transform: translateX(@full-width); }
         100% { transform: translateX(0); }
     }
 
     @keyframes slideOutLeft {
         0% { transform: translateX(0); }
-        100% { transform: translateX(-70vw); }
+        100% { transform: translateX(-@part-width); }
     }
 
     @keyframes slideInRight {
-        0% { transform: translateX(-100vw); }
+        0% { transform: translateX(-@full-width); }
         100% { transform: translateX(0); }
     }
 
     @keyframes slideOutRight {
         0% { transform: translateX(0); }
-        100% { transform: translateX(70vw); }
+        100% { transform: translateX(@part-width); }
     }
 }

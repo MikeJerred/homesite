@@ -2,14 +2,15 @@
   "name": "homesite.client",
   "dependencies": {},
   "globalDependencies": {
-    "angular": "registry:dt/angular#1.5.0+20160517064839",
-    "angular-animate": "registry:dt/angular-animate#1.5.0+20160407085121",
-    "angular-resource": "registry:dt/angular-resource#1.5.0+20160412142209",
-    "angular-ui-bootstrap": "registry:dt/angular-ui-bootstrap#0.13.3+20160501125848",
-    "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160521151413",
+    "angular": "registry:dt/angular#1.5.0+20160922195358",
+    "angular-animate": "registry:dt/angular-animate#1.5.0+20160709061515",
+    "angular-resource": "registry:dt/angular-resource#1.5.0+20160914132003",
+    "angular-ui-bootstrap": "registry:dt/angular-ui-bootstrap#0.13.3+20160919090501",
+    "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20160810191828",
     "highlightjs": "registry:dt/highlightjs#9.1.0+20160317120654",
-    "jquery": "registry:dt/jquery#2.0.0+20160303223636",
-    "showdown": "registry:dt/showdown#0.3.1+20160317120654"
+    "jquery": "registry:dt/jquery#1.10.0+20160929162922",
+    "modernizr": "registry:dt/modernizr#3.2.0+20160215162030",
+    "showdown": "registry:dt/showdown#1.4.1+20160608102004"
   },
   "resolution": {
     "browser": "typings/"
