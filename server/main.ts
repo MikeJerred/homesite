@@ -1,11 +1,12 @@
 ﻿import * as express from 'express';
 import * as userAgent from 'express-useragent';
-import mongoose = require('mongoose');
+import * as  mongoose from 'mongoose';
 import apiRoutes from './api/routes';
 import * as validation from './api/validate';
 require('dotenv').config();
 
 const app = express();
+const cacheAge = process.env.NODE_ENV === 'development' ? 0 : '10 years';
 mongoose.connect(process.env.MONGODB_URI, {
     server: {
         reconnectTries: Number.MAX_VALUE,
@@ -13,7 +14,7 @@ mongoose.connect(process.env.MONGODB_URI, {
         //socketOptions: { keepAlive: 120 }
     }
 });
-mongoose.Promise = global.Promise;
+(<any>mongoose).Promise = global.Promise;
 
 app.all('/*', (req, res, next) => {
     let info = userAgent.parse(req.headers['user-agent']);
@@ -24,8 +25,8 @@ app.all('/*', (req, res, next) => {
     }
 });
 
-app.use('/images', express.static(__dirname + '/wwwroot/images', { maxAge: '10 years' }));
-app.use(/^\/?(styles|scripts|templates|libraries)[a-zA-Z0-9]*\.(js|css)$/, express.static(__dirname + '/wwwroot', { maxAge: '10 years' }));
+app.use('/images', express.static(__dirname + '/wwwroot/images', { maxAge: cacheAge }));
+app.use(/^\/?(styles|scripts|templates|libraries)[a-zA-Z0-9]*\.(js|css)$/, express.static(__dirname + '/wwwroot', { maxAge: cacheAge }));
 app.use(express.static(__dirname + '/wwwroot', { maxAge: 0 }));
 
 // Register API routes
