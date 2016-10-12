@@ -151,10 +151,6 @@ article.default-layout article.main-home section.cv {
                         border-bottom: 1px solid @theme-black;
                         border-right: 1px solid @theme-black;
                     }
-
-                    ul {
-                        list-style-image: url(/images/list-line.svg);
-                    }
                 }
 
                 @media (max-width: @screen-xs-max) {
@@ -190,9 +186,15 @@ article.default-layout article.main-home section.cv {
             }
 
             .education-list {
-                list-style-image: url(/images/list-line.svg);
                 list-style-position: inside;
             }
+        }
+    }
+
+    &.scrolled-past {
+        .panel-group .panel-body {
+            .education-list { list-style-image: url(/images/list-line.svg); }
+            .list .projects { list-style-image: url(/images/list-line.svg); }
         }
     }
 }
