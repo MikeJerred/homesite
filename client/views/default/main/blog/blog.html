@@ -1,5 +1,6 @@
-<article class="main-blog" ng-swipe-disable-mouse ng-swipe-left="blogCtrl.gotoPreviousBlog()" ng-swipe-right="blogCtrl.gotoNextBlog()">
+<article class="main-blog">
     <section class="headline" ng-class="'id-' + blogCtrl.article.id">
+        <page-fixed-to-parent class="bg"></page-fixed-to-parent>
         <div class="box" page-loaded>
             <h1>{{blogCtrl.article.headline}}</h1>
 

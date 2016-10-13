@@ -6,10 +6,6 @@ article.default-layout article.main-blog {
         width: 100%;
         position: relative;
         padding: 40px;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center center;
-        background-attachment: fixed;
         color: @theme-grey;
         font-family: @font-family-serif;
 
@@ -17,13 +13,25 @@ article.default-layout article.main-blog {
             padding: 20px;
         }
 
-        &.id-1 { background-image: url(/images/blog-1.jpg); }
-        &.id-2 { background-image: url(/images/blog-2.jpg); }
-        &.id-3 { background-image: url(/images/blog-3.jpg); }
-        &.id-4 { background-image: url(/images/blog-4.jpg); }
-        &.id-5 { background-image: url(/images/blog-5.jpg); }
-        &.id-6 { background-image: url(/images/blog-6.jpg); }
-        &.id-7 { background-image: url(/images/blog-7.jpg); }
+        // hack for firefox, which has a bug that resizes images with background-attachment: fixed
+        // causing a 'jump' when the page loads
+        > .bg {
+            top: 0;
+            left: 0;
+            width: 100vw;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            z-index: -1;
+        }
+
+        &.id-1 > .bg { background-image: url(/images/blog-1.jpg); }
+        &.id-2 > .bg { background-image: url(/images/blog-2.jpg); }
+        &.id-3 > .bg { background-image: url(/images/blog-3.jpg); }
+        &.id-4 > .bg { background-image: url(/images/blog-4.jpg); }
+        &.id-5 > .bg { background-image: url(/images/blog-5.jpg); }
+        &.id-6 > .bg { background-image: url(/images/blog-6.jpg); }
+        &.id-7 > .bg { background-image: url(/images/blog-7.jpg); }
 
         &:before {
             content: '';
