@@ -9,7 +9,7 @@ article.default-layout article.main-blog {
         color: @theme-grey;
         font-family: @font-family-serif;
 
-        @media (max-width: @screen-sm-min) {
+        @media (max-width: @screen-xs-max) {
             padding: 20px;
         }
 
@@ -64,11 +64,11 @@ article.default-layout article.main-blog {
                 h1, h4, .share-links { animation-name: fade; }
             }
 
-            @media (max-width: @screen-sm-min) {
-                padding: 60px;
+            @media (max-width: @screen-xs-max) {
+                padding: 60px 0 20px 0;
 
-                h1 { font-size: 28px; }
-                h4 { font-size: 16px; }
+                h1 { font-size: 22px; }
+                h4 { font-size: 14px; }
             }
 
             .share-links {
@@ -286,10 +286,15 @@ article.default-layout article.main-blog {
             .content {
                 display: table-cell;
                 vertical-align: middle;
+            }
 
-                @media (max-width: @screen-xs-max) {
-                    h3 { font-size: 18px; }
-                    .date { font-size: 12px; }
+            @media (max-width: @screen-xs-max) {
+                padding: 20px 10px;
+                width: 47%;
+
+                .content {
+                    h3 { font-size: 14px; }
+                    .date { font-size: 11px; }
                 }
             }
         }
