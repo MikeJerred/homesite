@@ -9,7 +9,6 @@ module MJ {
         'hljs',
         'ui.bootstrap',
         'ui.router',
-        'LocalStorageModule',
         'mj.dataServices',
         'mj.directives',
         'mj.filters',

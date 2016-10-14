@@ -44,13 +44,13 @@ gulp.task('server:debug:watch', ['server:debug:build'], () => {
 
 // -------------------------------------------- compile --------------------------------------------
 var ts = require('gulp-typescript');
-var tsProject = ts.createProject(paths.tsConfig, { sortOutput: true });
+var tsProject = ts.createProject(paths.tsConfig);
 
 gulp.task('server:debug:compile', () =>
     gulp.src(paths.tsTypings.concat(paths.srcTs))
         .pipe(plumber(plumberOptions))
         .pipe(sourcemaps.init())
-        .pipe(ts(tsProject))
+        .pipe(tsProject())
         .js
         .pipe(sourcemaps.write('.', { includeContent: false, destPath: paths.dest }))
         .pipe(cached('server', { optimizeMemory: true }))

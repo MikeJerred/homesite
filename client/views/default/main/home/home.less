@@ -3,13 +3,19 @@
 article.default-layout article.main-home {
     .about {
         height: 100vh;
-        background-image: url(/images/tent.jpg);
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center center;
-        background-attachment: fixed;
         display: table;
         width: 100%;
+
+        // hack for firefox, which has a bug that resizes images with background-attachment: fixed
+        // causing a 'jump' when the page loads
+        > .bg {
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            background-image: url(/images/tent.jpg);
+            top: 0;
+            left: 0;
+        }
 
         > .center {
             display: table-cell;

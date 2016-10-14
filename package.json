@@ -3,20 +3,21 @@
   "name": "homesite",
   "private": true,
   "scripts": {
-    "postinstall": "bower install && cd ./client && typings install && cd ../server && typings install",
+    "postinstall": "bower install && node ./tasks/highlight.js && cd ./client && typings install && cd ../server && typings install",
     "heroku-postbuild": "gulp build:release",
     "start": "node dist/main.js",
     "monitor": "nodemon dist/main.js"
   },
   "dependencies": {
+    "compression": "^1.6.2",
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
+    "express-useragent": "^1.0.4",
     "immutable": "^3.8.1",
     "joi": "^8.4.0",
     "mongodb": "^2.2.10",
     "mongoose": "^4.6.3",
-    "require-all": "^2.0.0",
-    "send": "^0.14.1"
+    "require-all": "^2.0.0"
   },
   "devDependencies": {
     "bower": "^1.7.9",
@@ -35,6 +36,7 @@
     "gulp-consolidate": "^0.1.2",
     "gulp-filter": "^4.0.0",
     "gulp-flatten": "^0.2.0",
+    "gulp-htmlmin": "^3.0.0",
     "gulp-iconfont": "git://github.com/nfroidure/gulp-iconfont.git#optionnal_woff2",
     "gulp-ignore": "^2.0.1",
     "gulp-inject": "^4.0.0",
@@ -49,8 +51,8 @@
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "gulp-rev-all": "^0.9.7",
-    "gulp-sourcemaps": "git://github.com/floridoo/gulp-sourcemaps.git#f0acd2a31150b0403c14eed53e6234b192704257",
-    "gulp-typescript": "^2.13.6",
+    "gulp-sourcemaps": "^2.0.0",
+    "gulp-typescript": "^3.0.2",
     "gulp-typings": "^1.3.4",
     "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
@@ -58,9 +60,10 @@
     "less-plugin-autoprefix": "^1.5.1",
     "main-bower-files": "^2.12.0",
     "path": "^0.12.7",
-    "require-dir": "^0.3.0",
+    "require-directory": "^2.1.1",
     "run-sequence": "^1.1.5",
     "through2": "^2.0.1",
+    "typescript": "^2.0.3",
     "typings": "^1.0.4"
   },
   "engines": {

@@ -8,6 +8,7 @@ var clientBuildLibs = clientBuildRoot + '/libs/**';
 module.exports = {
     autoprefixer: { browsers: ['> 2%', 'IE 10'] },
     bowerOrder: ['**jquery.js', '**jquery**', '**lodash**', '**angular.js', '**/showdown.js'],
+    highlightLanguages: 'xml javascript typescript less css cs cpp yaml haskell x86asm json sql bash',
     paths: {
         client: {
             tsConfig: clientSrcRoot + '/tsconfig.json',
@@ -16,14 +17,15 @@ module.exports = {
 
             src: clientSrcRoot,
             srcIndex: clientSrcRoot + '/index.html',
-            srcHtml: [clientSrcRoot + '/**/*.html', '!' + clientSrcRoot + '/index.html'],
-            srcLess: [clientSrcRoot + '/**/*.less'],
-            srcTs: [clientSrcRoot + '/**/*.ts'],
+            srcHtml: [clientSrcRoot + '/**/*.html', '!' + clientSrcRoot + '/index.html', '!' + clientSrcRoot + '/critical/**/*'],
+            srcLess: [clientSrcRoot + '/**/*.less', '!' + clientSrcRoot + '/critical/**/*'],
+            srcTs: [clientSrcRoot + '/**/*.ts', '!' + clientSrcRoot + '/critical/**/*'],
             srcFonts: ['./bower_components/bootstrap/dist/fonts/*.*'],
             srcIcons: [clientSrcRoot + '/images/icons/*.svg'],
             srcIconsTemplate: [clientSrcRoot + '/styles/icons-template.templ'],
             srcImg: [clientSrcRoot + '/images/**/*.{png,jpg,gif,svg}', '!' + clientSrcRoot + '/images/icons/*.svg'],
             srcFavicons: [clientSrcRoot + '/favicon.ico', clientSrcRoot + '/favicons/**/*'],
+            srcCritical: clientSrcRoot + '/critical',
 
             dest: clientBuildRoot,
             destFonts: clientBuildRoot + '/fonts',

@@ -4,12 +4,18 @@ article.default-layout footer.footer {
     display: table;
     width: 100%;
     padding: 40px;
-    background-attachment: fixed;
-    background-image: url(/images/pattern.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
     border-top: 4px solid #fff;
+
+    // hack for firefox, which has a bug that resizes images with background-attachment: fixed
+    // causing a 'jump' when the page loads
+    > .bg {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        background-image: url(/images/pattern.jpg);
+        bottom: 0;
+        left: 0;
+    }
 
     .content {
         display: table-cell;
@@ -38,7 +44,7 @@ article.default-layout footer.footer {
 
             > li {
                 float: left;
-                font-size: 1.56em;
+                font-size: 1.8em;
 
                 > a {
                     transition: border-radius 0.2s ease-in-out;

@@ -1,0 +1,13 @@
+@import "../../styles/variables.less";
+
+body {
+    // always show vertical scrollbar to prevent the screen jumping when changing
+    // between a view taller than the viewport height and one that isn't
+    overflow-y: scroll;
+    margin: 0;
+}
+
+article.critical-path {
+    height: 100vh;
+    background-color: @theme-light-blue;
+}

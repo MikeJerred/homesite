@@ -1,7 +1,7 @@
 import * as Immutable from 'immutable';
 
 export default class Page<T> {
-    constructor(
+    private constructor(
         public pageNo: number,
         public pageSize: number,
         public items: Immutable.Iterable<number, T>,
