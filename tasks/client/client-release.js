@@ -1,11 +1,14 @@
 var gulp = require('gulp');
 var cleanCss = require('gulp-clean-css');
+var clone = require('gulp-clone');
 var concat = require('gulp-concat');
 var del = require('del');
+var fs = require('fs');
 var htmlMin = require('gulp-htmlmin');
 var merge = require('event-stream').merge;
 var path = require('path');
 var plumber = require('gulp-plumber');
+var rename = require('gulp-rename');
 var through = require('through2');
 var uglify = require('gulp-uglify');
 var util = require('gulp-util');
@@ -61,8 +64,6 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
         .pipe(concat('styles.css'))
         .pipe(cleanCss());
 
-    var critical = compileCritical().pipe(changeDir(paths.dest));
-
     var injectTransform = (filePath) => {
         if (filePath.slice(-3) === '.js') {
             return '<script src="' + filePath + '"></script>';
@@ -84,31 +85,41 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
         return inject.transform.html.apply(inject.transform, arguments);
     };
 
+    var injectCriticalTransform = (filePath, file) => {
+        if (filePath.slice(-5) === '.html') {
+            return file.contents.toString('utf8');
+        } else if (filePath.slice(-4) === '.css') {
+            return '<style>' + file.contents.toString('utf8') + '</style>';
+        } else if (filePath.slice(-4) === '.jpg') {
+            return '<link rel="prefetch" href="' + filePath + '">';
+        }
+    };
+
     var index = gulp.src(paths.srcIndex)
         .pipe(plumber(plumberOptions))
         .pipe(gulp.dest(paths.dest))
         .pipe(inject(libraries, { name: 'bower', relative: true, transform: injectTransform }))
         .pipe(inject(merge(allStyles, scripts), { relative: true, transform: injectTransform }))
-        .pipe(inject(templates, { name: 'templates', relative: true, transform: injectTransform }))
-        .pipe(inject(critical, {
-            name: 'critical',
-            relative: true,
-            transform: (filePath, file) => {
-                if (filePath.slice(-5) === '.html') {
-                    return '<article class="default-layout" ng-if="false">' + file.contents.toString('utf8') + '</article>';
-                } else if (filePath.slice(-4) === '.css') {
-                    return '<style>' + file.contents.toString('utf8') + '</style>';
-                } else if (filePath.slice(-4) === '.jpg') {
-                    return '<link rel="prefetch" href="' + filePath + '">';
-                }
-            }
-        }))
-        .pipe(gulp.dest(paths.dest));
+        .pipe(inject(templates, { name: 'templates', relative: true, transform: injectTransform }));
 
-    var revFiles = merge(templates, scripts, libraries, images, allStyles, index)
+    var criticalRoutes = fs.readdirSync(paths.srcCritical).filter((file) => fs.statSync(path.join(paths.srcCritical, file)).isDirectory());
+    criticalRoutes.push(null);
+    var indexes = [];
+
+    for (var route of criticalRoutes) {
+        var critical = compileCritical(route).pipe(changeDir(paths.dest));
+        var criticalIndex = index.pipe(clone())
+            .pipe(inject(critical, { name: 'critical', relative: true, transform: injectCriticalTransform }))
+            .pipe(rename('index'+ (route ? '-' + route : '') +'.html'))
+            .pipe(gulp.dest(paths.dest));
+
+        indexes.push(criticalIndex);
+    }
+
+    var revFiles = merge(templates, scripts, libraries, images, allStyles, merge(indexes))
         .pipe(changeDir(paths.dest))
         .pipe(revAll.revision({
-            dontRenameFile: [/^\/?index\.html$/g],
+            dontRenameFile: [/^\/?index[^\/]*\.html$/g],
             dontSearchFile: [/\.js$/g],
             includeFilesInManifest: ['.css', '.js', '.png', '.jpg', '.svg', '.gif']
         }))
@@ -121,18 +132,25 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
 
 
 // ------------------------------------------- critical --------------------------------------------
-var compileCritical = () => {
-    var html = gulp.src(paths.srcCriticalHtml)
+var compileCritical = (route) => {
+    var html = gulp.src(paths.srcCritical + '/' + (route ? route + '/**/*' : '*') + '.html')
         .pipe(htmlMin({ collapseWhitespace: true }));
 
-    var css = gulp.src(paths.srcCriticalLess)
+    var css = gulp.src(paths.srcCritical + '/' + (route ? route + '/**/*' : '*') + '.less')
         .pipe(plumber(plumberOptions))
         .pipe(progeny())
         .pipe(less({ plugins: [lessAutoprefix] }))
         .pipe(concat('critical.css'))
         .pipe(cleanCss());
 
-    var images = gulp.src(paths.srcCriticalImages, { base: paths.src });
+    var imgGlob = paths.src + '/images/';
+    switch (route) {
+        case null: imgGlob += '[intro,tent].jpg'; break;
+        case 'home': imgGlob += 'tent.jpg'; break;
+        default: imgGlob = '';
+    }
+
+    var images = gulp.src(imgGlob, { base: paths.src });
 
     return merge(html, css, images);
 }
@@ -235,7 +253,6 @@ var copyFavicons = () =>
 // --------------------------------------------- icons ---------------------------------------------
 var consolidate = require('gulp-consolidate');
 var iconfont = require('gulp-iconfont');
-var rename = require("gulp-rename");
 
 var compileIcons = (stylesStream) =>
     gulp.src(paths.srcIcons)
