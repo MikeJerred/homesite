@@ -18,7 +18,7 @@ module MJ.Directives.Page.PageFixedToParent {
                         () => parent[0].getBoundingClientRect().bottom
                     ],
                     (values: number[]) => {
-                        if (values[1] > 0 && values[0] < $window.innerHeight) {
+                        if (values[0] < ($window.innerHeight + 100) && values[1] > -100) {
                             element.css('display', 'block');
                         } else {
                             element.css('display', 'none');
