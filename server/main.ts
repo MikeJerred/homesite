@@ -30,7 +30,9 @@ app.all('/*', (req, res, next) => {
 });
 
 app.use('/images', express.static(__dirname + '/wwwroot/images', { maxAge: cacheAge }));
-app.use(/^\/?(styles|scripts|templates|libraries)[a-zA-Z0-9]*\.(js|css)$/, express.static(__dirname + '/wwwroot', { maxAge: cacheAge }));
+app.all(/^\/?(styles|scripts)\.[a-zA-Z0-9]*\.(js|css)$/, (req, res, next) => {
+    res.sendFile(req.url, { root: __dirname + '/wwwroot', maxAge: cacheAge });
+});
 app.use(express.static(__dirname + '/wwwroot', { maxAge: 0 }));
 
 // Register API routes

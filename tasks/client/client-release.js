@@ -72,16 +72,16 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
 
     var injectTransform = (filePath) => {
         if (filePath.slice(-3) === '.js') {
-            return '<script async src="' + filePath + '"></script>';
+            return '<script async src="/' + filePath + '"></script>';
         }
         if (filePath.slice(-4) === '.css') {
             return '<script>'
                 + '(function(){'
                 + 'var s=document.createElement("link");'
-                + 's.href="'+ filePath +'";'
-                + 's.rel="stylesheet";'
                 + 's.type="text/css";'
+                + 's.rel="stylesheet";'
                 + 's.media="only x";'
+                + 's.href="/'+ filePath +'";'
                 + 's.onload=function(){s.media="all"};'
                 + 'document.getElementsByTagName("head")[0].appendChild(s);'
                 + '})()'
@@ -97,7 +97,7 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
         } else if (filePath.slice(-4) === '.css') {
             return '<style>' + file.contents.toString('utf8') + '</style>';
         } else if (filePath.slice(-4) === '.jpg') {
-            return '<link rel="prefetch" href="' + filePath + '">';
+            return '<link rel="prefetch" href="/' + filePath + '">';
         }
     };
 
@@ -149,11 +149,9 @@ var compileCritical = (route) => {
         .pipe(cleanCss());
 
     var imgGlob = paths.src + '/images/';
-    switch (route) {
-        case null: imgGlob += '[intro,tent].jpg'; break;
-        case 'home': imgGlob += 'tent.jpg'; break;
-        default: imgGlob = '';
-    }
+    if (!route) imgGlob += '[intro,tent].jpg';
+    else if (route === 'home') imgGlob += 'tent.jpg';
+    else imgGlob = '';
 
     var images = gulp.src(imgGlob, { base: paths.src });
 
