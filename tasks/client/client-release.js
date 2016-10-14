@@ -61,7 +61,7 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
     var iconStyles = through.obj();
     var icons = compileIcons(iconStyles);
 
-    var allStyles = merge(styles, libStyles) // , iconStyles
+    var allStyles = merge(styles, libStyles, iconStyles)
         .pipe(concat('styles.css'))
         .pipe(cleanCss());
 
