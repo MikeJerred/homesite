@@ -1,4 +1,5 @@
 ﻿import * as express from 'express';
+import * as compression from 'compression';
 import * as userAgent from 'express-useragent';
 import * as  mongoose from 'mongoose';
 import apiRoutes from './api/routes';
@@ -6,6 +7,8 @@ import * as validation from './api/validate';
 require('dotenv').config();
 
 const app = express();
+app.use(compression());
+
 const cacheAge = process.env.NODE_ENV === 'development' ? 0 : '10 years';
 mongoose.connect(process.env.MONGODB_URI, {
     server: {
