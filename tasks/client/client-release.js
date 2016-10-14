@@ -52,7 +52,8 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
     var templates = compileTemplates();
     var styles = compileStyles();
     var scripts = compileScripts();
-    var libraries = compileLibs(scripts);
+    var libStyles = compileLibStyles();
+    var libScripts = compileLibScripts(scripts);
     var images = copyImages();
     var fonts = copyFonts();
     var favicons = copyFavicons();
@@ -60,9 +61,14 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
     var iconStyles = through.obj();
     var icons = compileIcons(iconStyles);
 
-    var allStyles = styles //merge(styles, iconStyles)
+    var allStyles = merge(styles, libStyles) // , iconStyles
         .pipe(concat('styles.css'))
         .pipe(cleanCss());
+
+    var allScripts = merge(libScripts, scripts, templates)
+        .pipe(order(['libraries.js', 'scripts.js', 'templates.js']))
+        .pipe(concat('scripts.js'))
+        .pipe(uglify());
 
     var injectTransform = (filePath) => {
         if (filePath.slice(-3) === '.js') {
@@ -98,9 +104,7 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
     var index = gulp.src(paths.srcIndex)
         .pipe(plumber(plumberOptions))
         .pipe(gulp.dest(paths.dest))
-        .pipe(inject(libraries, { name: 'bower', relative: true, transform: injectTransform }))
-        .pipe(inject(merge(allStyles, scripts), { relative: true, transform: injectTransform }))
-        .pipe(inject(templates, { name: 'templates', relative: true, transform: injectTransform }));
+        .pipe(inject(merge(allStyles, allScripts), { relative: true, transform: injectTransform }));
 
     var criticalRoutes = fs.readdirSync(paths.srcCritical).filter((file) => fs.statSync(path.join(paths.srcCritical, file)).isDirectory());
     criticalRoutes.push(null);
@@ -110,13 +114,14 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
         var critical = compileCritical(route).pipe(changeDir(paths.dest));
         var criticalIndex = index.pipe(clone())
             .pipe(inject(critical, { name: 'critical', relative: true, transform: injectCriticalTransform }))
+            .pipe(htmlMin({ collapseWhitespace: true }))
             .pipe(rename('index'+ (route ? '-' + route : '') +'.html'))
             .pipe(gulp.dest(paths.dest));
 
         indexes.push(criticalIndex);
     }
 
-    var revFiles = merge(templates, scripts, libraries, images, allStyles, merge(indexes))
+    var revFiles = merge(allStyles, allScripts, images, merge(indexes))
         .pipe(changeDir(paths.dest))
         .pipe(revAll.revision({
             dontRenameFile: [/^\/?index[^\/]*\.html$/g],
@@ -192,8 +197,7 @@ var compileScripts = () =>
         .pipe(tsProject())
         .js
         .pipe(angularFilesort())
-        .pipe(concat('scripts.js'))
-        .pipe(uglify());
+        .pipe(concat('scripts.js'));
 
 
 // --------------------------------------------- libs ----------------------------------------------
@@ -204,30 +208,27 @@ var ignore = require('gulp-ignore');
 var modernizr = require('gulp-modernizr');
 //var replace = require('gulp-replace');
 
-var compileLibs = (scripts) => {
+var compileLibStyles = () =>
+    gulp.src(bowerFiles())
+        .pipe(plumber(plumberOptions))
+        .pipe(filter(['**/*.css']))
+        .pipe(autoprefixer(settings.autoprefixer))
+        .pipe(concat('libraries.css'));
+
+var compileLibScripts = (scripts) => {
     var modernizrLib = scripts
         .pipe(modernizr({
             tests: ['smil'],
             options: ['setClasses']
         }));
 
-    var js = merge(gulp.src(bowerFiles()), modernizrLib)
+    return merge(gulp.src(bowerFiles()), modernizrLib)
         .pipe(plumber(plumberOptions))
         .pipe(filter(['**/*.js']))
         .pipe(ignore.exclude(['**/*.map']))
         .pipe(order(settings.bowerOrder))
         //.pipe(replace(/^\/\/# sourceMappingURL=.+$/g, ''))
-        .pipe(concat('libraries.js'))
-        .pipe(uglify());
-
-    var css = gulp.src(bowerFiles())
-        .pipe(plumber(plumberOptions))
-        .pipe(filter(['**/*.css']))
-        .pipe(autoprefixer(settings.autoprefixer))
-        .pipe(concat('libraries.css'))
-        .pipe(cleanCss());
-
-    return merge(js, css);
+        .pipe(concat('libraries.js'));
 };
 
 
