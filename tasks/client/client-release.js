@@ -63,7 +63,7 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
 
     var allStyles = merge(styles, libStyles, iconStyles)
         .pipe(concat('styles.css'))
-        .pipe(cleanCss());
+        .pipe(cleanCss({ keepSpecialComments: 0 }));
 
     var allScripts = merge(libScripts, scripts, templates)
         .pipe(order(['libraries.js', 'scripts.js', 'templates.js']))
@@ -72,7 +72,7 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
 
     var injectTransform = (filePath) => {
         if (filePath.slice(-3) === '.js') {
-            return '<script src="' + filePath + '"></script>';
+            return '<script async src="' + filePath + '"></script>';
         }
         if (filePath.slice(-4) === '.css') {
             return '<script>'
@@ -114,7 +114,7 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
         var critical = compileCritical(route).pipe(changeDir(paths.dest));
         var criticalIndex = index.pipe(clone())
             .pipe(inject(critical, { name: 'critical', relative: true, transform: injectCriticalTransform }))
-            .pipe(htmlMin({ collapseWhitespace: true }))
+            .pipe(htmlMin({ collapseWhitespace: true, collapseInlineTagWhitespace: true, removeComments: true }))
             .pipe(rename('index'+ (route ? '-' + route : '') +'.html'))
             .pipe(gulp.dest(paths.dest));
 
@@ -139,7 +139,7 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
 // ------------------------------------------- critical --------------------------------------------
 var compileCritical = (route) => {
     var html = gulp.src(paths.srcCritical + '/' + (route ? route + '/**/*' : '*') + '.html')
-        .pipe(htmlMin({ collapseWhitespace: true }));
+        .pipe(htmlMin({ collapseWhitespace: true, collapseInlineTagWhitespace: true, removeComments: true }));
 
     var css = gulp.src(paths.srcCritical + '/' + (route ? route + '/**/*' : '*') + '.less')
         .pipe(plumber(plumberOptions))
@@ -167,7 +167,7 @@ var angularTemplateCache = require('gulp-angular-templatecache');
 var compileTemplates = () =>
     gulp.src(paths.srcHtml)
         .pipe(plumber(plumberOptions))
-        .pipe(htmlMin({ collapseWhitespace: true }))
+        .pipe(htmlMin({ collapseWhitespace: true, collapseInlineTagWhitespace: true, removeComments: true }))
         .pipe(angularTemplateCache('templates.js', { module: 'mj.templates' }))
         .pipe(uglify());
 
