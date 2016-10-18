@@ -91,44 +91,28 @@ article.default-layout article.main-home section.cv {
             color: @theme-black;
             padding: 0;
 
-            .list, .education-list {
-                margin-top: @grid-gutter-width/2;
-                margin-bottom: @grid-gutter-width/2;
-                padding: 0;
+            .list, .skills-list, .education-list {
+                margin-top: @grid-gutter-width;
+                margin-bottom: @grid-gutter-width;
                 font-family: @font-family-base;
                 font-size: 16px;
                 font-weight: 200;
-                line-height: 24px;
-
-                > li {
-                    margin-bottom: @grid-gutter-width;
-                    color: @theme-black;
-
-                    &:first-child {
-                        margin-top: @grid-gutter-width;
-                    }
-                }
-
-                @media (max-width: @screen-xs-max) {
-                    margin: 0;
-                    font-size: 14px;
-
-                    > li {
-                        margin-bottom: @grid-gutter-width/2;
-
-                        &:first-child {
-                            margin-top: @grid-gutter-width/2;
-                        }
-                    }
-                }
+                line-height: 1.5;
+                color: @theme-black;
             }
 
             .list {
                 list-style: none;
+                padding: 0;
 
                 > li {
                     position: relative;
+                    margin-top: @grid-gutter-width;
                     padding: 60px;
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
 
                     @size: 150px;
                     &:before, &:after {
@@ -153,8 +137,60 @@ article.default-layout article.main-home section.cv {
                     }
                 }
 
-                @media (max-width: @screen-xs-max) {
+                .title, .place, .date { font-family: @font-family-serif; font-weight: 300; }
+                .title { font-size: 1.4em; }
+
+                .comments, .projects {
+                    margin-top: 20px;
+                }
+
+                .projects {
                     > li {
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+
+            .skills-list {
+                list-style: none;
+                padding: 0;
+
+                > li {
+                    margin-top: @grid-gutter-width / 2;
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+            }
+
+            .education-list {
+                list-style-position: outside;
+                padding-left: 40px;
+
+                .title, .other, .place, .date { font-family: @font-family-serif; font-weight: 300; }
+                .title { font-weight: 600; }
+                .place { font-style: italic; }
+
+                > li {
+                    margin-top: @grid-gutter-width / 2;
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                }
+            }
+
+            @media (max-width: @screen-xs-max) {
+                .list, .education-list {
+                    font-size: 14px;
+                    margin-top: @grid-gutter-width / 2;
+                    margin-bottom: @grid-gutter-width / 2;
+                }
+
+                .list {
+                    > li {
+                        margin-top: @grid-gutter-width/2;
                         padding: 0;
 
                         &:before {
@@ -175,18 +211,8 @@ article.default-layout article.main-home section.cv {
                     }
                 }
 
-                .title, .place, .date { font-family: @font-family-serif; font-weight: 300; }
-
-                .comments, .projects {
-                    margin-top: 20px;
+                .education-list {
                 }
-
-                //.projects {
-                //}
-            }
-
-            .education-list {
-                list-style-position: inside;
             }
         }
     }

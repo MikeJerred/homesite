@@ -2,80 +2,142 @@
     <uib-accordion>
         <div uib-accordion-group class="top" heading="Work Experience">
             <div class="container">
-                <ul class="list col-xs-12">
-                    <li>
-                        <div class="title">Web developer</div>
-                        <div class="place"><a href="http://www.centaurmedia.com/" target="_blank">Centaur Media</a></div>
-                        <div class="date">August 2014 - February 2014</div>
-                        <div class="comments">
-                            <p>
-                                My role at Centuar was to write code for ASP.NET projects, fixing bugs and developing new features
-                                on existing sites; as well as creating brand new sites, as part of a team of 6-7 developers.
-                            </p>
-
-                            <p>
-                                I introduced angularjs to the team, and created the front-end architecture for a major new project.
-                                This was a great success and the company is now using angular for current &amp; future projects.
-                            </p>
-                        </div>
-
-                        Projects:
-                        <ul class="projects">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <ul class="list">
                             <li>
-                                <a href="http://thelawyermarketintelligence.com/" target="_blank">LMI</a>
-                                - This site was built from scratch. It is a subscription service, where users are able to
-                                search for information they require. At the start Iworked alone, designing the structure for the frontend
-                                with a combination of angular, less and typescript. After this initial phase,
+                                <div class="title">Web developer</div>
+                                <div class="place"><a href="http://www.centaurmedia.com/" target="_blank">Centaur Media</a></div>
+                                <div class="date">August 2014 - February 2014</div>
+                                <div class="comments">
+                                    <p>
+                                        My role at Centaur was to write code for various ASP.NET projects, fixing bugs and developing new features on existing sites; as well as creating brand new sites, as part of a team of 6-7 developers. The sites were built using C# for the back-end, with Microsoft SQL Server for the database engine and Apache Solr for creating indexes. A combination of AngularJs, Bootstrap, Typescript, LESS and Knockout were used for the front-end. Mercurial was used for version management.
+                                    </p>
+                                    <p>
+                                        One of my main achievements was to introduce the AngularJs framework to the team, and use this to create the front-end architecture for two major new projects. These were a great success and the company is now using AngularJs as a standard for future projects.
+                                    </p>
+                                </div>
+
+                                Example projects:
+                                <ul class="projects">
+                                    <li>
+                                        <a href="http://thelawyermarketintelligence.com/" target="_blank">Lawyer Market Intelligence</a>
+                                        - This site was built from the ground up, and including building a custom CMS. At the start I worked alone by designing the structure for the front-end with a combination of AngularJs, LESS and Typescript. After this initial phase the other developers joined in and we each worked on a separate module. Using this approach we were able to develop with a high degree of parallelization, and finished the project in a short space of time.
+                                    </li>
+                                    <li>
+                                        <a href="http://fashionmonitor.com/" target="_blank">Fashion Monitor</a>
+                                        - This site had a major design overhaul and all the code was built from scratch, using a previously existing database. I used roughly the same architecture for the front-end as I used in the Lawyer Market Intelligence project, and we again developed it in a highly modular fashion with many developers working in parallel.
+                                    </li>
+                                    <li>
+                                        <a href="http://celebrityintelligence.com" target="_blank">Celebrity Intelligence</a>
+                                        - My main involvement with this site was the creation of a search widget on the home page. It is able to filter by many different categories and display a count of the results very quickly, so to do this fast enough required using Apache Solr to create indexes from complex SQL queries.
+                                    </li>
+                                </ul>
                             </li>
                             <li>
-                                <a href="http://fashionmonitor.com/" target="_blank">Fashion Monitor</a>
-                                - This site had a major design overhaul and all the code was built as a new project, but using
-                                the same data from the database. I started to build the site using ASP.NET vNext/Core, but decided
-                                to revert to ASP.NET 4 fairly early on due to bugs in the software (at the time ASP.NET Core was in beta).
-                                I used roughly the same architecture for the front-end as I used in the previous LMI project.
+                                <div class="title">Junior Web developer</div>
+                                <div class="place"><a href="http://www.acturis.com/" target="_blank">Acturis</a></div>
+                                <div class="date">August 2012 - June 2014</div>
+                                <div class="comments">
+                                    <p>
+                                        My role at Acturis was to maintain and add features to the company's product as part of an Agile development team. The product was mostly written in C#, SQL, HTML, CSS and Javascript with jQuery; there was also a lot of work with XML configuration files. The C# code was unit tested using Moq, and Subversion (SVN) was used for version management.
+                                    </p>
+                                    <p>
+                                        Example projects include many business to business and some business to client insurance sites (see <a href="http://www.acturis.com/our-clients/" target="_blank">http://www.acturis.com/our-clients/</a>).
+                                    </p>
+                                </div>
                             </li>
                         </ul>
-                    </li>
-                    <li>
-                        <div class="title">Junior Web developer</div>
-                        <div class="place"><a href="http://www.acturis.com/" target="_blank">Acturis</a></div>
-                        <div class="date">August 2012 - June 2014</div>
-                        <div class="comments">
-                            <p>
-                                My role at Acturis was to maintain and add features to the company's product as part of an AGILE development team.
-                                The product was mostly written in C#, SQL, HTML, CSS and Javascript with jQuery.
-                            </p>
-
-                            <p>
-                                The role also involved a lot of work with XML configuration files, and supporting legacy browsers (IE6+).
-                            </p>
-                        </div>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <div uib-accordion-group class="middle" heading="Skills">
-            B
+        <div uib-accordion-group class="middle" heading="Technologies">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <ul class="skills-list">
+                            <li class="row">
+                                <div class="col-xs-4 col-sm-3 col-md-2">Excellent</div>
+                                <div class="col-xs-8 col-sm-9 col-md-10">
+                                    <a href="https://msdn.microsoft.com/en-us/library/kx37x362.aspx" target="_blank">C#</a>,
+                                    <a href="https://msdn.microsoft.com/en-us/library/mt693024.aspx" target="_blank">LINQ</a>,
+                                    <a href="https://www.asp.net/" target="_blank">ASP.NET 4</a>,
+                                    <a href="https://angularjs.org/" target="_blank">AngularJs</a>,
+                                    <a href="http://www.typescriptlang.org/" target="_blank">Typescript</a>,
+                                    <a href="http://lesscss.org/" target="_blank">LESS</a>,
+                                    <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5" target="_blank">HTML5</a>,
+                                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3" target="_blank">CSS3</a>,
+                                    <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a>,
+                                    <a href="https://jquery.com/" target="_blank">JQuery</a>,
+                                    <a href="https://git-scm.com/" target="_blank">Git</a>,
+                                    <a href="https://www.mercurial-scm.org/" target="_blank">Mecurial</a>,
+                                    <a href="https://www.microsoft.com/en-us/windows/" target="_blank">Windows</a>
+                                </div>
+                            </li>
+                            <li class="row">
+                                <div class="col-xs-4 col-sm-3 col-md-2">Competent</div>
+                                <div class="col-xs-8 col-sm-9 col-md-10">
+                                    <a href="https://nodejs.org/en/" target="_blank">Node.js</a>,
+                                    <a href="http://gulpjs.com/" target="_blank">Gulp</a>,
+                                    <a href="https://en.wikipedia.org/wiki/SQL" target="_blank">SQL</a>,
+                                    <a href="https://www.mongodb.com/" target="_blank">MongoDB</a>,
+                                    <a href="https://www.asp.net/core" target="_blank">ASP.NET Core</a>,
+                                    <a href="https://lucene.apache.org/solr/" target="_blank">Apache Solr</a>,
+                                    <a href="https://cloud.google.com/" target="_blank">Google Cloud Platform</a>,
+                                    <a href="https://en.wikipedia.org/wiki/X86_assembly_language" target="_blank">x86 ASM</a>,
+                                    <a href="https://en.wikipedia.org/wiki/C%2B%2B" target="_blank">C++</a>,
+                                    <a href="https://en.wikipedia.org/wiki/Linux" target="_blank">Linux</a>
+                                </div>
+                            </li>
+                            <li class="row">
+                                <div class="col-xs-4 col-sm-3 col-md-2">Learning</div>
+                                <div class="col-xs-8 col-sm-9 col-md-10">
+                                    <a href="https://angular.io/" target="_blank">Angular2</a>,
+                                    <a href="https://www.haskell.org/" target="_blank">Haskell</a>,
+                                    <a href="https://en.wikipedia.org/wiki/Machine_learning" target="_blank">Machine Learning</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
         <div uib-accordion-group class="bottom" heading="Education">
             <div class="container">
-                <ul class="education-list col-xs-12">
-                    <li>
-                        <div class="title">Master of Science (MSci), Mathematics and Physics, 2:1</div>
-                        <div class="place">University of Bristol</div>
-                        <div class="date">2008 - 2012</div>
-                    </li>
-                    <li>
-                        <div class="title">Gold medal &amp; selected as one of 15 to attend the "bootcamp" preparation for the international olympiad.</div>
-                        <div class="place">UK Physics Olympiad</div>
-                        <div class="date">2008</div>
-                    </li>
-                    <li>
-                        <div class="title">5x A Levels, Maths, Further Maths, Further Maths Additional, Physics, Chemistry, AAAAB</div>
-                        <div class="place">Manchester Grammar School</div>
-                        <div class="date">2001 - 2008</div>
-                    </li>
-                </ul>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <ul class="education-list">
+                            <li>
+                                <div class="title">MSci. Mathematics and Physics (2:1)</div>
+                                <div class="place">University of Bristol</div>
+                                <div class="date">2008 - 2012</div>
+                            </li>
+                            <li>
+                                <div class="title">UK Physics Olympiad</div>
+                                <div class="other">Gold medal &amp; one of 15 chosen to attend the International Olympiad preparation camp</div>
+                                <div class="place">University of Oxford</div>
+                                <div class="date">2008</div>
+                            </li>
+                            <li>
+                                <div class="title">Physics Advanced Extension Award, Merit</div>
+                                <div class="place">The Manchester Grammar School</div>
+                                <div class="date">2008</div>
+                            </li>
+                            <li>
+                                <div class="title">5x A2 Level (AAAAB)</div>
+                                <div class="other">Maths, Further Maths, Further Maths Additional, Physics, Chemistry</div>
+                                <div class="place">The Manchester Grammar School</div>
+                                <div class="date">2006 - 2008</div>
+                            </li>
+                            <li>
+                                <div class="title">10x GCSE</div>
+                                <div class="place">The Manchester Grammar School</div>
+                                <div class="date">2001 - 2006</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </uib-accordion>
