@@ -75,6 +75,7 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
         .pipe(changeDir(paths.dest))
         .pipe(revAll.revision({
             dontRenameFile: [/\.(html|css)$/g],
+            dontUpdateReference: [/\.(html|css)$/g],
             dontSearchFile: [/\.(png|jpg|svg|gif|pdf|eot|ttf|woff|woff2)$/g]
         }))
         .pipe(filter('**/*.html'))
