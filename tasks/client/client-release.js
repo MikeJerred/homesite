@@ -71,7 +71,7 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
         .pipe(concat('styles.css'))
         .pipe(cleanCss({ keepSpecialComments: 0 }));
 
-    var revTemplates = merge(templates, allStyles.pipe(clone()), images, fonts, others, icons)
+    var revTemplates = merge(templates, allStyles.pipe(clone()), images, fonts, icons)
         .pipe(changeDir(paths.dest))
         .pipe(revAll.revision({
             dontRenameFile: ['.html', '.css'],
@@ -139,7 +139,7 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
     }
 
     // append file hash to name for cache-busting
-    var revFiles = merge(allStyles, allScripts, images, fonts, others, icons, merge(indexes))
+    var revFiles = merge(allStyles, allScripts, images, fonts, icons, merge(indexes))
         .pipe(changeDir(paths.dest))
         .pipe(revAll.revision({
             dontRenameFile: [/^\/?index[^\/]*\.html$/g],
@@ -150,7 +150,7 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
         .pipe(revAll.manifestFile())
         .pipe(gulp.dest(paths.dest));
 
-    return merge(revFiles, favicons);
+    return merge(revFiles, favicons, others);
 });
 
 
@@ -263,7 +263,8 @@ var copyFavicons = () =>
 
 var copyOthers = () =>
     gulp.src(paths.srcOther, { base: paths.src })
-        .pipe(plumber(plumberOptions));
+        .pipe(plumber(plumberOptions))
+        .pipe(gulp.dest(paths.dest));
 
 
 
