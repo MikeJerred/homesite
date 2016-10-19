@@ -181,7 +181,7 @@ var compileCritical = (route) => {
 var compileTemplates = () =>
     gulp.src(paths.srcHtml)
         .pipe(plumber(plumberOptions))
-        .pipe(htmlMin({ collapseWhitespace: true, collapseInlineTagWhitespace: true, removeComments: true }));
+        .pipe(htmlMin({ collapseWhitespace: true, collapseInlineTagWhitespace: false, removeComments: true }));
 
 
 // -------------------------------------------- styles ---------------------------------------------
