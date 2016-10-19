@@ -1,8 +1,10 @@
 var gulp = require('gulp');
+var angularTemplateCache = require('gulp-angular-templatecache');
 var cleanCss = require('gulp-clean-css');
 var clone = require('gulp-clone');
 var concat = require('gulp-concat');
 var del = require('del');
+var filter = require('gulp-filter');
 var fs = require('fs');
 var htmlMin = require('gulp-htmlmin');
 var merge = require('event-stream').merge;
@@ -33,11 +35,14 @@ var revAll = require('gulp-rev-all');
 var runSequence = require('run-sequence').use(gulp);
 var typings = require('gulp-typings');
 
-var changeDir = (dest) => {
+var changeDir = (base, rel) => {
     return through.obj((file, enc, cb) => {
         // change each files base path to be relative to the output dir
-        var basePath = path.resolve(process.cwd(), dest);
-        var writePath = path.resolve(basePath, file.relative);
+        var basePath = path.resolve(process.cwd(), base);
+        // change each files relative path
+        var writePath = rel
+            ? path.resolve(basePath, path.join(rel, file.relative))
+            : path.resolve(basePath, file.relative);
 
         file.base = path.normalize(basePath + path.sep);
         file.path = writePath;
@@ -57,6 +62,7 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
     var images = copyImages();
     var fonts = copyFonts();
     var favicons = copyFavicons();
+    var others = copyOthers();
 
     var iconStyles = through.obj();
     var icons = compileIcons(iconStyles);
@@ -65,11 +71,21 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
         .pipe(concat('styles.css'))
         .pipe(cleanCss({ keepSpecialComments: 0 }));
 
-    var allScripts = merge(libScripts, scripts, templates)
+    var revTemplates = merge(templates, allStyles.pipe(clone()), images, fonts, others, icons)
+        .pipe(changeDir(paths.dest))
+        .pipe(revAll.revision({
+            dontRenameFile: [/\.(html|css)$/g],
+            dontSearchFile: [/\.(png|jpg|svg|gif|pdf|eot|ttf|woff|woff2)$/g]
+        }))
+        .pipe(filter('**/*.html'))
+        .pipe(angularTemplateCache('templates.js', { module: 'mj.templates' }));
+
+    var allScripts = merge(libScripts, scripts, revTemplates)
         .pipe(order(['libraries.js', 'scripts.js', 'templates.js']))
         .pipe(concat('scripts.js'))
         .pipe(uglify());
 
+    // indexes
     var injectTransform = (filePath) => {
         if (filePath.slice(-3) === '.js') {
             return '<script async src="/' + filePath + '"></script>';
@@ -121,18 +137,19 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
         indexes.push(criticalIndex);
     }
 
-    var revFiles = merge(allStyles, allScripts, images, merge(indexes))
+    // append file hash to name for cache-busting
+    var revFiles = merge(allStyles, allScripts, images, fonts, others, icons, merge(indexes))
         .pipe(changeDir(paths.dest))
         .pipe(revAll.revision({
             dontRenameFile: [/^\/?index[^\/]*\.html$/g],
-            dontSearchFile: [/\.js$/g],
-            includeFilesInManifest: ['.css', '.js', '.png', '.jpg', '.svg', '.gif']
+            dontSearchFile: [/\.(js|png|jpg|svg|gif|pdf|eot|ttf|woff|woff2)$/g],
+            includeFilesInManifest: ['.css', '.js', '.png', '.jpg', '.svg', '.gif', '.pdf', '.eot', '.ttf', '.woff', '.woff2']
         }))
         .pipe(gulp.dest(paths.dest))
         .pipe(revAll.manifestFile())
         .pipe(gulp.dest(paths.dest));
 
-    return merge(revFiles, fonts, favicons, icons);
+    return merge(revFiles, favicons);
 });
 
 
@@ -160,14 +177,10 @@ var compileCritical = (route) => {
 
 
 // ------------------------------------------- templates -------------------------------------------
-var angularTemplateCache = require('gulp-angular-templatecache');
-
 var compileTemplates = () =>
     gulp.src(paths.srcHtml)
         .pipe(plumber(plumberOptions))
-        .pipe(htmlMin({ collapseWhitespace: true, collapseInlineTagWhitespace: true, removeComments: true }))
-        .pipe(angularTemplateCache('templates.js', { module: 'mj.templates' }))
-        .pipe(uglify());
+        .pipe(htmlMin({ collapseWhitespace: true, collapseInlineTagWhitespace: true, removeComments: true }));
 
 
 // -------------------------------------------- styles ---------------------------------------------
@@ -177,7 +190,7 @@ var progeny = require('gulp-progeny');
 var lessAutoprefix = new lessPluginAutoprefix(settings.autoprefixer);
 
 var compileStyles = () =>
-    gulp.src(paths.srcLess.concat('!**/*.debug.less'))
+    gulp.src(paths.srcLess)
         .pipe(plumber(plumberOptions))
         .pipe(progeny())
         .pipe(less({ plugins: [lessAutoprefix] }));
@@ -201,7 +214,6 @@ var compileScripts = () =>
 // --------------------------------------------- libs ----------------------------------------------
 var autoprefixer = require('gulp-autoprefixer');
 var bowerFiles = require('main-bower-files');
-var filter = require('gulp-filter');
 var ignore = require('gulp-ignore');
 var modernizr = require('gulp-modernizr');
 //var replace = require('gulp-replace');
@@ -241,12 +253,17 @@ var copyFonts = () =>
     gulp.src(paths.srcFonts)
         .pipe(plumber(plumberOptions))
         .pipe(flatten())
-        .pipe(gulp.dest(paths.destFonts));
+        .pipe(changeDir(paths.dest, './fonts'));
 
 var copyFavicons = () =>
     gulp.src(paths.srcFavicons, { base: paths.src })
         .pipe(plumber(plumberOptions))
         .pipe(gulp.dest(paths.dest));
+
+var copyOthers = () =>
+    gulp.src(paths.srcOther, { base: paths.src })
+        .pipe(plumber(plumberOptions));
+
 
 
 // --------------------------------------------- icons ---------------------------------------------
@@ -274,4 +291,4 @@ var compileIcons = (stylesStream) =>
                 .pipe(rename(paths.destIconsTemplate))
                 .pipe(stylesStream);
         })
-        .pipe(gulp.dest(paths.destFonts));
+        .pipe(changeDir(paths.dest, './fonts'));
