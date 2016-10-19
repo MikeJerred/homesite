@@ -5,17 +5,11 @@ article.default-layout footer.footer {
     width: 100%;
     padding: 40px;
     border-top: 4px solid #fff;
-
-    // hack for firefox, which has a bug that resizes images with background-attachment: fixed
-    // causing a 'jump' when the page loads
-    > .bg {
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center center;
-        background-image: url(/images/pattern.jpg);
-        bottom: 0;
-        left: 0;
-    }
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    background-image: url(/images/pattern.jpg);
 
     .content {
         display: table-cell;
