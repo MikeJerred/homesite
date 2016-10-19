@@ -167,7 +167,7 @@ var compileCritical = (route) => {
         .pipe(cleanCss());
 
     var imgGlob = paths.src + '/images/';
-    if (!route) imgGlob += '[intro,tent].jpg';
+    if (!route) imgGlob += '{intro,tent}.jpg';
     else if (route === 'home') imgGlob += 'tent.jpg';
     else imgGlob = '';
 
