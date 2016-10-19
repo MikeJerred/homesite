@@ -4,6 +4,9 @@ module MJ.States.Default {
     class Controller {
         static $inject = ['$scope', '$window'];
         constructor($scope: ng.IScope, private $window: ng.IWindowService) {
+            // remove critical html segment
+            $('article.critical-path').remove();
+
             // detect whether a state change happened because the user:
             // 1. used the browser history (back/forward buttons): $stateChangeSuccess happens after $locationChangeSuccess
             // 2. navigated using links on the page: $stateChangeSuccess happens before $locationChangeSuccess
