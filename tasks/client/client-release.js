@@ -74,9 +74,9 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
     var revTemplates = merge(templates, allStyles.pipe(clone()), images, fonts, others, icons)
         .pipe(changeDir(paths.dest))
         .pipe(revAll.revision({
-            dontRenameFile: [/\.(html|css)$/g],
-            dontUpdateReference: [/\.(html|css)$/g],
-            dontSearchFile: [/\.(png|jpg|svg|gif|pdf|eot|ttf|woff|woff2)$/g]
+            dontRenameFile: ['.html', '.css'],
+            dontUpdateReference: ['.html', '.css'],
+            dontSearchFile: ['.png', '.jpg', '.svg', '.gif', '.pdf', '.eot', '.ttf', '.woff', '.woff2']
         }))
         .pipe(filter('**/*.html'))
         .pipe(angularTemplateCache('templates.js', { module: 'mj.templates' }));
@@ -143,7 +143,7 @@ gulp.task('client:release:build', ['client:release:clean'], () => {
         .pipe(changeDir(paths.dest))
         .pipe(revAll.revision({
             dontRenameFile: [/^\/?index[^\/]*\.html$/g],
-            dontSearchFile: [/\.(js|png|jpg|svg|gif|pdf|eot|ttf|woff|woff2)$/g],
+            dontSearchFile: ['.js', '.png', '.jpg', '.svg', '.gif', '.pdf', '.eot', '.ttf', '.woff', '.woff2'],
             includeFilesInManifest: ['.css', '.js', '.png', '.jpg', '.svg', '.gif', '.pdf', '.eot', '.ttf', '.woff', '.woff2']
         }))
         .pipe(gulp.dest(paths.dest))
