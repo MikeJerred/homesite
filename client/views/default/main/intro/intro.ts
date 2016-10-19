@@ -3,12 +3,11 @@ module MJ.Views.Default.Main.Intro {
 
     class Controller {
         static $inject = ['pageMeta', '$state', '$scope'];
-        constructor(pageMeta: PageMetaService, $state: ng.ui.IStateService, $scope: ng.IScope) {
+        constructor(pageMeta: PageMetaService, private $state: ng.ui.IStateService, $scope: ng.IScope) {
             pageMeta.setTitle(null);
 
             $(window).on('wheel', event => {
                 if ((<WheelEvent>event.originalEvent).deltaY > 0) {
-
                     $state.transitionTo('default.home');
                 }
             });
@@ -17,10 +16,15 @@ module MJ.Views.Default.Main.Intro {
                 $(window).off('wheel');
             });
         }
+
+        public gotoHome() {
+            this.$state.transitionTo('default.home');
+        }
     }
 
     export var view = {
         templateUrl: 'views/default/main/intro/intro.html',
-        controller: Controller
+        controller: Controller,
+        controllerAs: 'introCtrl'
     };
 }

@@ -7,6 +7,7 @@ module MJ {
         'ngSanitize',
         'ngTouch',
         'hljs',
+        'swipe',
         'ui.bootstrap',
         'ui.router',
         'mj.dataServices',
