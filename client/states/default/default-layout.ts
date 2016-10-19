@@ -4,6 +4,10 @@ module MJ.States.Default {
     class Controller {
         static $inject = ['$scope', '$window'];
         constructor($scope: ng.IScope, private $window: ng.IWindowService) {
+            // hide critical html segment, but only once the css has loaded
+            // (otherwise we could get unstyled content if the scripts load before the css)
+            $('article.critical-path').addClass('hide-critical');
+
             // detect whether a state change happened because the user:
             // 1. used the browser history (back/forward buttons): $stateChangeSuccess happens after $locationChangeSuccess
             // 2. navigated using links on the page: $stateChangeSuccess happens before $locationChangeSuccess

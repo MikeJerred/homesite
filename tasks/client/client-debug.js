@@ -30,11 +30,11 @@ var watch = require('gulp-watch');
 
 gulp.task('client:debug:clean',
     [
-        'client:debug:clean:other',
         'client:debug:clean:templates',
         'client:debug:clean:styles',
         'client:debug:clean:scripts',
-        'client:debug:clean:other',
+        'client:debug:clean:images',
+        'client:debug:clean:fonts',
         'client:debug:clean:icons',
         'client:debug:clean:libs'
     ],
@@ -49,8 +49,9 @@ gulp.task('client:debug:build', (done) => {
             'client:debug:compile:scripts',
             'client:debug:compile:images',
             'client:debug:compile:fonts',
-            'client:debug:compile:icons',
-            'client:debug:compile:favicons'
+            'client:debug:compile:favicons',
+            'client:debug:compile:other',
+            'client:debug:compile:icons'
         ],
         'client:debug:compile:index',
         done);
@@ -72,6 +73,8 @@ gulp.task('client:debug:watch', ['client:debug:build'], () => {
     watch(paths.srcTs, { read: false }, buildHandler('client:debug:compile:scripts'));
     watch(paths.srcImg, { read: false }, buildHandler('client:debug:compile:images'));
     watch(paths.srcFonts, { read: false }, buildHandler('client:debug:compile:fonts'));
+    watch(paths.srcFavicons, { read: false }, buildHandler('client:debug:compile:favicons'));
+    watch(paths.srcOther, { read: false }, buildHandler('client:debug:compile:other'));
     watch(paths.srcIcons.concat(paths.srcIconsTemplate), { read: false }, buildHandler('client:debug:compile:icons'));
     watch(paths.srcIndex, { read: false }, () => { runSequence('client:debug:compile:index'); });
 });
@@ -110,7 +113,7 @@ gulp.task('client:debug:clean:styles', () => {
 });
 
 gulp.task('client:debug:compile:styles', () => {
-    var src = gulp.src(paths.srcLess.concat('!**/*.release.less'))
+    var src = gulp.src(paths.srcLess)
         .pipe(cached('client:debug:styles:src', { optimizeMemory: true }));
 
     var lessFiles = src
@@ -167,14 +170,18 @@ gulp.task('client:debug:compile:scripts', () => {
 // ---------------------------------------- fonts & images -----------------------------------------
 var flatten = require('gulp-flatten');
 
-gulp.task('client:debug:clean:other', () => {
+gulp.task('client:debug:clean:images', () => {
     if (cached.caches['client:debug:images'])
         delete cached.caches['client:debug:images'];
 
+    return del([paths.destImg]);
+});
+
+gulp.task('client:debug:clean:fonts', () => {
     if (cached.caches['client:debug:fonts'])
         delete cached.caches['client:debug:fonts'];
 
-    return del([paths.destImg, paths.destFonts]);
+    return del([paths.destFonts]);
 });
 
 gulp.task('client:debug:compile:images', () =>
@@ -196,6 +203,12 @@ gulp.task('client:debug:compile:fonts', () =>
 
 gulp.task('client:debug:compile:favicons', () =>
     gulp.src(paths.srcFavicons, { base: paths.src })
+        .pipe(plumber(plumberOptions))
+        .pipe(gulp.dest(paths.dest)));
+
+gulp.task('client:debug:compile:other', () =>
+    gulp.src(paths.srcOther, { base: paths.src })
+        .pipe(plumber(plumberOptions))
         .pipe(gulp.dest(paths.dest)));
 
 

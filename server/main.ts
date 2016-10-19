@@ -30,7 +30,8 @@ app.all('/*', (req, res, next) => {
 });
 
 app.use('/images', express.static(__dirname + '/wwwroot/images', { maxAge: cacheAge }));
-app.all(/^\/?(styles|scripts)\.[a-zA-Z0-9]*\.(js|css)$/, (req, res, next) => {
+app.use('/fonts', express.static(__dirname + '/wwwroot/fonts', { maxAge: cacheAge }));
+app.all(/^\/?(styles|scripts|cv)\.[a-zA-Z0-9]*\.(js|css|pdf)$/, (req, res, next) => {
     res.sendFile(req.url, { root: __dirname + '/wwwroot', maxAge: cacheAge });
 });
 app.use(express.static(__dirname + '/wwwroot', { maxAge: 0 }));

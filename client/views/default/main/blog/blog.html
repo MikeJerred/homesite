@@ -1,6 +1,5 @@
 <article class="main-blog">
-    <section class="headline" ng-class="'id-' + blogCtrl.article.id">
-        <page-fixed-to-parent class="bg"></page-fixed-to-parent>
+    <section class="headline" ng-class="'id-' + blogCtrl.article.id" page-fix-firefox image-refresh="blogCtrl.article.id">
         <div class="box" page-loaded>
             <h1>{{blogCtrl.article.headline}}</h1>
 

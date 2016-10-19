@@ -8,28 +8,22 @@ article.default-layout article.main-blog {
         padding: 40px;
         color: @theme-grey;
         font-family: @font-family-serif;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
 
         @media (max-width: @screen-xs-max) {
             padding: 20px;
         }
 
-        // hack for firefox, which has a bug that resizes images with background-attachment: fixed
-        // causing a 'jump' when the page loads
-        > .bg {
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center center;
-            top: 0;
-            left: 0;
-        }
-
-        &.id-1 > .bg { background-image: url(/images/blog-1.jpg); }
-        &.id-2 > .bg { background-image: url(/images/blog-2.jpg); }
-        &.id-3 > .bg { background-image: url(/images/blog-3.jpg); }
-        &.id-4 > .bg { background-image: url(/images/blog-4.jpg); }
-        &.id-5 > .bg { background-image: url(/images/blog-5.jpg); }
-        &.id-6 > .bg { background-image: url(/images/blog-6.jpg); }
-        &.id-7 > .bg { background-image: url(/images/blog-7.jpg); }
+        &.id-1 { background-image: url(/images/blog-1.jpg); }
+        &.id-2 { background-image: url(/images/blog-2.jpg); }
+        &.id-3 { background-image: url(/images/blog-3.jpg); }
+        &.id-4 { background-image: url(/images/blog-4.jpg); }
+        &.id-5 { background-image: url(/images/blog-5.jpg); }
+        &.id-6 { background-image: url(/images/blog-6.jpg); }
+        &.id-7 { background-image: url(/images/blog-7.jpg); }
 
         &:before {
             content: '';
@@ -235,7 +229,7 @@ article.default-layout article.main-blog {
         h3 { font-size: 22px; }
         h4 { font-size: 18px; }
 
-        @media (max-width: @screen-sm-min) {
+        @media (max-width: @screen-xs-max) {
             font-size: 16px;
 
             h1 { font-size: 30px; }

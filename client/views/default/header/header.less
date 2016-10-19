@@ -17,14 +17,13 @@ article.default-layout header.header {
         &.hide-menu { transform: translateY(-100px); }
 
         .top-bar {
-            //background-color: @theme-light-blue;
             height: @header-height;
             line-height: @header-height;
             font-size: 28px;
             padding-left: 40px;
             padding-top: 20px;
 
-            @media (max-width: @screen-sm-min) {
+            @media (max-width: @screen-xs-max) {
                 padding-left: 20px;
             }
 
@@ -72,7 +71,7 @@ article.default-layout header.header {
                 font-size: 0;
                 pointer-events: auto;
 
-                @media (max-width: @screen-sm-min) {
+                @media (max-width: @screen-xs-max) {
                     margin: 20px;
                 }
 

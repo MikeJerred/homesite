@@ -25,6 +25,7 @@ module.exports = {
             srcIconsTemplate: [clientSrcRoot + '/styles/icons-template.templ'],
             srcImg: [clientSrcRoot + '/images/**/*.{png,jpg,gif,svg}', '!' + clientSrcRoot + '/images/icons/*.svg'],
             srcFavicons: [clientSrcRoot + '/favicon.ico', clientSrcRoot + '/favicons/**/*'],
+            srcOther: [clientSrcRoot + '/*.pdf'],
             srcCritical: clientSrcRoot + '/critical',
 
             dest: clientBuildRoot,
