@@ -11,6 +11,10 @@ article.default-layout article.main-home {
         background-attachment: fixed;
         background-image: url(/images/tent.jpg);
 
+        @media (max-width: @screen-xs-max) {
+            background-attachment: scroll;
+        }
+
         > .center {
             display: table-cell;
             vertical-align: middle;

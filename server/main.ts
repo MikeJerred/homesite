@@ -66,9 +66,9 @@ app.all('/*', (req, res, next) => {
                 /<\/head>/g,
                 '<style>article.critical-path .image{background-image:url(/'+image+');}</style></head>');
 
-            res.set('Content-Type', 'text/html');
-            res.set('Cache-Control', 'public, max-age=0');
-            res.send(file);
+            res.set('Content-Type', 'text/html')
+               .set('Cache-Control', 'public, max-age=0')
+               .send(file);
             return;
         }
     } else if (page === 'not-found') {
