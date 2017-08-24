@@ -12,7 +12,6 @@ module.exports = {
     paths: {
         client: {
             tsConfig: clientSrcRoot + '/tsconfig.json',
-            tsTypingsConfig: clientSrcRoot + '/typings.json',
             tsTypings: [clientSrcRoot + '/typings/**/*.d.ts', modelsSrcRoot + '/**/*.d.ts'],
 
             src: clientSrcRoot,
@@ -41,7 +40,6 @@ module.exports = {
         },
         server: {
             tsConfig: serverSrcRoot + '/tsconfig.json',
-            tsTypingsConfig: serverSrcRoot + '/typings.json',
             tsTypings: [serverSrcRoot + '/typings/**/*.d.ts', modelsSrcRoot + '/**/*.d.ts'],
 
             srcRoot: serverSrcRoot,

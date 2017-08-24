@@ -3,8 +3,6 @@ module MJ.Directives.Blog.Markdown {
         markdown: string;
     }
 
-    declare var showdown: { Converter: Showdown.ConverterStatic };
-
     class BlogMarkdownDirectve implements ng.IDirective {
         public restrict = 'E';
         public scope = {

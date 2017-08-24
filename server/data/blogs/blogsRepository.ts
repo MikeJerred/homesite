@@ -3,16 +3,16 @@ import Page from '../page';
 import {default as Blog, IDmBlog} from './dmBlogs';
 
 export async function getBlog(id: number): Promise<IDmBlog> {
-    const blog = await Blog.findOne({ id: id })
-        .populate('prevBlog', 'id headline updatedDate')
-        .populate('nextBlog', 'id headline updatedDate')
+    const blog = await Blog.findOne({ blogId: id })
+        .populate('prevBlog', 'blogId headline updatedDate')
+        .populate('nextBlog', 'blogId headline updatedDate')
         .exec();
 
     if (!blog.prevBlog) {
         var prevBlogPromise = Blog.find({ updatedDate: { '$lt': blog.updatedDate } })
             .sort({ updatedDate: 'desc' })
             .limit(1)
-            .select('id headline updatedDate')
+            .select('blogId headline updatedDate')
             .exec();
     }
 
@@ -20,7 +20,7 @@ export async function getBlog(id: number): Promise<IDmBlog> {
         var nextBlogPromise = Blog.find({ updatedDate: { '$gt': blog.updatedDate } })
             .sort({ updatedDate: 'asc' })
             .limit(1)
-            .select('id headline updatedDate')
+            .select('blogId headline updatedDate')
             .exec();
     }
 
@@ -35,7 +35,7 @@ export async function getBlogsPage(pageNo: number, pageSize: number): Promise<Pa
         .sort({ updatedDate: 'desc' })
         .skip((pageNo-1)*pageSize)
         .limit(pageSize)
-        .select('id headline updatedDate')
+        .select('blogId headline updatedDate')
         .exec();
 
     let count = Blog.count({}).exec();

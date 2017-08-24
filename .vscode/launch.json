@@ -6,11 +6,10 @@
 			"type": "node",
 			"request": "launch",
 			"program": "${workspaceRoot}/server/main.ts",
+			"protocol": "inspector",
 			"stopOnEntry": false,
 			"args": [],
 			"cwd": "${workspaceRoot}/dist",
-			"preLaunchTask": null,
-			"runtimeExecutable": null,
 			"runtimeArgs": [
 				"--nolazy"
 			],
@@ -20,7 +19,7 @@
 			},
 			"console": "integratedTerminal",
 			"sourceMaps": true,
-			"outDir": "${workspaceRoot}/dist"
+			"outFiles": ["${workspaceRoot}/dist/**"]
 		},
 		{
 			"name": "Attach",
@@ -30,7 +29,7 @@
 			"address": "localhost",
 			"restart": false,
 			"sourceMaps": true,
-			"outDir": "${workspaceRoot}/dist",
+			"outFiles": ["${workspaceRoot}/dist/**"],
 			"localRoot": "${workspaceRoot}",
 			"remoteRoot": null
 		}

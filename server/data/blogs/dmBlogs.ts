@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 
 export interface IDmBlog extends mongoose.Document {
-    id: number;
+    blogId: number;
     prevBlog: IDmBlog;
     nextBlog: IDmBlog;
     headline: string;
@@ -10,7 +10,7 @@ export interface IDmBlog extends mongoose.Document {
 }
 
 export default mongoose.model<IDmBlog>('Blog', new mongoose.Schema({
-    id: { type: Number, required: true, unique: true },
+    blogId: { type: Number, required: true, unique: true },
     prevBlog: { type: Number, ref: 'Blog' },
     nextBlog: { type: Number, ref: 'Blog' },
     headline: String,
