@@ -1,6 +1,7 @@
 import * as express from 'express';
 import * as joi from 'joi';
-import * as Immutable from 'immutable';
+///<reference path='../../node_modules/immutable/dist/immutable.d.ts'/>
+import Immutable = require('immutable');
 
 interface IFieldError {
     field: string;

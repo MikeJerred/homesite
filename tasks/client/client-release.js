@@ -33,7 +33,6 @@ var plumberOptions = {
 var inject = require('gulp-inject');
 var revAll = require('gulp-rev-all');
 var runSequence = require('run-sequence').use(gulp);
-var typings = require('gulp-typings');
 
 var changeDir = (base, rel) => {
     return through.obj((file, enc, cb) => {
