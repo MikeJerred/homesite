@@ -1,0 +1,72 @@
+<article class="main-portfolio">
+    <section class="headline" ng-class="'id-' + portfolioCtrl.article.id" page-fix-firefox image-refresh="portfolioCtrl.article.id">
+        <div class="box" page-loaded>
+            <h1>{{portfolioCtrl.article.headline}}</h1>
+
+            <h4>{{portfolioCtrl.article.date | date:'dd MMMM yyyy'}}</h4>
+
+            <div class="share-links" ng-class="{ open: portfolioCtrl.showShareLinks}">
+                <button type="button"
+                        class="share-button"
+                        ng-click="portfolioCtrl.showShareLinks = !portfolioCtrl.showShareLinks"
+                        title="{{portfolioCtrl.showShareLinks ? 'Close' : 'Share'}}">
+                    <svg class="icon" width="20" height="20" viewbox="0 0 1200 1200">
+                        <circle class="dot1" cx="300" cy="600" r="220" />
+                        <circle class="dot2" cx="900" cy="320" r="220" />
+                        <circle class="dot3" cx="900" cy="880" r="220" />
+
+                        <rect class="line1" x="825" y="245" width="810" height="150" />
+                        <rect class="line2" x="825" y="805" width="810" height="150" />
+                    </svg>
+                    <svg class="no-smil-icon" width="20" height="20" viewbox="0 0 1200 1200">
+                        <circle class="dot1" cx="300" cy="600" r="220" />
+                        <circle class="dot2" cx="900" cy="320" r="220" />
+                        <circle class="dot3" cx="900" cy="880" r="220" />
+
+                        <line class="line1" x1="300" y1="600" x2="900" y2="320" stroke-width="150" />
+                        <line class="line2" x1="300" y1="600" x2="900" y2="880" stroke-width="150" />
+                    </svg>
+                    <svg class="no-smil-cross-icon" width="20" height="20" viewbox="0 0 1200 1200">
+                        <line class="line1" x1="1000" y1="220" x2="240" y2="980" stroke-width="150" />
+                        <line class="line2" x1="1000" y1="980" x2="240" y2="220" stroke-width="150" />
+                    </svg>
+                </button>
+                <ul class="links">
+                    <li><a class="mj-icon mj-icon-twitter-black-shape" ng-href="{{portfolioCtrl.twitterLink}}" title="Twitter"></a></li>
+                    <li><a class="mj-icon mj-icon-google-plus" ng-href="{{portfolioCtrl.googlePlusLink}}" title="Google+"></a></li>
+                    <li><a class="mj-icon mj-icon-linkedin-letters" ng-href="{{portfolioCtrl.linkedInLink}}" title="Linked In"></a></li>
+                    <li><a class="mj-icon mj-icon-facebook-logo" ng-href="{{portfolioCtrl.facebookLink}}" title="Facebook"></a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="main">
+        <div class="container">
+            <blog-markdown
+                class="col-xs-12 col-sm-offset-1 col-sm-10"
+                markdown="portfolioCtrl.article.articleMarkdown"></blog-markdown>
+        </div>
+    </section>
+
+    <section class="related-portfolios clearfix">
+        <a class="card card-prev pull-left col-xs-5 col-sm-4 col-md-3 col-lg-2"
+           ng-if="portfolioCtrl.article.prevPortfolio"
+           ui-sref="default.portfolio({ articleId: portfolioCtrl.article.prevPortfolio.id })">
+            <div class="content">
+                <h3 class="headline">{{portfolioCtrl.article.prevPortfolio.headline}}</h3>
+                <div class="date">{{portfolioCtrl.article.prevPortfolio.date | date:'dd MMMM yyyy'}}</div>
+            </div>
+        </a>
+        <a class="card card-next pull-right col-xs-5 col-sm-4 col-md-3 col-lg-2"
+           ng-if="portfolioCtrl.article.nextPortfolio"
+           ui-sref="default.portfolio({ articleId: portfolioCtrl.article.nextPortfolio.id })">
+            <div class="content">
+                <h3 class="headline">{{portfolioCtrl.article.nextPortfolio.headline}}</h3>
+                <div class="date">{{portfolioCtrl.article.nextPortfolio.date | date:'dd MMMM yyyy'}}</div>
+            </div>
+        </a>
+    </section>
+
+    <div ui-view name="footer"></div>
+</article>

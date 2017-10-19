@@ -45,6 +45,23 @@
                     },
                     resolve: Views.Default.Main.Blogs.resolve
                 })
+                .state('default.portfolio', {
+                    url: '/portfolio/:articleId',
+                    views: {
+                        'main': Views.Default.Main.Portfolio.view,
+                        'footer@default.portfolio': footer
+                    },
+                    resolve: Views.Default.Main.Portfolio.resolve
+                })
+                .state('default.portfolios', {
+                    url: '/portfolios?{pageNo:int}',
+                    reloadOnSearch: false,
+                    views: {
+                        'main': Views.Default.Main.Portfolios.view,
+                        'footer@default.portfolios': footer
+                    },
+                    resolve: Views.Default.Main.Portfolios.resolve
+                })
                 // .state('default.about', {
                 //     url: '/about',
                 //     views: {
