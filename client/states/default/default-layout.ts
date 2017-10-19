@@ -36,7 +36,7 @@ module MJ.States.Default {
                     if (fromState.name) {
                         // as we change view the fromState view will become position: fixed, so we need to offset its top by the
                         // current scroll position so that it remains in place. This is because the scroll position will soon
-                        // change to 0 since .ui-view-container has height set to 100vh during the transition,  and we don't want
+                        // change to 0 since .ui-view-container has height set to 100vh during the transition, and we don't want
                         // the old view to be affected by that.
                         //$('.ui-view-animate').css('top', -scrollPos);
                         $('.ui-view-animate > article').css({
@@ -46,6 +46,14 @@ module MJ.States.Default {
                         });
 
                         if (fromState.name === 'default.blog') {
+                            // save data for the fromState so that we can use it if the user goes back to this state later on
+                            if (!fromState.data)
+                                fromState.data = {};
+
+                            const key = this.getDataKey(fromParams);
+                            fromState.data[key] = { scrollY: this.scrollPos };
+                        }
+                        else if (fromState.name === 'default.portfolio') {
                             // save data for the fromState so that we can use it if the user goes back to this state later on
                             if (!fromState.data)
                                 fromState.data = {};
@@ -87,14 +95,23 @@ module MJ.States.Default {
 
         private chooseAnimation(toState: ng.ui.IState, toParams: any, fromState: ng.ui.IState, fromParams: any) {
             const order: {[key: string]: number} = {
-                'default.intro'    : 0,
-                'default.home'     : 20,
-                'default.blogs'    : 21,
-                'default.notFound' : 22,
-                'default.blog'     : 40
+                'default.intro'      : 0,
+                'default.home'       : 20,
+                'default.blogs'      : 21,
+                'default.portfolios' : 22,
+                'default.notFound'   : 23,
+                'default.blog'       : 40,
+                'default.portfolio'  : 41
             };
 
             if (toState.name === 'default.blog' && fromState.name === 'default.blog') {
+                if (toParams.articleId < fromParams.articleId) {
+                    return { enter: 'view-slide-right', leave: 'view-slide-left' };
+                } else {
+                    return { enter: 'view-slide-left', leave: 'view-slide-right' };
+                }
+            }
+            else if (toState.name === 'default.portfolio' && fromState.name === 'default.portfolio') {
                 if (toParams.articleId < fromParams.articleId) {
                     return { enter: 'view-slide-right', leave: 'view-slide-left' };
                 } else {

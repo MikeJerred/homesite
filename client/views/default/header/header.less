@@ -122,7 +122,7 @@ article.default-layout header.header {
             right: 40px;
             top: 70px;
             width: @menu-width;
-            height: @menu-width * 3;
+            height: @menu-width * 4;
             transition: height 0.3s ease-in-out;
             background-color: @theme-grey;
             z-index: 900;
@@ -131,7 +131,7 @@ article.default-layout header.header {
                 right: 20px;
             }
 
-            @delay-time: 0.1s;
+            @delay-time: 0.075s;
             .nav {
                 @font-size: 24px;
                 font-family: @font-family-serif;
@@ -174,6 +174,7 @@ article.default-layout header.header {
                     &:nth-child(1) { transition-delay: @delay-time; }
                     &:nth-child(2) { transition-delay: 2*@delay-time; }
                     &:nth-child(3) { transition-delay: 3*@delay-time; }
+                    &:nth-child(4) { transition-delay: 4*@delay-time; }
                 }
             }
 
@@ -185,9 +186,10 @@ article.default-layout header.header {
                     transform: translateX(100%);
                     transition: opacity 0.2s ease-in-out, transform 0.3s ease-in-out;
 
-                    &:nth-child(1) { transition-delay: 2*@delay-time; }
-                    &:nth-child(2) { transition-delay: @delay-time; }
-                    &:nth-child(3) { transition-delay: 0s; }
+                    &:nth-child(1) { transition-delay: 3*@delay-time; }
+                    &:nth-child(2) { transition-delay: 2*@delay-time; }
+                    &:nth-child(3) { transition-delay: @delay-time; }
+                    &:nth-child(4) { transition-delay: 0s; }
 
                     > a { display: none; }
                 }

@@ -1,0 +1,38 @@
+<article class="main-portfolio">
+    <section class="headline" ng-class="'id-' + portfolioCtrl.article.id" page-fix-firefox image-refresh="portfolioCtrl.article.id">
+        <div class="box" page-loaded>
+            <h1>{{portfolioCtrl.article.headline}}</h1>
+
+            <h4>{{portfolioCtrl.article.date | date:'dd MMMM yyyy'}}</h4>
+        </div>
+    </section>
+
+    <section class="main">
+        <div class="container">
+            <blog-markdown
+                class="col-xs-12 col-sm-offset-1 col-sm-10"
+                markdown="portfolioCtrl.article.articleMarkdown"></blog-markdown>
+        </div>
+    </section>
+
+    <section class="related-portfolios clearfix">
+        <a class="card card-prev pull-left col-xs-5 col-sm-4 col-md-3 col-lg-2"
+           ng-if="portfolioCtrl.article.prevPortfolio"
+           ui-sref="default.portfolio({ articleId: portfolioCtrl.article.prevPortfolio.id })">
+            <div class="content">
+                <h3 class="headline">{{portfolioCtrl.article.prevPortfolio.headline}}</h3>
+                <div class="date">{{portfolioCtrl.article.prevPortfolio.date | date:'dd MMMM yyyy'}}</div>
+            </div>
+        </a>
+        <a class="card card-next pull-right col-xs-5 col-sm-4 col-md-3 col-lg-2"
+           ng-if="portfolioCtrl.article.nextPortfolio"
+           ui-sref="default.portfolio({ articleId: portfolioCtrl.article.nextPortfolio.id })">
+            <div class="content">
+                <h3 class="headline">{{portfolioCtrl.article.nextPortfolio.headline}}</h3>
+                <div class="date">{{portfolioCtrl.article.nextPortfolio.date | date:'dd MMMM yyyy'}}</div>
+            </div>
+        </a>
+    </section>
+
+    <div ui-view name="footer"></div>
+</article>
