@@ -1,8 +1,6 @@
 @import 'variables';
 
-article.default-layout footer.footer {
-    display: table;
-    width: 100%;
+footer {
     padding: 40px;
     border-top: 4px solid #fff;
     background-repeat: no-repeat;
@@ -16,8 +14,6 @@ article.default-layout footer.footer {
     }
 
     .content {
-        display: table-cell;
-        vertical-align: middle;
         text-align: center;
         color: $theme-grey;
         padding: 30px;
@@ -45,6 +41,7 @@ article.default-layout footer.footer {
                 font-size: 1.8em;
 
                 > a {
+                    display: inline-block;
                     transition: border-radius 0.2s ease-in-out;
                     border: 2px solid $theme-grey;
                     margin: 0 5px;
