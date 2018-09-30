@@ -1,7 +1,15 @@
 {
-    "extends": "../tsconfig.json",
+    "compileOnSave": false,
     "compilerOptions": {
+        "outDir": "./dist",
+        "sourceMap": true,
+        "declaration": false,
         "module": "commonjs",
+        "moduleResolution": "node",
+        "noImplicitAny": true,
         "target": "es6"
-    }
+    },
+    "exclude": [
+        "node_modules"
+    ]
 }

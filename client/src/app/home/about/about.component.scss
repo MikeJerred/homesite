@@ -1,0 +1,153 @@
+@import 'variables';
+
+.about {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-image: url(/assets/images/tent.jpg);
+
+    @include media-breakpoint-down(xs) {
+        background-attachment: scroll;
+    }
+
+    .row {
+        height: 100vh;
+    }
+
+    .content {
+        .anchor {
+            position: relative;
+
+            @media (max-width: breakpoint-max(xs)) and (min-width: 500px) {
+                margin: 0 80px;
+            }
+        }
+
+        .yellow-border {
+            position: absolute;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+
+            $animation-time: 1s;
+            .top, .left, .right, .bottom {
+                position: absolute;
+                background-color: $theme-yellow;
+                animation-duration: $animation-time/4;
+                animation-fill-mode: both;
+                animation-timing-function: linear;
+            }
+
+            @keyframes defaultMainHomeBorderTop {
+                0% { width: 0; left: 33%; }
+                100% { width: 33%; left: 0; }
+            }
+
+            @keyframes defaultMainHomeBorderLeft {
+                0% { height: 0; }
+                100% { height: 50%; }
+            }
+
+            @keyframes defaultMainHomeBorderBottom {
+                0% { width: 0; right: 33%; }
+                100% { width: 33%; right: 0; }
+            }
+
+            @keyframes defaultMainHomeBorderRight {
+                0% { height: 0; }
+                100% { height: 50%; }
+            }
+
+            $stroke-width: 2px;
+            .top, .bottom { height: $stroke-width; }
+            .left, .right { width: $stroke-width; }
+
+            &.page-loaded {
+                .top { top: 0; animation-delay: 0s; animation-name: defaultMainHomeBorderTop; }
+                .left { top: 0; left: 0; animation-delay: $animation-time/4; animation-name: defaultMainHomeBorderLeft; }
+                .bottom { bottom: 0; animation-delay: 2*$animation-time/4; animation-name: defaultMainHomeBorderBottom; }
+                .right { bottom: 0; right: 0; animation-delay: 3*$animation-time/4; animation-name: defaultMainHomeBorderRight; }
+            }
+        }
+
+        .center {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 35px;
+            padding: 40px;
+            font-family: $font-family-base;
+            animation: fade 0.5s ease-in-out both;
+
+            .bold {
+                font-size: 48px;
+                font-weight: 400;
+                font-family: $font-family-serif;
+            }
+
+            @include media-breakpoint-down(xs) {
+                font-size: 14px;
+                line-height: 28px;
+                padding: 20px;
+
+                .bold { font-size: 24px; }
+            }
+        }
+    }
+}
+
+.filler {
+    color: $theme-grey;
+    background-color: $theme-light-blue;
+    border-top: 4px solid #fff;
+
+    .container > .row {
+        height: 40vh;
+
+        @include media-breakpoint-down(xs) {
+            font-size: 24px;
+            height: 25vh;
+        }
+
+        @media (max-height: 400px) {
+            height: 120px;
+        }
+    }
+
+    .left, .right {
+        text-align: center;
+    }
+
+    .left {
+        font-size: 28px;
+        font-family: $font-family-serif;
+
+        @include media-breakpoint-down(xs) {
+            font-size: 24px;
+        }
+    }
+
+    .right {
+        font-size: 18px;
+        font-family: $font-family-base;
+
+        .text > a {
+            display: inline-block;
+            border: 1px solid $theme-grey;
+            padding: 20px 40px;
+            background-color: transparent;
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+            &:hover {
+                border-color: transparent;
+                background-color: $theme-yellow;
+            }
+
+            @include media-breakpoint-down(xs) {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+    }
+}

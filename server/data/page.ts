@@ -1,4 +1,5 @@
 import * as Immutable from 'immutable';
+import { IVmPage } from '@homesite/shared/vmPage';
 
 export default class Page<T> {
     private constructor(
@@ -20,7 +21,7 @@ export default class Page<T> {
             this.totalCount);
     }
 
-    toVmPage(): MJ.Models.IVmPage<T> {
+    toVmPage(): IVmPage<T> {
         return {
             pageNo: this.pageNo,
             pageSize: this.pageSize,

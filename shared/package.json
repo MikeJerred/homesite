@@ -1,0 +1,6 @@
+{
+    "name": "@homesite/shared",
+    "private": true,
+    "dependencies": {
+    }
+}
