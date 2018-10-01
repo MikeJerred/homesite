@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top align-items-center justify-content-between" role="navigation" [class.hide-menu]="getUrl() === '/intro' || shouldHide()">
-    <div class="navbar-brand" [class.hide]="getUrl() !== '/home' && getUrl() !== '/intro'">
+    <div class="navbar-brand" [class.hide]="getUrl() === '/home' || getUrl() === '/intro'">
         <a class="logo" [routerLink]="['/home']">
             <span class="text">MJ</span>
         </a>
@@ -31,13 +31,13 @@
                 </a>
             </li>
             <li [class.active]="getUrl() === '/blogs'">
-                <a [routerLink]="['/blogs']" (click)="expandClick()" title="Blog">
+                <a [routerLink]="['/blog']" (click)="expandClick()" title="Blog">
                     <svg class="icon icon-black"><use xlink:href="/assets/icons.svg#icon-black"></use></svg>
                     <label>Blog</label>
                 </a>
             </li>
             <li [class.active]="getUrl() === '/portfolios'">
-                <a [routerLink]="['/portfolios']" (click)="expandClick()" title="Portfolio">
+                <a [routerLink]="['/portfolio']" (click)="expandClick()" title="Portfolio">
                     <svg class="icon icon-portfolio"><use xlink:href="/assets/icons.svg#icon-portfolio"></use></svg>
                     <label>Portfolio</label>
                 </a>

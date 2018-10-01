@@ -136,7 +136,7 @@ export class AppComponent {
         this.router.events
             .pipe(filter(evt => evt instanceof NavigationStart))
             .subscribe((evt: NavigationStart) => {
-                console.log(`NavigationStart: ${evt.url}`);
+                // console.log(`NavigationStart: ${evt.url}`);
 
                 // if (this.previousUrl) {
                 //     this.scrollYValues[this.previousUrl] = window.scrollY;
@@ -146,7 +146,7 @@ export class AppComponent {
         this.router.events
             .pipe(filter(evt => evt instanceof NavigationEnd))
             .subscribe((evt: NavigationEnd) => {
-                console.log(`NavigationEnd: ${evt.url}`);
+                // console.log(`NavigationEnd: ${evt.url}`);
 
                 // const roots = $('app-root > main > ng-component');
                 // const enter = roots.first();

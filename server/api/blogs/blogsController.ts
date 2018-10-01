@@ -1,7 +1,6 @@
-import { IVmPage } from '@homesite/shared/vmPage';
-import { IVmBlog } from '@homesite/shared/blogs/vmBlog';
-import { IVmBlogStub } from '@homesite/shared/blogs/vmBlogStub';
 import * as Joi from 'joi';
+
+import { IVmPage, IVmBlog, IVmBlogStub } from '@homesite/shared';
 import * as Router from '../router';
 import * as BlogsRepository from '../../data/blogs/blogsRepository';
 import * as VmBlogFactory from './vmBlogFactory';

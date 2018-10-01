@@ -1,6 +1,6 @@
+import { IVmPortfolio } from '@homesite/shared';
 import { IDmPortfolio } from '../../data/portfolios/dmPortfolios';
 import * as VmPortfolioStubFactory from './vmPortfolioStubFactory';
-import { IVmPortfolio } from '@homesite/shared/portfolios/vmPortfolio';
 
 export function build(model: IDmPortfolio): IVmPortfolio {
     let result: IVmPortfolio = {

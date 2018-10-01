@@ -1,5 +1,5 @@
 import * as Immutable from 'immutable';
-import { IVmPage } from '@homesite/shared/vmPage';
+import { IVmPage } from '@homesite/shared';
 
 export default class Page<T> {
     private constructor(

@@ -1,7 +1,6 @@
-import { IVmPage } from '@homesite/shared/vmPage';
-import { IVmPortfolio } from '@homesite/shared/portfolios/vmPortfolio';
-import { IVmPortfolioStub } from '@homesite/shared/portfolios/vmPortfolioStub';
 import * as Joi from 'joi';
+
+import { IVmPage, IVmPortfolio, IVmPortfolioStub } from '@homesite/shared';
 import * as Router from '../router';
 import * as PortfoliosRepository from '../../data/portfolios/portfoliosRepository';
 import * as VmPortfolioFactory from './vmPortfolioFactory';

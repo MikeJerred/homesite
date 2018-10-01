@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
@@ -10,6 +11,7 @@ import { PageLoadedService } from './page-loaded/page-loaded.service';
 @NgModule({
     imports: [
         CommonModule,
+        FormsModule,
         RouterModule,
         ScrollToModule.forRoot()
     ],
@@ -24,7 +26,9 @@ import { PageLoadedService } from './page-loaded/page-loaded.service';
         FooterComponent,
         HeaderComponent,
 
-        CommonModule
+        CommonModule,
+        FormsModule,
+        RouterModule
     ]
 })
 export class SharedModule {}

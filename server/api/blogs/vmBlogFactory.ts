@@ -1,6 +1,7 @@
+import { IVmBlog } from '@homesite/shared';
+
 import { IDmBlog } from '../../data/blogs/dmBlogs';
 import * as VmBlogStubFactory from './vmBlogStubFactory';
-import { IVmBlog } from '@homesite/shared/blogs/vmBlog';
 
 export function build(model: IDmBlog): IVmBlog {
     let result: IVmBlog = {

@@ -28,9 +28,7 @@
                         "stylePreprocessorOptions": {
                             "includePaths": [ "src" ]
                         },
-                        "scripts": [
-                            { "input": "node_modules/svgxuse/svgxuse.js", "bundleName": "svgxuse", "lazy": true }
-                        ]
+                        "scripts": []
                     },
                     "configurations": {
                         "production": {

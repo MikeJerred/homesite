@@ -22,18 +22,36 @@ $link-hover-decoration: none;
 
 $grid-breakpoints: (
     xs: 0,
-    sm: 480px,
-    md: 768px,
-    lg: 960px,
-    xl: 1280px
+    sm: 768px,
+    md: 960px,
+    lg: 1280px,
+    xl: 1400px
 );
 
 $container-max-widths: (
-    sm: 440px, // 540px,
-    md: 708px, // 720px,
-    lg: 940px, // 960px,
+    sm: 708px, // 540px,
+    md: 940px, // 720px,
+    lg: 980px, // 960px,
     xl: 980px // 1140px
 );
+
+
+// $grid-breakpoints: (
+//     xs: 0,
+//     sm: 480px,
+//     md: 768px,
+//     lg: 960px,
+//     xl: 1280px
+// );
+
+// $container-max-widths: (
+//     sm: 440px, // 540px,
+//     md: 708px, // 720px,
+//     lg: 940px, // 960px,
+//     xl: 980px // 1140px
+// );
+
+
 
 $grid-gutter-width: 40px;
 

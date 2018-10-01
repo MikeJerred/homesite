@@ -1,5 +1,5 @@
 import { IDmBlog } from '../../data/blogs/dmBlogs';
-import { IVmBlogStub } from '@homesite/shared/blogs/vmBlogStub';
+import { IVmBlogStub } from '@homesite/shared';
 
 export function build(model: IDmBlog): IVmBlogStub {
     return {

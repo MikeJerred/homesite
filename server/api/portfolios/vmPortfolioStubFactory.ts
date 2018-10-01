@@ -1,5 +1,5 @@
+import { IVmPortfolioStub } from '@homesite/shared';
 import { IDmPortfolio } from '../../data/portfolios/dmPortfolios';
-import { IVmPortfolioStub } from '@homesite/shared/portfolios/vmPortfolioStub';
 
 export function build(model: IDmPortfolio): IVmPortfolioStub {
     return {
