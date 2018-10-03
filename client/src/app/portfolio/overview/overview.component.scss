@@ -1,0 +1,81 @@
+@import 'variables';
+
+.background {
+    background-color: $theme-light-blue;
+    padding-top: $grid-gutter-width * 3;
+    padding-bottom: $grid-gutter-width;
+}
+
+.portfolios-list {
+    margin-bottom: 0;
+    padding: 0;
+    list-style: none;
+
+    > li {
+        margin-bottom: $grid-gutter-width;
+
+        > .portfolio-card {
+            position: relative;
+            display: table;
+            width: 100%;
+            color: $theme-grey;
+            background-position: center center;
+            background-size: cover;
+            box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+
+            &.id-1 { background-image: url(/assets/images/blog-1.jpg); }
+            &.id-2 { background-image: url(/assets/images/blog-2.jpg); }
+            &.id-3 { background-image: url(/assets/images/blog-3.jpg); }
+            &.id-4 { background-image: url(/assets/images/blog-4.jpg); }
+            &.id-5 { background-image: url(/assets/images/blog-5.jpg); }
+            &.id-6 { background-image: url(/assets/images/blog-6.jpg); }
+            &.id-7 { background-image: url(/assets/images/blog-7.jpg); }
+
+            $ratio: 0.9;
+            $lg-width: (map-get($container-max-widths, lg) / 3) - $grid-gutter-width;
+            $md-width: (map-get($container-max-widths, md) / 3) - $grid-gutter-width;
+            $sm-width: (map-get($container-max-widths, sm) / 2) - $grid-gutter-width;
+            height: $lg-width * $ratio;
+
+            @include media-breakpoint-down(md) { height: $md-width * $ratio; }
+            @include media-breakpoint-down(sm) { height: $sm-width * $ratio; }
+            @include media-breakpoint-down(xs) {
+                height: 150px;
+                font-size: 12px;
+            }
+
+            $margin: $grid-gutter-width/2;
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: $margin;
+                left: $margin;
+                bottom: $margin;
+                right: $margin;
+                background-color: #fff;
+                opacity: 0.8;
+                pointer-events: none;
+                transition: all 0.2s ease-in-out;
+            }
+
+            &:hover:before {
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+            }
+
+            > .content {
+                position: relative;
+                display: table-cell;
+                vertical-align: middle;
+                padding: 0 $margin*2;
+
+                .headline { margin: 0; font-family: $font-family-serif; font-size: 1.6em; }
+                .date { margin-top: 10px; font-size: 1em; font-weight: 300; }
+            }
+        }
+    }
+}

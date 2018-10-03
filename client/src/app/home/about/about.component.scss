@@ -1,0 +1,139 @@
+@import 'variables';
+
+.about {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    background-image: url(/assets/images/tent.jpg);
+
+    @include media-breakpoint-down(xs) {
+        background-attachment: scroll;
+    }
+
+    .row {
+        height: 100vh;
+    }
+
+    .content {
+        .anchor {
+            position: relative;
+
+            @media (max-width: breakpoint-max(xs)) and (min-width: 500px) {
+                margin: 0 80px;
+            }
+        }
+
+        .yellow-border {
+            position: absolute;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+
+            $animation-time: 0.5s;
+            $stroke-width: 2px;
+            .top, .left, .right, .bottom {
+                position: absolute;
+                background-color: $theme-yellow;
+                transition: all $animation-time/4 linear;
+            }
+
+            $delay: $animation-time / 4;
+            .top    { width: 0;             height: $stroke-width; top: 0;    left: 33%;  transition-delay: $delay*0; }
+            .left   { width: $stroke-width; height: 0;             top: 0;    left: 0;    transition-delay: $delay*1; }
+            .bottom { width: 0;             height: $stroke-width; bottom: 0; right: 33%; transition-delay: $delay*2; }
+            .right  { width: $stroke-width; height: 0;             bottom: 0; right: 0;   transition-delay: $delay*3; }
+
+            &.page-loaded {
+                .top { width: 33%; left: 0; }
+                .left { height: 50%; }
+                .bottom { width: 33%; right: 0; }
+                .right { height: 50%; }
+            }
+        }
+
+        .center {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 35px;
+            padding: 40px;
+            font-family: $font-family-base;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+
+            &.page-loaded {
+                opacity: 1;
+            }
+
+            .bold {
+                font-size: 48px;
+                font-weight: 400;
+                font-family: $font-family-serif;
+            }
+
+            @include media-breakpoint-down(xs) {
+                font-size: 14px;
+                line-height: 28px;
+                padding: 20px;
+
+                .bold { font-size: 24px; }
+            }
+        }
+    }
+}
+
+.filler {
+    color: $theme-grey;
+    background-color: $theme-light-blue;
+    border-top: 4px solid #fff;
+
+    .container > .row {
+        height: 40vh;
+
+        @include media-breakpoint-down(xs) {
+            font-size: 24px;
+            height: 25vh;
+        }
+
+        @media (max-height: 400px) {
+            height: 120px;
+        }
+    }
+
+    .left, .right {
+        text-align: center;
+    }
+
+    .left {
+        font-size: 28px;
+        font-family: $font-family-serif;
+
+        @include media-breakpoint-down(xs) {
+            font-size: 24px;
+        }
+    }
+
+    .right {
+        font-size: 18px;
+        font-family: $font-family-base;
+
+        .text > a {
+            display: inline-block;
+            border: 1px solid $theme-grey;
+            padding: 20px 40px;
+            background-color: transparent;
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+            &:hover {
+                border-color: transparent;
+                background-color: $theme-yellow;
+            }
+
+            @include media-breakpoint-down(xs) {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+    }
+}

@@ -1,10 +1,9 @@
 import * as express from 'express';
 import * as joi from 'joi';
-///<reference path='../../node_modules/immutable/dist/immutable.d.ts'/>
-import Immutable = require('immutable');
+import * as Immutable from 'immutable';
 
 interface IFieldError {
-    field: string;
+    fields: string[];
     errors: string[];
 }
 
@@ -30,13 +29,13 @@ function validate(data: any, schema: joi.SchemaMap): Promise<any> {
         };
 
         joi.validate(data, schema, options, (errors, value) => {
-            if (!errors || errors.details.length === 0) {
+            if (!errors || !errors.details || errors.details.length === 0) {
                 resolve(value);
             } else {
                 const fieldErrors: IFieldError[] = Immutable.Seq(errors.details)
                     .groupBy(error => error.path)
                     .map(group => ({
-                        field: group.first().path,
+                        fields: group.first().path,
                         errors: group.map(error => error.message).toArray()
                     }))
                     .toArray();

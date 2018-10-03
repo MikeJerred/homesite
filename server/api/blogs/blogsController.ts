@@ -1,7 +1,6 @@
-import IVmPage = MJ.Models.IVmPage;
-import IVmBlog = MJ.Models.Blogs.IVmBlog;
-import IVmBlogStub = MJ.Models.Blogs.IVmBlogStub;
 import * as Joi from 'joi';
+
+import { IVmPage, IVmBlog, IVmBlogStub } from '@homesite/shared';
 import * as Router from '../router';
 import * as BlogsRepository from '../../data/blogs/blogsRepository';
 import * as VmBlogFactory from './vmBlogFactory';

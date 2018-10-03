@@ -1,0 +1,28 @@
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~highlight.js/styles/github-gist';
+
+body {
+    // always have a scrollbar to prevent page jumping when transitioning
+    // between a view that would have no scrollbar and one that does
+    overflow-y: scroll;
+    //overflow-x: hidden;
+}
+
+ng-component {
+    display: block;
+}
+
+@keyframes fade {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+}

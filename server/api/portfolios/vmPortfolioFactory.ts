@@ -1,6 +1,6 @@
-import {IDmPortfolio} from '../../data/portfolios/dmPortfolios';
+import { IVmPortfolio } from '@homesite/shared';
+import { IDmPortfolio } from '../../data/portfolios/dmPortfolios';
 import * as VmPortfolioStubFactory from './vmPortfolioStubFactory';
-import IVmPortfolio = MJ.Models.Portfolios.IVmPortfolio;
 
 export function build(model: IDmPortfolio): IVmPortfolio {
     let result: IVmPortfolio = {

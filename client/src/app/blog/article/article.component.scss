@@ -1,0 +1,278 @@
+@import 'variables';
+
+section.headline {
+    position: relative;
+    padding: 40px;
+    color: $theme-grey;
+    font-family: $font-family-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+
+    @include media-breakpoint-down(xs) {
+        padding: 20px;
+        background-attachment: scroll;
+    }
+
+    &.id-1 { background-image: url(/assets/images/blog-1.jpg); }
+    &.id-2 { background-image: url(/assets/images/blog-2.jpg); }
+    &.id-3 { background-image: url(/assets/images/blog-3.jpg); }
+    &.id-4 { background-image: url(/assets/images/blog-4.jpg); }
+    &.id-5 { background-image: url(/assets/images/blog-5.jpg); }
+    &.id-6 { background-image: url(/assets/images/blog-6.jpg); }
+    &.id-7 { background-image: url(/assets/images/blog-7.jpg); }
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fff;
+        opacity: 0.84;
+    }
+
+    .box {
+        padding: 80px;
+        text-align: center;
+
+        h1, h4, .share-links {
+            position: relative;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        h1 { font-family: $font-family-serif; font-size: 38px; }
+        h4 { margin: 40px 0; font-family: $font-family-base; font-size: 15px; transition-delay: 0.15s; }
+        .share-links { transition-delay: 0.3s; }
+
+        &.page-loaded {
+            h1, h4, .share-links { opacity: 1; }
+        }
+
+        @include media-breakpoint-down(xs) {
+            padding: 60px 0 20px 0;
+
+            h1 { font-size: 22px; }
+            h4 { font-size: 14px; }
+        }
+
+        .share-links {
+            $link-size: 40px;
+
+            position: relative;
+            height: $link-size;
+            text-align: center;
+
+            .share-button {
+                border: 2px solid $theme-grey;
+                width: $link-size;
+                height: $link-size;
+                font-size: 0;
+                position: relative;
+                z-index: 100;
+                cursor: pointer;
+                background-color: transparent;
+                outline: none;
+                transition: border-radius 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+                .share-icon {
+                    .dot1, .dot2, .dot3, .line1, .line2 {
+                        fill: $theme-grey;
+                        transform: scale(1);
+                        transition: all 0.3s ease-in-out;
+                    }
+
+                    $center1: 300px 600px;
+                    $center2: 900px 320px;
+                    $center3: 900px 880px;
+
+                    .dot1 { transform-origin: $center1; }
+                    .dot2 { transform-origin: $center2; }
+                    .dot3 { transform-origin: $center3; }
+
+                    .line1 {
+                        transform-origin: $center2;
+                        transform: rotate(155deg);
+                    }
+
+                    .line2 {
+                        transform-origin: $center3;
+                        transform: rotate(-155deg);
+                    }
+                }
+
+                .no-smil-cross-icon {
+                    display: none;
+
+                    .line1, .line2 { stroke: $theme-grey; }
+                }
+
+                html:not(.smil) & .icon { display: none; }
+
+                &:hover {
+                    border-radius: 50%;
+                }
+            }
+
+            .links {
+                list-style: none;
+                position: absolute;
+                top: 0;
+                width: 100%;
+                height: $link-size;
+                color: $theme-grey;
+                text-align: center;
+                padding: 0;
+                margin: 0;
+                font-size: 0;
+                z-index: 1;
+
+                > li {
+                    position: absolute;
+                    $offset: $link-size/2 + 2; // +2 is for the border
+                    left: calc(50% - #{$offset});
+                    text-align: center;
+                    transition: all 0.2s ease-in-out;
+                    transform: translateX(0);
+                    opacity: 0;
+
+                    > a {
+                        display: inline-block;
+                        border: 2px solid $theme-grey;
+                        width: $link-size;
+                        height: $link-size;
+                        line-height: $link-size - 4px;
+                        text-align: center;
+                        transition: border-radius 0.2s ease-in-out;
+
+                        &:hover {
+                            border-radius: 50%;
+                        }
+
+                        > .icon {
+                            width: 20px;
+                            height: 20px;
+                        }
+                    }
+                }
+            }
+
+            &.open {
+                .share-button {
+                    color: $theme-grey;
+                    border-color: transparent;
+
+                    .share-icon {
+                        .dot1, .dot2, .dot3, .line1, .line2 { fill: $theme-grey; }
+                        .dot2, .dot3 { transform: scale(0); }
+                        .dot1 { transform: translateX(300px) scale(0.01); }
+                        .line1 { transform: rotate(135deg) scale(1.198, (120/150)); }
+                        .line2 { transform: rotate(-135deg) scale(1.198, (120/150)); }
+                    }
+
+                    html:not(.smil) & {
+                        .no-smil-cross-icon { display: block; }
+                    }
+
+                    &:hover {
+                        background-color: transparent;
+                    }
+                }
+
+                .links > li {
+                    @function getDistance($i) {
+                        $exp: 1;
+
+                        @for $j from 1 through $i {
+                            $exp: $exp * -1;
+                        }
+
+                        @return $exp * 55px * ceil($i / 2);
+                    }
+
+                    opacity: 1;
+
+                    &:nth-child(1) { transform: translateX(getDistance(1)); }
+                    &:nth-child(2) { transform: translateX(getDistance(2)); }
+                    &:nth-child(3) { transform: translateX(getDistance(3)); }
+                    &:nth-child(4) { transform: translateX(getDistance(4)); }
+                }
+            }
+        }
+    }
+}
+
+section.main {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 30px;
+    background-color: $theme-light-blue;
+    border-top: 4px solid #fff;
+
+    h1 { font-size: 36px; margin-top: 30px; }
+    h2 { font-size: 30px; margin-top: 20px; }
+    h3 { font-size: 22px; }
+    h4 { font-size: 18px; }
+
+    @include media-breakpoint-down(xs) {
+        font-size: 16px;
+
+        h1 { font-size: 30px; }
+        h2 { font-size: 25px; }
+        h3 { font-size: 18px; }
+        h4 { font-size: 14px; }
+    }
+}
+
+section.related-blogs {
+    background: $theme-light-blue;
+    padding: 40px 0;
+
+    .related-card {
+        height: 200px;
+        display: flex;
+        color: $theme-grey;
+        padding: 40px 20px;
+        font-family: $font-family-serif;
+        border-top: 1px solid $theme-grey;
+        border-bottom: 1px solid $theme-grey;
+        background-color: transparent;
+        transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+        &.card-prev {
+            border-right: 1px solid $theme-grey;
+
+            .content {
+                text-align: left;
+            }
+        }
+
+        &.card-next {
+            border-left: 1px solid $theme-grey;
+
+            .content {
+                text-align: right;
+            }
+        }
+
+        &:hover {
+            border-color: transparent;
+            background-color: $theme-yellow;
+        }
+
+        @include media-breakpoint-down(xs) {
+            padding: 20px 10px;
+            //width: 47%;
+
+            .content {
+                h3 { font-size: 14px; }
+                .date { font-size: 11px; }
+            }
+        }
+    }
+}
