@@ -1,8 +1,6 @@
 @import 'variables';
 
 section.headline {
-    display: table;
-    width: 100%;
     position: relative;
     padding: 40px;
     color: $theme-grey;
@@ -37,23 +35,21 @@ section.headline {
     }
 
     .box {
-        position: relative;
-        display: table-cell;
         padding: 80px;
-        vertical-align: middle;
         text-align: center;
 
         h1, h4, .share-links {
+            position: relative;
             opacity: 0;
-            animation: 0.3s ease-in-out both;
+            transition: opacity 0.3s ease-in-out;
         }
 
         h1 { font-family: $font-family-serif; font-size: 38px; }
-        h4 { margin: 40px 0; font-family: $font-family-base; animation-delay: 0.15s; }
-        .share-links { animation-delay: 0.3s; }
+        h4 { margin: 40px 0; font-family: $font-family-base; font-size: 15px; transition-delay: 0.15s; }
+        .share-links { transition-delay: 0.3s; }
 
         &.page-loaded {
-            h1, h4, .share-links { animation-name: fade; }
+            h1, h4, .share-links { opacity: 1; }
         }
 
         @include media-breakpoint-down(xs) {

@@ -1,0 +1,42 @@
+<article>
+
+    <section class="headline" [ngClass]="'id-' + article?.id" page-fix-firefox image-refresh="article?.id">
+        <div class="box" [class.page-loaded]="isPageLoaded">
+            <h1>{{article?.headline}}</h1>
+
+            <h4>{{article?.date | date:'dd MMMM yyyy'}}</h4>
+        </div>
+    </section>
+
+    <section class="main">
+        <div class="container">
+            <div class="row justify-content-center">
+                <app-markdown class="col-12 col-sm-10" [markdown]="article?.articleMarkdown"></app-markdown>
+            </div>
+        </div>
+    </section>
+
+    <section class="related-portfolios container-fluid">
+        <div class="row no-gutters justify-content-between">
+            <a class="related-card align-items-center justify-content-start card-prev col-5 col-sm-5 col-md-4 col-xl-3"
+                *ngIf="article?.prevPortfolio"
+                [routerLink]="['/portfolio', article?.prevPortfolio.id]">
+                <div class="content">
+                    <h3 class="headline">{{article?.prevPortfolio.headline}}</h3>
+                    <div class="date">{{article?.prevPortfolio.date | date:'dd MMMM yyyy'}}</div>
+                </div>
+            </a>
+            <a class="related-card align-items-center justify-content-end card-next col-5 col-sm-5 col-md-4 col-xl-3"
+                *ngIf="article?.nextPortfolio"
+                [routerLink]="['/portfolio', article?.nextPortfolio.id]">
+                <div class="content">
+                    <h3 class="headline">{{article?.nextPortfolio.headline}}</h3>
+                    <div class="date">{{article?.nextPortfolio.date | date:'dd MMMM yyyy'}}</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <app-footer></app-footer>
+
+</article>

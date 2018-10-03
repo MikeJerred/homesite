@@ -31,44 +31,25 @@
             height: 100%;
             pointer-events: none;
 
-            $animation-time: 1s;
+            $animation-time: 0.5s;
+            $stroke-width: 2px;
             .top, .left, .right, .bottom {
                 position: absolute;
                 background-color: $theme-yellow;
-                animation-duration: $animation-time/4;
-                animation-fill-mode: both;
-                animation-timing-function: linear;
+                transition: all $animation-time/4 linear;
             }
 
-            @keyframes defaultMainHomeBorderTop {
-                0% { width: 0; left: 33%; }
-                100% { width: 33%; left: 0; }
-            }
-
-            @keyframes defaultMainHomeBorderLeft {
-                0% { height: 0; }
-                100% { height: 50%; }
-            }
-
-            @keyframes defaultMainHomeBorderBottom {
-                0% { width: 0; right: 33%; }
-                100% { width: 33%; right: 0; }
-            }
-
-            @keyframes defaultMainHomeBorderRight {
-                0% { height: 0; }
-                100% { height: 50%; }
-            }
-
-            $stroke-width: 2px;
-            .top, .bottom { height: $stroke-width; }
-            .left, .right { width: $stroke-width; }
+            $delay: $animation-time / 4;
+            .top    { width: 0;             height: $stroke-width; top: 0;    left: 33%;  transition-delay: $delay*0; }
+            .left   { width: $stroke-width; height: 0;             top: 0;    left: 0;    transition-delay: $delay*1; }
+            .bottom { width: 0;             height: $stroke-width; bottom: 0; right: 33%; transition-delay: $delay*2; }
+            .right  { width: $stroke-width; height: 0;             bottom: 0; right: 0;   transition-delay: $delay*3; }
 
             &.page-loaded {
-                .top { top: 0; animation-delay: 0s; animation-name: defaultMainHomeBorderTop; }
-                .left { top: 0; left: 0; animation-delay: $animation-time/4; animation-name: defaultMainHomeBorderLeft; }
-                .bottom { bottom: 0; animation-delay: 2*$animation-time/4; animation-name: defaultMainHomeBorderBottom; }
-                .right { bottom: 0; right: 0; animation-delay: 3*$animation-time/4; animation-name: defaultMainHomeBorderRight; }
+                .top { width: 33%; left: 0; }
+                .left { height: 50%; }
+                .bottom { width: 33%; right: 0; }
+                .right { height: 50%; }
             }
         }
 
@@ -78,7 +59,12 @@
             line-height: 35px;
             padding: 40px;
             font-family: $font-family-base;
-            animation: fade 0.5s ease-in-out both;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+
+            &.page-loaded {
+                opacity: 1;
+            }
 
             .bold {
                 font-size: 48px;

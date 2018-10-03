@@ -17,12 +17,7 @@ $animate-delay: 0.75s;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
-        animation: 3s ease-in both;
-
-        @keyframes defaultMainIntroZoom {
-            0% { transform: translateX(0) translateY(0) scale(1); }
-            100% { transform: translateX(-5%) translateY(-5%) scale(1.1); }
-        }
+        transition: transform 3s ease-in;
     }
 
     .content {
@@ -50,12 +45,7 @@ $animate-delay: 0.75s;
                         $path-length: 90*4 + 1;
                         stroke-dasharray: $path-length;
                         stroke-dashoffset: $path-length;
-                        animation: 0.5s ease-in-out $animate-delay both;
-
-                        @keyframes defaultMainIntroOutlineLogo {
-                            0% { stroke-dashoffset: $path-length; }
-                            100% { stroke-dashoffset: 0; }
-                        }
+                        transition: stroke-dashoffset 0.5s ease-in-out $animate-delay;
                     }
                 }
 
@@ -65,18 +55,19 @@ $animate-delay: 0.75s;
                     font-size: 50px;
                     line-height: 100px;
                     opacity: 0;
-                    animation: 0.5s ease-in-out 0.25s both;
+                    transition: opacity 0.5s ease-in-out 0.25s;
                 }
             }
 
             h4 {
+                position: relative;
                 margin-top: 60px;
                 font-family: $font-family-base;
                 font-size: 18px;
                 font-weight: 200;
                 color: $theme-grey;
                 opacity: 0;
-                animation: 0.5s ease-in-out $animate-delay both;
+                transition: opacity 0.5s ease-in-out $animate-delay;
             }
 
             .down-link {
@@ -87,11 +78,12 @@ $animate-delay: 0.75s;
                 left: 45%;
                 left: calc(50% - 15px);
                 opacity: 0;
-                animation: 0.3s ease-in-out 0.5s 4 alternate, 0.5s ease-in-out $animate-delay both;
+                transition: opacity 0.5s ease-in-out $animate-delay;
+                animation: 0.3s ease-in-out 0.5s 4 alternate;
 
                 @keyframes defaultMainIntroArrowBounce {
-                    0% { opacity: 0; transform: translateY(0); }
-                    100% { opacity: 1; transform: translateY(-20px); }
+                    0% { transform: translateY(0); }
+                    100% { transform: translateY(-20px); }
                 }
 
                 > svg {
@@ -110,26 +102,27 @@ $animate-delay: 0.75s;
 
     &.page-loaded {
         &:before {
-            animation-name: defaultMainIntroZoom;
+            transform: translateX(-5%) translateY(-5%) scale(1.1);
         }
 
         .content .center {
             .logo {
                 .logo-border .line {
-                    animation-name: defaultMainIntroOutlineLogo;
+                    stroke-dashoffset: 0;
                 }
 
                 .text {
-                    animation-name: fade;
+                    opacity: 1;
                 }
             }
 
             h4 {
-                animation-name: fade;
+                opacity: 1;
             }
 
             .down-link {
-                animation-name: defaultMainIntroArrowBounce, fade;
+                animation-name: defaultMainIntroArrowBounce;
+                opacity: 1;
             }
         }
     }

@@ -6,6 +6,7 @@ import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { MarkdownComponent } from './markdown/markdown.component';
 import { PageLoadedService } from './page-loaded/page-loaded.service';
 
 @NgModule({
@@ -17,7 +18,8 @@ import { PageLoadedService } from './page-loaded/page-loaded.service';
     ],
     declarations: [
         FooterComponent,
-        HeaderComponent
+        HeaderComponent,
+        MarkdownComponent
     ],
     providers: [
         PageLoadedService
@@ -25,6 +27,7 @@ import { PageLoadedService } from './page-loaded/page-loaded.service';
     exports: [
         FooterComponent,
         HeaderComponent,
+        MarkdownComponent,
 
         CommonModule,
         FormsModule,

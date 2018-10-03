@@ -1,80 +1,85 @@
-<section class="headline" [ngClass]="'id-' + article?.id" page-fix-firefox image-refresh="article?.id">
-    <div class="box" [class.page-loaded]="pageLoaded()">
-        <h1>{{article?.headline}}</h1>
+<article>
 
-        <h4>{{article?.date | date:'dd MMMM yyyy'}}</h4>
+    <section class="headline" [ngClass]="'id-' + article?.id" page-fix-firefox image-refresh="article?.id">
+        <div class="box" [class.page-loaded]="isPageLoaded">
+            <h1>{{article?.headline}}</h1>
 
-        <div class="share-links" [class.open]="showShareLinks">
-            <button type="button"
-                    class="share-button"
-                    (click)="showShareLinks = !showShareLinks"
-                    [title]="showShareLinks ? 'Close' : 'Share'">
-                <svg class="share-icon" width="20" height="20" viewBox="0 0 1200 1200">
-                    <circle class="dot1" cx="300" cy="600" r="220" />
-                    <circle class="dot2" cx="900" cy="320" r="220" />
-                    <circle class="dot3" cx="900" cy="880" r="220" />
+            <h4>{{article?.date | date:'dd MMMM yyyy'}}</h4>
 
-                    <rect class="line1" x="825" y="245" width="810" height="150" />
-                    <rect class="line2" x="825" y="805" width="810" height="150" />
-                </svg>
-                <svg class="no-smil-cross-icon" width="20" height="20" viewBox="0 0 1200 1200">
-                    <line class="line1" x1="1000" y1="220" x2="240" y2="980" stroke-width="150" />
-                    <line class="line2" x1="1000" y1="980" x2="240" y2="220" stroke-width="150" />
-                </svg>
-            </button>
-            <ul class="links">
-                <li>
-                    <a [href]="twitterLink" title="Twitter">
-                        <svg class="icon icon-twitter-black-shape"><use xlink:href="/assets/icons.svg#icon-twitter-black-shape"></use></svg>
-                    </a>
-                </li>
-                <li>
-                    <a [href]="googlePlusLink" title="Google+">
-                        <svg class="icon icon-google-plus"><use xlink:href="/assets/icons.svg#icon-google-plus"></use></svg>
-                    </a>
-                </li>
-                <li>
-                    <a class="mj-icon mj-icon-linkedin-letters" [href]="linkedInLink" title="Linked In">
-                        <svg class="icon icon-linkedin-letters"><use xlink:href="/assets/icons.svg#icon-linkedin-letters"></use></svg>
-                    </a>
-                </li>
-                <li>
-                    <a [href]="facebookLink" title="Facebook">
-                        <svg class="icon icon-facebook-logo"><use xlink:href="/assets/icons.svg#icon-facebook-logo"></use></svg>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</section>
+            <div class="share-links" [class.open]="showShareLinks">
+                <button type="button"
+                        class="share-button"
+                        (click)="showShareLinks = !showShareLinks"
+                        [title]="showShareLinks ? 'Close' : 'Share'">
+                    <svg class="share-icon" width="20" height="20" viewBox="0 0 1200 1200">
+                        <circle class="dot1" cx="300" cy="600" r="220" />
+                        <circle class="dot2" cx="900" cy="320" r="220" />
+                        <circle class="dot3" cx="900" cy="880" r="220" />
 
-<section class="main">
-    <div class="container">
-        <div class="row justify-content-center">
-            <app-markdown class="col-12 col-sm-10" [markdown]="article?.articleMarkdown"></app-markdown>
-        </div>
-    </div>
-</section>
-
-<section class="related-blogs container-fluid">
-    <div class="row no-gutters justify-content-between">
-        <a class="related-card align-items-center justify-content-start card-prev col-5 col-sm-5 col-md-4 col-xl-3"
-            *ngIf="article?.prevBlog"
-            [routerLink]="['/blog', article?.prevBlog.id]">
-            <div class="content">
-                <h3 class="headline">{{article?.prevBlog.headline}}</h3>
-                <div class="date">{{article?.prevBlog.date | date:'dd MMMM yyyy'}}</div>
+                        <rect class="line1" x="825" y="245" width="810" height="150" />
+                        <rect class="line2" x="825" y="805" width="810" height="150" />
+                    </svg>
+                    <svg class="no-smil-cross-icon" width="20" height="20" viewBox="0 0 1200 1200">
+                        <line class="line1" x1="1000" y1="220" x2="240" y2="980" stroke-width="150" />
+                        <line class="line2" x1="1000" y1="980" x2="240" y2="220" stroke-width="150" />
+                    </svg>
+                </button>
+                <ul class="links">
+                    <li>
+                        <a [href]="twitterLink" title="Twitter">
+                            <svg class="icon icon-twitter-black-shape"><use xlink:href="/assets/icons.svg#icon-twitter-black-shape"></use></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a [href]="googlePlusLink" title="Google+">
+                            <svg class="icon icon-google-plus"><use xlink:href="/assets/icons.svg#icon-google-plus"></use></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="mj-icon mj-icon-linkedin-letters" [href]="linkedInLink" title="Linked In">
+                            <svg class="icon icon-linkedin-letters"><use xlink:href="/assets/icons.svg#icon-linkedin-letters"></use></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a [href]="facebookLink" title="Facebook">
+                            <svg class="icon icon-facebook-logo"><use xlink:href="/assets/icons.svg#icon-facebook-logo"></use></svg>
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </a>
-        <a class="related-card align-items-center justify-content-end card-next col-5 col-sm-5 col-md-4 col-xl-3"
-            *ngIf="article?.nextBlog"
-            [routerLink]="['/blog', article?.nextBlog.id]">
-            <div class="content">
-                <h3 class="headline">{{article?.nextBlog.headline}}</h3>
-                <div class="date">{{article?.nextBlog.date | date:'dd MMMM yyyy'}}</div>
-            </div>
-        </a>
-    </div>
-</section>
+        </div>
+    </section>
 
-<app-footer></app-footer>
+    <section class="main">
+        <div class="container">
+            <div class="row justify-content-center">
+                <app-markdown class="col-12 col-sm-10" [markdown]="article?.articleMarkdown"></app-markdown>
+            </div>
+        </div>
+    </section>
+
+    <section class="related-blogs container-fluid">
+        <div class="row no-gutters justify-content-between">
+            <a class="related-card align-items-center justify-content-start card-prev col-5 col-sm-5 col-md-4 col-xl-3"
+                *ngIf="article?.prevBlog"
+                [routerLink]="['/blog', article?.prevBlog.id]">
+                <div class="content">
+                    <h3 class="headline">{{article?.prevBlog.headline}}</h3>
+                    <div class="date">{{article?.prevBlog.date | date:'dd MMMM yyyy'}}</div>
+                </div>
+            </a>
+            <div *ngIf="!article?.prevBlog" class="col-5 col-sm-5 col-md-4 col-xl-3"></div>
+            <a class="related-card align-items-center justify-content-end card-next col-5 col-sm-5 col-md-4 col-xl-3"
+                *ngIf="article?.nextBlog"
+                [routerLink]="['/blog', article?.nextBlog.id]">
+                <div class="content">
+                    <h3 class="headline">{{article?.nextBlog.headline}}</h3>
+                    <div class="date">{{article?.nextBlog.date | date:'dd MMMM yyyy'}}</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <app-footer></app-footer>
+
+</article>

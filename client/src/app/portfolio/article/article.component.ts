@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { IVmBlog } from '@homesite/shared';
 import { PageLoadedService } from '~/shared/page-loaded/page-loaded.service';
-import { BlogService } from '../blog.service';
+import { PortfolioService } from '../portfolio.service';
 
 @Component({
     templateUrl: './article.component.html',
@@ -16,15 +16,10 @@ export class ArticleComponent implements OnInit, OnDestroy {
     private isPageLoaded = false;
 
     public article: IVmBlog;
-    public showShareLinks = false;
-    public linkedInLink: string;
-    public facebookLink: string;
-    public twitterLink: string;
-    public googlePlusLink: string;
 
     constructor(
         private route: ActivatedRoute,
-        private blogService: BlogService,
+        private portfolioService: PortfolioService,
         pageLoadedService: PageLoadedService) {
 
         this.subscription = pageLoadedService.pageLoaded$().subscribe(isLoaded => {
@@ -43,20 +38,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }
 
     public getArticle(): void {
-        this.blogService.getBlog(this.articleId).subscribe(result => {
+        this.portfolioService.getPortfolio(this.articleId).subscribe(result => {
             this.article = result;
-
-            const url = encodeURIComponent(window.location.href);
-            const title = result.headline;
-            const summary = '';
-
-            this.linkedInLink = 'https://www.linkedin.com/shareArticle?mini=true&url=' + url
-                + '&title=' + title
-                + '&summary=' + summary
-                + '&source=' + url;
-            this.facebookLink = 'https://www.facebook.com/sharer/sharer.php?u=' + url + '&title=' + title;
-            this.googlePlusLink = 'https://plus.google.com/share?url=' + url;
-            this.twitterLink = 'https://twitter.com/intent/tweet/?source=' + url + '&text=' + title + ':%20' + url;
         });
     }
 }

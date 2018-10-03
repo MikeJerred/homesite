@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import * as marked from 'marked';
-import { highlight, highlightAuto } from 'highlight.js';
+import * as hljs from 'highlight.js';
 
 @Component({
     template: `<div [innerHTML]="getHtml()"></div>`,
@@ -16,8 +16,8 @@ export class MarkdownComponent {
                 this.markdown,
                 {
                     highlight: (code, language) => language
-                        ? highlight(language, code).value
-                        : highlightAuto(code).value
+                        ? hljs.highlight(language, code).value
+                        : hljs.highlightAuto(code).value
                 });
         }
 

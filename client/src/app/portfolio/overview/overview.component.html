@@ -1,0 +1,35 @@
+<article>
+
+    <div class="background">
+        <section class="main container">
+            <ul class="portfolios-list row">
+                <li *ngFor="let portfolio of portfolios?.items" class="col-xs-12 col-sm-6 col-md-4">
+                    <a class="portfolio-card"
+                        [routerLink]="['/portfolio', portfolio.id]"
+                        [ngClass]="'id-' + portfolio.id">
+
+                        <div class="content">
+                            <div class="headline">{{portfolio.headline}}</div>
+                            <div class="date">{{portfolio.date | date:'dd/MM/yyyy'}}</div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+        <section class="pagination-container text-center" *ngIf="portfolios?.totalCount > portfolios?.pageSize">
+            <pagination
+                [totalItems]="portfolios?.totalCount"
+                [itemsPerPage]="portfolios?.pageSize"
+                [(ngModel)]="pageNo"
+                (pageChanged)="pageChanged()"
+                previousText="&lsaquo;"
+                nextText="&rsaquo;"
+                firstText="&laquo;"
+                lastText="&raquo;"></pagination>
+        </section>
+    </div>
+
+    <app-footer></app-footer>
+
+</article>

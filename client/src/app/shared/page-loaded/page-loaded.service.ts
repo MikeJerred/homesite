@@ -1,24 +1,15 @@
 import { Injectable } from '@angular/core';
-import { NavigationStart, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class PageLoadedService {
-    private isLoaded = false;
+    private loaded = new BehaviorSubject<boolean>(false);
 
-    constructor(router: Router) {
-        router.events
-            .pipe(filter(evt => evt instanceof NavigationStart))
-            .subscribe((evt: NavigationStart) => {
-                this.isLoaded = false;
-            });
-    }
-
-    public isPageLoaded(): boolean {
-        return this.isLoaded;
+    public pageLoaded$(): Observable<boolean> {
+        return this.loaded;
     }
 
     public setPageLoaded(isLoaded: boolean): void {
-        this.isLoaded = isLoaded;
+        this.loaded.next(isLoaded);
     }
 }

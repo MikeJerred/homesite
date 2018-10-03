@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
-import { HomeModule } from 'home/home.module';
-import { BlogModule } from 'blog/blog.module';
+import { HomeModule } from './home/home.module';
+import { BlogModule } from './blog/blog.module';
+import { PortfolioModule } from './portfolio/portfolio.module';
 import { PageNotFoundComponent } from './page-not-found.component';
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
     imports: [
         HomeModule,
         BlogModule,
+        PortfolioModule,
         RouterModule.forRoot(routes)
     ],
     exports: [ RouterModule ]

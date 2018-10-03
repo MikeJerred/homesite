@@ -3,10 +3,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { SharedModule } from '~/shared/shared.module';
-import { BlogRoutingModule } from './blog-routing.module';
+import { PortfolioRoutingModule } from './portfolio-routing.module';
 import { ArticleComponent } from './article/article.component';
 import { OverviewComponent } from './overview/overview.component';
-import { BlogService } from './blog.service';
+import { PortfolioService } from './portfolio.service';
 
 @NgModule({
     imports: [
@@ -14,14 +14,14 @@ import { BlogService } from './blog.service';
         PaginationModule.forRoot(),
 
         SharedModule,
-        BlogRoutingModule
+        PortfolioRoutingModule
     ],
     providers: [
-        BlogService
+        PortfolioService
     ],
     declarations: [
         ArticleComponent,
         OverviewComponent
     ]
 })
-export class BlogModule {}
+export class PortfolioModule {}

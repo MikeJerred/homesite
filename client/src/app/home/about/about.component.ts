@@ -1,16 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-import { PageLoadedService } from 'shared/page-loaded/page-loaded.service';
+import { PageLoadedService } from '~/shared/page-loaded/page-loaded.service';
 
 @Component({
     templateUrl: './about.component.html',
     styleUrls: ['./about.component.scss']
 })
 export class AboutComponent {
-    constructor(private pageLoadedService: PageLoadedService) {
+    private subscription: Subscription;
+    private isPageLoaded = false;
+
+    constructor(pageLoadedService: PageLoadedService) {
+        this.subscription = pageLoadedService.pageLoaded$().subscribe(isLoaded => {
+            this.isPageLoaded = this.isPageLoaded || isLoaded;
+        });
     }
 
-    public pageLoaded(): boolean {
-        return this.pageLoadedService.isPageLoaded();
+    ngOnDestroy(): void {
+        if (this.subscription)
+            this.subscription.unsubscribe();
     }
 }
