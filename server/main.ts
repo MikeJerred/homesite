@@ -32,11 +32,11 @@ app.all('/*', (req, res, next) => {
 
 app.use('/api', apiRoutes);
 
-app.use(express.static(path.join(__dirname, '../client/dist/homesite')));
+app.use(express.static('../client/dist/homesite'));
 
 // Just send the index.html for other paths to support routes in angular
 app.all('/*', (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../client/dist/homesite/index.html'));
+    res.sendFile('../client/dist/homesite/index.html');
 });
 
 app.use(<express.ErrorRequestHandler>((err, req, res, next) => {
