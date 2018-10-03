@@ -225,7 +225,9 @@ export class AppComponent {
         if (outlet && outlet.isActivated && outlet.activatedRoute
             && outlet.activatedRoute.snapshot && outlet.activatedRoute.snapshot.url) {
 
-            let animation = outlet.activatedRoute.snapshot.url[0].path;
+            let animation = outlet.activatedRoute.snapshot.url.length === 0
+                ? 'intro'
+                : outlet.activatedRoute.snapshot.url[0].path;
 
             if (animation === 'blog' || animation === 'portfolio') {
                 const id = outlet.activatedRoute.snapshot.paramMap.get('id');

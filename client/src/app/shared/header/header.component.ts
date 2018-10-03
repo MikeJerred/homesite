@@ -23,7 +23,7 @@ export class HeaderComponent implements OnDestroy {
         router.events
             .pipe(filter(evt => evt instanceof NavigationEnd))
             .subscribe((evt: NavigationEnd) => {
-                if (evt.url === '/intro')
+                if (evt.url === '/')
                     this.expanded = false;
 
                 this.inRouteTransition = true;

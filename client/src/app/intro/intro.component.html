@@ -1,16 +1,17 @@
-<article class="main-intro no-prevent-default" ng-swipe-disable-mouse (swipeup)="gotoHome()">
+<article (swipeup)="gotoHome()">
     <section class="about" [class.page-loaded]="isPageLoaded">
+        <div class="background" [@background]="isPageLoaded"></div>
         <div class="container">
             <div class="content row align-items-center justify-content-center">
                 <div class="center">
                     <a class="logo" [routerLink]="['/home']">
                         <svg class="logo-border" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-                            <path class="line" fill="none" d="M5 5 L95 5 L95 95 L5 95 L5 4"/>
+                            <path class="line" [@border]="isPageLoaded" fill="none" d="M5 5 L95 5 L95 95 L5 95 L5 4"/>
                         </svg>
-                        <div class="text">MJ</div>
+                        <div class="text" [@logo]="isPageLoaded">MJ</div>
                     </a>
 
-                    <h4>Web Developer, using C#, Angular, and Typescript</h4>
+                    <h4 [@heading]="isPageLoaded">Web Developer, using C#, Angular, and Typescript</h4>
 
                     <a [routerLink]="['/home']" class="down-link">
                         <svg width="30px" height="50px" viewBox="0 0 60 100">

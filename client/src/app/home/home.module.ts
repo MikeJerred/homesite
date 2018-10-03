@@ -5,7 +5,6 @@ import { SharedModule } from '~/shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { AboutComponent } from './about/about.component';
 import { CvComponent } from './cv/cv.component';
-import { IntroComponent } from './intro/intro.component';
 import { OverviewComponent } from './overview/overview.component';
 
 @NgModule({
@@ -18,7 +17,6 @@ import { OverviewComponent } from './overview/overview.component';
     declarations: [
         AboutComponent,
         CvComponent,
-        IntroComponent,
         OverviewComponent
     ]
 })

@@ -1,5 +1,5 @@
-<nav class="navbar fixed-top align-items-center justify-content-between" role="navigation" [class.hide-menu]="getUrl() === '/intro' || shouldHide()">
-    <div class="navbar-brand" [class.hide]="getUrl() === '/home' || getUrl() === '/intro'">
+<nav class="navbar fixed-top align-items-center justify-content-between" role="navigation" [class.hide-menu]="getUrl() === '/' || shouldHide()">
+    <div class="navbar-brand" [class.hide]="getUrl() === '/home' || getUrl() === '/'">
         <a class="logo" [routerLink]="['/home']">
             <span class="text">MJ</span>
         </a>

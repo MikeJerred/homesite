@@ -36,7 +36,7 @@ app.use(express.static('../client/dist/homesite'));
 
 // Just send the index.html for other paths to support routes in angular
 app.all('/*', (req, res, next) => {
-    res.sendFile('../client/dist/homesite/index.html');
+    res.sendFile('../client/dist/homesite/index.html', { root: '.' });
 });
 
 app.use(<express.ErrorRequestHandler>((err, req, res, next) => {
