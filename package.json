@@ -3,7 +3,10 @@
     "scripts": {
         "install": "concurrently \"cd client && npm install\" \"cd server && npm install\"",
         "start:prod": "concurrently \"cd client && npm run build\" \"cd server && npm run start:prod\"",
-        "start:dev": "concurrently --kill-others \"cd client && npm run watch\" \"cd server && npm run start:dev\""
+        "start:dev": "concurrently --kill-others \"cd client && npm run watch\" \"cd server && npm run start:dev\"",
+        "heroku-postbuild": "npm run build",
+        "build": "concurrently \"cd client && npm run build\" \"cd server && npm run build\"",
+        "start": "cd server && npm run start:prod"
     },
     "files": [],
     "devDependencies": {
