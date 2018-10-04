@@ -17,7 +17,7 @@ import { PageLoadedService } from '~/shared/page-loaded/page-loaded.service';
         trigger('border', [
             state('false', style({ 'stroke-dashoffset': '*' })),
             state('true', style({ 'stroke-dashoffset': 0 })),
-            transition('false => true', animate('0.5s 1.75s ease-in-out'))
+            transition('false => true', animate('0.5s 1s ease-in-out'))
         ]),
         trigger('logo', [
             state('false', style({ opacity: 0 })),
@@ -27,7 +27,7 @@ import { PageLoadedService } from '~/shared/page-loaded/page-loaded.service';
         trigger('heading', [
             state('false', style({ opacity: 0 })),
             state('true', style({ opacity: 1 })),
-            transition('false => true', animate('0.5s 1.25s ease-in-out'))
+            transition('false => true', animate('0.5s 1s ease-in-out'))
         ])
     ]
 })

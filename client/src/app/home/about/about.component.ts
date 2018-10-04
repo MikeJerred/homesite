@@ -21,4 +21,8 @@ export class AboutComponent {
         if (this.subscription)
             this.subscription.unsubscribe();
     }
+
+    public getYears(): number {
+        return new Date().getFullYear() - new Date('2012').getFullYear();
+    }
 }
