@@ -26,6 +26,7 @@
                     <div class="date">{{article?.prevPortfolio.date | date:'dd MMMM yyyy'}}</div>
                 </div>
             </a>
+            <div *ngIf="!article?.prevPortfolio" class="col-5 col-sm-5 col-md-4 col-xl-3"></div>
             <a class="related-card align-items-center justify-content-end card-next col-5 col-sm-5 col-md-4 col-xl-3"
                 *ngIf="article?.nextPortfolio"
                 [routerLink]="['/portfolio', article?.nextPortfolio.id]">
