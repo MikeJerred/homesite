@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes } from '@angular/router';
-import { RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
 import { HomeModule } from './home/home.module';
 import { BlogModule } from './blog/blog.module';

@@ -24,7 +24,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 app.all('/*', (req, res, next) => {
     const info = userAgent.parse(req.header('user-agent'));
-    if (info.isIE && +info.version < 10)
+    if (info.isIE && +info.version <= 11)
         res.redirect('http://www.whatbrowser.org/');
     else
         next();

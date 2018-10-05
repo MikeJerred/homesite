@@ -12,6 +12,8 @@ import { PageLoadedService } from '~/shared/page-loaded/page-loaded.service';
 const before: AnimationMetadata[] = [
     style({
         position: 'relative',
+        top: 0,
+        left: 0,
         width: '100%',
         height: '100vh',
         overflow: 'hidden'
@@ -44,31 +46,31 @@ const before: AnimationMetadata[] = [
 ];
 
 const after: AnimationMetadata[] = [
-    style({
-        width: '*',
-        height: '*',
-        overflow: 'visible'
-    }),
-    query(
-        ':enter, :leave',
-        style({
-            position: '*',
-            width: '*',
-            height: '*',
-            overflow: 'visible'
-        })),
-    query(':enter > *, :leave > *', style({
-        position: '*',
-        top: '*',
-        width: '*'
-    }))
+    // style({
+    //     width: '*',
+    //     height: '*',
+    //     overflow: 'visible'
+    // }),
+    // query(
+    //     ':enter, :leave',
+    //     style({
+    //         position: '*',
+    //         width: '*',
+    //         height: '*',
+    //         overflow: 'visible'
+    //     })),
+    // query(':enter > *, :leave > *', style({
+    //     position: '*',
+    //     top: '*',
+    //     width: '*'
+    // }))
 ];
 
 const slideLeft = before.concat([
     query(':enter', style({ transform: 'translateX(100vw)' })),
     query(':leave', animateChild()),
     group([
-        query(':enter', animate('1s ease-in-out', style({ transform: 'translateX(0)'}))),
+        query(':enter', animate('1s ease-in-out', style({ transform: 'translateX(0)' }))),
         query(':leave', animate('1s ease-in-out', style({ transform: 'translateX(-70vw)'})))
     ]),
     query(':enter', animateChild())
@@ -78,8 +80,8 @@ const slideRight = before.concat([
     query(':enter', style({ transform: 'translateX(-100vw)' })),
     query(':leave', animateChild()),
     group([
-        query(':enter', animate('1s ease-in-out', style({ transform: 'translateX(0)'}))),
-        query(':leave', animate('1s ease-in-out', style({ transform: 'translateX(70vw)'})))
+        query(':enter', animate('1s ease-in-out', style({ transform: 'translateX(0)' }))),
+        query(':leave', animate('1s ease-in-out', style({ transform: 'translateX(70vw)' })))
     ]),
     query(':enter', animateChild())
 ]).concat(after);
@@ -88,8 +90,8 @@ const slideUp = before.concat([
     query(':enter', style({ transform: 'translateY(100vh)' })),
     query(':leave', animateChild()),
     group([
-        query(':enter', animate('1s ease-in-out', style({ transform: 'translateY(0)'}))),
-        query(':leave', animate('1s ease-in-out', style({ transform: 'translateY(-70vh)'})))
+        query(':enter', animate('1s ease-in-out', style({ transform: 'translateY(0)' }))),
+        query(':leave', animate('1s ease-in-out', style({ transform: 'translateY(-70vh)' })))
     ]),
     query(':enter', animateChild())
 ]).concat(after);
@@ -98,8 +100,8 @@ const slideDown = before.concat([
     query(':enter', style({ transform: 'translateY(-100vh)' })),
     query(':leave', animateChild()),
     group([
-        query(':enter', animate('1s ease-in-out', style({ transform: 'translateY(0)'}))),
-        query(':leave', animate('1s ease-in-out', style({ transform: 'translateY(70vh)'})))
+        query(':enter', animate('1s ease-in-out', style({ transform: 'translateY(0)' }))),
+        query(':leave', animate('1s ease-in-out', style({ transform: 'translateY(70vh)' })))
     ]),
     query(':enter', animateChild())
 ]).concat(after);
@@ -208,11 +210,18 @@ export class AppComponent {
     }
 
     public animationDone(event: AnimationEvent): void {
-        if (this.previousTrigger === 'popstate') {
-            this.window.scrollTo(0, this.scrollYValues[this.nextUrl] || 0);
-        }
+        // if (this.previousTrigger === 'popstate') {
+        //     this.window.scrollTo(0, this.scrollYValues[this.nextUrl] || 0);
+        // }
+
+        const scrollTo = this.previousTrigger === 'popstate'
+            ? this.scrollYValues[this.nextUrl] || 0
+            : null;
 
         setTimeout(() => {
+            if (scrollTo)
+                this.window.scrollTo(0, scrollTo);
+
             this.pageLoadedService.setPageLoaded(true);
         }, 0);
 
