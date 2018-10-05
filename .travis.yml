@@ -1,16 +1,14 @@
 sudo: false
 language: node_js
 node_js:
-- '6'
+- '10'
 branches:
   only:
   - master
-before_install:
-- npm install -g gulp bower typings
 install:
 - npm install
 before_script:
-- gulp build:release
+- npm run build
 deploy:
   provider: heroku
   skip_cleanup: true
@@ -22,5 +20,5 @@ deploy:
 cache:
   directories:
   - node_modules
-  - bower_components
-  - typings
+  - client/node_modules
+  - server/node_modules

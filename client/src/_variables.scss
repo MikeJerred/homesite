@@ -1,0 +1,60 @@
+@import 'functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+$icon-font-path: '../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
+
+$font-family-base: 'Prompt', sans-serif;
+$font-family-serif: 'Fauna One', serif;
+$font-size-base: 0.75rem;
+
+$theme-grey: #515151;
+$theme-black: #12211A;
+$theme-light-blue: #ebf5ff;
+$theme-blue: #b9dcff;
+$theme-dark-blue: #455a64;
+$theme-yellow: #ff9;
+$theme-yellow-dark: #ff6;
+
+$link-color: inherit;
+$link-hover-color: inherit;
+$link-hover-decoration: none;
+
+$grid-breakpoints: (
+    xs: 0,
+    sm: 768px,
+    md: 960px,
+    lg: 1280px,
+    xl: 1400px
+);
+
+$container-max-widths: (
+    sm: 708px, // 540px,
+    md: 940px, // 720px,
+    lg: 980px, // 960px,
+    xl: 980px // 1140px
+);
+
+
+// $grid-breakpoints: (
+//     xs: 0,
+//     sm: 480px,
+//     md: 768px,
+//     lg: 960px,
+//     xl: 1280px
+// );
+
+// $container-max-widths: (
+//     sm: 440px, // 540px,
+//     md: 708px, // 720px,
+//     lg: 940px, // 960px,
+//     xl: 980px // 1140px
+// );
+
+
+
+$grid-gutter-width: 40px;
+
+$border-radius:               0;
+$border-radius-lg:            0;
+$border-radius-sm:            0;

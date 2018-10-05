@@ -1,0 +1,53 @@
+<nav class="navbar fixed-top align-items-center justify-content-between" role="navigation" [class.hide-menu]="getUrl() === '/' || shouldHide()">
+    <div class="navbar-brand" [class.hide]="getUrl() === '/home' || getUrl() === '/'">
+        <a class="logo" [routerLink]="['/home']">
+            <span class="text">MJ</span>
+        </a>
+    </div>
+    <div class="nav-header">
+        <button type="button"
+                class="nav-toggle"
+                (click)="expandClick()"
+                [class.cross]="expanded"
+                [title]="expanded ? 'Close' : 'Menu'">
+            <svg class="menu-icon" width="24" height="15" viewBox="0 0 1618 1000">
+                <rect class="line1" x="50" y="50" width="1518" height="100" />
+                <rect class="line2" x="50" y="450" width="1518" height="100" />
+                <rect class="line3" x="50" y="850" width="1518" height="100" />
+            </svg>
+            <svg class="no-smil-cross-icon" width="24" height="15" viewBox="0 0 1618 1000">
+                <line class="line1" x1="409" y1="100" x2="1209" y2="900" stroke-width="100" />
+                <line class="line3" x1="409" y1="900" x2="1209" y2="100" stroke-width="100" />
+            </svg>
+        </button>
+    </div>
+
+    <div class="nav-collapse collapsed" [class.collapsed]="!expanded">
+        <ul class="nav">
+            <li [class.active]="getUrl() === '/home'">
+                <a [routerLink]="['/home']" (click)="expandClick()" title="Home">
+                    <svg class="icon icon-home"><use xlink:href="/assets/icons.svg#icon-home"></use></svg>
+                    <label>Home</label>
+                </a>
+            </li>
+            <li [class.active]="getUrl() === '/blogs'">
+                <a [routerLink]="['/blog']" (click)="expandClick()" title="Blog">
+                    <svg class="icon icon-black"><use xlink:href="/assets/icons.svg#icon-black"></use></svg>
+                    <label>Blog</label>
+                </a>
+            </li>
+            <li [class.active]="getUrl() === '/portfolios'">
+                <a [routerLink]="['/portfolio']" (click)="expandClick()" title="Portfolio">
+                    <svg class="icon icon-portfolio"><use xlink:href="/assets/icons.svg#icon-portfolio"></use></svg>
+                    <label>Portfolio</label>
+                </a>
+            </li>
+            <li>
+                <a (click)="expandClick(); scrollToBottom();" title="Contact">
+                    <svg class="icon icon-envelope"><use xlink:href="/assets/icons.svg#icon-envelope"></use></svg>
+                    <label>Contact</label>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

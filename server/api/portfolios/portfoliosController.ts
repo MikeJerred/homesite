@@ -1,7 +1,6 @@
-import IVmPage = MJ.Models.IVmPage;
-import IVmPortfolio = MJ.Models.Portfolios.IVmPortfolio;
-import IVmPortfolioStub = MJ.Models.Portfolios.IVmPortfolioStub;
 import * as Joi from 'joi';
+
+import { IVmPage, IVmPortfolio, IVmPortfolioStub } from '@homesite/shared';
 import * as Router from '../router';
 import * as PortfoliosRepository from '../../data/portfolios/portfoliosRepository';
 import * as VmPortfolioFactory from './vmPortfolioFactory';

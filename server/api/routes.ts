@@ -1,9 +1,5 @@
 import * as router from './router';
-
-const controllers = require('require-all')({
-    dirname     :  __dirname,
-    filter      :  /(.+Controller)\.js$/,
-    recursive   : true
-});
+import './blogs/blogsController';
+import './portfolios/portfoliosController';
 
 export default router.default;

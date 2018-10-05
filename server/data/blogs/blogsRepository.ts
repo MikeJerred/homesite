@@ -1,4 +1,3 @@
-import * as mongoose from 'mongoose';
 import Page from '../page';
 import {default as Blog, IDmBlog} from './dmBlogs';
 

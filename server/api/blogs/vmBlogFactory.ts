@@ -1,6 +1,7 @@
-import {IDmBlog} from '../../data/blogs/dmBlogs';
+import { IVmBlog } from '@homesite/shared';
+
+import { IDmBlog } from '../../data/blogs/dmBlogs';
 import * as VmBlogStubFactory from './vmBlogStubFactory';
-import IVmBlog = MJ.Models.Blogs.IVmBlog;
 
 export function build(model: IDmBlog): IVmBlog {
     let result: IVmBlog = {

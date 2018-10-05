@@ -1,0 +1,44 @@
+<article>
+
+    <section class="about">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="content col-xs-12 col-sm-10 col-md-8">
+                    <div class="anchor">
+                        <div class="yellow-border" [class.page-loaded]="isPageLoaded">
+                            <div class="top"></div>
+                            <div class="left"></div>
+                            <div class="right"></div>
+                            <div class="bottom"></div>
+                        </div>
+                        <div class="center" [class.page-loaded]="isPageLoaded">
+                            <span class="bold">Hi</span>, my name is Mike - a .NET web developer based in London.
+                            I have had a real passion for programming since the age of 13, beginning by reverse engineering video games, and have taught myself multiple languages and technologies over past {{getYears()}} years.
+                            I currently do contract work through my company Linnet Digital Ltd.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <app-home-overview></app-home-overview>
+
+    <app-home-cv></app-home-cv>
+
+    <section class="filler">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="left col-xs-12 col-sm-6">
+                    <div class="text">Available for contract work, feel free to get in touch.</div>
+                </div>
+                <div class="right col-xs-12 col-sm-6">
+                    <div class="text"><a href="/assets/cv.pdf" target="_blank">Download CV</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <app-footer></app-footer>
+
+</article>

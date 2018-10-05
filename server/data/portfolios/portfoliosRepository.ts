@@ -1,4 +1,3 @@
-import * as mongoose from 'mongoose';
 import Page from '../page';
 import {default as Portfolio, IDmPortfolio} from './dmPortfolios';
 

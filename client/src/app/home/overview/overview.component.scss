@@ -1,0 +1,77 @@
+@import 'variables';
+
+.overview {
+    color: $theme-grey;
+    background-color: $theme-light-blue;
+    border-top: 4px solid #fff;
+    border-bottom: 4px solid #fff;
+    position: relative;
+    font-size: 16px;
+    $transition-time: 1s;
+
+    .left, .right {
+        padding-top: $grid-gutter-width*2;
+        padding-bottom: $grid-gutter-width*2;
+    }
+
+    .left {
+        font-family: $font-family-serif;
+        font-size: 1.25em;
+        font-weight: 300;
+        line-height: 40px;
+        transition: opacity $transition-time ease-in-out;
+        opacity: 0;
+    }
+
+    .right {
+        font-family: $font-family-base;
+        font-size: 1em;
+        font-weight: 200;
+        line-height: 35px;
+
+        .tech-list {
+            list-style-position: inside;
+            margin: 0;
+            padding: 0;
+
+            $fade-time: 0.6s;
+            $delay-time: ($transition-time - $fade-time)/5;
+
+            > li {
+                transition: opacity $fade-time ease-in-out;
+                opacity: 0;
+            }
+
+            > li:nth-child(1) { transition-delay: 0; }
+            > li:nth-child(2) { transition-delay: 1*$delay-time; }
+            > li:nth-child(3) { transition-delay: 2*$delay-time; }
+            > li:nth-child(4) { transition-delay: 3*$delay-time; }
+            > li:nth-child(5) { transition-delay: 4*$delay-time; }
+            > li:nth-child(6) { transition-delay: 5*$delay-time; }
+        }
+    }
+
+    @include media-breakpoint-only(sm) {
+        > .container { font-size: 14px; }
+
+        .left { padding-right: 15px; }
+        .right { padding-left: 15px; }
+    }
+
+    @include media-breakpoint-down(xs) {
+        > .container { font-size: 14px; }
+
+        .right {
+            padding-top: 0;
+        }
+    }
+
+    &.scrolled-past {
+        .left { opacity: 1; }
+        .right .tech-list > li { opacity: 1; }
+
+        // the list-style is applied here because it was causing problems
+        // with the animation from intro -> home for some unknown reason
+        .right .tech-list { list-style-image: url(/assets/images/list-line.svg); }
+    }
+}
