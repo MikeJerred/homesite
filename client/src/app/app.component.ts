@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationStart, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import {
@@ -66,45 +66,53 @@ const after: AnimationMetadata[] = [
     // }))
 ];
 
-const slideLeft = before.concat([
+const slideLeft = [
+    ...before,
     query(':enter', style({ transform: 'translateX(100vw)' })),
     query(':leave', animateChild()),
     group([
         query(':enter', animate('1s ease-in-out', style({ transform: 'translateX(0)' }))),
         query(':leave', animate('1s ease-in-out', style({ transform: 'translateX(-70vw)'})))
     ]),
-    query(':enter', animateChild())
-]).concat(after);
+    query(':enter', animateChild()),
+    ...after
+];
 
-const slideRight = before.concat([
+const slideRight = [
+    ...before,
     query(':enter', style({ transform: 'translateX(-100vw)' })),
     query(':leave', animateChild()),
     group([
         query(':enter', animate('1s ease-in-out', style({ transform: 'translateX(0)' }))),
         query(':leave', animate('1s ease-in-out', style({ transform: 'translateX(70vw)' })))
     ]),
-    query(':enter', animateChild())
-]).concat(after);
+    query(':enter', animateChild()),
+    ...after
+];
 
-const slideUp = before.concat([
+const slideUp = [
+    ...before,
     query(':enter', style({ transform: 'translateY(100vh)' })),
     query(':leave', animateChild()),
     group([
         query(':enter', animate('1s ease-in-out', style({ transform: 'translateY(0)' }))),
         query(':leave', animate('1s ease-in-out', style({ transform: 'translateY(-70vh)' })))
     ]),
-    query(':enter', animateChild())
-]).concat(after);
+    query(':enter', animateChild()),
+    ...after
+];
 
-const slideDown = before.concat([
+const slideDown = [
+    ...before,
     query(':enter', style({ transform: 'translateY(-100vh)' })),
     query(':leave', animateChild()),
     group([
         query(':enter', animate('1s ease-in-out', style({ transform: 'translateY(0)' }))),
         query(':leave', animate('1s ease-in-out', style({ transform: 'translateY(70vh)' })))
     ]),
-    query(':enter', animateChild())
-]).concat(after);
+    query(':enter', animateChild()),
+    ...after
+];
 
 const blogRegex = /^blog:(\d+)$/;
 const portfolioRegex = /^portfolio:(\d+)$/;
@@ -169,7 +177,7 @@ function getDirection(fromState: string, toState: string): 'up' | 'down' | 'left
         ])
     ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     private previousTrigger: 'imperative' | 'popstate' | 'hashchange';
     private previousUrl: string;
     private nextUrl: string;
