@@ -1,6 +1,6 @@
 @import 'variables';
 
-/deep/ pre {
+::ng-deep pre {
     font-size: 0.75em;
     border: none;
     background-color: #fff;
