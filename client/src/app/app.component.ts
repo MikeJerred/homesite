@@ -143,6 +143,22 @@ function getDirection(fromState: string, toState: string): 'up' | 'down' | 'left
     return null;
 }
 
+export function isUp(fromState: string, toState: string): boolean {
+    return getDirection(fromState, toState) === 'up';
+}
+
+export function isDown(fromState: string, toState: string): boolean {
+    return getDirection(fromState, toState) === 'down';
+}
+
+export function isLeft(fromState: string, toState: string): boolean {
+    return getDirection(fromState, toState) === 'left';
+}
+
+export function isRight(fromState: string, toState: string): boolean {
+    return getDirection(fromState, toState) === 'right';
+}
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -169,10 +185,10 @@ function getDirection(fromState: string, toState: string): 'up' | 'down' | 'left
             transition('notFound => blog', slideRight),
             transition('notFound => portfolio', slideRight),
             transition('notFound => *', slideUp),
-            transition((fromState, toState) => getDirection(fromState, toState) === 'up', slideUp),
-            transition((fromState, toState) => getDirection(fromState, toState) === 'down', slideDown),
-            transition((fromState, toState) => getDirection(fromState, toState) === 'left', slideLeft),
-            transition((fromState, toState) => getDirection(fromState, toState) === 'right', slideRight),
+            transition(isUp, slideUp),
+            transition(isDown, slideDown),
+            transition(isLeft, slideLeft),
+            transition(isRight, slideRight),
             transition('* => *', slideLeft)
         ])
     ]
@@ -218,10 +234,6 @@ export class AppComponent implements OnInit {
     }
 
     public animationDone(event: AnimationEvent): void {
-        // if (this.previousTrigger === 'popstate') {
-        //     this.window.scrollTo(0, this.scrollYValues[this.nextUrl] || 0);
-        // }
-
         const scrollTo = this.previousTrigger === 'popstate'
             ? this.scrollYValues[this.nextUrl] || 0
             : null;

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { PreloadAllModules, Routes, RouterModule } from '@angular/router';
 
 import { HomeModule } from './home/home.module';
 import { BlogModule } from './blog/blog.module';
@@ -19,7 +19,10 @@ const routes: Routes = [
         HomeModule,
         BlogModule,
         PortfolioModule,
-        RouterModule.forRoot(routes)
+        RouterModule.forRoot(routes, {
+            preloadingStrategy: PreloadAllModules,
+            scrollPositionRestoration: 'disabled'
+        })
     ],
     exports: [ RouterModule ]
 })
