@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { IVmBlog } from '@homesite/shared';
+import { IVmPortfolio } from '@homesite/shared';
 import { PageLoadedService } from '~/shared/page-loaded/page-loaded.service';
 import { PortfolioService } from '../portfolio.service';
 
@@ -13,9 +13,9 @@ import { PortfolioService } from '../portfolio.service';
 export class ArticleComponent implements OnInit, OnDestroy {
     private articleId: number;
     private subscription: Subscription;
-    private isPageLoaded = false;
+    isPageLoaded = false;
 
-    public article: IVmBlog;
+    article: IVmPortfolio;
 
     constructor(
         private route: ActivatedRoute,

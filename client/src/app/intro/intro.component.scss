@@ -100,19 +100,23 @@ $animate-delay: 0.75s;
     }
 
     &.page-loaded {
+        .background {
+            transform: translateX(-5%) translateY(-5%) scale(1.1);
+        }
+
         .content .center {
             .logo {
                 .logo-border .line {
-                    //stroke-dashoffset: 0;
+                    stroke-dashoffset: 0;
                 }
 
                 .text {
-                    //opacity: 1;
+                    opacity: 1;
                 }
             }
 
             h4 {
-                //opacity: 1;
+                opacity: 1;
             }
 
             .down-link {

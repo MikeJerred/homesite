@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as Hammer from 'hammerjs';
@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { IntroComponent } from './intro/intro.component';
 import { PageNotFoundComponent } from './page-not-found.component';
 
+@Injectable()
 export class HammerConfig extends HammerGestureConfig {
     overrides = {
         swipe: { direction: Hammer.DIRECTION_ALL }

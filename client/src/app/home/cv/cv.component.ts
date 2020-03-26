@@ -15,9 +15,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 })
 export class CvComponent {
     private furthestScroll = 0;
-    private topOpen = false;
-    private middleOpen = false;
-    private bottomOpen = false;
+    topOpen = false;
+    middleOpen = false;
+    bottomOpen = false;
 
     constructor(
         @Inject('Window') private window: Window,

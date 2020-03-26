@@ -13,7 +13,7 @@ import { BlogService } from '../blog.service';
 export class ArticleComponent implements OnInit, OnDestroy {
     private articleId: number;
     private subscription: Subscription;
-    private isPageLoaded = false;
+    isPageLoaded = false;
 
     public article: IVmBlog;
     public showShareLinks = false;

@@ -17,23 +17,23 @@ import { PageLoadedService } from '~/shared/page-loaded/page-loaded.service';
         trigger('border', [
             state('false', style({ 'stroke-dashoffset': '*' })),
             state('true', style({ 'stroke-dashoffset': 0 })),
-            transition('false => true', animate('0.5s 1s ease-in-out'))
+            transition('false <=> true', animate('0.5s 1s ease-in-out'))
         ]),
         trigger('logo', [
             state('false', style({ opacity: 0 })),
             state('true', style({ opacity: 1 })),
-            transition('false => true', animate('0.5s 0.25s ease-in-out'))
+            transition('false <=> true', animate('0.5s 0.25s ease-in-out'))
         ]),
         trigger('heading', [
             state('false', style({ opacity: 0 })),
             state('true', style({ opacity: 1 })),
-            transition('false => true', animate('0.5s 1s ease-in-out'))
+            transition('false <=> true', animate('0.5s 1s ease-in-out'))
         ])
     ]
 })
 export class IntroComponent implements OnDestroy {
     private subscription: Subscription;
-    private isPageLoaded = false;
+    isPageLoaded = false;
 
     constructor(private router: Router, private pageLoadedService: PageLoadedService) {
         this.subscription = pageLoadedService.pageLoaded$().subscribe(isLoaded => {

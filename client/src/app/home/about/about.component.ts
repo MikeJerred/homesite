@@ -7,9 +7,9 @@ import { PageLoadedService } from '~/shared/page-loaded/page-loaded.service';
     templateUrl: './about.component.html',
     styleUrls: ['./about.component.scss']
 })
-export class AboutComponent {
+export class AboutComponent implements OnDestroy {
     private subscription: Subscription;
-    private isPageLoaded = false;
+    isPageLoaded = false;
 
     constructor(pageLoadedService: PageLoadedService) {
         this.subscription = pageLoadedService.pageLoaded$().subscribe(isLoaded => {
