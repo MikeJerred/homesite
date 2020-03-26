@@ -1,7 +1,7 @@
+import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { ScrollToService } from '@nicky-lenaers/ngx-scroll-to';
 
 @Component({
     selector: 'app-header',
@@ -17,8 +17,9 @@ export class HeaderComponent implements OnDestroy {
 
     constructor(
         private router: Router,
-        private scrollToService: ScrollToService,
-        @Inject('Window') private window: Window) {
+        @Inject('Window') private window: Window,
+        @Inject(DOCUMENT) private document: Document
+    ) {
 
         router.events
             .pipe(filter(evt => evt instanceof NavigationEnd))
@@ -65,13 +66,10 @@ export class HeaderComponent implements OnDestroy {
     }
 
     public scrollToBottom() {
-        this.scrollToService.scrollTo({
-            duration: 300,
-            target: 'page-footer'
-        });
+        this.document.getElementById('page-footer').scrollIntoView({ behavior: 'smooth' });
     }
 
-    public isScrolledToTop() : boolean {
+    public isScrolledToTop(): boolean {
         return this.window.scrollY === 0;
     }
 
