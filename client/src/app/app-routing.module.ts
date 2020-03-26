@@ -9,8 +9,8 @@ import { PageNotFoundComponent } from './page-not-found.component';
 
 const routes: Routes = [
     { path: '', component: IntroComponent },
-    //{ path: 'blog', loadChildren: 'blog/blog.module#BlogModule' },
-    //{ path: 'portfolio', loadChildren: 'portfolio/portfolio.module#PortfolioModule' },
+    // { path: 'blog', loadChildren: 'blog/blog.module#BlogModule' },
+    // { path: 'portfolio', loadChildren: 'portfolio/portfolio.module#PortfolioModule' },
     { path: '**', component: PageNotFoundComponent }
 ];
 
