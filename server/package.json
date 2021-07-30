@@ -15,7 +15,7 @@
         "express-useragent": "^1.0.12",
         "immutable": "^3.8.2",
         "joi": "^13.6.0",
-        "mongoose": "^5.9.6"
+        "mongoose": "^5.13.4"
     },
     "devDependencies": {
         "@types/compression": "^0.0.36",
@@ -23,7 +23,7 @@
         "@types/express-useragent": "^0.2.21",
         "@types/joi": "^13.4.5",
         "@types/mongoose": "^5.2.17",
-        "ts-node-dev": "^1.0.0-pre.30",
+        "ts-node-dev": "^1.1.8",
         "typescript": "~3.0.3"
     }
 }
