@@ -17,7 +17,8 @@ app.use(compression());
 mongoose.connect(process.env.MONGODB_URI, {
     reconnectTries: Number.MAX_VALUE,
     reconnectInterval: 3000,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
     //socketOptions: { keepAlive: 120 }
 });
 (<any>mongoose).Promise = global.Promise;
