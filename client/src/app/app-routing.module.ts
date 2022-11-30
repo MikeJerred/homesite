@@ -20,9 +20,10 @@ const routes: Routes = [
         BlogModule,
         PortfolioModule,
         RouterModule.forRoot(routes, {
-            preloadingStrategy: PreloadAllModules,
-            scrollPositionRestoration: 'disabled'
-        })
+    preloadingStrategy: PreloadAllModules,
+    scrollPositionRestoration: 'disabled',
+    relativeLinkResolution: 'legacy'
+})
     ],
     exports: [ RouterModule ]
 })
