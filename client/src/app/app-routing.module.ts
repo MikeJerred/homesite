@@ -21,8 +21,7 @@ const routes: Routes = [
         PortfolioModule,
         RouterModule.forRoot(routes, {
     preloadingStrategy: PreloadAllModules,
-    scrollPositionRestoration: 'disabled',
-    relativeLinkResolution: 'legacy'
+    scrollPositionRestoration: 'disabled'
 })
     ],
     exports: [ RouterModule ]
