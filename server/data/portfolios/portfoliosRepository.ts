@@ -1,43 +1,41 @@
+import { orderBy } from 'lodash';
+
 import Page from '../page';
-import {default as Portfolio, IDmPortfolio} from './dmPortfolios';
+import { IDmPortfolio } from './dmPortfolios';
+import * as data1 from './data/1.json';
+import * as data2 from './data/2.json';
+import * as data3 from './data/3.json';
+import * as data4 from './data/4.json';
+import * as data5 from './data/5.json';
+import * as data6 from './data/6.json';
+
+const data = [data1, data2, data3, data4, data5, data6];
+const dataById = {
+    [data1.portfolioId]: data1,
+    [data2.portfolioId]: data2,
+    [data3.portfolioId]: data3,
+    [data4.portfolioId]: data4,
+    [data4.portfolioId]: data5,
+    [data4.portfolioId]: data6
+};
 
 export async function getPortfolio(id: number): Promise<IDmPortfolio> {
-    const portfolio = await Portfolio.findOne({ portfolioId: id })
-        .populate('prevPortfolio', 'portfolioId headline updatedDate')
-        .populate('nextPortfolio', 'portfolioId headline updatedDate')
-        .exec();
+    const index = id - 1;
+    const portfolio = dataById[index];
+    const prevPortfolio = dataById[index - 1];
+    const nextPortfolio = dataById[index + 1];
 
-    if (!portfolio.prevPortfolio) {
-        var prevPortfolioPromise = Portfolio.find({ updatedDate: { '$lt': portfolio.updatedDate } })
-            .sort({ updatedDate: 'desc' })
-            .limit(1)
-            .select('portfolioId headline updatedDate')
-            .exec();
-    }
-
-    if (!portfolio.nextPortfolio) {
-        var nextPortfolioPromise = Portfolio.find({ updatedDate: { '$gt': portfolio.updatedDate } })
-            .sort({ updatedDate: 'asc' })
-            .limit(1)
-            .select('portfolioId headline updatedDate')
-            .exec();
-    }
-
-    portfolio.prevPortfolio = portfolio.prevPortfolio || (await prevPortfolioPromise)[0];
-    portfolio.nextPortfolio = portfolio.nextPortfolio || (await nextPortfolioPromise)[0];
-
-    return portfolio;
+    return {
+        ...portfolio,
+        prevPortfolio,
+        nextPortfolio
+    };
 }
 
 export async function getPortfoliosPage(pageNo: number, pageSize: number): Promise<Page<IDmPortfolio>> {
-    let results = Portfolio.find({})
-        .sort({ updatedDate: 'desc' })
-        .skip((pageNo-1)*pageSize)
-        .limit(pageSize)
-        .select('portfolioId headline updatedDate')
-        .exec();
+    const start = (pageNo - 1) * pageSize;
+    const results = orderBy(data, 'updatedDate', 'desc').slice(start, start + pageSize);
+    const count = data.length;
 
-    let count = Portfolio.count({}).exec();
-
-    return Page.build(pageNo, pageSize, await results, await count);
+    return Page.build(pageNo, pageSize, results, count);
 }

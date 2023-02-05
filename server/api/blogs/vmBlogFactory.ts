@@ -7,7 +7,7 @@ export function build(model: IDmBlog): IVmBlog {
     let result: IVmBlog = {
         id: model.blogId,
         headline: model.headline,
-        date: model.updatedDate,
+        date: new Date(model.updatedDate),
         articleMarkdown: model.markdown
     };
 

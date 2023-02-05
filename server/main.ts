@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as compression from 'compression';
 import * as userAgent from 'express-useragent';
 import { AddressInfo } from 'net';
-import * as mongoose from 'mongoose';
+// import * as mongoose from 'mongoose';
 import * as path from 'path';
 import apiRoutes from './api/routes';
 import { ValidationError } from './api/validate';
@@ -14,14 +14,14 @@ if (process.env.NODE_ENV === 'development') {
 const app = express();
 app.use(compression());
 
-mongoose.connect(process.env.MONGODB_URI, {
-    reconnectTries: Number.MAX_VALUE,
-    reconnectInterval: 3000,
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-    //socketOptions: { keepAlive: 120 }
-});
-(<any>mongoose).Promise = global.Promise;
+// mongoose.connect(process.env.MONGODB_URI, {
+//     reconnectTries: Number.MAX_VALUE,
+//     reconnectInterval: 3000,
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+//     //socketOptions: { keepAlive: 120 }
+// });
+// (<any>mongoose).Promise = global.Promise;
 
 app.all('/*', (req, res, next) => {
     const info = userAgent.parse(req.header('user-agent'));

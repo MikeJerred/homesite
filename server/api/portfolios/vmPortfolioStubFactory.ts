@@ -5,6 +5,6 @@ export function build(model: IDmPortfolio): IVmPortfolioStub {
     return {
         id: model.portfolioId,
         headline: model.headline,
-        date: model.updatedDate
+        date: new Date(model.updatedDate)
     };
 }

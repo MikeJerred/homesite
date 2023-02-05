@@ -6,7 +6,7 @@ export function build(model: IDmPortfolio): IVmPortfolio {
     let result: IVmPortfolio = {
         id: model.portfolioId,
         headline: model.headline,
-        date: model.updatedDate,
+        date: new Date(model.updatedDate),
         articleMarkdown: model.markdown
     };
 
